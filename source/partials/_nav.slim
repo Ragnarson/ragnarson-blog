@@ -1,0 +1,6 @@
+nav class="nav"
+  div class="nav-item nav-brand"
+    = link_to "/", class: "blog-title" do
+      = responsive_image_tag "brand-ragnar.png", "brand-ragnar-2x.png", title: "Ragnarson Blog"
+  div class="nav-item" = link_to "Archive", "/archive.html"
+  div class="nav-item" = link_to "Ragnarson.com", "http://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=blog-header"

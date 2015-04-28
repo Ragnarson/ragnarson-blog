@@ -1,0 +1,8 @@
+= wrap_layout :layout do
+  div class="article"
+    = partial "partials/article/header", locals: { article: current_article }
+    = yield
+    - if note = article_author(current_article).note.presence
+      div class="article-author-note" = note
+    div class="article-comments"
+      = partial "partials/article/disqus"

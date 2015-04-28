@@ -1,0 +1,32 @@
+.article
+
+.article + .article
+  margin-top: $base-spacing * 2
+  padding-top: $base-spacing * 2
+  border-top: 1px solid $base-border-color
+
+.article-title
+  a
+    color: $base-font-color
+
+.article-info
+  @include display(flex)
+  @include flex-direction(row)
+  @include justify-content(space-between)
+  margin-bottom: $small-spacing
+
+.article ul
+  @extend %default-ul
+
+.article ol
+  @extend %default-ol
+
+.article-comments
+  margin-top: $base-spacing * 2
+
+.article-author-note
+  margin-top: $base-spacing * 2
+  padding: $base-spacing
+  background-color: $light-gray
+  color: $medium-gray
+  font-size: 0.9em
