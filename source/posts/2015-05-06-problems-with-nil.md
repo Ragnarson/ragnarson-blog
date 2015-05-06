@@ -1,7 +1,6 @@
 ---
 title: Problems with nil and how to avoid them
 author: karol
-published: false
 ---
 
 Have you recently got an exception saying ``NoMethodError: undefined method `name' for nil:NilClass``? Most likely more than once. And how did you solve it? Maybe you used `try` and thought the problem is solved... until the same exception happened in a different place! Using methods like `try` is just treating symptoms, it doesn't even touch the real problem. Maybe the right question would be: why was it nil in the first place? Could it be avoided? Was the possibility of nil a desired behavior? And why at all is `nil` even a problem? Let's find out and investigate some usecases.READMORE
