@@ -207,7 +207,7 @@ class Comment < ActiveRecord::Base
 end
 ```
 
-It will add `author_name` method (with `prefix`) which would return `nil` if `author` is not present. That way we reduced structural coupling and are guarded  `NoMethodError` from non-existent user.
+It will add `author_email` method (with `prefix`) which would return `nil` if `author` is not present. That way we reduced structural coupling and are guarded  `NoMethodError` from non-existent user.
 
 ## Bonus: persisting records with null objects
 
