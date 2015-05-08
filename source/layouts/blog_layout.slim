@@ -4,5 +4,7 @@
     = yield
     - if note = article_author(current_article).note.presence
       div class="article-author-note" = note
+    div class="article-social-buttons"
+      a href="https://twitter.com/share" class="twitter-share-button" data-size="large" Tweet
     div class="article-comments"
       = partial "partials/article/disqus"
