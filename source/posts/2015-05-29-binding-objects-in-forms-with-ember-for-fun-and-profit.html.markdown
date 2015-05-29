@@ -6,7 +6,7 @@ author: karol
 Ever run into the situation where you had to perform some operation based on the value from select field? How did you handle it? Maybe multiple case / switch statements? Or if you are lucky enough and code in language with good support for metaprogramming like Ruby you can write some magic code like this one:
 
 ```ruby
-value = "#{params[:calculation_type].classify.constantize}Calculation".new.calculate(params)
+"#{params[:type].classify}Calculation".constantize.new.calculate(params)
 ```
 
 which in fact can be treated as hidden case statement, but much easier to handle.
@@ -18,7 +18,12 @@ Are there any cleaner solutions to such problems which would be more readable? F
 The great thing about Ember is that you can easily bind objects in e.g. select fields instead of raw strings. Check the example below:
 
 ```handlebars
-{{view "select" content=calculationStrategies selection=currentCalculationStrategy optionValuePath="content" optionLabelPath="content.name" multiple=false}}
+{{view "select"
+  content=calculationStrategies
+  selection=currentCalculationStrategy
+  optionValuePath="content"
+  optionLabelPath="content.name"
+  multiple=false}}
 ```
 
 In most cases you would probably use something like `content.type` for `optionValuePath` or even use just an array of strings as `calculationStrategies` and not using `optionValuePath` and `optionLabelPath` at all. But here we are going to do something fancier - bind object directly.  So what is the `calculationStrategies` in this case?  It's an array of objects, let's call them Option Value Objects. Our component (or controller) could look like this:
@@ -69,7 +74,9 @@ export default Ember.Component.extend({
 
   actions: {
     perform: function() {
-      var value = this.get('currentCalculationStrategy.strategy').calculate(this.get('propertyA'), this.get('propertyB'), this.get('yetAnotherProperty'));
+      var value = this.get('currentCalculationStrategy.strategy')
+        .calculate(this.get('propertyA'), this.get('propertyB'),
+          this.get('yetAnotherProperty'));
       // do something here with the value
     }
   }
