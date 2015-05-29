@@ -1,5 +1,5 @@
 ---
-title: Binding Objects in Forms With Ember For Fun And Profit
+title: Binding Objects in Forms with Ember for Fun and Profit
 author: karol
 ---
 
