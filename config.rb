@@ -75,7 +75,9 @@ page "/feed.xml", layout: false
 
 # Reload the browser automatically whenever files change
 activate :livereload
-activate :autoprefixer
+activate :autoprefixer do |config|
+  config.browsers = ['last 2 versions', 'Explorer >= 9']
+end
 
 activate :syntax
 
