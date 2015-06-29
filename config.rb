@@ -1,4 +1,5 @@
 require "lib/custom_helpers"
+require "lib/custom_renderer"
 helpers CustomHelpers
 ###
 # Blog settings
@@ -79,7 +80,7 @@ activate :autoprefixer
 activate :syntax
 
 set :markdown_engine, :redcarpet
-set :markdown, :fenced_code_blocks => true, :smartypants => true
+set :markdown, CustomRedcarpetHTML::REDCARPET_OPTIONS.merge(renderer: CustomRedcarpetHTML)
 
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
