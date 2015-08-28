@@ -6,9 +6,10 @@ require "middleman-core/renderers/redcarpet"
 class CustomRedcarpetHTML < ::Middleman::Renderers::MiddlemanRedcarpetHTML
   REDCARPET_OPTIONS = {
     fenced_code_blocks: true,
-    smartypants: true
+    smartypants: true,
+    no_intra_emphasis: true,
   }
-  
+
   #
   # Override block_html to support parsing nested markdown blocks.
   #
