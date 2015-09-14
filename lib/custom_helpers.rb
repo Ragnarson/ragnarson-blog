@@ -24,4 +24,8 @@ module CustomHelpers
       avatar(author.email, 23) + " " + author.name
     end
   end
+
+  def strip_tags(html)
+    Loofah.fragment(html).to_text.strip
+  end
 end

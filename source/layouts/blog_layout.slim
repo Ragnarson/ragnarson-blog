@@ -1,3 +1,11 @@
+- content_for :graph_meta do
+  meta property="og:type" content="article"
+  meta property="og:url" content="http://blog.ragnarson.com#{current_article.url}"
+  meta property="og:title" content=current_article.title
+  meta property="og:description" content=strip_tags(current_article.summary)
+  meta property="og:image" content="http://blog.ragnarson.com/images/ragnar-desk-2x.png"
+  meta name="author" content=article_author(current_article).name
+
 = wrap_layout :layout do
   div class="article"
     = partial "partials/article/header", locals: { article: current_article }

@@ -10,6 +10,7 @@ gem "middleman-sprockets", '>= 3.3.10'
 gem "middleman-syntax"
 gem "redcarpet"
 gem "nokogiri"
+gem "loofah"
 
 gem "slim"
 gem "bitters"

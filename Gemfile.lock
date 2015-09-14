@@ -59,6 +59,8 @@ GEM
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
+    loofah (2.0.3)
+      nokogiri (>= 1.5.9)
     middleman (3.3.12)
       coffee-script (~> 2.2)
       compass (>= 1.0.0, < 2.0.0)
@@ -169,6 +171,7 @@ DEPENDENCIES
   bitters
   bourbon
   builder (~> 3.0)
+  loofah
   middleman (~> 3.3.11)
   middleman-autoprefixer
   middleman-blog (~> 3.5.3)
@@ -183,4 +186,4 @@ DEPENDENCIES
   slim
 
 BUNDLED WITH
-   1.10.4
+   1.10.5
