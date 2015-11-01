@@ -19,9 +19,10 @@ module CustomHelpers
   def author_link(article)
     return "" unless article.data.author
     author = article_author(article)
-    email_hash = Digest::MD5.hexdigest(author.email)
-    link_to "https://twitter.com/#{author.twitter}" do
-      avatar(author.email, 23) + " " + author.name
+    if author.twitter
+      link_to author.name, "https://twitter.com/#{author.twitter}"
+    else
+      author.name
     end
   end
 
