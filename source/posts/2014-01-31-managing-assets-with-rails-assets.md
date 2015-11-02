@@ -1,6 +1,7 @@
 ---
 title: Managing assets with Rails Assets
 author: grk
+shelly: true
 ---
 
 Up until recently, managing external CSS and JavaScript dependencies in Rails

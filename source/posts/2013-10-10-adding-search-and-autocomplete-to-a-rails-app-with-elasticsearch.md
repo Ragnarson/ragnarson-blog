@@ -1,6 +1,7 @@
 ---
 title: Adding search and autocomplete to a Rails app with Elasticsearch
 author: grk
+shelly: true
 ---
 
 This post will show a fast and easy way to add search to your Rails application.

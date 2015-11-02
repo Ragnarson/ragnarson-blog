@@ -1,6 +1,7 @@
 ---
 title: Synchronize your settings with Dropbox and Mackup
 author: wijet
+shelly: true
 ---
 
 Most of the developers are creatures of habit. Once they get comfortable

@@ -1,6 +1,7 @@
 ---
 title: Be aware about the out-of-memory killer
 author: smefju
+shelly: true
 ---
 
 One of the most important things for applications is stability. There are various hosting platforms that give you virtual servers, where you can run multiple services. There is no limit to the number of processes so it is up to you how much of their resources will be used. However, exceeding all available RAM memory can result in poor stability or even a server crash. This article gives you some basic knowledge about the *out-of-memory* system state.

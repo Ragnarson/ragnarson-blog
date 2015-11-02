@@ -1,6 +1,7 @@
 ---
 title: Life of an HTTP Request
 author: michalkw
+shelly: true
 ---
 
 When working on web applications we take a lot of supporting technology for

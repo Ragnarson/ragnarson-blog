@@ -11,6 +11,7 @@
 = wrap_layout :layout do
   div class="article"
     = partial "partials/article/header", locals: { article: current_article }
+    = partial "partials/article/shelly" if current_article.data.shelly
     = yield
     - if note = article_author(current_article).note.presence
       div class="article-author-note" = note

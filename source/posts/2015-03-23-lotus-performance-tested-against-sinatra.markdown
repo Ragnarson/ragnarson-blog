@@ -1,6 +1,7 @@
 ---
 title: Lotus performance tested against Sinatra
 author: smefju
+shelly: true
 ---
 
 Some time ago I heard about [Lotus][home]. A fresh Ruby framework for building web applications. It is created from stand-alone parts which are shipped as separated gems. This means that I am able to pick only the essential components for my project. The source code can be found on [github][source].
