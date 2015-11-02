@@ -7,7 +7,7 @@ shelly: true
 Generating PDF files with custom fonts can be tricky. In this tutorial we
 will create a simple Rails app and tackle this problem with two tools:
 [wicked_pdf] (https://github.com/mileszs/wicked_pdf) and
-[wkhtmltopdf] (https://code.google.com/p/wkhtmltopdf/).
+[wkhtmltopdf] (https://code.google.com/p/wkhtmltopdf/). READMORE
 
 ## Example application
 

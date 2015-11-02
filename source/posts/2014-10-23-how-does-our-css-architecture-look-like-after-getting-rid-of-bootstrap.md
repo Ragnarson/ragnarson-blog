@@ -6,7 +6,7 @@ shelly: true
 
 In summer, several well-known companies such as [GitHub][1], [CodePen][2] or [Buffer][3] have published blog posts about how the CSS architecture is designed in their applications.
 
-Due to the fact that in September we finished transferring Shelly Cloud from Twitter Bootstrap (from version 2.3.2) to the styles developed by us and based on the Inuit framework, I wanted to share the experience that we've gained doing this.
+Due to the fact that in September we finished transferring Shelly Cloud from Twitter Bootstrap (from version 2.3.2) to the styles developed by us and based on the Inuit framework, I wanted to share the experience that we've gained doing this. READMORE
 
 *If you haven't heard of the Inuit framework before, please check [my previous blog post][4] where I described it.*
 

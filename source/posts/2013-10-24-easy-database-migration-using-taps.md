@@ -11,7 +11,7 @@ finally **load it** into the database. Things get even more complicated
 when we want to transfer database to a different database engine,
 say from MySQL to PostgreSQL.
 
-Fortunately there is taps. It's a tool for migrating databases. From this post you will learn how to use it, how it works and how to resolve its most common problems.
+Fortunately there is taps. It's a tool for migrating databases. From this post you will learn how to use it, how it works and how to resolve its most common problems. READMORE
 
 
 ## Quick usage example

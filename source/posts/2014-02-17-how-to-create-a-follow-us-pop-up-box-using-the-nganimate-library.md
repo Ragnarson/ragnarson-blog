@@ -4,13 +4,13 @@ author: bkzl
 shelly: true
 ---
 
+_The following article has been prepared based on AngularJS and ngAnimate
+version 1.2.12, so the provided code examples may not work properly
+with older or newer versions of these libraries._ READMORE
+
 <figure>
   ![Follow Us pop-up](2014-02-17-how-to-create-a-follow-us-pop-up-box-using-the-nganimate-library/animation.gif)
 </figure>
-
-_The following article has been prepared based on AngularJS and ngAnimate
-version 1.2.12, so the provided code examples may not work properly
-with older or newer versions of these libraries._
 
 ## What is ngAnimate?
 

@@ -8,7 +8,7 @@ shelly: true
 Secure Sockets Layer (SSL) and its successor Transport Layer Security (TLS) are
 cryptographic protocols designed to provide secure connection between a server
 and a client, typically a web server and a browser or a mail server and a mail
-client.
+client. READMORE
 
 SSL protocol defines the structure of the data transfered and the procedure to
 establish an encrypted connection, it also makes sure of the integrity of the

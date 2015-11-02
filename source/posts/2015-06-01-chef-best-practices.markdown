@@ -4,7 +4,7 @@ author: staszek
 shelly: true
 ---
 
-Chef is a framework written in Ruby, and partially in Erlang ([Chef Server][chef-server]). It provides an API for numerous system services. With Chef, your infrastructure can be expressed as object-oriented code that is versionable, testable, and repeatable. One of the main ideas of Chef developers was to bury the walls that exist between software development and system administration, allowing them to bring system configuration to a higher level.
+Chef is a framework written in Ruby, and partially in Erlang ([Chef Server][chef-server]). It provides an API for numerous system services. With Chef, your infrastructure can be expressed as object-oriented code that is versionable, testable, and repeatable. One of the main ideas of Chef developers was to bury the walls that exist between software development and system administration, allowing them to bring system configuration to a higher level. READMORE
 
 In Chef there are [cookbooks][cookbooks] which act as code packages. Cookbooks have scripts called [recipes][recipes] consisting of [resources][resources]. All operations on your repository, and Chef Server, can be made via the [knife][knife] command tool. There are also basic cookbooks that can be downloaded from [Chef Supermarket][chef-market], developed and maintained by [Chef Community][chef-community]. You can also test your code by using your own [kitchen][kitchen].
 

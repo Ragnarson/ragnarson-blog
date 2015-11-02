@@ -17,7 +17,7 @@ Today we're going to describe what route an HTTP requests takes, from the moment
 it leaves the browser up to the moment a response gets back from the server.
 
 Second part of this article builds upon this knowledge and describes multiple
-failure scenarios.
+failure scenarios. READMORE
 
 ## From a browser to the application
 

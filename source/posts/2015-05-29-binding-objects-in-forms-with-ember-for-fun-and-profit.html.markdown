@@ -11,7 +11,7 @@ Ever run into the situation where you had to perform some operation based on the
 
 which in fact can be treated as hidden case statement, but much easier to handle.
 
-Are there any cleaner solutions to such problems which would be more readable? Fortunately, the answer is yes - some frameworks like Ember give possibility to use cool patterns that are not possible in other cases.
+Are there any cleaner solutions to such problems which would be more readable? Fortunately, the answer is yes - some frameworks like Ember give possibility to use cool patterns that are not possible in other cases. READMORE
 
 ## Binding Objects In Forms
 

@@ -10,7 +10,7 @@ says the first sentence in a README file.
 The biggest advantage of Inuit over other frameworks is modularity
 and focus on abstractions. It doesn't enforce how elements should look.
 Instead, it gives a set of tools which speed up your work and allow to
-test new things faster.
+test new things faster. READMORE
 
 In a certain sense you can compare it to the extended version of [normalize](http://necolas.github.io/normalize.css/)
 (which nota bene is included in Inuit), complemented by set of defaults, helpers

@@ -9,7 +9,7 @@ simplifies dependencies management and updating of front-end packages (like
 [gridism](http://cobyism.com/gridism/) or [normalize](http://necolas.github.io/normalize.css/)).
 In general it is the same thing for HTML/CSS/JS what Bundler is for Ruby.
 Not so long time ago version 1.0 has been released and the current stable version
-is 1.2. Let's take a look at how to use it and integrate with a Rails app.
+is 1.2. Let's take a look at how to use it and integrate with a Rails app. READMORE
 
 ## Workflow
 
