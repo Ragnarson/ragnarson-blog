@@ -6,6 +6,8 @@ shelly: true
 
 I have recently changed payment service provider to Braintree on Shelly Cloud and would love to share the experience with you. This post will show a fast and easy way of adding credit card payments to a Rails application.
 
+READMORE
+
 ## Getting Braintree account
 
 I started off with [Braintree](https://www.braintreepayments.com/) website and signing up. As a requirement I had to provide basic info about the company as well as IDs and residential utility bills for owners. I was surprised that Braintree did not require from us to send any documents such as a translated excerpt from National Court Register, bank statements or detailed business plan of the company. We had our production account at Braintree within a couple of days, our previous payments providers should learn from them. Adding PayPal integration with a couple of clicks was also straightforward.

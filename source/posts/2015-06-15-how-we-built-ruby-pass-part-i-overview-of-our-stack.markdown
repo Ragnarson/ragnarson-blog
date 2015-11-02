@@ -6,6 +6,8 @@ shelly: true
 
 I would like to share with you the details of how we built Shelly Cloud, our platform for hosting Ruby applications, and how it works.
 
+READMORE
+
 This is the first post of the series on our blog, in which I'll present you with an introduction to the company and an overview of our stack. You will also find links to future posts as and when we publish them:
 
 * [Part I - Overview of the stack][part1]

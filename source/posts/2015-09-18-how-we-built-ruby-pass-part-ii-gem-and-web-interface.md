@@ -6,6 +6,8 @@ shelly: true
 
 This is the second post of the series on our blog, in which I'll present to you the part of our infrastructure that is visible to the users. Here you can find links to past and, when we publish them, future posts:
 
+READMORE
+
 * [Part I - Overview of the stack][part1]
 * [Part II - Gem and web interface][part2]
 * Part III - API
