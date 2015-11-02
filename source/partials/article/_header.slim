@@ -1,10 +1,8 @@
 header
-  small class="article-info"
-    span class="article-author"
-      - if article.data.author
-        ' by
-        = author_link(article)
-    span class="article-date text--right" = article.date.strftime('%B %e, %Y')
+  = avatar(article_author(article).email, 36)
+  div class="article-meta"
+    = article.date.strftime('%B %e, %Y')
+    |  - #{author_link(article)}
 
   h1 class="article-title"
     = link_to article.title, article
