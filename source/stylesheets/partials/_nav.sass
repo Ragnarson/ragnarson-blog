@@ -1,13 +1,12 @@
 nav
+  margin-top: 2em
+  margin-bottom: 2em
+  padding-bottom: 2em
   border-bottom: 1px solid $base-border-color
-  margin: 2em 0 2em
   @include display(flex)
   @include flex-direction(row)
   @include justify-content(space-between)
   @include align-items(baseline)
-
-.nav-item
-  margin-bottom: 2em
 
 .nav-brand
   @include flex(1)
@@ -21,6 +20,7 @@ nav
   font-family: $heading-font-family
   color: $base-font-color
   transition: box-shadow .3s
+  vertical-align: $small-spacing
 
   &:active, &:hover
     color: $red
