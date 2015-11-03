@@ -14,7 +14,7 @@ To accomplish that we are going to use a simple tool called
 [mackup](https://github.com/lra/mackup) and [Dropbox](https://www.dropbox.com).
 Mackup keeps your application settings in sync using Dropbox as a storage.
 It can be installed using homebrew or downloaded as a script,
-we will do the latter because we want to modify this script later on.
+we will do the latter because we want to modify this script later on. READMORE
 
 Before you start make sure Dropbox is configured on all machines.
 

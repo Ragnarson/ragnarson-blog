@@ -6,7 +6,7 @@ shelly: true
 
 *tl;dr Collect feedback from your customers; always plan what to do next; think about the user interface before you start writing code; discuss with your team your current work often; test what you have done.*
 
-Many developers encounter a variety of difficulties when they have to work on new features. From things like: "how exactly should I start?" to more complex issues, for example, in the middle of a development, they notice that everything they have done is wrong and that it is necessary to start over. Therefore, I have decided to share information about my workflow and how I usually get things done.
+Many developers encounter a variety of difficulties when they have to work on new features. From things like: "how exactly should I start?" to more complex issues, for example, in the middle of a development, they notice that everything they have done is wrong and that it is necessary to start over. Therefore, I have decided to share information about my workflow and how I usually get things done. READMORE
 
 Please note that the described process refers to working on a new feature from an individual perspective. I understand that in most scenarios, the work is delegated to a number of people. I may have even exaggerated in some cases when it comes to simple tasks, but this is due to the fact that my main focus is on ideas; ways to help you avoid making mistakes as early as possible in the process.
 

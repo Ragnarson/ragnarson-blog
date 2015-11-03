@@ -12,7 +12,7 @@ Regular expressions are widely used in the daily work of developers. For example
 ```
 
 The question is how to wrap each matched vowel with the underscore. The first solution is to use the **back-reference** in a *replacement* argument:
-
+READMORE
 ```ruby
 "here will be dragons".gsub(/([aeiouy])/, '_\1_')
 => "h_e_r_e_ w_i_ll b_e_ dr_a_g_o_ns"

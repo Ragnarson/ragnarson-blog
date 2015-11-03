@@ -11,7 +11,7 @@ to manage dependencies.
 
 Take a look at your `vendor/assets` directory. How old are the libraries there?
 How often do you remember to check for new versions? There could be some
-serious bugs discovered and fixed, maybe even security issues resolved.
+serious bugs discovered and fixed, maybe even security issues resolved. READMORE
 
 ## Current approaches
 

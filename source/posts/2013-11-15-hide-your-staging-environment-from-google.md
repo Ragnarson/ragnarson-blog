@@ -8,7 +8,7 @@ If you deploy your application to a staging environment, chances are that
 it will eventually get picked up by Google and other search engines. This
 is undesired for many reasons, from other people discovering your
 unfinished work to
-[bad SEO from duplicate content](http://moz.com/learn/seo/duplicate-content).
+[bad SEO from duplicate content](http://moz.com/learn/seo/duplicate-content). READMORE
 
 [robots.txt](http://www.robotstxt.org/robotstxt.html) is a file that
 can be used to instruct search engine robots not to index certain paths of a

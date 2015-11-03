@@ -4,7 +4,7 @@ author: sabcio
 shelly: true
 ---
 
-I have recently changed payment service provider to Braintree on Shelly Cloud and would love to share the experience with you. This post will show a fast and easy way of adding credit card payments to a Rails application.
+I have recently changed payment service provider to Braintree on Shelly Cloud and would love to share the experience with you. This post will show a fast and easy way of adding credit card payments to a Rails application. READMORE
 
 READMORE
 

@@ -6,9 +6,8 @@ shelly: true
 
 I would like to share with you the details of how we built Shelly Cloud, our platform for hosting Ruby applications, and how it works.
 
-READMORE
-
-This is the first post of the series on our blog, in which I'll present you with an introduction to the company and an overview of our stack. You will also find links to future posts as and when we publish them:
+This is the first post of the series on our blog, in which I'll present you with an introduction to the company and an overview of our stack. READMORE You will also find links to future posts as and when we publish them:
+>>>>>>> Cleaner previews for Shelly posts
 
 * [Part I - Overview of the stack][part1]
 * [Part II - Gem and web interface][part2]
@@ -114,8 +113,8 @@ There are also some 3rd party services which we use and I want to mention:
 Basically, that's all the general information. Please don't hesitate to ask questions in the comments section. As I mentioned at the beginning, please keep an eye out for the next part of this series, where I'll be explaining more about every section.
 
 [ragnarson]: http://ragnarson.com
-[part1]: https://blog.ragnarson.com/2015/06/15/how-we-built-ruby-pass-part-i-overview-of-our-stack
-[part2]: https://blog.ragnarson.com/2015/09/18/how-we-built-ruby-pass-part-ii-gem-and-web-interface
+[part1]: http://blog.ragnarson.com/2015/06/15/how-we-built-ruby-pass-part-i-overview-of-our-stack
+[part2]: http://blog.ragnarson.com/2015/09/18/how-we-built-ruby-pass-part-ii-gem-and-web-interface
 [winnie-test]: https://shellycloud.com/blog/blog/2015/04/how-do-we-perform-system-integration-tests
 [shelly-gem]: https://github.com/shellycloud/shelly/
 [rails-serializers]: https://github.com/rails-api/active_model_serializers

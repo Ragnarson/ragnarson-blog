@@ -7,7 +7,7 @@ shelly: true
 This post will show a fast and easy way to add search to your Rails application.
 We will use [Elasticsearch](http://www.elasticsearch.org/), an open source
 search engine, and [Searchkick](http://ankane.github.io/searchkick/), an
-easy-to-use gem that integrates Elasticsearch with Rails.
+easy-to-use gem that integrates Elasticsearch with Rails. READMORE
 
 ## Installing Elasticsearch
 

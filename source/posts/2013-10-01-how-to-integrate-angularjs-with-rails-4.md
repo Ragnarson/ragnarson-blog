@@ -8,7 +8,7 @@ Building most single-page applications (SPAs for short) is a two-step process:
 first you create a JSON API in a backend technology of choice and then you use
 that API in the JavaScript application. Here we'll be using [Ruby on
 Rails](http://rubyonrails.org/) on the backend and
-[AngularJS](http://angularjs.org/) on the frontend.
+[AngularJS](http://angularjs.org/) on the frontend. READMORE
 
 The main pain point of any kind of integration is making sure that everything
 fits together well. This post will *not* take you through building the whole
