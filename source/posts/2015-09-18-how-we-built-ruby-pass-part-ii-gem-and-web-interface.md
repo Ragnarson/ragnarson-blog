@@ -34,7 +34,7 @@ Deployment is handled by Git. Developer runs deployment and update code on remot
 <figure>
   ![Shelly Gem](2015-09-18-how-we-built-ruby-pass-part-ii-gem-and-web-interface/shelly-gem.png)
 </figure>
-  
+
 The main interface to interact with our platform is a CLI written in Ruby. We focus to allow customers to do everything from the shell. That's why we are called Shelly Cloud.
 
 Our gem is named `shelly` and hosted as many other gems on RubyGems, and [it's open sourced][shelly].
