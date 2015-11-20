@@ -72,33 +72,33 @@ most useful bindings:
 ctrl-w # delete the previous word
 ```
 
-![ctrl-w](2015-11-17-readline-editor/ctrl-w.gif)
+![ctrl-w](2015-11-20-readline-editor/ctrl-w.gif)
 
 ```shell
 ctrl-_ # undo the last editing
 ctrl-y # paste the last deleted word
 ```
-![ctrl-y](2015-11-17-readline-editor/ctrl-y.gif)
+![ctrl-y](2015-11-20-readline-editor/ctrl-y.gif)
 
 ```shell
 ctrl-a # move the cursor to the start of the line
 ctrl-e # move the cursor to the end of the line
 ```
 
-![ctrl-a-ctrl-e](2015-11-17-readline-editor/ctrl-a-ctrl-e.gif)
+![ctrl-a-ctrl-e](2015-11-20-readline-editor/ctrl-a-ctrl-e.gif)
 
 ```shell
 meta-b # move the cursor one word backward
 meta-f # move the cursor one word forward
 ```
 
-![meta-b-meta-f](2015-11-17-readline-editor/meta-b-meta-f.gif)
+![meta-b-meta-f](2015-11-20-readline-editor/meta-b-meta-f.gif)
 
 ```shell
 meta-t # swap the places of the last two words
 ```
 
-![meta-t](2015-11-17-readline-editor/meta-t.gif)
+![meta-t](2015-11-20-readline-editor/meta-t.gif)
 
 
 ```shell
@@ -106,7 +106,7 @@ ctrl-meta-y # paste the first argument of the last executed command
 meta-_ # paste the last argument of the last executed command
 ```
 
-![ctrl-meta-y](2015-11-17-readline-editor/ctrl-meta-y.gif)
+![ctrl-meta-y](2015-11-20-readline-editor/ctrl-meta-y.gif)
 
 And that's all. If this topic seems interesting to you, check out these links:
 
