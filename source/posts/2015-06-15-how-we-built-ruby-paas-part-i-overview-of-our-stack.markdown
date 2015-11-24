@@ -31,7 +31,7 @@ Shelly Cloud is built to run independently from the server providers, but for no
 Let's start with the diagram:
 
 <figure>
-  ![Shelly Cloud stack](2015-06-15-how-we-built-ruby-pass-part-i-overview-of-our-stack/shelly-cloud-stack.png)
+  ![Shelly Cloud stack](2015-06-15-how-we-built-ruby-paas-part-i-overview-of-our-stack/shelly-cloud-stack.png)
 </figure>
 
 We can split the whole stack into four main segments:
@@ -112,8 +112,8 @@ There are also some 3rd party services which we use and I want to mention:
 Basically, that's all the general information. Please don't hesitate to ask questions in the comments section. As I mentioned at the beginning, please keep an eye out for the next part of this series, where I'll be explaining more about every section.
 
 [ragnarson]: http://ragnarson.com
-[part1]: http://blog.ragnarson.com/2015/06/15/how-we-built-ruby-pass-part-i-overview-of-our-stack
-[part2]: http://blog.ragnarson.com/2015/09/18/how-we-built-ruby-pass-part-ii-gem-and-web-interface
+[part1]: http://blog.ragnarson.com/2015/06/15/how-we-built-ruby-paas-part-i-overview-of-our-stack.html
+[part2]: http://blog.ragnarson.com/2015/09/18/how-we-built-ruby-paas-part-ii-gem-and-web-interface.html
 [winnie-test]: https://shellycloud.com/blog/blog/2015/04/how-do-we-perform-system-integration-tests
 [shelly-gem]: https://github.com/shellycloud/shelly/
 [rails-serializers]: https://github.com/rails-api/active_model_serializers

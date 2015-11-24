@@ -32,7 +32,7 @@ Deployment is handled by Git. Developer runs deployment and update code on remot
 ## Shelly Gem
 
 <figure>
-  ![Shelly Gem](2015-09-18-how-we-built-ruby-pass-part-ii-gem-and-web-interface/shelly-gem.png)
+  ![Shelly Gem](2015-09-18-how-we-built-ruby-paas-part-ii-gem-and-web-interface/shelly-gem.png)
 </figure>
 
 The main interface to interact with our platform is a CLI written in Ruby. We focus to allow customers to do everything from the shell. That's why we are called Shelly Cloud.
@@ -62,7 +62,7 @@ For test purposes, we use RSpec with the addition of [fakefs][fakefs] gem which 
 ## Web interface - shelly-app
 
 <figure>
-  ![Shelly App](2015-09-18-how-we-built-ruby-pass-part-ii-gem-and-web-interface/shelly-app.png)
+  ![Shelly App](2015-09-18-how-we-built-ruby-paas-part-ii-gem-and-web-interface/shelly-app.png)
 </figure>
 
 Our web interface is a regular Rails application, running on the newest available version, 4.2.x. One specific thing is the lack of a database, everything is done with API. Shelly-app is hosted on Shelly Cloud itself.
@@ -89,8 +89,8 @@ We have a handy set of tools for development. This is a list of libraries which 
 
 Last but not least, popular nowadays is a set of tools to test our Rails app: RSpec, [Jasmine][jasmine] and [Capybara][capybara].
 
-[part1]: https://blog.ragnarson.com/2015/06/15/how-we-built-ruby-pass-part-i-overview-of-our-stack
-[part2]: https://blog.ragnarson.com/2015/09/18/how-we-built-ruby-pass-part-ii-gem-and-web-interface
+[part1]: http://blog.ragnarson.com/2015/06/15/how-we-built-ruby-paas-part-i-overview-of-our-stack.html
+[part2]: http://blog.ragnarson.com/2015/09/18/how-we-built-ruby-paas-part-ii-gem-and-web-interface.html
 [cloudfile]: https://shellycloud.com/documentation/cloudfile
 [shelly]: http://github.com/shellycloud/shelly
 [fakefs]: https://github.com/defunkt/fakefs
