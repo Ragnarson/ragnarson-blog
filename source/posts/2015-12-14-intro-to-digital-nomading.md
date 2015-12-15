@@ -9,7 +9,7 @@ Working remotely comes with a lot of perks. Deploying to production in your pyja
 
 READMORE
 
-Thailand is a world leader on the list of best places to live and work remotely on [https://nomadlist.com](https://nomadlist.com). Still, I had tons of doubts and worries about trying to work from such an exotic spot. However, to make the most of my one-month visa allowance I had no choice but to give it a try. I ended up working for about 2 weeks during my one month stay there.
+Thailand is a world leader on the list of best places to live and work remotely on [nomadlist.com](https://nomadlist.com). Still, I had tons of doubts and worries about trying to work from such an exotic spot. However, to make the most of my one-month visa allowance I had no choice but to give it a try. I ended up working for about 2 weeks during my one month stay there.
 
 In the end, most of my worries turned out to be false.
 
@@ -28,12 +28,12 @@ The only places I had trouble finding a decent internet connection were the smal
 
 ## Where will I work from?
 
-I lived in all kinds of budget places, from cockroach-infested beach bungalows to tidy, air-conditioned hostel rooms. I never had a problem finding a corner to sit with my laptop. With the advent of smartphones, internet cafes are becoming less common. However, almost all of the bars and restaurants offer free wifi for their customers. What worked for me was to order a coffee and ask the owner if I can sit for a couple of hours to do *my computer things*. They were always ok with it, and even happier if I ordered lunch in the same place. I also used to work from tourist agencies, who were always fond of earning a few extra baht for lending me their wifi and a chair. I never paid more than the equivalent of 2€ for a day of work. In most of the hostels, I had no problem connecting to wifi in my room. If you would like to find a less random place to work from you can check out [https://www.sharedesk.net](https://www.sharedesk.net).
+I lived in all kinds of budget places, from cockroach-infested beach bungalows to tidy, air-conditioned hostel rooms. I never had a problem finding a corner to sit with my laptop. With the advent of smartphones, internet cafes are becoming less common. However, almost all of the bars and restaurants offer free wifi for their customers. What worked for me was to order a coffee and ask the owner if I can sit for a couple of hours to do *my computer things*. They were always ok with it, and even happier if I ordered lunch in the same place. I also used to work from tourist agencies, who were always fond of earning a few extra baht for lending me their wifi and a chair. I never paid more than the equivalent of 2€ for a day of work. In most of the hostels, I had no problem connecting to wifi in my room. If you would like to find a less random place to work from you can check out [www.sharedesk.net](https://www.sharedesk.net).
 
 <figure>
 ![Boxing](2015-12-14-intro-to-digital-nomading/boxing.jpg)
 <figcaption>
-Just one more commit and I am off to see Thay boxing.
+Just one more commit and I am off to see Thai boxing.
 </figcaption>
 </figure>
 
@@ -43,7 +43,7 @@ Because of the +6h time difference I used to start working in the afternoon to s
 
 ## Bad guys will steal my laptop.
 
-Showing off with your fancy MacBook in the hostel lobby might attract some unnecessary attention. Just make sure to ask staff for a locker when you leave your room. I also wouldn't recommend strolling around Bangkok downtown at midnight with a laptop in your hand. Apart from that, you should be fine. If you are still superworried about losing your precious work tool, you might consider insuring it on [https://www.worldnomads.com](https://www.worldnomads.com).
+Showing off with your fancy MacBook in the hostel lobby might attract some unnecessary attention. Just make sure to ask staff for a locker when you leave your room. I also wouldn't recommend strolling around Bangkok downtown at midnight with a laptop in your hand. Apart from that, you should be fine. If you are still superworried about losing your precious work tool, you might consider insuring it on [www.worldnomads.com](https://www.worldnomads.com).
 
 ## Will I be able to focus and do some actual work?
 
