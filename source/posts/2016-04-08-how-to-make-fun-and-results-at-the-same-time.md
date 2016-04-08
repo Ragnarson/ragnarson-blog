@@ -2,7 +2,6 @@
 title: How to make fun and results at the same time
 author: piotr
 ---
-![KEEP CALM AND LOVE PROGRAMMING](2016-04-08-how-to-make-fun-and-results-at-the-same-time/cover.png)
 
 > “If you do what you love, you'll never work a day in your life.”
 
