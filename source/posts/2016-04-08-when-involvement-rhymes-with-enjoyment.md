@@ -1,5 +1,5 @@
 ---
-title: How to make fun and results at the same time
+title: When involvement rhymes with enjoyment
 author: piotr
 ---
 
@@ -17,9 +17,9 @@ Bullshit!
 Even if you are in a relationship with someone you truly love, there will still be problems and hard times.
 Even if you do the job you love, there will also be problems, hard times and periods when you will struggle and even hate your job.
 
-That is why as soon as you find the person or job you love, you should start asking yourself: How should I do this job (love)?
+That is why as soon as you find the person or job you love, you should start asking yourself: *How should I do this job (love)?*
 
-That was the question that Mihaly Csikszentmihalyi had been asking himself for years. He had been trying to figure out what makes an activity, and our entire life, enjoyable. After many years of research he developed a theory of optimal experience, also called the flow state.
+That was the question that Mihaly Csikszentmihalyi had been asking himself for years. He had been trying to figure out what makes an activity, and our entire life, enjoyable. After many years of research he developed a theory of optimal experience, also called *the flow* state.
 
 There are 7 factors that show whether or not you are in the flow:
 
@@ -39,7 +39,7 @@ If you are not able to be there with us, don't worry. I will describe the most i
 
 Let’s start right now with the first point:
 
-You are completely involved in the thing you are doing.
+**You are completely involved in the thing you are doing.**
 
 Here are the three most important techniques that will help you to focus on the things you want to do.
 
@@ -66,7 +66,7 @@ You can experiment with the length of each cycle to find what works best for you
 
 The key point is that during the work period you really do the work and during the break you stop doing any work.
 
-You can learn more about this technique [here]().
+You can learn more about this technique [here](http://pomodorotechnique.com/).
 
 ### Internal clock
 All living organisms (humans included) have their own internal clock. This clock is ticking inside you all the time. It decides when is the best time to work and when is the best time to rest (sleep).
