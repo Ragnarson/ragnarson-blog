@@ -32,7 +32,8 @@ activate :blog do |blog|
   blog.page_link = "page/{num}"
 end
 
-activate :authors
+# switch off temporarly, reuse after middleman update will be
+#activate :authors
 
 page "/feed.xml", layout: false
 
@@ -97,6 +98,6 @@ end
 
 activate :deploy do |deploy|
   deploy.build_before = true
-  deploy.method = :git
+  deploy.deploy_method = :git
   deploy.strategy = :force_push
 end
