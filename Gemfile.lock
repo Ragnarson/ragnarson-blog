@@ -178,6 +178,3 @@ DEPENDENCIES
   nokogiri
   redcarpet
   slim
-
-BUNDLED WITH
-   1.12.2

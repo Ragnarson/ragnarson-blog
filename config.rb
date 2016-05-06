@@ -32,9 +32,6 @@ activate :blog do |blog|
   blog.page_link = "page/{num}"
 end
 
-# switch off temporarly, reuse after middleman update will be
-#activate :authors
-
 activate :sprockets
 
 page "/feed.xml", layout: false

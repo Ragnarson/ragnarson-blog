@@ -7,10 +7,6 @@ gem "middleman", "4.1.7"
 gem "middleman-core", git: "https://github.com/Ragnarson/middleman.git"
 
 gem "middleman-blog", "~> 4.0.1"
-
-# switch off temporarly, reuse after middleman update will be complete
-#gem "middleman-blog-authors"
-
 gem "middleman-livereload"
 gem "middleman-autoprefixer"
 gem "middleman-deploy", git: "https://github.com/middleman-contrib/middleman-deploy.git"
