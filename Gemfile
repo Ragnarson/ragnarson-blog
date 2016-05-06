@@ -1,11 +1,7 @@
 source "https://rubygems.org"
 
 gem "middleman", "4.1.7"
-
-# we use our fork waiting for our PR approval:
-# Fix contract for Sitemap::Store.register_resource_list_manipulator
-gem "middleman-core", git: "https://github.com/Ragnarson/middleman.git"
-
+gem "middleman-core", git: "https://github.com/middleman/middleman.git"
 gem "middleman-blog", "~> 4.0.1"
 gem "middleman-livereload"
 gem "middleman-autoprefixer"
