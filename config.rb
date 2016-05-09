@@ -91,7 +91,9 @@ set :images_dir, 'images'
 configure :build do
   activate :minify_css
   activate :minify_javascript
-  activate :asset_hash
+
+  # use asset hash, but ignore post images to be able to display cover photo in post summary
+  activate :asset_hash, ignore: /\d{4}\/\d{2}\/\d{2}\//
   # activate :relative_assets
 end
 

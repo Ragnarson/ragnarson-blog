@@ -29,4 +29,10 @@ module CustomHelpers
   def strip_tags(html)
     Loofah.fragment(html).to_text.strip
   end
+
+  def article_cover(article)
+    return unless article.data.cover_photo
+    src = "#{article.url.gsub(".html", "")}/#{article.data.cover_photo}"
+    "<img src='#{src}'/>"
+  end
 end
