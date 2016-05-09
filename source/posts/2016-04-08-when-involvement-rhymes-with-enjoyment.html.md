@@ -1,6 +1,7 @@
 ---
 title: When involvement rhymes with enjoyment
 author: piotr
+cover_photo: cover.png
 ---
 
 > “If you do what you love, you'll never work a day in your life.”
@@ -13,6 +14,8 @@ If you choose wrongly, then every single day you will struggle to do things you 
 It’s like being in a relationship. If you find your perfect match - your soulmate, the love of your life - then you will always be happy, and all your problems will disappear. You will understand each other without words, and there will be no arguments, and no silent treatment.
 
 Bullshit!
+
+READMORE
 
 Even if you are in a relationship with someone you truly love, there will still be problems and hard times.
 Even if you do the job you love, there will also be problems, hard times and periods when you will struggle and even hate your job.
