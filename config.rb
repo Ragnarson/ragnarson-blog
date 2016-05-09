@@ -32,7 +32,7 @@ activate :blog do |blog|
   blog.page_link = "page/{num}"
 end
 
-activate :authors
+activate :sprockets
 
 page "/feed.xml", layout: false
 
@@ -91,12 +91,14 @@ set :images_dir, 'images'
 configure :build do
   activate :minify_css
   activate :minify_javascript
-  activate :asset_hash
+
+  # use asset hash, but ignore post images to be able to display cover photo in post summary
+  activate :asset_hash, ignore: /\d{4}\/\d{2}\/\d{2}\//
   # activate :relative_assets
 end
 
 activate :deploy do |deploy|
   deploy.build_before = true
-  deploy.method = :git
+  deploy.deploy_method = :git
   deploy.strategy = :force_push
 end

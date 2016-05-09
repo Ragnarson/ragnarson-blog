@@ -1,12 +1,12 @@
 source "https://rubygems.org"
 
-gem "middleman", "~> 3.3.11"
-gem "middleman-blog", "~> 3.5.3"
-gem "middleman-blog-authors"
+gem "middleman", "4.1.7"
+gem "middleman-core", git: "https://github.com/middleman/middleman.git"
+gem "middleman-blog", "~> 4.0.1"
 gem "middleman-livereload"
 gem "middleman-autoprefixer"
-gem "middleman-deploy"
-gem "middleman-sprockets", '>= 3.3.10'
+gem "middleman-deploy", git: "https://github.com/middleman-contrib/middleman-deploy.git"
+gem "middleman-sprockets", '>= 4.0.0rc.2'
 gem "middleman-syntax"
 gem "redcarpet"
 gem "nokogiri"
@@ -14,7 +14,7 @@ gem "loofah"
 
 gem "slim"
 gem "bitters"
-gem "bourbon"
+gem "bourbon", "~> 4.2.2"
 gem "neat"
 
 # For feed.xml.builder
