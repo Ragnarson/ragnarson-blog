@@ -328,7 +328,7 @@ angular.module('app')
 
 ### 8. Run gulp tasks on ionic serve
 
-You can hook up any gulp tasks to `ionic serve` command. Triggering `annotate` and `watch` command is a good way of making sure that you always have the latest version of the app running in the browser.
+You can hook up any gulp tasks to `ionic serve` command. Triggering `annotate` and `watch` commands is a good way of making sure that you always have the latest version of the app running in the browser.
 
 Edit the `ionic.project` file so it looks like this:
 
