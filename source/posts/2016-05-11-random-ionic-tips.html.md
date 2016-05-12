@@ -1,7 +1,7 @@
 ---
 title: 8 random Ionic tips
 author: pawurb
-cover_photo: ionic_cover.png
+cover_photo: ionic_cover.jpg
 ---
 
 [Ionic](ionicframework.com) is a leading hybrid mobile app development framework. With [Ionic 2](http://ionic.io/2) still in its infancy and multitude of production apps that will need maintenance, the current version is not going away any time soon. I've been developing Ionic apps for about a year now. This blogpost presents 8 random tips which I wish I had known when I started to play with it.
@@ -350,4 +350,3 @@ Next time you run ionic serve, the project will be built and the watcher started
 ### Sample repo
 
 You can find a demo Ionic app with all the tips applied in [this repo](https://github.com/Ragnarson/ionic-tips).
-
