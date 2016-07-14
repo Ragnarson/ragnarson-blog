@@ -5,6 +5,13 @@
   clear: left
   font: $fixed-font-size $base-font-family
 
+  .one-third,
+  .two-thirds
+    @media screen and (max-width: $medium-screen)
+      margin-top: $small-spacing
+      text-align: center
+      width: 100%
+
   .newsletter-input
     margin-bottom: 0
 
