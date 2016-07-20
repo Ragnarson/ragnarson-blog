@@ -163,3 +163,15 @@ We'll look at how to change that in future posts.
 So we got Elasticsearch running and we indexed our needed data, but that’s just the basic
 configuration. Next time, we’ll see how we can do a multi-model search in a single command.
 Let me know in the comments if you’ve got some other concepts or issues you would like to read about.
+
+---
+
+_As [Karel Minarik](http://www.karmi.cz) pointed out in the comments the Ruby integration is split
+between 2 projects: The [low-level](https://github.com/elastic/elasticsearch-ruby) client which provides
+a DSL for writing the search definitions and [Rails integration](https://github.com/elastic/elasticsearch-rails).
+Basically by requiring the elasticsearch-model gem we are automatically using part of the Rails
+integration. But I think that the low-level github repo is a good place to start, you can find there
+all informations you need (also link to the Rails integration repository).
+Also it turned out that we could simplify our importer by using the built in import method. It does
+basically [the same](https://github.com/elastic/elasticsearch-rails/blob/master/elasticsearch-model/lib/elasticsearch/model/importing.rb#L122-L126)
+thing._
