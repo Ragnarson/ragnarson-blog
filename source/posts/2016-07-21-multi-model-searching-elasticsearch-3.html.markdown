@@ -11,6 +11,18 @@ Now it’s time to talk about some of the more complicated stuff and try to impr
 
 READMORE
 
+---
+
+This a part of a three post series:
+
+1. [Part 1 - basic setup](http://blog.ragnarson.com/2016/06/30/multi_model_searching_elasticsearch_1.html)
+
+2. [Part 2 - multi model searching](http://blog.ragnarson.com/2016/07/14/multi-model-searching-elasticsearch-2.html)
+
+3. [Part 3 - improving searching intelligence](http://blog.ragnarson.com/2016/07/21/multi-model-searching-elasticsearch-3.html)
+
+---
+
 ## TL;DR
 
 I've created a sample app which is a foundation for my blog posts. If you already are familiar with
