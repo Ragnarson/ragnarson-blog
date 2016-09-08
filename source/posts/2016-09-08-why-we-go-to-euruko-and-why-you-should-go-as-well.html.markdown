@@ -18,6 +18,7 @@ Firstly all these famous people who I knew only from their Github nicknames were
 * [Sven Fuchs](https://twitter.com/svenfuchs) - responsible for rails i18n project!
 * [Mislav Marohnić](https://twitter.com/mislav) - whose pagination plugin, will_paginate, was being used at this time in 95% of rails projects.
 * [Yehuda Katz](https://twitter.com/wycats) - who was showing his new kid Bundler
+
 You were able to understand more from their way of thinking. From their way of writing code. Even more, you were able to chat face to face with them during the breaks or after-parties. All lecturers, organizers, and attendees were so open and friendly, creating a great atmosphere.
 
 The second memorable thing during my first EuRuKo was that it was the first time I met my co-workers face to face. I was a remote junior rails developer at Ragnarson and it was my first occasion to meet almost the entire company. Playing poker till 3am in the hostel room was an amazing opportunity to meet each other and build connections between us. People stopped being just a nickname or avatar on the internet. They became REAL PEOPLE, FRIENDS to me.
