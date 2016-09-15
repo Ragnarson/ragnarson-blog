@@ -33,7 +33,11 @@ module CustomHelpers
 
   def article_cover(article)
     return unless article.data.cover_photo
-    src = "#{article.url.gsub(".html", "")}/#{article.data.cover_photo}"
-    "<img src='#{src}'/>"
+    "<img src='#{article_cover_url(article)}'/>"
+  end
+
+  def article_cover_url(article)
+    return unless article.data.cover_photo
+    "#{article.url.gsub(".html", "")}/#{article.data.cover_photo}"
   end
 end

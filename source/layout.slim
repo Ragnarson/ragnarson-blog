@@ -10,7 +10,6 @@ html
     - else
       title Ragnarson Blog
 
-    meta property="og:image" content="http://blog.ragnarson.com#{image_path("blog-embed.png")}"
     meta name="twitter:image" content="http://blog.ragnarson.com#{image_path("blog-embed.png")}"
     meta name="twitter:card" content="summary"
     meta name="twitter:site" content="@ragnarsoncom"
@@ -18,6 +17,7 @@ html
     - if content_for?(:graph_meta)
       = yield_content :graph_meta
     - else
+      meta property="og:image" content="http://blog.ragnarson.com#{image_path("blog-embed.png")}"
       meta property="og:type" content="website"
       meta property="og:url" content="http://blog.ragnarson.com/"
       meta property="og:title" content="Ragnarson Blog"

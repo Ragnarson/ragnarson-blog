@@ -5,6 +5,11 @@
   meta property="og:description" content=strip_tags(current_article.summary)
   meta name="author" content=article_author(current_article).name
 
+  - if cover_url = article_cover_url(current_article)
+    meta property="og:image" content="http://blog.ragnarson.com#{cover_url}"
+  - else
+    meta property="og:image" content="http://blog.ragnarson.com#{image_path("blog-embed.png")}"
+
   - if author_twitter = article_author(current_article).twitter
     meta name="twitter:creator" content="@#{author_twitter}"
 
