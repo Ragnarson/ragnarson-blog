@@ -66,8 +66,33 @@ page "/feed.xml", layout: false
 # proxy "/this-page-has-no-template.html", "/template-file.html", locals: {
 #  which_fake_page: "Rendering a fake page with a local variable" }
 
+data.authors.collect {|author| author }.each do |author|
+  proxy "/authors/#{Blog::UriTemplates.safe_parameterize(author.last["name"])}.html",
+        "/author.html",
+        locals: { author_slug: author.first },
+        ignore: true
+end
+
 ###
 # Helpers
+helpers do
+  def find_author(author_slug)
+    result = data.authors.select { |author| author == author_slug.downcase }
+    result.any? ? result.first[1] : nil
+  end
+
+  def articles_by_author(author_slug)
+    sitemap.
+      resources.
+      select { |resource| resource.data.author == author_slug }.
+      sort_by { |resource| resource.data.date }.
+      reverse
+  end
+
+  def author_link(author)
+    link_to author.name, "/authors/#{Blog::UriTemplates.safe_parameterize(author.name)}.html"
+  end
+end
 ###
 
 # Automatic image dimensions on image_tag helper

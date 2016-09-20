@@ -2,7 +2,7 @@ header
   = avatar(article_author(article).email, 72)
   div class="article-meta"
     = article.date.strftime('%B %e, %Y')
-    |  - #{author_link(article)}
+    |  - #{author_link(article_author(article))}
 
   h1 class="article-title"
     = link_to article.title, article

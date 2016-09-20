@@ -1,0 +1,6 @@
+- author = find_author(author_slug)
+h1= author.name
+
+ul
+  - articles_by_author(author_slug).each do |article|
+    li= link_to article.metadata[:page][:title], article.request_path
