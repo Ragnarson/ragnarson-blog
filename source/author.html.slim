@@ -1,6 +1,14 @@
 - author = find_author(author_slug)
-h1= author.name
-
+h1= "Articles by #{author.name}"
+- if note = author.note.presence
+      div class="article-author-note" = note
+      hr
 ul
   - articles_by_author(author_slug).each do |article|
-    li= link_to article.metadata[:page][:title], article.request_path
+    article.article
+      = partial "partials/article/header", locals: { article: article }
+      .post-body
+        - img_dir = article.request_path.gsub(/\.html$/, '')
+        img src="/#{img_dir}/#{article.metadata[:page][:cover_photo]}"
+        = article.summary
+        = link_to "Continue reading", article.request_path
