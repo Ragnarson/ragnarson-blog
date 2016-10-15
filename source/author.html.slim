@@ -8,7 +8,6 @@ ul
     article.article
       = partial "partials/article/header", locals: { article: article }
       .post-body
-        - img_dir = article.request_path.gsub(/\.html$/, '')
-        img src="/#{img_dir}/#{article.metadata[:page][:cover_photo]}"
+        = article_cover(article)
         = article.summary
         = link_to "Continue reading", article.request_path
