@@ -84,8 +84,8 @@ class User::Register
     return broadcast(:invalid) if email.blank?
     user = User.create!(email: email)
     broadcast(:ok, user.id)
-    end
   end
+end
 
 ...
 controller action
