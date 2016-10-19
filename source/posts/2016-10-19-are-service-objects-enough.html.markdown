@@ -118,7 +118,7 @@ So what about the so-called service objects? In my approach, they are still usef
 
 ```ruby
 class User::GenerateToken
-  def self.call
+  def self.call(user)
     new(user).call
   end
 
