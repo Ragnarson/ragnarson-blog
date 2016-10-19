@@ -26,7 +26,42 @@ cover_photo: cover.png
 ```
 The cover photo should be placed in post directory.
 
+Build static files:
+```
+$ bundle exec middleman build_all
+```
+
+Run server:
+```
+$ bundle exec rake server
+```
+
+Open normal website:
+```
+http://localhost:4567/index.html
+```
+
+Open AMP website:
+```
+http://localhost:4567/amp/index.html
+```
+
+Validate Accelerated Mobile Pages (AMP) website:
+```
+http://localhost:4567/amp/index.html#development=1
+```
+
+Read more about Accelerated Mobile Pages (AMP) validation:
+```
+https://www.ampproject.org/docs/guides/validate
+```
+
 ### Deployment
+
+To deploy static website, use the following rake task:
+
 ```
-bundle exec middleman deploy
+$ bundle exec rake deploy
 ```
+
+Note that blog uses Accelerated Mobile Pages (AMP). Default middleman deploy task will not build all necessary dependencies for AMP. deploy rake task runs middleman build_all first and then deploy task.

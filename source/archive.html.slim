@@ -4,7 +4,6 @@ ul class="archive"
       h3 class="archive-month" = date.strftime("%B %Y")
       ul
         - articles.each do |article|
-        
           li
             span class="archive-date" = article.date.strftime("%Y-%m-%d")
             = link_to article.title, article

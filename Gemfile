@@ -19,3 +19,10 @@ gem "neat"
 
 # For feed.xml.builder
 gem "builder", "~> 3.0"
+
+# AMP
+gem "middleman-minify-html"
+gem "middleman-targets"
+
+gem "rake"
+gem "thin"
