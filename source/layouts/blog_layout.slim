@@ -14,7 +14,7 @@
     meta name="twitter:creator" content="@#{author_twitter}"
 
 = wrap_layout :layout do
-  = partial "partials/article/floating_share_buttons.html"
+  = partial "partials/article/floating_share_buttons.html" unless target_name?(:amp)
   div class="article"
     = partial "partials/article/header", locals: { article: current_article }
     = partial "partials/article/shelly" if current_article.data.shelly
@@ -23,8 +23,9 @@
     - if note = article_author(current_article).note.presence
       div class="article-author-note" = note
     div class="article-social-buttons"
-      = partial "partials/article/bottom_social_buttons.html"
-    div class="newsletter"
-      = partial "partials/newsletter"
+      = partial "partials/article/bottom_social_buttons.html" unless target_name?(:amp)
+    - unless target_name?(:amp)
+      div class="newsletter"
+        = partial "partials/newsletter"
     div class="article-comments"
-      = partial "partials/article/disqus"
+      = partial "partials/article/disqus" unless target_name?(:amp)

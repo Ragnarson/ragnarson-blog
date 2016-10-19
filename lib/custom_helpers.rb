@@ -1,4 +1,5 @@
 require "digest/md5"
+require "fastimage"
 
 module CustomHelpers
   def responsive_image_tag(image, image_2x, options = {})
@@ -33,7 +34,10 @@ module CustomHelpers
 
   def article_cover(article)
     return unless article.data.cover_photo
-    "<img src='#{article_cover_url(article)}'/>"
+    return "<img src='#{article_cover_url(article)}'/>" unless amp?
+    cover_path = File.join("source", article.path.gsub(".html", ""), article.data.cover_photo)
+    size = FastImage.size(cover_path)
+    "<amp-img src='#{article_cover_url(article)}' width='#{size[0]}' height='#{size[1]}' layout='responsive'></amp-img>"
   end
 
   def article_cover_url(article)

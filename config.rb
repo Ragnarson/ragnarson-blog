@@ -1,6 +1,9 @@
 require "lib/custom_helpers"
 require "lib/custom_renderer"
+require "fastimage"
+
 helpers CustomHelpers
+
 ###
 # Blog settings
 ###
@@ -92,6 +95,73 @@ helpers do
   def author_link(author)
     link_to author.name, "/authors/#{Blog::UriTemplates.safe_parameterize(author.name)}.html"
   end
+
+  # Resources such as images, videos, audio files or ads must be included into
+  # an AMP HTML file through custom elements such as <amp-img>. We call them
+  # “managed resources” because whether and when they will be loaded and
+  # displayed to the user is decided by the AMP runtime.
+  #
+  # https://www.ampproject.org/docs/get_started/create/include_image.html
+  def amp_image_tag(path, options = {})
+    if path.start_with?("http") && options[:class] == "avatar"
+      avatar_size = options[:size].chomp("px")
+      return "<amp-img src='#{path}' width='#{avatar_size}' height='#{avatar_size}' class='avatar'></amp-img>"
+    end
+    image_path = normalize_image_path(path)
+    size = FastImage.size(File.join("source", image_path))
+    size = [(size[0] * options[:height].to_i / size[1]).to_i, options[:height].to_i] if options[:height]
+    alt_text = options[:alt] ? options[:alt] : path.gsub(/\.[\w]*/, "")
+    options.merge!(layout: "responsive") if options[:layout].blank? && options[:srcset].blank?
+    "<amp-img #{(options[:layout] ? "layout='#{options[:layout]}'" : "")} src='#{image_path}' alt='#{alt_text}' width='#{size[0].to_s}' height='#{size[1].to_s}'></amp-img>"
+  end
+
+  def normalize_image_path(path)
+    image_path = File.join("images", path)
+    unless File.exists?(File.join("source", image_path))
+      image_path = File.join("posts", path)
+    end
+
+    image_path.start_with?("/") ? image_path : "/#{image_path}"
+  end
+
+  # If Google Search finds the non-AMP version of page, it know there’s an AMP version of it.
+  #
+  # https://www.ampproject.org/docs/get_started/create/prepare_for_discovery.html
+  def amp_or_canonical_link(url, path)
+    if amp?
+      "<link rel='canonical' href='#{url + path.sub(/amp\//, "")}'>"
+    else
+      "<link rel='amphtml' href='#{url}/amp#{path}'>"
+    end
+  end
+
+  def inline_stylesheet(name)
+    Middleman::Extensions::MinifyCss::SassCompressor.compress(sprockets[ "#{name}.css" ].to_s)
+  end
+
+  def inline_stylesheet_tag(name)
+    content_tag(:style, "amp-custom": "") do
+      inline_stylesheet(name)
+    end
+  end
+
+  def image_tag(path, options = {})
+    amp? ? amp_image_tag(path, options) : super
+  end
+
+  def amp?
+    target_name?(:amp)
+  end
+
+  def url_for(path_or_resource, options = {})
+    url = super
+
+    return url if !target_value(:link_prefix)  || url.scan(/^(http:|https:|)\/\//)[0]
+
+    prefix = target_value(:link_prefix)
+    prefix = url[0] == "/" ? "/#{prefix}" : "#{prefix}/"
+    "#{prefix}#{url}"
+  end
 end
 ###
 
@@ -101,7 +171,7 @@ end
 # Reload the browser automatically whenever files change
 activate :livereload
 activate :autoprefixer do |config|
-  config.browsers = ['last 2 versions', 'Explorer >= 9']
+  config.browsers = ["last 2 versions", "Explorer >= 9"]
 end
 
 activate :syntax
@@ -109,9 +179,23 @@ activate :syntax
 set :markdown_engine, :redcarpet
 set :markdown, CustomRedcarpetHTML::REDCARPET_OPTIONS.merge(renderer: CustomRedcarpetHTML)
 
-set :css_dir, 'stylesheets'
-set :js_dir, 'javascripts'
-set :images_dir, 'images'
+set :css_dir, "stylesheets"
+set :js_dir, "javascripts"
+set :images_dir, "images"
+
+activate :MiddlemanTargets
+config[:targets] = {
+  default: {
+    build_dir: "build",
+    link_prefix: nil,
+    features: {}
+  },
+  amp: {
+    build_dir: "build/amp",
+    link_prefix: "amp",
+    features: {}
+  }
+}
 
 configure :build do
   activate :minify_css
@@ -119,11 +203,9 @@ configure :build do
 
   # use asset hash, but ignore post images to be able to display cover photo in post summary
   activate :asset_hash, ignore: /\d{4}\/\d{2}\/\d{2}\//
-  # activate :relative_assets
 end
 
 activate :deploy do |deploy|
-  deploy.build_before = true
   deploy.deploy_method = :git
   deploy.strategy = :force_push
 end
