@@ -25,3 +25,8 @@ cover_photo: cover.png
 ---
 ```
 The cover photo should be placed in post directory.
+
+### Deployment
+```
+bundle exec middleman deploy
+```
