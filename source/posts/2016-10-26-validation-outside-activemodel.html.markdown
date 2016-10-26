@@ -41,7 +41,7 @@ end
 
 contact = UserContact.new
 contact.name = "John Doe"
-contact.phone_number=123456789
+contact.phone_number = 123456789
 contact.valid? # => false
 contact.errors # => { message: ["can't be blank"] }
 ```
@@ -118,7 +118,7 @@ New validation schema should handle optional key:
 
 ```ruby
 Dry::Validation.Schema do
-  optional(:name} { filled? }
+  optional(:name) { filled? }
   required(:age) { filled? & int? & gt?(18) }
 end
 ```
@@ -171,7 +171,7 @@ Schema with attributes nested in hash isn't so complicated:
 Dry::Validation.Schema do
   require(:data).schema do
     require(:attributes).schema do
-      optional(:name} { filled? }
+      optional(:name) { filled? }
       required(:phone_number) { filled? & int? }
     end
   end
@@ -185,7 +185,7 @@ input_data = {
   data: {
     attributes: {
       name: "John Doe",
-      phone_number: 123456789
+      phone_number: 123456789,
       emails: ["foobar@example.com", "foobar"]
     }
   }
@@ -198,7 +198,7 @@ And validation schema:
 schema = Dry::Validation.Schema do
   require(:data).schema do
     require(:attributes).schema do
-      optional(:name} { filled? }
+      optional(:name) { filled? }
       required(:phone_number) { filled? & int? }
       optional(:emails).each(:email?)
     end
@@ -227,7 +227,7 @@ data = {
   },
   delivery_address: {
     street: "Brodway"
-  },
+  }
 }
 ```
 
@@ -259,7 +259,7 @@ data = {
   },
   delivery_address: {
     street: "Brodway"
-  },
+  }
 }
 
 puts invoice_schema.call(data).messages
