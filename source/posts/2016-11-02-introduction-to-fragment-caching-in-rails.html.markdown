@@ -20,7 +20,7 @@ In order to help you understand fragment caching, let me first show an example s
 # posts/show.html.erb
 
 <h1><%= @post.title %></h1>
-<p><%= @post.body %></h2>
+<p><%= @post.body %></p>
 
 <%= render @post.comments %>
 ```
@@ -46,7 +46,7 @@ Fragment caching is a lot more useful than full page caching, especially in comp
 
 Before we start with some examples, we need to turn on the caching in the development environment as it is turned off by default (though it is enabled in production). To do this in Rails 4, we need to change the appropriate option in the configuration settings.
 
-```ruby
+```
 config.action_controller.perform_caching = true
 ```
 
