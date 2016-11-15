@@ -93,6 +93,8 @@ GEM
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     json (1.8.3)
+    json-minify (0.0.3)
+      json (> 0)
     kramdown (1.11.1)
     listen (3.0.7)
       rb-fsevent (>= 0.9.3)
@@ -178,6 +180,7 @@ DEPENDENCIES
   bitters
   bourbon (~> 4.2.2)
   builder (~> 3.0)
+  json-minify
   loofah
   middleman (= 4.1.7)
   middleman-autoprefixer

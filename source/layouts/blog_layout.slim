@@ -13,6 +13,12 @@
   - if author_twitter = article_author(current_article).twitter
     meta name="twitter:creator" content="@#{author_twitter}"
 
+- content_for :structured_data do
+  = inline_ld_json_tag do
+    = person_structured_data(article_author(current_article))
+  = inline_ld_json_tag do
+    = article_structured_data(current_article)
+
 = wrap_layout :layout do
   = partial "partials/article/floating_share_buttons.html" unless target_name?(:amp)
   div class="article"

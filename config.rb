@@ -1,6 +1,7 @@
 require "lib/custom_helpers"
 require "lib/custom_renderer"
 require "fastimage"
+require "json/minify"
 
 helpers CustomHelpers
 
@@ -143,6 +144,50 @@ helpers do
     content_tag(:style, "amp-custom": "") do
       inline_stylesheet(name)
     end
+  end
+
+  def inline_ld_json_tag(&block)
+    content_tag(:script, "type": "application/ld+json") do
+      JSON.minify(block.call)
+    end
+  end
+
+  def structured_data(type, data)
+    {
+      "@context": "http://schema.org",
+      "@type": type
+    }.merge(data).to_json
+  end
+
+  def organization_structured_data
+    structured_data("Organization",
+                    name: "Ragnarson",
+                    url: "https://ragnarson.com")
+  end
+
+  def website_structured_data
+    structured_data("WebSite",
+                    name: "Ragnarson Blog",
+                    url: "https://blog.ragnarson.com")
+  end
+
+  def person_structured_data(author)
+    structured_data("Person",
+                    name: author.name,
+                    image: gravatar_link(author.email, 72))
+  end
+
+  def article_structured_data(article)
+    data = {
+      name: article.title,
+      url: "https://blog.ragnarson.com#{url_for(article)}"
+    }
+
+    if article.data.cover_photo
+      data.merge!(image: "https://blog.ragnarson.com#{article_cover_url(article)}")
+    end
+
+    structured_data("Article", data)
   end
 
   def image_tag(path, options = {})

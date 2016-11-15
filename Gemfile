@@ -23,6 +23,7 @@ gem "builder", "~> 3.0"
 # AMP
 gem "middleman-minify-html"
 gem "middleman-targets"
+gem "json-minify"
 
 gem "rake"
 gem "thin"

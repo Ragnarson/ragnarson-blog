@@ -1,4 +1,8 @@
 - author = find_author(author_slug)
+- content_for :structured_data do
+  = inline_ld_json_tag do
+    = person_structured_data(author)
+
 h1= "Articles by #{author.name}"
 - if note = author.note.presence
       div class="article-author-note" = note

@@ -13,9 +13,13 @@ module CustomHelpers
   end
 
   def avatar(email, size, options = { class: "avatar" })
-    email_hash = Digest::MD5.hexdigest(email)
     options[:size] = options[:width] = "#{size}px"
-    image_tag("https://www.gravatar.com/avatar/#{email_hash}.jpg?s=#{size * 2}&d=mm", options)
+    image_tag(gravatar_link(email, size), options)
+  end
+
+  def gravatar_link(email, size)
+    email_hash = Digest::MD5.hexdigest(email)
+    "https://www.gravatar.com/avatar/#{email_hash}.jpg?s=#{size * 2}&d=mm"
   end
 
   def author_link(article)
