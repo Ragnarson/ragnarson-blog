@@ -4,7 +4,7 @@ author: piotr
 cover_photo: cover.png
 ---
 
-From When involvement rhymes with enjoyment article we know that there are 7 factors to achieve the flow state. This state is ultimate effective when we are fully engaged in the activity.
+From [When involvement rhymes with enjoyment](https://blog.ragnarson.com/2016/04/08/when-involvement-rhymes-with-enjoyment.html) article we know that there are 7 factors to achieve the flow state. This state is ultimate effective when we are fully engaged in the activity.
 
 Today, we focus on which of the factors can be activated by having a good product management. And how this activation can be achieved.
 
