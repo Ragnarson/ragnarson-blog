@@ -207,6 +207,24 @@ helpers do
     prefix = url[0] == "/" ? "/#{prefix}" : "#{prefix}/"
     "#{prefix}#{url}"
   end
+
+  def full_url(path)
+    "https://blog.ragnarson.com#{url_for(path)}"
+  end
+
+  def layout_options
+    @layout_options ||= {
+      links: []
+    }
+  end
+
+  def append_link(link)
+    layout_options[:links].push(link)
+  end
+
+  def display_links
+    layout_options[:links].map { |meta| tag(:link, meta) }.join.html_safe
+  end
 end
 ###
 
