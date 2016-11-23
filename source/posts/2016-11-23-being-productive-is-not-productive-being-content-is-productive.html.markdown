@@ -43,44 +43,51 @@ But what if being happy is the way to be successful?
 Positive psychology states that’s true. If you are happy your brain and body work more efficiently. Low level of stress allows you to focus and use your entire energy on your task. Your happiness is the internal drive to take actions.
 
 And there are 5 habits that help you build your internal happiness
+
 ### Gratitude
-Our economy is built on the creation of lack in people. Creation of new needs that promise you happiness as soon as you fulfill themis need. But there will be a next one. And athe next one. Avoid commercials, celebrities or Instagram photos.  Their role is to tell your ego that there is something missing in you.
+Our economy is built on the creation of lack in people. Creation of new needs that promise you happiness as soon as you fulfill them. But there will be a next one. And a next one. Avoid commercials, celebrities or Instagram photos.  Their role is to tell your ego that there is something missing in you.
 
+Gratitude is opposite. It helps you to see all things you already have and be thankful for them.
+Remind yourself about three things: people, memories or experiences you are grateful for. You will focus on the things you have, not on a lack created by media.
 
-Gratitude is opposite. It helps you to see all things you already have a. And be thankful for them.
-
-Remind yourself about three things:, people, memories or experiences you are grateful for. You will focus on the things you have, not on a lack created by media.
 
 Start and finish your day with finding 3 things you feel gratitude for.
 
+
 ### Write your own journal
-It helps you to have athe better understanding of yourself. It helps to have a better connection with your values, dreams and goals. A Jjournal is a form of athe dialog with yourself. It allows you to see some patterns or needs that were hidden on a regular basis.
+It helps you to have a better understanding of yourself. It helps to have a better connection with your values, dreams and goals. A journal is a form of a dialog with yourself. It allows you to see some patterns or needs that were hidden on a regular basis.
 
-It will also be a reminder of your good moments. The best emotions and feelings you experienced. They are now on a paper (or in the cloud) so you can go back to theseis memories in hard times to find your power again.
+It will also be a reminder of your good moments. The best emotions and feelings you experienced. They are now on a paper (or in the cloud) so you can go back to these memories in hard times to find your power again.
 
-A journalIt is also a good teacher that will help you to avoid repeating the same mistakes again, and again… and again
+A journal is also a good teacher that will help you to avoid repeating the same mistakes again, and again… and again
 
 ### Exercise
 For thousands of years, our survival depended on our strength, endurance and agility. Everyday activities required some physical action to be taken.
 
 But in the last 200 years things changed a lot. Some days opening a beer and changing the TV station are your all activities.
 
-We feel good when we are moving / in motionin move. When our lungs and blood deliver more oxygen and energy to our brain, muscles and other organs. We are offspring of those who were running, climbing or swimming. The ones who were just sitting died eaten by predators.
-Start with small steps like daily 20 minutes walk. You will feel a difference and start wantingto want more. To be more active. To be happier :)
+We feel good when we are in motion. When our lungs and blood deliver more oxygen and energy to our brain, muscles and other organs. We are offspring of those who were running, climbing or swimming. The ones who were just sitting died eaten by predators.
+
+Start with small steps like daily 20 minutes walk. You will feel a difference and start wanting more. To be more active. To be happier :)
 
 ### Meditation
-We have thousands of thoughts every single day. Most of us believe in thoughts. That they are true. That the world is exactly as our mind describes it. It is not true. We all live in the same world, but have different thoughts describing it. The same territory is the same for all of us,. bBut each person has a unique map of it in the mind. None of them are trueth. Most of them are even not ours. We took them unconsciously from ouryour parents, school, society traditions, ads or politics propaganda.
+We have thousands of thoughts every single day. Most of us believe in thoughts. That they are true. That the world is exactly as our mind describes it. It is not true. We all live in the same world, but have different thoughts describing it. The territory is the same for all of us, but each person has a unique map of it in the mind. None of them are true. Most of them are even not ours. We took them unconsciously from our parents, school, society traditions, ads or politics propaganda.
 
-Meditation helps us dissociate from thoughts. You will Sstart to just observe them, notdon’t believe in them.  Start with 5 minutes meditation per day. Just sit (it doesn’t have to be a lotus pose) and observe your thoughts. Don’t try to avoid them. Just notice there is some thought and don’t go deeper inside. For example, you can start thinkingto think about dinner. Just notice this, don’t go deeper to think about who you should eat with, what and where.
+
+Meditation helps us dissociate from thoughts. You will start to just observe them, not believe in them.  Start with 5 minutes meditation per day. Just sit (it doesn’t have to be a lotus pose) and observe your thoughts. Don’t try to avoid them. Just notice there is some thought and don’t go deeper inside. For example, you can start thinking about dinner. Just notice this, don’t go deeper to think about who you should eat with, what and where.
+
 
 ### Being kind to others
-KindnessIt is good for you and your happiness forfrom three strong reasons.
+Kindness is good for you and your happiness for three strong reasons.
+
 
 Psychologic theory of reciprocity is the first thing working for you. It states that people will repay you what you provided to them. If you are kind to others you can expect most of them will be kind to you as well.
 
-The way how we look at the universe is the same we look at ourselves a. And vice versa. If we are kind to others we also thinkconsider that other people and the world are kind as well.
 
-Finally, you will like yourself more because you are a good kind of person. How can you notto don’t like such a good person as you?
+The way how we look at the universe is the same we look at ourselves and vice versa. If we are kind to others we also think that other people and the world are kind as well.
+
+
+Finally, you will like yourself more because you are a good kind of person. How can you not like such a good person as you?
 
 
 ## TL;DR
