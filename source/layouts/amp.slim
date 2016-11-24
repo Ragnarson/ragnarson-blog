@@ -17,13 +17,6 @@ html lang="en" amp=""
 
     = inline_stylesheet_tag "application"
     link rel="apple-touch-icon-precomposed" href="/favicon-152.png"
-
-    = inline_ld_json_tag do
-      = organization_structured_data
-    = inline_ld_json_tag do
-      = website_structured_data
-    - if content_for?(:structured_data)
-      = yield_content(:structured_data)
   body
     = partial "partials/amp_analytics"
 
