@@ -179,8 +179,21 @@ helpers do
 
   def article_structured_data(article)
     data = {
-      name: article.title,
-      url: "https://blog.ragnarson.com#{url_for(article)}"
+      headline: article.title,
+      url: "https://blog.ragnarson.com#{url_for(article)}",
+      author: {
+        "@type": "Person",
+        name: article_author(article).name,
+        image: gravatar_link(article_author(article).email, 72)
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Ragnarson",
+        url: "https://ragnarson.com",
+        logo: "https://blog.ragnarson.com#{image_path("brand.svg")}"
+      },
+      datePublished: article.date.strftime("%Y-%m-%d"),
+      dateModified: article.date.strftime("%Y-%m-%d")
     }
 
     if article.data.cover_photo
