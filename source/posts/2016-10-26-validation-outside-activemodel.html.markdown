@@ -29,10 +29,10 @@ end
 There are cases when the application isn't saving data in any database, nor is any data received from a form on a web page, but we still need to perform validations. One example could be sending SMS - before we do it, we need to make sure we're sending correct data.
 
 ```ruby
-class SmsMessage
+class UserContact
   include ActiveModel::Validations
 
-  attr_accessor :name, :phone_number, :body
+  attr_accessor :name, :phone_number, :message
 
   validates :name, presence: true
   validates :phone_number, numericality: { only_integer: true }
