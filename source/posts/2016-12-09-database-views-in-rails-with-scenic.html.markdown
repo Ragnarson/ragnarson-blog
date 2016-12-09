@@ -96,7 +96,7 @@ After the file was edited and filled in with our queries we were able to apply t
 
 `rake db:migrate`
 
-The process for creating a view is similar to creating new table..
+The process for creating a view is similar to creating new table.
 
 ## The model layer
 
