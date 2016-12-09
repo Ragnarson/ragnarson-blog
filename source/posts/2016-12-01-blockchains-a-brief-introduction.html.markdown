@@ -69,3 +69,7 @@ Worth reading / watching:
 * [https://www.khanacademy.org/economics-finance-domain/core-finance/money-and-banking/bitcoin](https://www.khanacademy.org/economics-finance-domain/core-finance/money-and-banking/bitcoin)
 * [http://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html](http://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html)
 * [https://bitcoin.org/bitcoin.pdf](https://bitcoin.org/bitcoin.pdf)
+
+***
+
+[Subscribe our newsletter Blockchain Weekly to be up to date with the most interesting topics from the Blockchain world.](http://blockchainweekly.net)
