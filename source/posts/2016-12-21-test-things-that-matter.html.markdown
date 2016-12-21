@@ -22,7 +22,7 @@ class User::Register
   private
 
   def generate_super_secret_token(email)
-  ...
+    # ...
   end
 end
 ```
