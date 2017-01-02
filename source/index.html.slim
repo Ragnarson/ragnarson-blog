@@ -18,6 +18,8 @@ per_page: 10
         - append_link(rel: "prev", href: full_url(prev_page.url))
         = link_to "« Newer articles", prev_page
     li
+      = link_to "All articles", "/archive.html"
+    li
       - if next_page
         - append_link(rel: "next", href: full_url(next_page.url))
         = link_to "Older articles »", next_page
