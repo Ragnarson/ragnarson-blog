@@ -27,3 +27,4 @@ gem "json-minify"
 
 gem "rake"
 gem "thin"
+gem "puma"
