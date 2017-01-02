@@ -1,7 +1,9 @@
-nav class="nav"
-  div class="nav-brand"
-    = link_to "/", class: "blog-title" do
-      = image_tag "brand.svg", title: "Ragnarson Blog", height: "32px"
-  div class="nav-items"
-    div class="nav-item" = link_to "Archive", "/archive.html"
-    div class="nav-item" = link_to "Ragnarson.com", "http://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=blog-header"
+.nav-container
+  nav class="nav"
+    = link_to "https://ragnarson.com", class: "nav-brand" do
+      = image_tag "brand.svg", title: "Ragnarson Blog", width: "220px"
+    div class="nav-items"
+      div class="nav-item" = link_to "Contact", "https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=blog-header#contact"
+      div class="nav-item" = link_to "Blog", "/", class: "active"
+      div class="nav-item" = link_to "Jobs", "http://jobs.ragnarson.com"
+      

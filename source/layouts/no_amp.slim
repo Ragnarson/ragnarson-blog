@@ -4,13 +4,13 @@ html lang="en"
     = partial "partials/head"
 
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    link rel="amphtml" href="https://blog.ragnarson.com/amp#{current_page.url}"
+    - # link rel="amphtml" href="https://blog.ragnarson.com/amp#{current_page.url}"
 
     = stylesheet_link_tag "application"
     link rel="apple-touch-icon-precomposed" href="/favicon-152.png"
     = partial "partials/analytics"
   body
+    = partial "partials/nav"
     #main role="main"
-      = partial "partials/nav"
       = yield
       = partial "partials/footer"

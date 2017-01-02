@@ -1,25 +1,34 @@
+.nav-container
+  background-image: asset-url("images/top-nav.jpg")
+  background-size: contain
+  background-position: center top
+  background-repeat: no-repeat
+  padding: 1.5rem
+
 nav
-  margin-top: 3em
-  margin-bottom: 2em
-  padding-bottom: 2em
-  border-bottom: 1px solid $base-border-color
+  margin-left: auto
+  margin-right: auto
+  padding: 0.3rem 15px 0
+  font-size: 20.8px
   @include display(flex)
   @include flex-direction(row)
 
 .nav-brand
   @include flex(1)
+  font-size: 1.25rem
 
 .nav-items
   @include display(flex)
   @include flex-direction(row)
+  padding-top: 0.3rem
+
+.nav-item
+  padding: 0 0.5rem
 
 .nav-item + .nav-item
-  margin-left: $base-spacing
+  margin-left: 1rem
 
 .nav-item > a
-  padding: $small-spacing 0
-  font-size: 0.9em
-  font-family: $heading-font-family
   color: $base-font-color
   transition: box-shadow .3s
   vertical-align: $small-spacing
@@ -27,6 +36,9 @@ nav
   &:active, &:hover
     color: $red
     box-shadow: inset 0 -3px $red
+
+  &.active
+    color: $red
 
 @media screen and (max-width: $medium-screen)
   nav
@@ -37,3 +49,24 @@ nav
   .nav-items
     margin-top: $small-spacing
     @include justify-content(center)
+
+
+@media (min-width: 576px)
+  nav
+    width: 540px
+    max-width: 100%
+
+@media (min-width: 768px)
+  nav
+    width: 720px
+    max-width: 100%
+
+@media (min-width: 992px)
+  nav
+    width: 960px
+    max-width: 100%
+
+@media (min-width: 1200px)
+  nav
+    width: 1140px
+    max-width: 100%
