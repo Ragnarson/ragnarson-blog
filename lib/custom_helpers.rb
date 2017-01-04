@@ -46,6 +46,6 @@ module CustomHelpers
 
   def article_cover_url(article)
     return unless article.data.cover_photo
-    "#{article.url.gsub(".html", "")}/#{article.data.cover_photo}"
+    image_path "#{article.path.gsub(".html", "")}/#{article.data.cover_photo}"
   end
 end
