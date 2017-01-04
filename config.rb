@@ -3,6 +3,10 @@ require "lib/custom_renderer"
 require "fastimage"
 require "json/minify"
 
+# Workaround for https://github.com/middleman/middleman/issues/2002
+Tilt.send(:remove_const, :SYMBOL_ARRAY_SORTABLE)
+Tilt::SYMBOL_ARRAY_SORTABLE = false
+
 helpers CustomHelpers
 
 ###
@@ -37,6 +41,15 @@ activate :blog do |blog|
 end
 
 activate :sprockets
+
+# Cloudflare adds a 4 hour cache to all assets by default, which we don't want for
+# files like the how we work PDF, and we want even longer times for assets with a hash.
+#
+# There's no way to use a regex in Cloudflare's Page Rules, so a simple workaround is to add
+# this -c0 prefix to the hash, which is unlikely to appear in any other file name.
+# Then we configure Cloudflare to cache files matching *-c0*.* for a month, and remove caching
+# for all other assets.
+activate :asset_hash, prefix: "c0"
 
 page "/feed.xml", layout: false
 
@@ -276,9 +289,6 @@ config[:targets] = {
 configure :build do
   activate :minify_css
   activate :minify_javascript
-
-  # use asset hash, but ignore post images to be able to display cover photo in post summary
-  activate :asset_hash, ignore: /\d{4}\/\d{2}\/\d{2}\//
 end
 
 activate :deploy do |deploy|
