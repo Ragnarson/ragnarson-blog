@@ -25,6 +25,9 @@ gem "middleman-minify-html"
 gem "middleman-targets"
 gem "json-minify"
 
+# sitemap
+gem "middleman-search_engine_sitemap"
+
 gem "rake"
 gem "thin"
 gem "puma"

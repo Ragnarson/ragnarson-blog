@@ -53,6 +53,9 @@ activate :asset_hash, prefix: "c0"
 
 page "/feed.xml", layout: false
 
+set :url_root, "https://blog.ragnarson.com"
+activate :search_engine_sitemap
+
 ###
 # Compass
 ###

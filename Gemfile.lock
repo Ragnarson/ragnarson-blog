@@ -113,6 +113,9 @@ GEM
     middleman-minify-html (3.4.1)
       htmlcompressor (~> 0.2.0)
       middleman-core (>= 3.2)
+    middleman-search_engine_sitemap (1.4.0)
+      builder
+      middleman-core (~> 4.0)
     middleman-sprockets (4.1.0)
       middleman-core (~> 4.0)
       sprockets (>= 3.0)
@@ -188,6 +191,7 @@ DEPENDENCIES
   middleman-deploy!
   middleman-livereload
   middleman-minify-html
+  middleman-search_engine_sitemap
   middleman-sprockets
   middleman-syntax
   middleman-targets
