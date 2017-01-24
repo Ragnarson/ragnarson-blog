@@ -38,7 +38,7 @@ In the article, I will make an overview of the main features of the application 
 
 The main - and the most useful - role is presenting information about the current state of the Platform. It requires data synchronization from different sources with building relations between them. For example an instance and its DNS records or an application and its database with backups. The Admin Panel performs that process periodically using a background worker and automatically on changing the state from the web interface (for example after updating a DNS record). It ensures that all information are up-to-date.
 
-The first service that provides important data is Deis. It is responsible for running applications. We synchronizes application's metadata, domains, limits, configuration and SSL certificates. Having all of them on a single view per application is helpful when developers ask for assistance.
+The first service that provides important data is Deis. It is responsible for running applications. We synchronize application's metadata, domains, limits, configuration and SSL certificates. Having all of them on a single view per application is helpful when developers ask for assistance.
 
 Another tool is Amazon Web Services that is used as instances provider at the moment. Under the hood, there are servers not only for Deis itself, but also for databases, Chef server, monitoring, etc. At this point, it stores information about instances, their maintenance events and load balancers. You can easily recognize which server of PostgreSQL replica set is a master or which instance does not have a DNS record yet.
 
@@ -48,7 +48,7 @@ The Platform uses Cloudflare as a DNS provider. The Admin Panel synchronizes all
 
 The Admin Panel helps us to solve things that are specific to our use case. For example in the past, we had an incident when Amazon Web Service restarted one of our instance due to the maintenance event. We were not aware about this, because an email has been sent to a person from management team and not to the people that took care about the servers. We decided to add a monitoring that will send us an alert when an instance have a maintenance event added. This way we can take an action immediately.
 
-Another thing is with Deis and the way it manages SSL certificates. When one administrator creates a certificate, it is not possible to read it by someone else using the command line interface. This is a problem for us, because we need to be able to manage it even if someone will take a few days off. We have solved the problem by moving certificates under a single user that is used by the Admin Panel. This way we have a view with all certificates and their expiry date.
+Another thing is with Deis and the way it manages SSL certificates. When one administrator creates a certificate, no one else can read it using the command line interface. This is a problem for us, because we need to be able to manage it even if someone will take a few days off. We have solved the problem by moving certificates under a single user that is used by the Admin Panel. This way we have a view with all certificates and their expiry date.
 
 # Monitoring
 
