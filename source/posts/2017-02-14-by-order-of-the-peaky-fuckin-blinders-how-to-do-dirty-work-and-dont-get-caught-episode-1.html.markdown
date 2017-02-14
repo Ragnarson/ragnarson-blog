@@ -1,5 +1,5 @@
 ---
-title: "\"by order of the peaky fuckin' blinders\" - how to do dirty work and don’t get caught - episode 1"
+title: "\"By order of the Peaky fuckin' Blinders\" - how to do dirty work and don’t get caught - episode 1"
 author: piotr
 cover_photo: cover.png
 ---
@@ -51,7 +51,6 @@ The second thing is to check your computer's internal network IP. You can find i
 
 
 Now you have to set up your iPhone to use this proxy. Go to `Settings -> Wi-Fi` then go to `current network details`. And the bottom there are `proxy settings`. Click the manual tab and provide proxy server IP you got in the previous step and its port which is 8080.
-
 And it works! Now you can go to the iPhone browser and visit any page. Then you will see the request in mitmproxy. Use arrows to navigate on requests list. Press enter to see the request details. Press q to go back to the list.
 
 ![Mitmproxy in action](2017-02-14-by-order-of-the-peaky-fuckin-blinders-how-to-do-dirty-work-and-dont-get-caught-episode-1/mitmproxy.png)
@@ -66,8 +65,8 @@ It is time to use the app that is using the API that we are interested in. Make 
 
 The most important parts are:
 
- - Which URLs are requested for each action
- - How does each request look like?
+ - which URLs are requested for each action
+ - how does each request look like?
  - which HTTP method is in use
  - how the params look like
  - how the body looks like
