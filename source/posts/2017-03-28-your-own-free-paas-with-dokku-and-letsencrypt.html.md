@@ -47,18 +47,20 @@ Where `@` means your domain name (e.g. example.com), and `*` is a wildcard for a
 
 ## Install Dokku
 
+*At the day this blog post was published the stable version of Dokku was `v0.8.2`. You should check the [https://github.com/dokku/dokku/releases](https://github.com/dokku/dokku/releases) page for the current release.*
+
 Dokku is designed for usage on a fresh machine and should install all necessary dependencies itself upon the bootstrap process. You can download a bootstrap script and run the installation using the following command on your remote machine:
 
 ```
-$ wget https://raw.githubusercontent.com/dokku/dokku/v0.8.0/bootstrap.sh;
-$ sudo DOKKU_TAG=v0.8.0 bash bootstrap.sh
+$ wget https://raw.githubusercontent.com/dokku/dokku/<current-dokku-version>/bootstrap.sh;
+$ sudo DOKKU_TAG=<current-dokku-version> bash bootstrap.sh
 ```
 
 The installation process takes a while, depending on the CPU and network connection of the machine. After that, you should be able to use a `dokku` command on your remote machine.
 
 ```
 $ dokku version
-0.8.0
+0.8.2
 ```
 
 Alternatively, if you are not a fan of bootstrap scripts, you can use an [official .deb repository guide](http://dokku.viewdocs.io/dokku/getting-started/install/debian/) to install Dokku.
