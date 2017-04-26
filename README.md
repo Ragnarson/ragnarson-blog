@@ -2,7 +2,7 @@
 ### Create new post
 To create a new post run a command:
 ```
-middleman article SAMLPE-BLOG-POST-TITLE
+middleman article SAMPLE-BLOG-POST-TITLE
 ```
 as a result following file will be created:
 ```
