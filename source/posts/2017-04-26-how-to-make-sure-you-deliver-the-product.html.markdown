@@ -24,7 +24,7 @@ Before implementing rethink each feature. Try to find a way to make given thing 
 
 In one of the recent projects we needed to implement simple admin panel. We just used scaffolds with basic bootstrap styling. It didn’t matter for admins now how it looks, they just needed a place where they could see all of the data. Scaffolds are the quickest way to have a fully working CRUD.
 
-## Embrace feature spec
+## Embrace feature specs
 
 They are your biggest friend at the beginning. Even a simple spec that checks if some text is present on a given page can save you from introducing a regression. It has a great “hidden” value - it imitates user experience and will fail if there is any error on a page. And who cares if they are slow at this moment? A time for all of the unit testing will come.
 
