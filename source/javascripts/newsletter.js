@@ -1,10 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
   var newsletterEl = document.getElementsByClassName('newsletter-popup')[0];
   var newsletterCloseBtnEl = document.getElementById('newsletter-close-btn');
+  var newsletterSubscribeBtnEl = document.getElementById('mc-embedded-subscribe');
+  var joinNewsletterBtnEl = document.getElementById('js-join-newsletter');
 
   newsletterCloseBtnEl.addEventListener('click', function(e) {
     newsletterEl.style.display = 'none';
     document.cookie = 'seenNewsletterPopup=true';
+    e.preventDefault();
+  });
+
+  newsletterSubscribeBtnEl.addEventListener('click', function(e) {
+    newsletterEl.style.display = 'none';
+    document.cookie = 'seenNewsletterPopup=true';
+  });
+
+  joinNewsletterBtnEl.addEventListener('click', function(e) {
+    newsletterEl.style.display = 'block';
     e.preventDefault();
   });
 
