@@ -7,12 +7,14 @@ document.addEventListener('DOMContentLoaded', function() {
   newsletterCloseBtnEl.addEventListener('click', function(e) {
     newsletterEl.style.display = 'none';
     document.cookie = 'seenNewsletterPopup=true';
+    trackEvent('close');
     e.preventDefault();
   });
 
   newsletterSubscribeBtnEl.addEventListener('click', function(e) {
     newsletterEl.style.display = 'none';
     document.cookie = 'seenNewsletterPopup=true';
+    trackEvent('submit');
   });
 
   joinNewsletterBtnEl.addEventListener('click', function(e) {
@@ -36,4 +38,13 @@ function readCookie(name) {
   }
 
   return null;
+}
+
+function trackEvent(action) {
+  ga('send', 'event', {
+    eventCategory: 'newsletter',
+    eventAction: action,
+    eventLabel: 'popup',
+    eventValue: 1
+  });
 }
