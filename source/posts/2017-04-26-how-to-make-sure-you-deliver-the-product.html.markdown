@@ -2,6 +2,7 @@
 title: How to make sure you deliver the product
 author: dawid
 cover_photo: cover.png
+tags: development, entrepreneurship
 ---
 
 As developers we constantly try to improve our knowledge. We are trying to implement features where the code will be easy to maintain in the future. It is really important when we work on some long lasting, complex project. But should it be a priority when we work for a client with limited budget or tight deadline?

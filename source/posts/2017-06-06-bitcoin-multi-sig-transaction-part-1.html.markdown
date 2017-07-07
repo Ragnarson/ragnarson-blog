@@ -2,6 +2,7 @@
 title: Bitcoin multi-sig transaction part 1
 author: piotr
 cover_photo: cover.png
+tags: development
 ---
 Welcome again. In this episode, we will code a bitcoin multi-sig transaction based on the bitcore library.
 
