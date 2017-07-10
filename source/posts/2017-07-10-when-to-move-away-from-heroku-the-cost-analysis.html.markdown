@@ -16,7 +16,7 @@ READMORE
 
 # The tool
 
-Based on years of experience on both ends ([our own PaaS](https://shellycloud.com/), [customized solutions](https://ragnarson.com/services/infrastructure-and-devops/?utm_source=blog&utm_medium=blogpost&utm_campaign=heroku-cost)), we created a simple tool for comparing the price between Heroku and a customized solution. The bespoke platform consists of a code which sets up all services on top of a server infrastructure provider (AWS in our example) and is maintenanced and supported by a team of administrators.
+Based on years of experience on both ends ([our own PaaS](https://shellycloud.com/), [customized solutions](https://ragnarson.com/services/infrastructure-and-devops/?utm_source=blog&utm_medium=blogpost&utm_campaign=heroku-cost)), we created a simple tool for comparing the price between Heroku and a customized solution. The bespoke platform consists of a code which sets up all services on top of a server infrastructure provider (AWS in our example) and is maintained and supported by a team of administrators.
 
 ['Heroku vs a custom solution based on AWS - the cost analysis' spreadsheet](https://goo.gl/6rZDkU)
 
