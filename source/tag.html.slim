@@ -1,0 +1,25 @@
+---
+pageable: true
+per_page: 12
+---
+
+h1 class="large" #{tagname.capitalize} posts
+
+- page_articles.each_with_index do |article, i|
+  article class="article"
+    = partial "partials/article/header", locals: { article: article }
+    div class="post-body"
+      = article_cover(article)
+      = article.summary
+    = link_to "Continue reading", article
+
+- if paginate
+  ul class="pagination"
+    li
+      - if prev_page
+        - append_link(rel: "prev", href: full_url(prev_page.url))
+        = link_to "« Newer articles", prev_page
+    li
+      - if next_page
+        - append_link(rel: "next", href: full_url(next_page.url))
+        = link_to "Older articles »", next_page
