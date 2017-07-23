@@ -295,6 +295,7 @@ configure :build do
 end
 
 activate :deploy do |deploy|
+  deploy.build_before = true
   deploy.deploy_method = :git
   deploy.strategy = :force_push
 end
