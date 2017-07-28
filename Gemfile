@@ -8,6 +8,7 @@ gem "middleman-autoprefixer"
 gem "middleman-deploy", git: "https://github.com/middleman-contrib/middleman-deploy.git"
 gem "middleman-sprockets"
 gem "middleman-syntax"
+gem "jquery-middleman"
 gem "redcarpet"
 gem "nokogiri"
 gem "loofah"
@@ -16,6 +17,7 @@ gem "slim"
 gem "bitters"
 gem "bourbon", "~> 4.2.2"
 gem "neat"
+gem 'bootstrap', '~> 4.0.0.alpha6'
 
 # For feed.xml.builder
 gem "builder", "~> 3.0"
@@ -31,3 +33,7 @@ gem "middleman-search_engine_sitemap"
 gem "rake"
 gem "thin"
 gem "puma"
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end

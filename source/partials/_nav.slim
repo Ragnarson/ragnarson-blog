@@ -1,9 +1,29 @@
-.nav-container
-  nav class="nav"
-    = link_to "https://ragnarson.com", class: "nav-brand" do
+
+div class="container nav-container"
+  nav class="navbar navbar-dark navbar-toggleable-md"
+    button class="navbar-toggler navbar-toggler-right" aria-controls="navbarResponsive" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarResponsive" data-toggle="collapse" type="button"
+      i class="icon-menu"
+    = link_to "https://ragnarson.com", class: "nav-brand navbar-logo" do
       = image_tag "brand.svg", title: "Ragnarson Blog", width: "220px"
-    div class="nav-items"
-      div class="nav-item" = link_to "Contact", "https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=blog-header#contact"
-      div class="nav-item" = link_to "Blog", "/", class: "active"
-      div class="nav-item" = link_to "Jobs", "http://jobs.ragnarson.com"
-      div class="nav-item" = link_to "Join newsletter", "#", id: "js-join-newsletter"
+    div class="collapse navbar-collapse" id="navbarResponsive"
+      ul class="nav navbar-nav ml-auto"
+        li class="nav-item dropdown"
+          a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" Why us
+          div class="dropdown-menu"
+            = link_to "Our story", "https://ragnarson.com/our-story/", class: "dropdown-item"
+            = link_to "Core Values", "https://ragnarson.com/core-values/", class: "dropdown-item"
+        li class="nav-item dropdown"
+          a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" Services
+          div class="dropdown-menu"
+            = link_to "Web app development", "https://ragnarson.com/services/web-app-development/", class: "dropdown-item"
+            = link_to "Infrastructure and DevOps", "https://ragnarson.com/services/infrastructure-and-devops/", class: "dropdown-item"
+        li class="nav-item"
+          = link_to "Case studies", "https://ragnarson.com/case-studies/", class: "nav-link"
+        li class="nav-item"
+          = link_to "Community", "https://ragnarson.com/community/", class: "nav-link"
+        li class="nav-item"
+          = link_to "Contact", "https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=blog-header#contact", class: "nav-link"
+        li class="nav-item"
+          = link_to "Blog", "/", class: "active nav-link"
+        li class="nav-item"
+          = link_to "Jobs", "http://jobs.ragnarson.com", class: "nav-link"
