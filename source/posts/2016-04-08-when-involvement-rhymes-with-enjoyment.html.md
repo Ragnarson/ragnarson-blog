@@ -2,6 +2,7 @@
 title: When involvement rhymes with enjoyment
 author: piotr
 cover_photo: cover.jpg
+tags: development, entrepreneurship
 ---
 
 > “If you do what you love, you'll never work a day in your life.”

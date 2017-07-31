@@ -2,6 +2,7 @@
 title: Blazer - a great tool to see what (data) you get
 author: piotr
 cover_photo: cover.png
+tags: development
 ---
 
 No matter what kind of online business you run, you also collect some data. To be honest we collect and store more and more data nowadays. The problem is that almost no one understands collected data and it cannot be used to make better business decisions.

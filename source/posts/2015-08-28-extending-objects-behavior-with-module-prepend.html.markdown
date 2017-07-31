@@ -1,6 +1,7 @@
 ---
 title: Extending Objects' Behavior With Module#prepend
 author: karol
+tags: development
 ---
 
 Ruby 2.0 came with some pretty useful features like lazy enumerators, keyword arguments, convention for converting to hash. There is also `Module#prepend`, which is not that commonly used, but there are some cases  where it really shines. Let's see what we can get from that feature then.READMORE

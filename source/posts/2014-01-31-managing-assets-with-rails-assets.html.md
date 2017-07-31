@@ -2,6 +2,7 @@
 title: Managing assets with Rails Assets
 author: grk
 shelly: true
+tags: entrepreneurship
 ---
 
 Up until recently, managing external CSS and JavaScript dependencies in Rails

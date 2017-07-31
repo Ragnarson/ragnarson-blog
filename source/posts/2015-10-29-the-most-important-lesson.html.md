@@ -1,6 +1,7 @@
 ---
 title: The most important lesson
 author: dawid
+tags: development, entrepreneurship
 ---
 
 Before working for Ragnarson I was a Rails developer for nearly 2 years. When I finally became one of the "Perfect Programmers", I considered myself a guy who knew enough stuff to take another step forward. I felt ready for new challenges. But it quickly turned out that there was one important skill I was missing which was not related to any technical knowledge. In simple terms, I can say now that I wasn't 100% professional about my work. But what exactly does that mean? READMORE

@@ -1,6 +1,7 @@
 ---
 title: Rails Girls Łódź 2015
 author: kasia
+tags: development
 ---
 
 The second edition of [Rails Girls Łódź](http://railsgirls.com/lodz) took place a few weeks ago and I cannot be more proud to have been a part of that – again. The recipe for a great workshop boils down to just a few good quality ingredients. Come along, I'll show you.READMORE

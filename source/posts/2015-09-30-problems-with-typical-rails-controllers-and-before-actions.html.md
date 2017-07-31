@@ -1,6 +1,7 @@
 ---
 title: Problems with typical Rails controllers and before actions
 author: karol
+tags: development
 ---
 
 One of the most common practices when writing controllers in Rails is using `before_actions` to keep them DRY. Sure, repeating code is a bad practice and leads to maintenance nightmare, but what happens when the readability drastically deteriorates after making the code DRY to the max? Is it still worth it? Let's see how it applies to controllers, what are the consequences and possible solutions.READMORE

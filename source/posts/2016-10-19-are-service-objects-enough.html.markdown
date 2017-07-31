@@ -2,6 +2,7 @@
 title: Are service objects enough?
 author: dawid
 cover_photo: cover.png
+tags: development
 ---
 
 There have been a lot of buzz around service objects in Ruby community. It started some time ago and new articles about them popped up like mushrooms. I still think about myself as a “developer in progress” and I think it’s a good approach for all of us. We should always keep learning new stuff. For me, the so-called service objects were like a milestone. A lot of things started to look simpler with them. So how does the perfect implementation of service objects looks to me?

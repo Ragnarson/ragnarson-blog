@@ -2,6 +2,7 @@
 title: Validation outside ActiveModel
 author: wafcio
 cover_photo: cover.jpg
+tags: development
 ---
 
 On the latest Euruko Ruby Conference (Bulgaria, Sofia, 2016) I had a lightning talk about a different approach to data verification. Today, I want to share and explain more of the good stuff in validation.

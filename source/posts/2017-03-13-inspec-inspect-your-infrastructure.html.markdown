@@ -2,6 +2,7 @@
 title: InSpec - Inspect Your Infrastructure
 author: szymon.szypulski
 cover_photo: cover.png
+tags: development
 ---
 
 We don't have many infrastructure related posts here. We have a few full-time DevOps, it's a part of  our normal offer.
@@ -74,11 +75,11 @@ Test Summary: 2 successful, 1 failures, 0 skipped
 ```
 
 Is it readable? Well, it is, with basic English knowledge it shouldn't be too hard to understand what source code
-describes and what is the result. It can specify compliance rules and policy requirements. 
+describes and what is the result. It can specify compliance rules and policy requirements.
 
 Also, the code is very similar to RSpec, which is used as the underlying foundation of InSpec. One *novelty* may be the
 *cmp* matcher. It helps to compare file modes, string, single element array strings and numbers. You can read more about
-cmp in [InSpec documentation](http://inspec.io/docs/reference/matchers/). 
+cmp in [InSpec documentation](http://inspec.io/docs/reference/matchers/).
 
 The tool itself doesn't depend on any particular operating system. You can develop your code on almost anything which
 runs Ruby. For the best experience, you may want to use [ChefDK](https://github.com/chef/chef-dk). Most of the resources
@@ -95,7 +96,7 @@ InSpec.
 1. It's open source. I know most of the tools are, but it's a good start.
 1. Its development is supported by Chef Software Inc., it probably won't disappear like some nodejs libs in the past and
 it won't be abandoned.
-1. Awesome community. If you have any issues, you can always ask for help on 
+1. Awesome community. If you have any issues, you can always ask for help on
 [Chef slack's InSpec channel](http://community-slack.chef.io), core maintainers are frequently the first responders.
 1. Resource-rich. When I'm writing this, there are [over 60 resources](http://inspec.io/docs/reference/resources/)
 available and this number is growing. If you need something unusual you can always use file/command resources or
@@ -114,20 +115,20 @@ without inspec shell.
     $ inspec shell
     Welcome to the interactive InSpec Shell
     To find out how to use it, type: help
-    inspec> describe file('/home') do       
-    inspec>   it { should exist } 
-    inspec> end   
+    inspec> describe file('/home') do
+    inspec>   it { should exist }
+    inspec> end
 
-    Profile: inspec-shell 
-    Version: unknown 
+    Profile: inspec-shell
+    Version: unknown
 
-     File /home 
-        ✔  should exist 
+     File /home
+        ✔  should exist
 
     Test Summary: 1 successful, 0 failures, 0 skipped
     ```
 1. [It works on most popular operating systems](https://github.com/chef/inspec#supported-os). On less popular too!
-1. Ruby. As Serverspec/RSpec derivative, it's written in Ruby. If I need to, I can easily jump into the source and 
+1. Ruby. As Serverspec/RSpec derivative, it's written in Ruby. If I need to, I can easily jump into the source and
 verify any doubts.
 
 # How to use InSpec?
@@ -140,7 +141,7 @@ Puppet, Salt, Ansible, shell scripts.
 Windows.
 1. Operating system migration. It's similar to previous one, but it's worth separate mention. Ubuntu 14.04 LTS will be
 supported until April 2019. Get ahead and start testing your provisioning on next LTS before it will be too late.
-1. Security compliance. There are sets of InSpec profiles linked on 
+1. Security compliance. There are sets of InSpec profiles linked on
 [Chef Supermarket](https://supermarket.chef.io/tools?type=compliance_profile) which can help you verify if your
 operating system is running under sane security settings.
 1. Cheap reporting. Describe your whole infrastructure in InSpec, run it periodically and store the reports for better
@@ -193,7 +194,7 @@ ssh-hardening-ubuntu-1604  Vagrant  ChefZero     Inspec    Ssh        <Not Creat
 
 ## Web
 
-Let's start with ‘web' server. 
+Let's start with ‘web' server.
 [Code is very simple, get me nginx](https://gitlab.com/szymon.szypulski/inspec-blog-post/blob/master/recipes/web.rb).
 
 
@@ -253,15 +254,15 @@ instance state is matching our expectations.
 
 
 ```bash
- System Package 
-    ✔  nginx should be installed 
- Service nginx 
-    ✔  should be running 
- File /etc/nginx/nginx.conf 
-    ✔  should exist 
-    ✔  content should match /ssl_protocols TLSv1 TLSv1.1 TLSv1.2;/ 
- File /var/log/nginx 
-    ✔  should not be owned by "www-data" 
+ System Package
+    ✔  nginx should be installed
+ Service nginx
+    ✔  should be running
+ File /etc/nginx/nginx.conf
+    ✔  should exist
+    ✔  content should match /ssl_protocols TLSv1 TLSv1.1 TLSv1.2;/
+ File /var/log/nginx
+    ✔  should not be owned by "www-data"
 
 Test Summary: 5 successful, 0 failures, 0 skipped
 ```
@@ -290,7 +291,7 @@ package 'postgresql'
 ```
 
 Lets verify our test suite `kitchen verify database-ubuntu-1604`. In the meantime, look at our test suite code.
- 
+
 1. As previously, is package installed?
 
     ```ruby
@@ -374,14 +375,14 @@ explicitly. But you can find some interesting things in kitchen output.
 ```bash
 ...
 ×  sshd-06: Server: Do not permit root-based login or do not allow password and keyboard-interactive authentication (expected "prohibit-password" to match /no|without-password/
-   Diff:              
+   Diff:
    @@ -1,2 +1,2 @@
    -/no|without-password/
    +"prohibit-password"
-   )              
+   )
    ×  SSH Configuration PermitRootLogin should match /no|without-password/
    expected "prohibit-password" to match /no|without-password/
-   Diff:              
+   Diff:
    @@ -1,2 +1,2 @@
    -/no|without-password/
    +"prohibit-password"
@@ -397,7 +398,7 @@ To cleanup after our examples, run `kitchen destroy`.
 
 It's easy to notice I like InSpec. However, there are few things which could be improved:
 
-1. Code sharing is less than ideal. Custom resources are stored in the *libraries* directory. If you want to share a 
+1. Code sharing is less than ideal. Custom resources are stored in the *libraries* directory. If you want to share a
 resource across multiple cookbooks, you have to create a separate profile.
 1. Some resources are still missing from Serverspec, but it isn't a big problem. Maintainers are re-implementing/moving
 resources upon user request. You just may need to wait a while for release.

@@ -2,6 +2,7 @@
 title: My first experience with Ragnarson - a logo design
 author: agata
 cover_photo: cover.jpg
+tags: development
 ---
 
 There comes a time in your life when you apply for a job. Sometimes, your potential employer gives you a recruitment task to check your skills and qualifications. When applying to Ragnarson, one of my tasks was to redesign the existing logo. In this post, I will guide you through all stages of this challenge, showing my thoughts about the design process and how it influenced the development of our company's visual identity.

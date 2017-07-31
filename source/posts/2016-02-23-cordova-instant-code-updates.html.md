@@ -1,6 +1,7 @@
 ---
 title: Instant code updates for Cordova iOS apps
 author: pawurb
+tags: development
 ---
 
 One of the many advantages of a hybrid approach to mobile apps development is instant code updates. In this article, I will guide you through setting up a basic updates mechanism from scratch. With little adjustment it will work for every [Cordova](https://cordova.apache.org/) ([PhoneGap](http://phonegap.com/), [Ionic](http://ionicframework.com)) iOS project. You can follow the steps or download a [complete github repo](https://github.com/pawurb/cordova-instant-updates) to tinker with it yourself. Some basic Objective-C knowledge will be necessary to follow the guide.

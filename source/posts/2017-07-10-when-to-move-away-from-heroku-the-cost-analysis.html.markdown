@@ -2,7 +2,7 @@
 title: When to move away from Heroku - the cost analysis
 author: macias
 cover_photo: cover.png
-
+tags: entrepreneurship
 ---
 # The problem
 
@@ -27,13 +27,13 @@ All prices are based on our own experience in building hosting solutions. Please
 ## Where do we break even
 
 There are 2 important takeaways from the spreadsheet:
- 
+
 The first case is an app or a set of apps with requirements of around 168GB of RAM and an estimated cost of $7620 with premium support on Heroku.
- 
+
 The custom solution **saves around $1001 monthly** and gives **a return of investment after 15 months**.
- 
+
 The second case is an app or a set of apps with requirements of around 112GB of RAM and an estimated cost of $4350 without support on Heroku.
- 
+
 The custom solution **saves around $1085 monthly** and gives **a return of investment after 14 months**.
 
 # Similarities

@@ -1,6 +1,7 @@
 ---
 title: Search with autocomplete using Twitter Typeahead
 author: dawid
+tags: development
 ---
 
 Adding simple, easy to customize and reliable autocomplete functionality has always been one of the topics that I thought wasn't very clear for Rails applications. During my last project, I finally decided that I would do some serious research and find one solution that I could use later without hesitation. And here it is: my choice is to use Twitter [typeahead.js](https://twitter.github.io/typeahead.js/) library.

@@ -1,6 +1,7 @@
 ---
 title: Intro to digital nomading
 author: pawurb
+tags: development, entrepreneurship
 ---
 
 My favourite definition of the term [digital nomad](https://en.wikipedia.org/wiki/Digital_nomad) is *'Someone who flies across half the globe to look for good wifi in Starbucks'*.

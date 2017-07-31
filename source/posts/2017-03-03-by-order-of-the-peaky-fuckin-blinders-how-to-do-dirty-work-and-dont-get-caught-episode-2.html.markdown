@@ -2,6 +2,7 @@
 title: "\"By order of the Peaky fuckin' Blinders\" - how to do dirty work and don’t get caught - episode 2"
 author: piotr
 cover_photo: cover.png
+tags: development, entrepreneurship
 ---
 
 > "Intelligence is a very valuable thing, innit, my friend? And usually it comes far too fucking late."

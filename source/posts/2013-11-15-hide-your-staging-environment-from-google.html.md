@@ -2,6 +2,7 @@
 title: Hide your staging environment from Google
 author: grk
 shelly: true
+tags: development, entrepreneurship
 ---
 
 If you deploy your application to a staging environment, chances are that

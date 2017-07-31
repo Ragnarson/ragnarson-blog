@@ -2,6 +2,7 @@
 title: Being productive is not productive. Being content is productive
 author: piotr
 cover_photo: cover.png
+tags: entrepreneurship
 ---
 
 _Have a productive day!_

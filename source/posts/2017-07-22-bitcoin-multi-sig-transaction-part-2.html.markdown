@@ -60,5 +60,3 @@ You are welcome to leave a tip if you like the content:
 
 * BTC: 14DgncjAnqM3Wd2pYyoJTXckSXuVv43cNx
 * ETH: 0x3e6bE376ef37D96bd3E7F792098c90B87B84B042
-
-

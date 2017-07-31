@@ -2,6 +2,7 @@
 title: Flow daily routines - create habits that boost your productivity
 author: piotr
 cover_photo: cover.png
+tags: development, entrepreneurship
 ---
 
 This article is the next episode in our Flow series. You can find [the first episode here](/2016/04/08/when-involvement-rhymes-with-enjoyment.html). In this part, we will talk about daily routines that can help you go into the flow state

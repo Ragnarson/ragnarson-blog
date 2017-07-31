@@ -2,6 +2,7 @@
 title: How to create a "Follow Us" pop-up box using the ngAnimate library
 author: bkzl
 shelly: true
+tags: development
 ---
 
 _The following article has been prepared based on AngularJS and ngAnimate

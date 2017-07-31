@@ -2,6 +2,7 @@
 title: Code The Flow - How To Write Code In More Productive And Fun Way
 author: piotr
 cover_photo: cover.png
+tags: development, entrepreneurship
 ---
 
 Spend less than 2 minutes to discover three simple tricks that will help you to be in the coding flow! Write the code in the more effective way. Code with better quality. Be more satisfied with the time spent on programming.
