@@ -2,6 +2,7 @@
 title: "JavaScript Generators"
 author: maciej
 cover_photo: cover.png
+tags: development
 ---
 
 # Introduction

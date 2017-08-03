@@ -2,6 +2,7 @@
 title: "How we built Ruby PaaS - Part I: Overview of our stack"
 author: bkzl
 shelly: true
+tags: development, entrepreneurship
 ---
 
 I would like to share with you the details of how we built Shelly Cloud, our platform for hosting Ruby applications, and how it works.

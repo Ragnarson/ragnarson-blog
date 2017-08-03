@@ -2,6 +2,7 @@
 title: Why do we need SSL certificates?
 author: sabcio
 shelly: true
+tags: development, entrepreneurship
 ---
 
 ## What is SSL/TLS?

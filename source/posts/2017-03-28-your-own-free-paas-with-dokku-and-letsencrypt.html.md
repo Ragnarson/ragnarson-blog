@@ -2,6 +2,7 @@
 title: Your own free PaaS with Dokku and Let's Encrypt
 author: staszek
 cover_photo: cover.png
+tags: development, entrepreneurship
 ---
 
 I've been working with [Platform as a Service](https://en.wikipedia.org/wiki/Platform_as_a_service) products for almost 3 years. I truly believe that an introduction of PaaS solutions was a breakthrough for web development.

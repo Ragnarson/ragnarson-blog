@@ -1,6 +1,7 @@
 ---
 title: The cost of using Ruby Gems
 author: jonasz
+tags: development
 ---
 
 ## Gems are great...

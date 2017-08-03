@@ -2,6 +2,7 @@
 title: How does our CSS architecture look like after getting rid of Bootstrap
 author: bkzl
 shelly: true
+tags: development
 ---
 
 In summer, several well-known companies such as [GitHub][1], [CodePen][2] or [Buffer][3] have published blog posts about how the CSS architecture is designed in their applications.

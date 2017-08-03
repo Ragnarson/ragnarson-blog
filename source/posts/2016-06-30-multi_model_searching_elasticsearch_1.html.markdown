@@ -2,6 +2,7 @@
 title: Multi-model searching using Elasticsearch vol. 1
 author: dawid
 cover_photo: cover.png
+tags: development
 ---
 
 For one of our projects I had to do some complex searching. To cut a long story short, admin users wanted
@@ -143,7 +144,7 @@ User.create(name: "John Rambo",  city: "New York")
 ```
 
 Please take note that it will be automatically indexed with the `after_commit` callback.
-The `Searchable` module includes the `search` method, so in your rails console it should look like this:  
+The `Searchable` module includes the `search` method, so in your rails console it should look like this:
 
 ```ruby
 >> User.search("Rambo").results.total

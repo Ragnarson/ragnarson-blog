@@ -1,6 +1,7 @@
 ---
 title: Readline Editor
 author: bkzl
+tags: development
 ---
 
 Last weekend I watched a really enjoyable talk about the [Readline editor

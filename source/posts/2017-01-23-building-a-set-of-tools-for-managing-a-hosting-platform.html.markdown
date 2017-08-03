@@ -2,6 +2,7 @@
 title: Building a set of tools for managing a hosting platform
 author: smefju
 cover_photo: cover.png
+tags: development
 ---
 
 At Ragnarson we have unique experience in building Platform as a Service infrastructures for applications. For more than one year, I have worked on a private solution for a big player from Asia. We made a platform using several tools and services. Here is the list of some of them:

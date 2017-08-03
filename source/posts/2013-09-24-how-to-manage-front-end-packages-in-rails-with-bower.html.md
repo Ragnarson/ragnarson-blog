@@ -2,6 +2,7 @@
 title: How to manage front-end packages in Rails with Bower
 author: bkzl
 shelly: true
+tags: development
 ---
 
 [Bower](http://bower.io) is an open source software created by Twitter, which

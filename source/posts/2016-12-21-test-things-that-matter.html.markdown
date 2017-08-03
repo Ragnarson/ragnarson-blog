@@ -2,6 +2,7 @@
 title: Test the things that matter
 author: dawid
 cover_photo: cover.png
+tags: development
 ---
 
 Testing your application is a crucial thing to ensure that everything is working as expected. It gives you a quick feedback if the new feature can be shipped and you didn’t introduce any regression. It’s pretty much an integral part of development. If you like the TDD technique it means that you write your tests even before writing the actual code. But you have to remember that your tests are also an important part of your codebase and you have to take care of them. They should be easy to understand and modify in the future. It’s also important to isolate your tests as much as possible and check things that really matter. Let’s look at some example.

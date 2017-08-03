@@ -2,6 +2,7 @@
 title: "Database Views in Rails with Scenic"
 author: krzysztof
 cover_photo: cover.png
+tags: development
 ---
 
 This article describes how database views can be a solution for an application with complex relationships and how Scenic gem simplifies the task of implementing those views in your Rails application.
@@ -50,7 +51,7 @@ We’ve searched for a ready-made gem which implements an interface for managing
 [https://github.com/thoughtbot/scenic](https://github.com/thoughtbot/scenic)
 
 The gem had everything we needed and the implementation was somehow natural with Rails.
-The view creation is very similar to a schema update and is triggered by `db:migrate`. Another great feature is that any created view works with ActiveRecord as a regular model and comes with all its native features. Scenic turned out be a perfect fit for our scenario.  
+The view creation is very similar to a schema update and is triggered by `db:migrate`. Another great feature is that any created view works with ActiveRecord as a regular model and comes with all its native features. Scenic turned out be a perfect fit for our scenario.
 
 ## Installation:
 
@@ -73,7 +74,7 @@ Contents of our available_people_v01.sql file:
 ```sql
 SELECT users.id FROM users
 JOIN assignments on users.id = assignments.user_id
-JOIN projects on assignments.project_id = projects.id                      
+JOIN projects on assignments.project_id = projects.id
 WHERE assignments.end_date < (now() + '1 month'::interval) AND projects.internal = false
 
 UNION
@@ -85,7 +86,7 @@ WHERE projects.internal = true AND (assignments.end_date > now() OR assignments.
 
 UNION
 
-SELECT users.id FROM users                                  
+SELECT users.id FROM users
 LEFT JOIN assignments on users.id = assignments.user_id
 WHERE assignments is NULL;
 ```

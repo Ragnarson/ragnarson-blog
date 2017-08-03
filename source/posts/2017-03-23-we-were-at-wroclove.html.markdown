@@ -2,6 +2,7 @@
 title: We were at wroc_love.rb
 author: dawid
 cover_photo: cover.jpg
+tags: development
 ---
 
 It’s our annual tradition that we go to the biggest Ruby conference in Poland - [wroc_love.rb](http://www.wrocloverb.com). This year it took place from 17th to 19th March. It’s a really good thing to attend programming conferences for couple of reasons and here are my thoughts about it.

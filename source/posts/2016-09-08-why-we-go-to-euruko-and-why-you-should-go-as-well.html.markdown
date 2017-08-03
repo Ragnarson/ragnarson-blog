@@ -2,6 +2,7 @@
 title: Why we go to Euruko and why you should go as well
 author: piotr
 cover_photo: cover.png
+tags: development, entrepreneurship
 ---
 
 EuRuKo is the annual European Ruby conference, launched for the first time in Karlsruhe (Germany) in 2003. The first four editions were organized in Germany. Since 2007 it's moved from city to city across Europe. At the end of each event, people vote for the next edition's host city.

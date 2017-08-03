@@ -2,6 +2,7 @@
 title: How to choose a bug tracker for a small startup team
 author: wijet
 cover_photo: cover.png
+tags: entrepreneurship
 ---
 Choosing a project management tool isn’t an easy task. There are tons of SaaS/web-based issue tracking tools out there (like with TODO apps for personal use.) Quora and Stack Exchange threads are full of comments written by marketing teams about these tools. It’s as easy to overshoot and choose a massive product, packed with hundreds of features, that cripples your productivity and joy, as undershoot and end up with a service that you will outgrow in a matter of weeks.
 

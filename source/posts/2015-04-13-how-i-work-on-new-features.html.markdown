@@ -2,6 +2,7 @@
 title: How I work on new features
 author: bkzl
 shelly: true
+tags: development, entrepreneurship
 ---
 
 *tl;dr Collect feedback from your customers; always plan what to do next; think about the user interface before you start writing code; discuss with your team your current work often; test what you have done.*

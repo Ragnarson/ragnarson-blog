@@ -2,6 +2,7 @@
 title: Developing as a developer - a journey through learning
 author: marcin
 cover_photo: cover.png
+tags: development
 ---
 
 Hey there traveller, I want to share a story with you. Some time ago I set off for a programming journey. This has been a fun and rewarding adventure. It was also filled with unexpected frustrations, roadblocks and dangers. I have been on the learning road for some time now and I want to share my experiences and things that did work out for me in the end.

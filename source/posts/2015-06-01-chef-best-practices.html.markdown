@@ -2,6 +2,7 @@
 title: Chef best practices
 author: staszek
 shelly: true
+tags: development
 ---
 
 Chef is a framework written in Ruby, and partially in Erlang ([Chef Server][chef-server]). It provides an API for numerous system services. With Chef, your infrastructure can be expressed as object-oriented code that is versionable, testable, and repeatable. One of the main ideas of Chef developers was to bury the walls that exist between software development and system administration, allowing them to bring system configuration to a higher level. READMORE

@@ -2,6 +2,7 @@
 title: Multi-model searching using Elasticsearch vol. 3
 author: dawid
 cover_photo: cover.png
+tags: development
 ---
 
 This is a final part of the series about [Elasticsearch](https://www.elastic.co/products/elasticsearch).

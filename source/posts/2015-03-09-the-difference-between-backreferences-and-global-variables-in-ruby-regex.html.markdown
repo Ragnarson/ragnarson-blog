@@ -2,6 +2,7 @@
 title: The difference between back-references and global variables in Ruby regular expressions
 author: smefju
 shelly: true
+tags: development
 ---
 
 Regular expressions are widely used in the daily work of developers. For example, I can use the [gsub method][1] when I want to replace all the vowels in a given string with the underscore symbol:

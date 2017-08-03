@@ -2,6 +2,7 @@
 title: 5 functions of the Console object you didn’t know
 author: bkzl
 shelly: true
+tags: development
 ---
 
 Not everybody knows that apart from the simplest `console.log()` used for logging, the Console object has a couple of other equally useful function. I have chosen and described the 5 most interesting but unpopular methods, which can be successfully utilized in everyday work. READMORE

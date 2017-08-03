@@ -2,6 +2,7 @@
 title: Preparing for Impact
 author: beata
 cover_photo: cover.png
+tags: entrepreneurship
 ---
 
 ## Maximizing your software development runway on available budget

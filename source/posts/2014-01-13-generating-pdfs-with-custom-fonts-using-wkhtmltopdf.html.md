@@ -2,6 +2,7 @@
 title: Generating PDFs with custom fonts using wkhtmltopdf
 author: sabcio
 shelly: true
+tags: development
 ---
 
 Generating PDF files with custom fonts can be tricky. In this tutorial we

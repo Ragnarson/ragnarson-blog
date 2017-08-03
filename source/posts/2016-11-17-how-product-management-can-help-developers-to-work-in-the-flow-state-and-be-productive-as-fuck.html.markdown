@@ -2,6 +2,7 @@
 title: How product management can help developers to work in the flow state (and be productive as fuck)
 author: piotr
 cover_photo: cover.png
+tags: entrepreneurship
 ---
 
 From [When involvement rhymes with enjoyment](https://blog.ragnarson.com/2016/04/08/when-involvement-rhymes-with-enjoyment.html) article we know that there are 7 factors to achieve the flow state. This state is ultimate effective when we are fully engaged in the activity.

@@ -2,6 +2,7 @@
 title: When Inuit.css is a better choice than Bootstrap
 author: bkzl
 shelly: true
+tags: development
 ---
 
 _"[Inuit.css](http://inuitcss.com/) is a powerful little framework designed for serious developers."_

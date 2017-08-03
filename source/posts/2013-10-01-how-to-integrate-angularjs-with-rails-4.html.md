@@ -2,6 +2,7 @@
 title: How to integrate AngularJS with Rails 4
 author: michalkw
 shelly: true
+tags: development
 ---
 
 Building most single-page applications (SPAs for short) is a two-step process:

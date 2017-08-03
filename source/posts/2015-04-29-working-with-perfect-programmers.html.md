@@ -1,6 +1,7 @@
 ---
 title: Working with Perfect Programmers
 author: agnieszka
+tags: development, entrepreneurship
 ---
 
 I've always liked new beginnings, with all the possibilities they bring.

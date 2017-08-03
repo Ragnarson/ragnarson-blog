@@ -1,6 +1,7 @@
 ---
 title: Binding Objects in Forms with Ember for Fun and Profit
 author: karol
+tags: development
 ---
 
 Ever run into the situation where you had to perform some operation based on the value from select field? How did you handle it? Maybe multiple case / switch statements? Or if you are lucky enough and code in language with good support for metaprogramming like Ruby you can write some magic code like this one:

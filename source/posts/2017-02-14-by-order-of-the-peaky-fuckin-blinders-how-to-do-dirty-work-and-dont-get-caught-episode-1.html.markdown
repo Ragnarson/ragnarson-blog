@@ -2,6 +2,7 @@
 title: "\"By order of the Peaky fuckin' Blinders\" - how to do dirty work and don’t get caught - episode 1"
 author: piotr
 cover_photo: cover.png
+tags: development, entrepreneurship
 ---
 
 > “Everyone's a whore, Grace. We just sell different parts of ourselves”
