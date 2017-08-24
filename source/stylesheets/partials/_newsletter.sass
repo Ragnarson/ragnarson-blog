@@ -1,3 +1,34 @@
+.newsletter-container
+  width: 350px
+  font-size: 12px
+  line-height: 20px
+  right: -300px
+  top: 30%
+  position: fixed
+  z-index: 100
+
+.newsletter-toggler
+  float: left
+  list-style: none outside none
+  margin: 0
+  padding: 10px
+  font-size: 20px
+  background-color: $gray-light
+  position: relative
+  z-index: 99
+
+.newsletter-box
+  width: 300px
+  float: left
+
+.show
+  margin-right: 290px
+  transition: margin-right .5s ease-in
+
+.hide
+  transition: margin-right .5s ease-in
+  margin-right: 0px
+
 .newsletter
   margin-top: $base-spacing
   padding: $base-spacing * 1.5
@@ -6,20 +37,9 @@
   clear: left
 
 .newsletter-popup
-  position: fixed
-  bottom: 0
-  left: 0
-  right: 0
   padding: 2em
   background-color: $gray-light
-  display: none
-
-  .close
-    position: absolute
-    top: 1rem
-    right: 1rem
-    font-size: 30px
-    line-height: 20px
+  display: block
 
 .newsletter, .newsletter-popup
   font: $fixed-font-size $base-font-family
