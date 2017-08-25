@@ -9,6 +9,6 @@ document.getElementById('js-arrow').onclick = function() {
 
     el.classList.toggle('hide');
     arrow.classList.toggle('icon-chevron-right');
-    el.classList.toggle('show');
+    el.classList.toggle('newsletter-show');
     arrow.classList.toggle('icon-chevron-left');
 }
