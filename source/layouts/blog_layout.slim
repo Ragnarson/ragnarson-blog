@@ -30,8 +30,8 @@
       div class="article-author-note" = note
     div class="article-social-buttons"
       = partial "partials/article/bottom_social_buttons.html" unless target_name?(:amp)
-    - unless target_name?(:amp)
-      div class="newsletter"
-        = partial "partials/newsletter"
+    div class="work-with-us"
+      p At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.
+      a href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact" class="btn" Work with us
     div class="article-comments"
       = partial "partials/article/disqus" unless target_name?(:amp)
