@@ -2,7 +2,7 @@
 title: Bitcoin multi-sig transaction part 2
 author: piotr
 cover_photo: cover.png
-tags: development
+tags: development, blockchain
 ---
 Welcome back bitcoin freaks. [In the previous episode](https://blog.ragnarson.com/2017/06/06/bitcoin-multi-sig-transaction-part-1.html), we created a multi-sig transaction. [Go back to that blog post](https://blog.ragnarson.com/2017/06/06/bitcoin-multi-sig-transaction-part-1.html) if you don't know what `multi-sig` means.
 

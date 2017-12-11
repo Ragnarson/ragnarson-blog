@@ -2,7 +2,7 @@
 title: "Blockchains: A brief introduction"
 author: michald
 cover_photo: cover.png
-tags: development, entrepreneurship
+tags: development, entrepreneurship, blockchain
 ---
 
 This post begins a series about the blockchain technology wherein I will try to answer the common questions like what it is, how it works and where blockchains are used. However, I will not go into technical details, I will only focus on a general overview.

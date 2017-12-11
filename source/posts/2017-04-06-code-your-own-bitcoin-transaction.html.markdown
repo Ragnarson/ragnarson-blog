@@ -2,7 +2,7 @@
 title: Code your own bitcoin transaction
 author: piotr
 cover_photo: cover.png
-tags: development
+tags: development, blockchain
 ---
 
 Today we will code our first bitcoin transaction. To achieve this goal we will use JavaScript library called [bitcore](https://github.com/bitpay/bitcore-lib). JavaScript is the most popular, modern programming language and almost every developer knows it, so it makes this article universal and useful for the wider audience.
