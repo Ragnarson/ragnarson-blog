@@ -1,0 +1,39 @@
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+window.addEventListener('load', function () {
+  window.cookieconsent.initialise({
+    'palette': {
+      'popup': {
+        'background': '#f6f2f3'
+      },
+      'button': {
+        'background': '#ff004f'
+      }
+    },
+    'type': 'opt-in',
+    'revokable': 'false',
+    'content': {
+      'message': 'We use cookies to track website impressions and to track conversions.',
+      'dismiss': 'Disallow'
+    },
+    'law': {
+      'regionalLaw': false
+    },
+
+    onInitialise: function (status) {
+      var didConsent = this.hasConsented();
+      if (didConsent && status == 'allow') {
+        initAnalytics()
+      }
+    },
+
+    onStatusChange: function (status, chosenBefore) {
+      var didConsent = this.hasConsented();
+      if (didConsent && status == 'allow') {
+        initAnalytics()
+      }
+    }
+  })
+});
+</script>

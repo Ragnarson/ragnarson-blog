@@ -1,6 +1,7 @@
 //= require jquery
 //= require tether
 //= require bootstrap-sprockets
+//= require analytics
 //= require autotrack
 
 document.getElementById('js-arrow').onclick = function() {
