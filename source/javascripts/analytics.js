@@ -26,6 +26,8 @@ function initAnalytics() {
 
   ga("create", "UA-11839548-2", "auto");
 
+  ga('set', 'anonymizeIp', true);
+
   ga("require", "cleanUrlTracker");
   ga("require", "eventTracker");
   ga("require", "outboundFormTracker");
