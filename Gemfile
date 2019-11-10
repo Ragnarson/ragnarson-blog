@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "middleman", "4.1.11"
+gem "middleman", "~> 4.1"
 gem "middleman-core"
 gem "middleman-blog", "~> 4.0.1"
 gem "middleman-livereload"

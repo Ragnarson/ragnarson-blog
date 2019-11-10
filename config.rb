@@ -3,10 +3,6 @@ require "lib/custom_renderer"
 require "fastimage"
 require "json/minify"
 
-# Workaround for https://github.com/middleman/middleman/issues/2002
-Tilt.send(:remove_const, :SYMBOL_ARRAY_SORTABLE)
-Tilt::SYMBOL_ARRAY_SORTABLE = false
-
 helpers CustomHelpers
 
 ###
