@@ -20,7 +20,6 @@
     = article_structured_data(current_article)
 
 = wrap_layout :layout do
-  = partial "partials/article/floating_share_buttons.html"
   div class="article"
     = partial "partials/article/header", locals: { article: current_article }
     = partial "partials/article/shelly" if current_article.data.shelly
@@ -28,8 +27,6 @@
     = yield
     - if note = article_author(current_article).note.presence
       div class="article-author-note" = note
-    div class="article-social-buttons"
-      = partial "partials/article/bottom_social_buttons.html"
     div class="work-with-us"
       p At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.
       a href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact" class="btn" Work with us
