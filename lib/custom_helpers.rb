@@ -38,10 +38,7 @@ module CustomHelpers
 
   def article_cover(article)
     return unless article.data.cover_photo
-    return "<img src='#{article_cover_url(article)}'/>" unless amp?
-    cover_path = File.join("source", article.path.gsub(".html", ""), article.data.cover_photo)
-    size = FastImage.size(cover_path)
-    "<amp-img src='#{article_cover_url(article)}' width='#{size[0]}' height='#{size[1]}' layout='responsive'></amp-img>"
+    return "<img src='#{article_cover_url(article)}'/>"
   end
 
   def article_cover_url(article)
