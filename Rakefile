@@ -6,7 +6,7 @@ end
 
 desc "Deploy blog"
 task :deploy do
-  if system("middleman build_all")
+  if system("middleman build")
     system("middleman deploy")
   end
 end
