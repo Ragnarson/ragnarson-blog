@@ -61,7 +61,7 @@ https://www.ampproject.org/docs/guides/validate
 To deploy static website, use the following rake task:
 
 ```
-$ bundle exec rake deploy
+$ bundle exec middleman deploy
 ```
 
 Note that blog uses Accelerated Mobile Pages (AMP). Default middleman deploy task will not build all necessary dependencies for AMP. deploy rake task runs middleman build_all first and then deploy task.
