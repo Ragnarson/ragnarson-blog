@@ -12,6 +12,10 @@ module CustomHelpers
     data.authors[author_slug]
   end
 
+  def article_og_description(article)
+    article.data.og_description.present? ? article.data.og_description : article.summary
+  end
+
   def avatar(email, size, options = { class: "avatar" })
     options[:size] = options[:width] = "#{size}px"
     image_tag(gravatar_link(email, size), options)
