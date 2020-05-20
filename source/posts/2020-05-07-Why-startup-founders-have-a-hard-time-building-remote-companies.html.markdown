@@ -3,6 +3,7 @@ title: Why startup founders have a hard time building remote companies?
 author: macias
 cover_photo: image.png
 tags: remote work
+og_description: “If the future were to be remote, would you be a part of it or would you slowly move towards extinction?”
 ---
 Over the years, I’ve collaborated with dozens of successful European startup founders. Many of them weren’t interested in building remote companies.
 
