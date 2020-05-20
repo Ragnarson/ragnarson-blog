@@ -141,10 +141,12 @@ Both of them are important ways of gathering information and help in understandi
 With remote work, informal communication is diminished. People don’t have many occasions to gossip in the kitchen or have a quick chat before leaving the office.
 
 There are two ways to counterbalance this negative effect:
+
 * Be transparent by default
+
 * Encourage informal interactions
 
-Being transparent means many things. For me, the biggest sin is sharing only what people need to know at the time. This is usually what happens during formal meetings. As managers, we spare people from the complexity of different decisions, information that gives us an edge, or simply from an inconvenient truth. The more you limit the information flow, the harder it gets for everyone else to help you.
+Being transparent means many things. For me, the biggest sin is sharing only [what people need to know at the time](https://maciejgalkiewicz.com/2019/01/07/context-building-and-delegation-of-authority/). This is usually what happens during formal meetings. As managers, we spare people from the complexity of different decisions, information that gives us an edge, or simply from an inconvenient truth. The more you limit the information flow, the harder it gets for everyone else to help you.
 
 The second important ingredient are informal interactions. In a typical office setting, they happen without planning and effort. You go to the kitchen, someone happens to be there and you chat briefly. Remote work requires a bit more preparation. In our case, it’s a system of calls that fulfil different purposes. Many of them are peer-to-peer and encourage small talk. Our official communication style is also more relaxed and sets an example for others in their communication style.
 
@@ -170,7 +172,7 @@ The change of your mindset.
 
 I’m sure that you’re already familiar with the benefits of remote work and you know most of the tools. But you might still be occupied with different business priorities and a bit afraid to get started.
 
-I absolutely feel you. I had the same concerns before we transformed Ragnarson into a self-managed, transparent company.
+I absolutely feel you. I had the same concerns before [we transformed Ragnarson into a self-managed, transparent company](https://maciejgalkiewicz.com/2019/01/07/context-building-and-delegation-of-authority/).
 
 For me, the change of my mindset came from two sources: a financial crisis and the intrinsic need for creating a better work environment than the one offered by the old structures.
 
@@ -203,18 +205,19 @@ There is rarely an irreversible damage you can cause. Go and try it for yourself
 
 **Notes:**
 
+
 <span id="note-1">
-[1] For more information, have a look at Gallup poll from 2017 and US Census data from 2018.
+[1] For more information, have a look at [Gallup poll from 2017](https://news.gallup.com/businessjournal/206033/america-coming-workplace-home-alone.aspx) and [US Census data from 2018](https://qz.com/work/1392302/more-than-5-of-americans-now-work-from-home-new-statistics-show/).
 </span>
 
 <span id="note-2">
-[2] https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic
+[2] [COVID-19 pandemic](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic)
 </span>
 
 <span id="note-3">
-[3] Have a look at Buffer’s survey about what is important to remote workers
+[3] Have a look at [Buffer’s survey](https://lp.buffer.com/state-of-remote-work-2020) about what is important to remote workers
 </span>
 
 <span id="note-4">
-[4] More about The Red Queen Effect can be found on Farnam Street
+[4] More about The Red Queen Effect can be found on [Farnam Street](https://fs.blog/2012/10/the-red-queen-effect/)
 </span>
