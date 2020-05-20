@@ -107,8 +107,11 @@ Remote work has been getting traction over the years [1]. Moreover, the COVID-19
 In my experience, remote work is not merely a way to source talent from different regions or build a more flexible working environment. For Ragnarson, remote work is an **unique value proposition (UVP)** and often acts as a strong differentiator among our competitors. It allows us to attract more diverse and, on average, more skilled talent.
 
 Here are a few important questions you should ask yourself:
+
 * If the future were to be remote, would you be a part of it or would you slowly move towards extinction?
+
 * Can remote work become a UVP of your business? [3]
+
 * Can you reap the benefits before everyone else starts offering the same?
 
 If those concerns resonate with you, it might be a good time to reevaluate your thinking about remote work.
@@ -194,7 +197,7 @@ Remote work doesn’t have to  affect your startup negatively. On the contrary, 
 * Is it my lack of confidence in pulling it off?
 * Is it the fear of failure?
 * When will I be ready?
-* What happens if I never am?**
+* What happens if I never am?
 
 There is rarely an irreversible damage you can cause. Go and try it for yourself before it's too late.
 
