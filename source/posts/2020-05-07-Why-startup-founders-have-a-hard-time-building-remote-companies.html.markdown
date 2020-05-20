@@ -193,7 +193,7 @@ Remote work is just a way of doing things in the same way as work at the office.
 
 Remote work doesn’t have to  affect your startup negatively. On the contrary, it can help to uncover your organization’s deeper shortcomings. Strengthening the foundation brings positive and long-lasting impact on organizations.
 
-##If I were to leave you with one thing to think about, I would focus your attention on yourself.
+If I were to leave you with one thing to think about, I would focus your attention on yourself.
 
 * What are the things holding me off remote work or some other big change?
 * Is it my lack of confidence in pulling it off?
@@ -211,13 +211,13 @@ There is rarely an irreversible damage you can cause. Go and try it for yourself
 </span>
 
 <span id="note-2">
-[2] [COVID-19 pandemic](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic)
+[2] [COVID-19 pandemic](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic).
 </span>
 
 <span id="note-3">
-[3] Have a look at [Buffer’s survey](https://lp.buffer.com/state-of-remote-work-2020) about what is important to remote workers
+[3] Have a look at [Buffer’s survey](https://lp.buffer.com/state-of-remote-work-2020) about what is important to remote workers.
 </span>
 
 <span id="note-4">
-[4] More about The Red Queen Effect can be found on [Farnam Street](https://fs.blog/2012/10/the-red-queen-effect/)
+[4] More about The Red Queen Effect can be found on [Farnam Street](https://fs.blog/2012/10/the-red-queen-effect/).
 </span>
