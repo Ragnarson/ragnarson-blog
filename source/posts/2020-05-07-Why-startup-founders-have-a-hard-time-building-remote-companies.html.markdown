@@ -102,7 +102,7 @@ Let’s focus on the essentials. If remote work requires effort to implement and
 
 ## Business survival
 
-Remote work has been getting traction over the years [[1]](#note-1). Moreover, the COVID-19 pandemic [[2]](#note-2) forced many businesses to switch to work from home almost overnight. If we think about remote work in the long run, every business should be asking itself not only about the benefits but rather how important work from home is for survival.
+Remote work has been getting traction over the years <sup>[[1]](#note-1)</sup>. Moreover, the COVID-19 pandemic<sup>[[2]](#note-2)</sup> forced many businesses to switch to work from home almost overnight. If we think about remote work in the long run, every business should be asking itself not only about the benefits but rather how important work from home is for survival.
 
 In my experience, remote work is not merely a way to source talent from different regions or build a more flexible working environment. For Ragnarson, remote work is an **unique value proposition (UVP)** and often acts as a strong differentiator among our competitors. It allows us to attract more diverse and, on average, more skilled talent.
 
@@ -110,7 +110,7 @@ Here are a few important questions you should ask yourself:
 
 * If the future were to be remote, would you be a part of it or would you slowly move towards extinction?
 
-* Can remote work become a UVP of your business? [[3]](#note-3)
+* Can remote work become a UVP of your business?<sup>[[3]](#note-3)</sup>
 
 * Can you reap the benefits before everyone else starts offering the same?
 
@@ -178,7 +178,7 @@ For me, the change of my mindset came from two sources: a financial crisis and t
 
 It’s impossible for me to tell what could be your tipping point or whether you even need one.
 
-Look at it from a different perspective. Whether it’s remote work or some other bigger challenge, the world is constantly changing. “It takes all the running you can do, to keep in the same place.” [[4]](#note-4)
+Look at it from a different perspective. Whether it’s remote work or some other bigger challenge, the world is constantly changing. “It takes all the running you can do, to keep in the same place.”<sup>[[4]](#note-4)</sup>
 
 If you don’t stay flexible and adapt to the changing environment, you’ll eventually become obsolete. Adaptation might be your only competitive advantage in the long run.
 
