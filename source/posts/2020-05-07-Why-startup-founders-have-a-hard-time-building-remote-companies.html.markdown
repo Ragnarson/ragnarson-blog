@@ -203,7 +203,7 @@ If I were to leave you with one thing to think about, I would focus your attenti
 
 There is rarely an irreversible damage you can cause. Go and try it for yourself before it's too late.
 
-**Notes:**
+**Notes**
 
 
 <span id="note-1">
