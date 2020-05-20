@@ -5,7 +5,7 @@ meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1"
 - else
   title Ragnarson Blog
 
-meta name="twitter:image" content="https://blog.ragnarson.com#{image_path("blog-embed.png")}"
+
 meta name="twitter:card" content="summary"
 meta name="twitter:site" content="@ragnarsoncom"
 meta property="og:site_name" content="Ragnarson Blog"
@@ -13,6 +13,7 @@ meta property="og:site_name" content="Ragnarson Blog"
 - if content_for?(:graph_meta)
   = yield_content :graph_meta
 - else
+  meta name="twitter:image" content="https://blog.ragnarson.com#{image_path("blog-embed.png")}"
   meta property="og:image" content="https://blog.ragnarson.com#{image_path("blog-embed.png")}"
   meta property="og:type" content="website"
   meta property="og:url" content="https://blog.ragnarson.com/"
