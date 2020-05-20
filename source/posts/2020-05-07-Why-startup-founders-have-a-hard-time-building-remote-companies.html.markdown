@@ -104,7 +104,7 @@ Let’s focus on the essentials. If remote work requires effort to implement and
 
 Remote work has been getting traction over the years <sup>[[1]](#note-1)</sup>. Moreover, the COVID-19 pandemic<sup>[[2]](#note-2)</sup> forced many businesses to switch to work from home almost overnight. If we think about remote work in the long run, every business should be asking itself not only about the benefits but rather how important work from home is for survival.
 
-In my experience, remote work is not merely a way to source talent from different regions or build a more flexible working environment. For Ragnarson, remote work is an **unique value proposition (UVP)** and often acts as a strong differentiator among our competitors. It allows us to attract more diverse and, on average, more skilled talent.
+In my experience, remote work is not merely a way to source talent from different regions or build a more flexible working environment. For Ragnarson, remote work is a unique value proposition (UVP) and often acts as a strong differentiator among our competitors. It allows us to attract more diverse and, on average, more skilled talent.
 
 Here are a few important questions you should ask yourself:
 
