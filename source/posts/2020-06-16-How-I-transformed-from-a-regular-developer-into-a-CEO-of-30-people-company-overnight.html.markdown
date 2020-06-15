@@ -11,7 +11,7 @@ READMORE
 
 The work environment Łukasz and other colleagues have created was awesome. We felt like we owned a part of the company, and actually me and a few other people became its minor shareholders within the next few years.
 
-But in late 2013, things weren’t looking good. We lost a major customer. Shellycloud.com, our own hosting startup (a Heroku alternative) was burning more money than we predicted. Łukasz was very stressed and we felt that he lost control over the company.
+But in late 2013, things weren’t looking good. We lost a major customer. [Shellycloud.com](https://shellycloud.com/), our own hosting startup (a Heroku alternative) was burning more money than we predicted. Łukasz was very stressed and we felt that he lost control over the company.
 
 We’ve seen his struggle and together with the team decided to have a serious talk with him. We wanted to help, but didn’t know how. All we’ve been doing so far was just coding. The talk was tough but it resulted in Łukasz sharing some of his responsibilities with us. **And then, 6 months later, he died.**
 
@@ -63,7 +63,7 @@ Things started to look really bad. We were burning more cash than ever and neede
 
 2017 was the year when we tried all the ideas we could come up with. From content marketing to networking, ad campaigns and cold mailing. We traveled all over Europe trying to find a new project.
 
-Eventually, we were able to bring in a few minor projects, but they didn’t change our situation.
+Eventually, we were able to bring in a few smaller projects, but they didn’t change our situation.
 
 The help came from a totally different direction. Back in the beginning of 2016, Guy, a friend of Ragnarson, called me saying that he had spotted an awesome startup that needed our help. But they didn’t have any cash at the time.
 
@@ -75,17 +75,17 @@ This startup was Vehiculum, today one of the leaders in the car rental space wit
 
 At the same time, referrals from our customers started to come in and we kicked off new projects. At the end of 2017, we were back on track. But this time, we did it without the “wolves of Wall Street” attitude. We rebuilt the company slowly up to the point where we are right now.
 
-##And where are we exactly?
 ![team overview](2020-06-16-How-I-transformed-from-a-regular-developer-into-a-CEO-of-30-people-company-overnight/October.jpg)
 *Ragnarson feedback workshop, October 2019*
+##And where are we exactly?
 
 Our customers include some of the top European startups, such as Vehiculum, HeyJobs, GrowthMentor, and mature organisations like A-connect, Verivox, and the Zurich University of Art.
 
 Our team is smaller than during the times of prosperity, but we constantly hire new developers.
 
-We have a stable situation and were able to secure enough cash that we decided to invest in impactful pre-seed startups. In 2019 we started the Ragnarson Fund which is a big part of our strategy for the years to come.
+We have a stable situation and were able to secure enough cash that we decided to invest in impactful pre-seed startups. In 2019 we started the [Ragnarson Fund](https://ragnarson.com/pdf/ragnarson-fund-one-pager.pdf) which is a big part of our strategy for the years to come.
 
-We feel that we understand and control our business. We changed into a teal organisation, hired a marketing team, and know exactly where we are and where we want to be. We are still keeping Łukasz’s legacy alive, but made it our own way.
+We feel that we understand and control our business. We changed into a [teal organisation](https://en.wikipedia.org/wiki/Teal_organisation#:~:text=A%20Teal%20organisation%20is%20an,the%20operations%20of%20an%20organization.), hired a marketing team, and know exactly where we are and where we want to be. We are still keeping Łukasz’s legacy alive, but made it our own way.
 
 ##What did I learn?
 
