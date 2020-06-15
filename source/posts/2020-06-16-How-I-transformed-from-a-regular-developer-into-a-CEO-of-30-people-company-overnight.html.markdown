@@ -1,7 +1,7 @@
 ---
 title: How I transformed from a regular developer into a CEO of 30 people company overnight
 author: macias
-cover_photo: Teamcover.jpg
+cover_photo: October.jpg
 tags:
 og_description: When the CEO & founder of your company passes away
 ---
@@ -75,7 +75,7 @@ This startup was Vehiculum, today one of the leaders in the car rental space wit
 
 At the same time, referrals from our customers started to come in and we kicked off new projects. At the end of 2017, we were back on track. But this time, we did it without the “wolves of Wall Street” attitude. We rebuilt the company slowly up to the point where we are right now.
 
-![team overview](2020-06-16-How-I-transformed-from-a-regular-developer-into-a-CEO-of-30-people-company-overnight/October.jpg)
+![team overview](2020-06-16-How-I-transformed-from-a-regular-developer-into-a-CEO-of-30-people-company-overnight/Teamcover.jpg)
 *Ragnarson feedback workshop, October 2019*
 ##And where are we exactly?
 
