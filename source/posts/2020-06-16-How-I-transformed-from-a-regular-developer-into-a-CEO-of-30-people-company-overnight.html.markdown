@@ -76,7 +76,7 @@ This startup was Vehiculum, today one of the leaders in the car rental space wit
 At the same time, referrals from our customers started to come in and we kicked off new projects. At the end of 2017, we were back on track. But this time, we did it without the “wolves of Wall Street” attitude. We rebuilt the company slowly up to the point where we are right now.
 
 ![team overview](2020-06-16-How-I-transformed-from-a-regular-developer-into-a-CEO-of-30-people-company-overnight/Teamcover.jpg)
-*Ragnarson feedback workshop, October 2019*
+*Ragnarson 10th anniversary, Łódź*
 ##And where are we exactly?
 
 Our customers include some of the top European startups, such as Vehiculum, HeyJobs, GrowthMentor, and mature organisations like A-connect, Verivox, and the Zurich University of Art.
