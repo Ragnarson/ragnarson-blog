@@ -1,9 +1,9 @@
 ---
-title: How to avoid hiring people who are a bad fit for your company
+title: Motivated team starts with the recruitment process
 author: macias
 cover_photo: cover.jpg
 tags:
-og_description: Motivated team starts with the recruitment process
+og_description:
 ---
 #Introduction
 In April 2018, my business partners at Ragnarson and I joined a local group of IT entrepreneurs in Lodz, Poland. We usually meet once a month and discuss topics that are relevant to our interests. It's a place to learn from each other and share our struggles.
@@ -53,19 +53,19 @@ The main question marks we want to address at this stage are:
 
 * Do the communications skills and maturity of the candidate correspond with our requirements?
 
-As a self-managed company, our expectations need to be at the top end of the spectrum. For example, most of our employees communicate directly with clients. They are responsible for making decisions which in traditional environments are handled by more experienced managers.
+    As a self-managed company, our expectations need to be at the top end of the spectrum. For example, most of our employees communicate directly with clients. They are responsible for making decisions which in traditional environments are handled by more experienced managers.
 
 * Can we provide the candidate with what they're looking for (and vice versa)?
 
-In our case, the responsibilities of developers are broad. They not only code but also manage the relationship with our clients. This means they engage in tasks like collecting feedback, organizing in-person meetings, learning about the business of our clients, and handling issues if any arise. A person looking for a calm environment where their concerns are limited to the technical challenges of the project wouldn't be a good fit for us.
+    In our case, the responsibilities of developers are broad. They not only code but also manage the relationship with our clients. This means they engage in tasks like collecting feedback, organizing in-person meetings, learning about the business of our clients, and handling issues if any arise. A person looking for a calm environment where their concerns are limited to the technical challenges of the project wouldn't be a good fit for us.
 
 * Does the candidate speak English fluently?
 
-Practically all developers write code in English and need to understand this language to be able to learn new things. In terms of speaking English, not all companies on the market require that. This creates a pool of specialists whose speaking skills don't allow for smooth business communication.
+    Practically all developers write code in English and need to understand this language to be able to learn new things. In terms of speaking English, not all companies on the market require that. This creates a pool of specialists whose speaking skills don't allow for smooth business communication.
 
 * Do our mutual expectations meet (like salary level, flexible working hours, or remote work)?
 
-Flexible working hours and remote work provide a lot of freedom to employees who can work from any place and at any time, assuming that their team and clients get enough time overlap. But not everyone wants that. People who need a bit more structure in their lives and/or prefer working from an office aren't going to appreciate the option (or necessity) of remote work as much.
+    Flexible working hours and remote work provide a lot of freedom to employees who can work from any place and at any time, assuming that their team and clients get enough time overlap. But not everyone wants that. People who need a bit more structure in their lives and/or prefer working from an office aren't going to appreciate the option (or necessity) of remote work as much.
 
 If we don't see any major red flags at this point, we move forward with the process.
 
@@ -79,21 +79,21 @@ Most of the time, we hire software developers. In this case, there are two steps
 This is the first technical step that gives us an overview of how the candidate thinks and what kind of quality they deliver. It's not enough for us to reject the candidate at this stage. In practice, some candidates give up without completing the challenge for various reasons. It saves time for us both.
 2.  A call with one of our senior developers consisting of:
 
-a) discussion about the solution of the programming challenge prepared by the candidate (around 30 minutes)
+      a) A discussion about the solution of the programming challenge prepared by the candidate (around 30 minutes)
 
-This step is crucial in understanding how the candidate approached the challenge and why they solved it in this particular way. It tells us a lot about their perspective and how broadly they look at problem-solving.
+      This step is crucial in understanding how the candidate approached the challenge and why they solved it in this particular way. It tells us a lot about their perspective and how broadly they look at problem-solving.
 
-b) Theoretical questions (30-60 minutes)
+      b) Theoretical questions (30-60 minutes)
 
-Contrary to how it sounds, this step doesn't aim to bore the candidate. The goal is to uncover whether they have a deeper understanding of the technologies they use. It's crucial, especially if someone aspires to a technical leadership role. In the case of less experienced candidates, it tells us a lot about their potential.
+      Contrary to how it sounds, this step doesn't aim to bore the candidate. The goal is to uncover whether they have a deeper understanding of the technologies they use. It's crucial, especially if someone aspires to a technical leadership role. In the case of less experienced candidates, it tells us a lot about their potential.
 
-c) Live coding (around 60 minutes)
+      c) Live coding (around 60 minutes)
 
-Theoretical knowledge is nice but not very useful if the candidate struggles to apply it. At this step, we see their problem-solving capabilities in real time. The task also simulates everyday challenges they are bound to encounter at work. Both sides get a chance to see how the collaboration may look like once we decide to work together.
+      Theoretical knowledge is nice but not very useful if the candidate struggles to apply it. At this step, we see their problem-solving capabilities in real time. The task also simulates everyday challenges they are bound to encounter at work. Both sides get a chance to see how the collaboration may look like once we decide to work together.
 
-d) Q&A and next steps
+      d) Q&A and next steps
 
-At the end of the process, we summarize it - we describe our expectations regarding each step, provide candidates with feedback, and answer their questions.
+      At the end of the process, we summarize it - we describe our expectations regarding each step, provide candidates with feedback, and answer their questions.
 
 During the technical interview, two good things usually happen for candidates.
 
@@ -111,7 +111,7 @@ It's crucial to have a structure for each conversation. We don't want to just ha
 ###Soft skills and expectations
 From the candidate's perspective, it's essential to understand how we differ from the competitors. This is also something that we mention during the first interview, but it requires constant reminders. Now is the time to give them a proper introduction and lay out the concept in more detail.
 
-Oftentimes we experience 'aha' moments when the candidate realizes what our environment really looks like. I always tell the story of how we help T-shaped individuals [1] to flourish. One of the best examples involves our self-set salary process. By the time I have a chance to speak with the candidate, they usually have a vague idea about how it works. They often don't realize that they will be ultimately responsible for their own salary, and no one, not even me, can influence it.
+Oftentimes we experience 'aha' moments when the candidate realizes what our environment really looks like. I always tell the story of how we help T-shaped individuals <sup>[[1]](#note-1)</sup> to flourish. One of the best examples involves our [self-set salary process](https://maciejgalkiewicz.com/2018/05/08/self-set-salaries/). By the time I have a chance to speak with the candidate, they usually have a vague idea about how it works. They often don't realize that they will be ultimately responsible for their own salary, and no one, not even me, can influence it.
 
 But back to what matters now: understanding the value proposition makes all the difference in the long run.
 
@@ -159,6 +159,7 @@ Let's summarize the most important aspects of the process. It should give you a 
 3. Engage your team. It brings so many benefits to the process that it's even hard to mention them all. The most important thing for the candidate is getting to know their future teammates beforehand. They can ask questions about the company first-hand and get honest feedback. And you can get a much broader and comprehensive picture of the candidate.
 4. I believe that just like in sales, the best recruiters act as advisors to the candidate. They're not someone looking to close a deal at all costs. We often challenge the decisions and preferences of candidates. We want to know how well-thought those choices are and whether our offer makes sense for them in the foreseeable future.
 5. Provide candidates with feedback. It's extremely valuable to them as it provides a reference point for future improvements. If the candidate was rejected, it also helps you to keep the door open and encourages them to get back to you once they meet your requirements.
+
 #Conclusion
 Building thriving working environments is not only about their design and features. An important part of it is the people you invite to the table. Candidates have diverse preferences and because of that require different environments.
 
@@ -172,4 +173,7 @@ If what your organization offers doesn't match their interests, don't expect the
 
 Managing expectations is key.
 #Notes
+
+<span id="note-1">
 [1] More about t-shaped individuals can be found in [T-shaped Professionals, T-shaped Skills, Hybrid Managers by David Ing.](http://coevolving.com/blogs/index.php/archive/t-shaped-professionals-t-shaped-skills-hybrid-managers/)
+</span>
