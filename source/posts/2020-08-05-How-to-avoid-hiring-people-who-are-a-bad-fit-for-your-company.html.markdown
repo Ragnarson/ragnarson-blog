@@ -36,7 +36,7 @@ In what follows, we share an overview of our recruitment framework. It has been 
 
 Note that we've been tweaking the process for years and adding new features that help to attract desirable candidates, give them more value, and filter out the undesirable ones. Moreover, we constantly adapt it to changing market conditions.
 #Our interview process
-![Team overview](2020-08-05-How-to-avoid-hiring-people-who-are-a-bad-fit-for-your-company/screen1.png)
+![Team overview](2020-08-06-Motivated-team-starts-with-the-recruitment-process/screen1.png)
 Our recruitment process consists of three steps.
 
 1. The first interview with our HR team,
@@ -137,7 +137,7 @@ There are many people who have a narrow specialization and would rather have onl
 
 There's nothing wrong with that. It just means that such candidates are not always a good fit for us.
 #Finalizing the process
-![Team overview](2020-08-05-How-to-avoid-hiring-people-who-are-a-bad-fit-for-your-company/screen2.png)
+![Team overview](2020-08-06-Motivated-team-starts-with-the-recruitment-process/screen2.png)
 Once we have all pieces of the puzzle in place, it's time to summarize what we know and accept or reject the candidate.
 
 All interviewers participate in a 30- to 60-minute call.
