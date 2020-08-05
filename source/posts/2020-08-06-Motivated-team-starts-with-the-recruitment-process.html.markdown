@@ -76,10 +76,12 @@ Once we have an overview of the candidate, it's time to make sure that they poss
 Most of the time, we hire software developers. In this case, there are two steps to complete:
 
 1. A programming challenge carried out offline at their convenience
-This is the first technical step that gives us an overview of how the candidate thinks and what kind of quality they deliver. It's not enough for us to reject the candidate at this stage. In practice, some candidates give up without completing the challenge for various reasons. It saves time for us both.
-2.  A call with one of our senior developers consisting of:
 
-      a) A discussion about the solution of the programming challenge prepared by the candidate (around 30 minutes)
+    This is the first technical step that gives us an overview of how the candidate thinks and what kind of quality they deliver. It's not enough for us to reject the candidate at this stage. In practice, some candidates give up without completing the challenge for various reasons. It saves time for us both.        
+
+1. A call with one of our senior developers consisting of:
+
+     a) A discussion about the solution of the programming challenge prepared by the candidate (around 30 minutes)
 
       This step is crucial in understanding how the candidate approached the challenge and why they solved it in this particular way. It tells us a lot about their perspective and how broadly they look at problem-solving.
 
