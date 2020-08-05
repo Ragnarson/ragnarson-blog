@@ -23,9 +23,13 @@ Every environment is attractive only to a specific group of people. If you hire 
 The question is not how to motivate every single employee on the market. That's just impossible. Instead, we need to focus on recruiting the right people for our organizations. We need to know who they are - and then get them on board.
 
 If you have ever:
-* Hired someone who left after a few months because 'the company was not what they expected,'
+
+* Hired someone who left after a few months because 'the company was not what they expected',
+
 * Dealt with an unmotivated employee who struggled with their responsibilities and delivered little value,
+
 * Hired a person who didn't get along well with the rest of the team,
+
 then let me introduce you to our secret sauce that helps to handle this problem.
 
 In what follows, we share an overview of our recruitment framework. It has been tremendously helpful for minimizing such problems and brought us a lot of other benefits.
@@ -33,6 +37,7 @@ In what follows, we share an overview of our recruitment framework. It has been 
 Note that we've been tweaking the process for years and adding new features that help to attract desirable candidates, give them more value, and filter out the undesirable ones. Moreover, we constantly adapt it to changing market conditions.
 #Our interview process
 Our recruitment process consists of three steps.
+
 1. The first interview with our HR team,
 2. Technical interview,
 3. Cultural fit and soft skills check.
@@ -44,15 +49,19 @@ Most companies are adept at the initial interview with candidates. It's chiefly 
 Some companies engage the final decision-makers at this point. They speak with a candidate for an hour, and if they like what they hear, they make a hire. In my opinion, this is where the greatest danger lies. All you can do in an hour is to get a vague idea about someone. That's why we do more than that.
 
 The main question marks we want to address at this stage are:
+
 * Do the communications skills and maturity of the candidate correspond with our requirements?
 
 As a self-managed company, our expectations need to be at the top end of the spectrum. For example, most of our employees communicate directly with clients. They are responsible for making decisions which in traditional environments are handled by more experienced managers.
+
 * Can we provide the candidate with what they're looking for (and vice versa)?
 
 In our case, the responsibilities of developers are broad. They not only code but also manage the relationship with our clients. This means they engage in tasks like collecting feedback, organizing in-person meetings, learning about the business of our clients, and handling issues if any arise. A person looking for a calm environment where their concerns are limited to the technical challenges of the project wouldn't be a good fit for us.
+
 * Does the candidate speak English fluently?
 
 Practically all developers write code in English and need to understand this language to be able to learn new things. In terms of speaking English, not all companies on the market require that. This creates a pool of specialists whose speaking skills don't allow for smooth business communication.
+
 * Do our mutual expectations meet (like salary level, flexible working hours, or remote work)?
 
 Flexible working hours and remote work provide a lot of freedom to employees who can work from any place and at any time, assuming that their team and clients get enough time overlap. But not everyone wants that. People who need a bit more structure in their lives and/or prefer working from an office aren't going to appreciate the option (or necessity) of remote work as much.
@@ -64,19 +73,23 @@ From the candidate perspective, they get a basic overview of our offer and recru
 Once we have an overview of the candidate, it's time to make sure that they possess the relevant skills for the job. Depending on the type of individual we are looking for, we ask them to perform different tasks.
 
 Most of the time, we hire software developers. In this case, there are two steps to complete:
-1. A programming challenge carried out offline at their convenience
 
+1. A programming challenge carried out offline at their convenience
 This is the first technical step that gives us an overview of how the candidate thinks and what kind of quality they deliver. It's not enough for us to reject the candidate at this stage. In practice, some candidates give up without completing the challenge for various reasons. It saves time for us both.
-2. A call with one of our senior developers consisting of:
+2.  A call with one of our senior developers consisting of:
+
 a) discussion about the solution of the programming challenge prepared by the candidate (around 30 minutes)
 
 This step is crucial in understanding how the candidate approached the challenge and why they solved it in this particular way. It tells us a lot about their perspective and how broadly they look at problem-solving.
+
 b) Theoretical questions (30-60 minutes)
 
 Contrary to how it sounds, this step doesn't aim to bore the candidate. The goal is to uncover whether they have a deeper understanding of the technologies they use. It's crucial, especially if someone aspires to a technical leadership role. In the case of less experienced candidates, it tells us a lot about their potential.
+
 c) Live coding (around 60 minutes)
 
 Theoretical knowledge is nice but not very useful if the candidate struggles to apply it. At this step, we see their problem-solving capabilities in real time. The task also simulates everyday challenges they are bound to encounter at work. Both sides get a chance to see how the collaboration may look like once we decide to work together.
+
 d) Q&A and next steps
 
 At the end of the process, we summarize it - we describe our expectations regarding each step, provide candidates with feedback, and answer their questions.
