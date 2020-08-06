@@ -175,7 +175,7 @@ If there was only one thing I could ask a candidate, it would be about what driv
 
 If what your organization offers doesn't match their interests, don't expect them to be motivated or engaged.
 
-Managing expectations is key.
+Managing expectations is the key.
 #Notes
 
 <span id="note-1">
