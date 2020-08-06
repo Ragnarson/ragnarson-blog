@@ -1,12 +1,12 @@
 ---
-title: Motivated team starts with the recruitment process
+title: A motivated team starts with the recruitment process
 author: macias
 cover_photo: cover.jpg
-tags:
+tags: recruitment, self-management
 og_description:
 ---
-#Introduction
 In April 2018, my business partners at Ragnarson and I joined a local group of IT entrepreneurs in Lodz, Poland. We usually meet once a month and discuss topics that are relevant to our interests. It's a place to learn from each other and share our struggles.
+READMORE
 
 One of the most common problems that keep popping up is the low motivation of employees to do their best at work. They're often not engaged enough or lack a proactive attitude. Instead of bringing out the best in them, the company seems to drag them down.
 
@@ -37,6 +37,7 @@ In what follows, we share an overview of our recruitment framework. It has been 
 Note that we've been tweaking the process for years and adding new features that help to attract desirable candidates, give them more value, and filter out the undesirable ones. Moreover, we constantly adapt it to changing market conditions.
 #Our interview process
 ![Team overview](2020-08-06-Motivated-team-starts-with-the-recruitment-process/screen1.png)
+
 Our recruitment process consists of three steps.
 
 1. The first interview with our HR team,
@@ -81,19 +82,19 @@ Most of the time, we hire software developers. In this case, there are two steps
 
 1. A call with one of our senior developers consisting of:
 
-     a) A discussion about the solution of the programming challenge prepared by the candidate (around 30 minutes)
+  * A discussion about the solution of the programming challenge prepared by the candidate (around 30 minutes)
 
       This step is crucial in understanding how the candidate approached the challenge and why they solved it in this particular way. It tells us a lot about their perspective and how broadly they look at problem-solving.
 
-      b) Theoretical questions (30-60 minutes)
+  * Theoretical questions (30-60 minutes)
 
       Contrary to how it sounds, this step doesn't aim to bore the candidate. The goal is to uncover whether they have a deeper understanding of the technologies they use. It's crucial, especially if someone aspires to a technical leadership role. In the case of less experienced candidates, it tells us a lot about their potential.
 
-      c) Live coding (around 60 minutes)
+  * Live coding (around 60 minutes)
 
       Theoretical knowledge is nice but not very useful if the candidate struggles to apply it. At this step, we see their problem-solving capabilities in real time. The task also simulates everyday challenges they are bound to encounter at work. Both sides get a chance to see how the collaboration may look like once we decide to work together.
 
-      d) Q&A and next steps
+  * Q&A and next steps
 
       At the end of the process, we summarize it - we describe our expectations regarding each step, provide candidates with feedback, and answer their questions.
 
@@ -140,6 +141,7 @@ There are many people who have a narrow specialization and would rather have onl
 There's nothing wrong with that. It just means that such candidates are not always a good fit for us.
 #Finalizing the process
 ![Team overview](2020-08-06-Motivated-team-starts-with-the-recruitment-process/screen2.png)
+
 Once we have all pieces of the puzzle in place, it's time to summarize what we know and accept or reject the candidate.
 
 All interviewers participate in a 30- to 60-minute call.
