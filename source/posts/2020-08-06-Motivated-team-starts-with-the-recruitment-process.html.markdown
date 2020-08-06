@@ -35,7 +35,6 @@ In what follows, we share an overview of our recruitment framework. It has been 
 
 Note that we've been tweaking the process for years and adding new features that help to attract desirable candidates, give them more value, and filter out the undesirable ones. Moreover, we constantly adapt it to changing market conditions.
 #Our interview process
-![Team overview](2020-08-06-Motivated-team-starts-with-the-recruitment-process/screen1.png)
 
 Our recruitment process consists of three steps.
 
@@ -45,6 +44,7 @@ Our recruitment process consists of three steps.
 
 The importance lies in what's being checked and how. This order works for us, but it doesn't mean that it will also work for you. Moreover, the entire process is done remotely. Let me walk you through it with more detail.
 ##First interview
+![Team overview](2020-08-06-Motivated-team-starts-with-the-recruitment-process/screen1.png)
 Most companies are adept at the initial interview with candidates. It's chiefly about getting to know each other, talking about basic expectations, checking their language skills, and getting a general impression of the candidate.
 
 Some companies engage the final decision-makers at this point. They speak with a candidate for an hour, and if they like what they hear, they make a hire. In my opinion, this is where the greatest danger lies. All you can do in an hour is to get a vague idea about someone. That's why we do more than that.
@@ -71,6 +71,7 @@ If we don't see any major red flags at this point, we move forward with the proc
 
 From the candidate perspective, they get a basic overview of our offer and recruitment process. It gives them the first glimpse of our culture to decide whether this is what they are looking for. Nobody proposes marriage on the first date, and the same logic applies here. Both sides need time to figure out if they fit well together.
 ##Technical interview
+![Team overview](2020-08-06-Motivated-team-starts-with-the-recruitment-process/screen3.png)
 Once we have an overview of the candidate, it's time to make sure that they possess the relevant skills for the job. Depending on the type of individual we are looking for, we ask them to perform different tasks.
 
 Most of the time, we hire software developers. In this case, there are two steps to complete:
