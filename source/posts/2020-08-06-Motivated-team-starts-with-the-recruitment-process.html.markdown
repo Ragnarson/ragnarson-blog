@@ -2,8 +2,7 @@
 title: A motivated team starts with the recruitment process
 author: macias
 cover_photo: cover.jpg
-tags: recruitment, self-management
-og_description:
+tags: recruitment, self-management, entrepreneurship
 ---
 In April 2018, my business partners at Ragnarson and I joined a local group of IT entrepreneurs in Lodz, Poland. We usually meet once a month and discuss topics that are relevant to our interests. It's a place to learn from each other and share our struggles.
 READMORE
