@@ -21,7 +21,7 @@ When companies realize that they’re just like everyone else, they’re often l
 
 Of course, when we realized that we are “just like everyone else,” we started to search for this one big change immediately.
 
-Maybe we should pivot? We’ve had previous experiences with running our own hosting platform, shellcloud.com. But at the time, we had no idea what product we could build. We started to research this and ended up with few ideas.
+Maybe we should pivot? We’ve had previous experiences with running our own hosting platform, shellycloud.com. But at the time, we had no idea what product we could build. We started to research this and ended up with few ideas.
 
 To speed up the process, we organized a workshop with Sustainable Natives (huge thanks to Marco, Matthias, Christian, and Marius). They helped us to narrow down the list of ideas to precision farming.
 
