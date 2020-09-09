@@ -2,7 +2,7 @@
 title: The first step to a self managed company: transparency
 author: macias
 cover_photo: cover.jpg
-tags: transparency, management
+tags: transparency, entrepreneurship
 ---
 
 It took us 6 years and a lot of trial and error to transform Ragnarson into a self-managed company [where people get to even set their own salaries](https://maciejgalkiewicz.com/2018/05/08/self-set-salaries/). This series of blog posts is a step-by-step guide to changing your organisation into a self-managed one.
