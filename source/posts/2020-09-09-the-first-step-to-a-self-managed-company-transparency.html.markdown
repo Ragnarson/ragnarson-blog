@@ -37,7 +37,8 @@ First of all, your team needs to know that you trust them, and they need to trus
 
 Because of that - thanks to a bigger context - they will know how to act. For example - during the COVID-19 pandemic, due to the uncertain situation, Ragnarson’s team decided to postpone most of the pay raises. It was a bottom-up initiative and it showed how well our team members understood the situation on the market.
 
-From your perspective, instead of having to control each aspect of the organisation, you will be able to let go and trust that the team can handle most of the problems on its own. You will be able to focus on growing the business instead of putting out fires. **This process needs to start with transparency and context.**
+From your perspective, instead of having to control each aspect of the organisation, you will be able to let go and trust that the team can handle most of the problems on its own. You will be able to focus on growing the business instead of putting out fires.
+**This process needs to start with transparency and context.**
 
 ##What can go wrong?
 
