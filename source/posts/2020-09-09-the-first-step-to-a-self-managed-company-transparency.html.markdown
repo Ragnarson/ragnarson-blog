@@ -1,5 +1,5 @@
 ---
-title: The first step to a self managed company: transparency
+title: "The first step to a self managed company: transparency"
 author: macias
 cover_photo:
 tags: transparency, entrepreneurship
