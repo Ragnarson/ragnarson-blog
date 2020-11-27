@@ -1,5 +1,5 @@
 ---
-title: "Impact Investors List"
+title: "Opensourced Impact Investors List"
 author: macias
 cover_photo: cover.jpg
 tags: impact investing,
@@ -13,7 +13,7 @@ READMORE
 
 That’s not a surprise, as there are dozens of VCs and business angels’ lists online, but hardly any, presenting an impact-focused investor scene.
 
-That’s why we decided to gather them all in one place, [spreadsheet](https://docs.google.com/spreadsheets/d/1KKJozFWOLnUAIbPoJUvxrUI0e2OzjttuzJf-SkQWH98/edit?usp=sharing).
+That’s why we decided to gather them all in one [spreadsheet](https://docs.google.com/spreadsheets/d/1KKJozFWOLnUAIbPoJUvxrUI0e2OzjttuzJf-SkQWH98/edit?usp=sharing).
 
 Our primary goal is to provide a ready-to-use investors list for impact-driven startups looking for funding.
 
