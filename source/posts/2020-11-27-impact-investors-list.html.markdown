@@ -1,5 +1,5 @@
 ---
-title: "Opensourced Impact Investors List"
+title: "Open-sourced impact investors list"
 author: macias
 cover_photo: cover.jpg
 tags: impact investing,
@@ -24,3 +24,4 @@ Do you know impact investors that should be featured on the list or are you an i
 Don’t hesitate to supplement the spreadsheet!
 
 Spreadsheet link: [LINK](https://docs.google.com/spreadsheets/d/1KKJozFWOLnUAIbPoJUvxrUI0e2OzjttuzJf-SkQWH98/edit?usp=sharing)
+ 
