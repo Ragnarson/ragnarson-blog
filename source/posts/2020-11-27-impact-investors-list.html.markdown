@@ -9,6 +9,8 @@ One of the common problems that impact-driven founders face is finding the right
 
 The reason for this problem might be simply targeting the wrong types of investors.
 
+READMORE
+
 That’s not a surprise, as there are dozens of VCs and business angels’ lists online, but hardly any, presenting an impact-focused investor scene.
 
 That’s why we decided to gather them all in one place, [spreadsheet](https://docs.google.com/spreadsheets/d/1KKJozFWOLnUAIbPoJUvxrUI0e2OzjttuzJf-SkQWH98/edit?usp=sharing).
@@ -21,4 +23,4 @@ Do you know impact investors that should be featured on the list or are you an i
 
 Don’t hesitate to supplement the spreadsheet!
 
-Spreadsheet link: https://docs.google.com/spreadsheets/d/1KKJozFWOLnUAIbPoJUvxrUI0e2OzjttuzJf-SkQWH98/edit?usp=sharing
+Spreadsheet link: [LINK](https://docs.google.com/spreadsheets/d/1KKJozFWOLnUAIbPoJUvxrUI0e2OzjttuzJf-SkQWH98/edit?usp=sharing)
