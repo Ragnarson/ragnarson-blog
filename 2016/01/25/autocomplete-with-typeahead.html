@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Search with autocomplete using Twitter Typeahead - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2016/01/25/autocomplete-with-typeahead.html" property="og:url" /><meta content="Search with autocomplete using Twitter Typeahead" property="og:title" /><meta content="Adding simple, easy to customize and reliable autocomplete functionality has always been one of the topics that I thought wasn't very clear for Rails applications. During my last project, I finally decided that I would do some serious research and find one solution that I could use later without hesitation. And here it is: my choice is to use Twitter typeahead.js library." property="og:description" /><meta content="Dawid Lenkiewicz" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Dawid Lenkiewicz","image":"https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Search with autocomplete using Twitter Typeahead","url":"https://blog.ragnarson.com/2016/01/25/autocomplete-with-typeahead.html","author":{"@type":"Person","name":"Dawid Lenkiewicz","image":"https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2016-01-25","dateModified":"2016-01-25"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="01caa77a1f122a1371fed292cab37c72" /><div class="article-meta">January 25, 2016 - <a href="/authors/dawid-lenkiewicz.html">Dawid Lenkiewicz</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2016/01/25/autocomplete-with-typeahead.html">Search with autocomplete using Twitter Typeahead</a></h1></header><p>Adding simple, easy to customize and reliable autocomplete functionality has always been one of the topics that I thought wasn&#39;t very clear for Rails applications. During my last project, I finally decided that I would do some serious research and find one solution that I could use later without hesitation. And here it is: my choice is to use Twitter <a href="https://twitter.github.io/typeahead.js/">typeahead.js</a> library.</p>
+
+<p></p>
+
+<h2>Installing Typeahead</h2>
+
+<p>There are several gems that integrate the typeahead plugin with the Rails assets pipeline. I decided to use <a href="https://github.com/Nerian/bootstrap-typeahead-rails">the one</a> which also provides basic styling for bootstrap. To get started simply add:</p>
+<pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'bootstrap-typeahead-rails'</span>
+</code></pre>
+
+<p>to your Gemfile and run bundle install. Next you will need to require necessary libraries in your app/assets/javascripts/application.js:</p>
+<pre class="highlight javascript"><code><span class="c1">//= require bootstrap-typeahead-rails</span>
+</code></pre>
+
+<p>and styling in app/assets/stylesheets/application.css:</p>
+<pre class="highlight css"><code><span class="o">*=</span> <span class="nt">require</span> <span class="nt">bootstrap-typeahead-rails</span>
+</code></pre>
+
+<p>Unfortunately, we still need some custom css to work properly with input-group classes used in forms, but it&#39;s pretty simple and straightforward. You can just copy and paste it:</p>
+<pre class="highlight css"><code><span class="nt">span</span><span class="nc">.twitter-typeahead</span>
+  <span class="nt">width</span><span class="o">:</span> <span class="nt">100</span><span class="o">%</span>
+
+<span class="nc">.input-group</span>
+  <span class="nt">span</span><span class="nc">.twitter-typeahead</span>
+    <span class="nt">display</span><span class="o">:</span> <span class="nt">block</span> <span class="o">!</span><span class="nt">important</span>
+    <span class="nc">.tt-dropdown-menu</span>
+      <span class="nt">top</span><span class="o">:</span> <span class="nt">32px</span> <span class="o">!</span><span class="nt">important</span>
+      <span class="nt">width</span><span class="o">:</span> <span class="nt">100</span><span class="o">%</span>
+</code></pre>
+
+<h2>Implementing autocomplete</h2>
+
+<p>We will provide simple autocomplete to one of the text fields. We want to search all users by their name, email or github account. To achieve this, we will use Bloodhound, the typeahead suggestion engine. Let&#39;s start with creating new file users.js.coffee:</p>
+<pre class="highlight coffeescript"><code> <span class="o">-&gt;</span>
+  <span class="nx">initialize_users_typeahead</span> <span class="o">=</span> <span class="o">-&gt;</span>
+    <span class="nx">users_typeahead</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bloodhound</span><span class="p">(</span>
+      <span class="na">datumTokenizer</span><span class="o">:</span> <span class="nx">Bloodhound</span><span class="p">.</span><span class="na">tokenizers</span><span class="p">.</span><span class="na">obj</span><span class="p">.</span><span class="na">whitespace</span><span class="p">(</span>
+        <span class="s">"name"</span><span class="p">,</span> <span class="s">"email"</span><span class="p">,</span> <span class="s">"github_username"</span>
+      <span class="p">),</span>
+      <span class="na">queryTokenizer</span><span class="o">:</span> <span class="nx">Bloodhound</span><span class="p">.</span><span class="na">tokenizers</span><span class="p">.</span><span class="na">whitespace</span><span class="p">,</span>
+      <span class="na">prefetch</span><span class="o">:</span> <span class="s">"/users/autocomplete"</span>
+    <span class="p">)</span>
+
+    <span class="nx">users_typeahead</span><span class="p">.</span><span class="na">initialize</span><span class="p">()</span>
+</code></pre>
+
+<ul>
+<li>datumTokenizer basically tells us what fields we want to search by. So here we specify that we want to search by name, email and github_username from our autocomplete data. We will provide the data later.</li>
+<li>Prefetch fetches data and processes it on initialization, so it hits a given route only once and populates the needed data. It&#39;s then cached in local storage. For more complicated cases, you could also use the remote option instead of prefetch.</li>
+</ul>
+
+<p>Now we need to initialize autocomplete on our text field, so let&#39;s say we will give it a <code>js-user-autocomplete</code> class and use it in our coffescript file as follows:</p>
+<pre class="highlight coffeescript"><code><span class="nx">$</span><span class="p">(</span><span class="s">".js-user-autocomplete"</span><span class="p">).</span><span class="na">typeahead</span> <span class="no">null</span><span class="p">,</span>
+  <span class="na">displayKey</span><span class="o">:</span> <span class="s">"email"</span>
+  <span class="na">source</span><span class="o">:</span> <span class="nx">users_typeahead</span><span class="p">.</span><span class="na">ttAdapter</span><span class="p">()</span>
+</code></pre>
+
+<ul>
+<li>displayKey is just a value we want to display in our text field after selecting one of the options.</li>
+</ul>
+
+<p>The last things to do is to create a new route for the prefetch option:</p>
+<pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"users/autocomplete"</span> <span class="o">=&gt;</span> <span class="s2">"users#autocomplete"</span>
+</code></pre>
+
+<p>and action in controller where we provide data:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">autocomplete</span>
+  <span class="n">users</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">all</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
+    <span class="p">{</span>
+      <span class="ss">name: </span><span class="n">user</span><span class="p">.</span><span class="nf">name</span><span class="p">,</span>
+      <span class="ss">email: </span><span class="n">user</span><span class="p">.</span><span class="nf">email</span><span class="p">,</span>
+      <span class="ss">github_username: </span><span class="n">user</span><span class="p">.</span><span class="nf">github_username</span>
+    <span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="n">render</span> <span class="ss">json: </span><span class="n">users</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Let&#39;s say we got 3 users in our database, shall we see how it works:</p>
+
+<p><img src="/2016/01/25/autocomplete-with-typeahead/first-c045ef46d8.gif" alt="first" /></p>
+
+<p>Cool, it works! But wait a minute, why do we see that test@test.org user when we type &quot;dawid&quot;? The answer is simple, we are searching not only by email but also by user name and github username. It&#39;s a little bit misleading right now.</p>
+
+<p>What can we do to improve user experience?</p>
+
+<h2>Adding custom handlebars.js template</h2>
+
+<p>Typeahead gives us full control over how suggestions are rendered. If we want to customize the look, we can provide a html template. For more complicated cases, we can use handlebars.js templates which will be rendered in place of suggestions. Firstly, add <a href="https://github.com/leshill/handlebars_assets">the gem</a> needed and run bundle install:</p>
+<pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'handlebars_assets'</span>
+</code></pre>
+
+<p>Then add it to the application.js file:</p>
+<pre class="highlight javascript"><code><span class="c1">//= require handlebars</span>
+</code></pre>
+
+<p>We want to display all the user&#39;s information we search by, but only if it&#39;s available (some users may not provide their name or don&#39;t connect their github account). The whole thing is very easy to achieve, we just need to add a templates option when initializing autocomplete, so our final version of users.js.coffee looks like this (notice templates option):</p>
+<pre class="highlight coffeescript"><code><span class="nx">$</span> <span class="o">-&gt;</span>
+  <span class="nx">initialize_users_typeahead</span> <span class="o">=</span> <span class="o">-&gt;</span>
+    <span class="nx">users_typeahead</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bloodhound</span><span class="p">(</span>
+      <span class="na">datumTokenizer</span><span class="o">:</span> <span class="nx">Bloodhound</span><span class="p">.</span><span class="na">tokenizers</span><span class="p">.</span><span class="na">obj</span><span class="p">.</span><span class="na">whitespace</span><span class="p">(</span>
+        <span class="s">"name"</span><span class="p">,</span> <span class="s">"email"</span><span class="p">,</span> <span class="s">"github_username"</span>
+      <span class="p">),</span>
+      <span class="na">queryTokenizer</span><span class="o">:</span> <span class="nx">Bloodhound</span><span class="p">.</span><span class="na">tokenizers</span><span class="p">.</span><span class="na">whitespace</span><span class="p">,</span>
+      <span class="na">prefetch</span><span class="o">:</span> <span class="s">"/users/autocomplete"</span>
+    <span class="p">)</span>
+
+    <span class="nx">users_typeahead</span><span class="p">.</span><span class="na">initialize</span><span class="p">()</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="s">".js-user-autocomplete"</span><span class="p">).</span><span class="na">typeahead</span> <span class="no">null</span><span class="p">,</span>
+      <span class="na">displayKey</span><span class="o">:</span> <span class="s">"email"</span>
+      <span class="na">source</span><span class="o">:</span> <span class="nx">users_typeahead</span><span class="p">.</span><span class="na">ttAdapter</span><span class="p">()</span>
+      <span class="na">templates</span><span class="o">:</span>
+        <span class="na">suggestion</span><span class="o">:</span> <span class="nx">Handlebars</span><span class="p">.</span><span class="na">compile</span><span class="p">(</span><span class="s">"
+          &lt;div&gt;
+            {{#if name}}
+              Name: &lt;strong&gt;{{name}}&lt;/strong&gt;
+            {{/if}}
+            {{#if email}}
+              Email: &lt;strong&gt;{{email}}&lt;/strong&gt;
+            {{/if}}
+            {{#if github_username}}
+              Github username: &lt;strong&gt;{{github_username}}&lt;/strong&gt;
+            {{/if}}
+          &lt;/div&gt;
+        "</span><span class="p">)</span>
+
+  <span class="nx">initialize_users_typeahead</span><span class="p">()</span>
+</code></pre>
+
+<p>Does it work as expected? Hell yeah!</p>
+
+<p><img src="/2016/01/25/autocomplete-with-typeahead/second-c0903b6bbf.gif" alt="second" /></p>
+
+<p>Now we can see why the &quot;test@test.org&quot; user was visible earlier - his name is Dawid Doe and we don&#39;t see any name or github username if it isn&#39;t available.</p>
+
+<h2>Wrapping Up</h2>
+
+<p>The whole autocomplete thing using typeahead may seem a little bit complicated at first glance, but all in all, there are just some concepts that have to be understood and adjusted to the current feature. We need to figure out how Bloodhound works, maybe integrate it with handlebars.js, but future implementations in other projects will be really easy and differentiated only with search logic and suggestion template. The concepts stay the same.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

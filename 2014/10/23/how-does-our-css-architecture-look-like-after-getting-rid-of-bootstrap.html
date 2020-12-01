@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>How does our CSS architecture look like after getting rid of Bootstrap - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2014/10/23/how-does-our-css-architecture-look-like-after-getting-rid-of-bootstrap.html" property="og:url" /><meta content="How does our CSS architecture look like after getting rid of Bootstrap" property="og:title" /><meta content="In summer, several well-known companies such as GitHub, CodePen or Buffer have published blog posts about how the CSS architecture is designed in their applications.
+
+Due to the fact that in September we finished transferring Shelly Cloud from Twitter Bootstrap (from version 2.3.2) to the styles developed by us and based on the Inuit framework, I wanted to share the experience that we've gained doing this." property="og:description" /><meta content="Bartłomiej Kozal" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@_bkzl" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"How does our CSS architecture look like after getting rid of Bootstrap","url":"https://blog.ragnarson.com/2014/10/23/how-does-our-css-architecture-look-like-after-getting-rid-of-bootstrap.html","author":{"@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2014-10-23","dateModified":"2014-10-23"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="11ec30dedeb7889af512461ba7ce6a45" /><div class="article-meta">October 23, 2014 - <a href="/authors/bartlomiej-kozal.html">Bartłomiej Kozal</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2014/10/23/how-does-our-css-architecture-look-like-after-getting-rid-of-bootstrap.html">How does our CSS architecture look like after getting rid of Bootstrap</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>In summer, several well-known companies such as <a href="http://markdotto.com/2014/07/23/githubs-css/">GitHub</a>, <a href="http://codepen.io/chriscoyier/blog/codepens-css">CodePen</a> or <a href="http://blog.brianlovin.com/buffers-css/">Buffer</a> have published blog posts about how the CSS architecture is designed in their applications.</p>
+
+<p>Due to the fact that in September we finished transferring Shelly Cloud from Twitter Bootstrap (from version 2.3.2) to the styles developed by us and based on the Inuit framework, I wanted to share the experience that we&#39;ve gained doing this. </p>
+
+<p><em>If you haven&#39;t heard of the Inuit framework before, please check <a href="https://shellycloud.com/blog/2013/11/when-inuitcss-is-a-better-choice-than-bootstrap">my previous blog post</a> where I described it.</em></p>
+
+<h2>Why we dropped Bootstrap</h2>
+
+<p>From the very beginning, when we started creating Shelly Cloud, for CSS we used one of the first publicly available versions of Bootstrap. Bootstrap was very limited at that time, especially looking through the prism of what it offers now. Moreover, we wrote a lot of CSS by ourselves and what&#39;s worse, actually none of us ever really took writing styles seriously. It affected us later during the development. We were able to regularly update Bootstrap to the last second release - 2.3.2, but the strong connection between the framework and our CSS made upgrade to 3.0 too time-consuming and complicated.</p>
+
+<p>We did not touch our CSS too much until the discovery of the Inuit framework. Inuit in no way dictates the design of the application. It suggests a structure and offers a low-level CSS modules that can easily be attached to your own code. We decided to replace Bootstrap with Inuit in small steps.</p>
+
+<p>It wasn&#39;t nearly as difficult as you might think. We started with transferring all the current assets to a gem. A good idea is to configure Bundler to use the gem from the local machine. It&#39;s very convenient when we often edit the library which is directly linked with the application. You can do that like here:</p>
+<pre class="highlight ruby"><code><span class="c1"># Gemfile</span>
+<span class="n">gem</span> <span class="s1">'shelly-ui'</span><span class="p">,</span> <span class="ss">github: </span><span class="s1">'shellycloud/shelly-ui'</span><span class="p">,</span> <span class="ss">branch: </span><span class="s1">'master'</span>
+</code></pre>
+<pre class="highlight shell"><code><span class="c"># In your terminal</span>
+<span class="gp">$ </span>bundle config local.shelly-ui ~/code/shellycloud/shelly-ui
+</code></pre>
+
+<p>From the other things, we had a separate layout that used only new styles, and an additional flag in the controllers which we changed when view was prepared for the new version. An important thing that&#39;s worth mentioning is that when a page was ready, we immediately deploy it to the production environment. It was evident that it differed slightly from the rest, but in the long-term we&#39;ve avoided two things - maintaining two versions of CSS simultaneously and merging a huge branch at the end of the update. In addition, the order which we have followed when rebuilding views was not accidental. We started from the simplest static pages, then we replace the more complex ones, e.g. pricing, and we finished with the panel that&#39;s available to users upon logging in.</p>
+
+<h2>Current CSS architecture</h2>
+
+<p>Before I start to write about CSS, I would like to add that for HTML templates we are using Slim, whose syntax is for us much more convenient and clearer than erb or HAML. We also adopted two conventions:</p>
+
+<p>To write divs in the following way:</p>
+<pre class="highlight slim"><code><span class="p">-</span><span class="c1"># good</span>
+<span class="nt">div</span><span class="w"> </span><span class="na">class</span><span class="p">=</span><span class="s">"box"</span>
+  <span class="p">|</span> ...
+
+<span class="p">-</span><span class="c1"># bad</span>
+<span class="nc">.box</span>
+  <span class="p">|</span> ...
+</code></pre>
+
+<p>To use interpolation when text was mixed with other HTML elements:</p>
+<pre class="highlight slim"><code><span class="p">-</span><span class="c1"># good</span>
+<span class="nt">p</span>
+  <span class="p">|</span> Lorem <span class="nt">&lt;strong&gt;</span>ipsum<span class="nt">&lt;/strong&gt;</span> <span class="si">#{</span><span class="n">link_to</span> <span class="s1">'dolor sit'</span><span class="p">,</span> <span class="s1">'#'</span><span class="si">}</span> amet
+
+<span class="p">-</span><span class="c1"># bad</span>
+<span class="nt">p</span>
+  <span class="p">'</span> Lorem
+  <span class="nt">strong</span><span class="w"> </span><span class="na">ipsum</span><span class="w">
+  </span><span class="p">=</span><span class="w"> </span><span class="n">link_to</span><span class="w"> </span>'dolor<span class="w"> </span>sit',<span class="w"> </span>'#'
+  <span class="p">|</span>  amet
+</code></pre>
+
+<p>As a CSS preprocessor we use SASS in conjunction with <a href="https://github.com/ai/autoprefixer-rails">Autoprefixer</a> gem. I cannot imagine not using a preprocessor. The ability to define things such as variables, functions or mixins drastically simplifies writing and maintaining code. Moreover, thanks to the autoprefixer, we don&#39;t have to worry about vendor prefixes in CSS rules.</p>
+
+<p>To manage external libraries we use a free <a href="https://rails-assets.org">Rails Assets</a> service. This gives us access to the entire <a href="http://bower.io/search/">Bower Directory</a>, actually without any additional settings. We can simply write all the necessary libraries like Inuit, Angular or <a href="http://sugarjs.com">sugar.js</a> right in the Gemfile.</p>
+
+<p>For the class names we use <a href="http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/">a simplified version of the BEM methodology</a>, trying to use no more than <a href="http://bensmithett.com/bem-modifiers-multiple-classes-vs-extend/">one/two modifiers per element</a>.</p>
+
+<p>If we need to refer to an element in JavaScript, we always add an additional class with <code>js-</code> prefix, so that we avoid the problem of something suddenly stopping to work after removing a class:</p>
+<pre class="highlight slim"><code><span class="p">-</span><span class="c1"># good</span>
+<span class="nt">div</span><span class="w"> </span><span class="na">class</span><span class="p">=</span><span class="s">"flash js-flash"</span>
+  <span class="p">|</span> ...
+<span class="nd">coffee:
+</span>  <span class="nx">$</span><span class="p">(</span><span class="s">'.js-flash'</span><span class="p">)</span>
+
+<span class="p">-</span><span class="c1"># bad</span>
+<span class="nt">div</span><span class="w"> </span><span class="na">class</span><span class="p">=</span><span class="s">"flash"</span>
+  <span class="p">|</span> ...
+<span class="nd">coffee:
+</span>  <span class="nx">$</span><span class="p">(</span><span class="s">'.flash'</span><span class="p">)</span>
+</code></pre>
+
+<p>We don&#39;t use IDs in HTML at all, the only exception being anchors in the table of contents of the articles.</p>
+
+<p>Our directory structure is similar to that proposed by Inuit:</p>
+<pre class="highlight plaintext"><code>generic/
+  _normalize.sass
+  _functions.sass
+  ...
+base/
+  _form.sass
+  _table.sass
+  ...
+objects/
+  _box.sass
+  _navbar.sass
+  ...
+inbox/
+  _shame.sass
+  _new-landing.sass
+  ...
+_settings.sass
+application.css.sass
+</code></pre>
+
+<p>In <code>generic</code> we keep the lowest level styles such as definitions of our own functions, mixins or animations.</p>
+
+<p>The <code>base</code> contains CSS related to HTML elements, e.g. global settings for tables, lists and forms.</p>
+
+<p>The components defined by us, e.g. navbar, flash or box, we keep in <code>objects</code>.</p>
+
+<p>The last directory, <code>inbox</code>, has a special function to store the code that we know needs refactoring or is written by people who haven&#39;t dealt with front-end development before.</p>
+
+<p>We have defined all font sizes, margins and colors as variables in <code>_settings.sass</code>. We never use absolute values in the code.</p>
+
+<p>If we have a situation that, e.g., a color exists only in one particular case, we use the <code>lighten()</code> and <code>darken()</code>:</p>
+<pre class="highlight sass"><code><span class="c1">// good
+</span><span class="nc">.flash--success</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nv">$color-positive</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="nf">lighten</span><span class="p">(</span><span class="nv">$color-positive</span><span class="o">,</span> <span class="m">30%</span><span class="p">)</span>
+
+<span class="c1">// bad
+</span><span class="nc">.flash--success</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="mh">#5cb85c</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="mh">#346a34</span>
+</code></pre>
+
+<p>For paddings and margins, we have prepared functions such as <code>quarter()</code> or <code>double()</code> that return a multiple of the specified variable:</p>
+<pre class="highlight sass"><code><span class="c1">// good
+</span><span class="nc">.box--narrow</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="nf">halve</span><span class="p">(</span><span class="nv">$base-spacing-unit</span><span class="p">)</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span> <span class="nv">$base-spacing-unit</span>
+
+<span class="c1">// bad
+</span><span class="nc">.box--narrow</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">16px</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">32px</span>
+</code></pre>
+
+<p>We use <code>box-sizing</code> <a href="http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/">set globally to <code>border-box</code></a>.</p>
+
+<p>As for the font sizes, we define them using <code>px</code>. We also keep them as variables, and to calculate the line height we use <a href="https://github.com/csswizardry/inuit.css/blob/master/generic/_mixins.scss#L13-L19">an appropriate Inuit&#39;s mixin</a>.</p>
+
+<p>To generate icons we use <a href="http://fontello.com">Fontello</a>.</p>
+
+<h2>Plans for the future</h2>
+
+<p>At this point, a certain disadvantage is that our website is not responsive. While this is not a problem when using our key service, because it mainly takes place in the shell, but, e.g., reading the blog is getting onerous. We want to improve it, but we are also going to implement responsiveness in stages.</p>
+
+<p>Another thing we are missing is a style guide available to all developers, which would definitely facilitate daily work and testing changes.</p>
+
+<p>The last thing we want to do is updating the Inuit modules we use to <a href="https://github.com/inuitcss">the latest pre-alpha version</a>.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

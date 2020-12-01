@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Bitcoin multi-sig transaction part 1 - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2017/06/06/bitcoin-multi-sig-transaction-part-1.html" property="og:url" /><meta content="Bitcoin multi-sig transaction part 1" property="og:title" /><meta content="Welcome again. In this episode, we will code a bitcoin multi-sig transaction based on the bitcore library.
+
+A multi-sig transaction means that an output has to be signed by more than one private key. This kind of transactions has a lot of practical use cases. Let’s say we have a company founded by three people. They decided that any outcome has to be confirmed by at least two of them. They create a special bitcoin address where companies bitcoins are stored. The address will require at least two signatures to make any outgoing transaction valid." property="og:description" /><meta content="Piotr Misiurek" name="author" /><meta content="https://blog.ragnarson.com/2017/06/06/bitcoin-multi-sig-transaction-part-1/cover-c0c9233863.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Piotr Misiurek","image":"https://www.gravatar.com/avatar/5122e54437a4b89911623dfbe9a2f3c4.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Bitcoin multi-sig transaction part 1","url":"https://blog.ragnarson.com/2017/06/06/bitcoin-multi-sig-transaction-part-1.html","author":{"@type":"Person","name":"Piotr Misiurek","image":"https://www.gravatar.com/avatar/5122e54437a4b89911623dfbe9a2f3c4.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2017-06-06","dateModified":"2017-06-06","image":"https://blog.ragnarson.com/2017/06/06/bitcoin-multi-sig-transaction-part-1/cover-c0c9233863.png"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/5122e54437a4b89911623dfbe9a2f3c4.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="5122e54437a4b89911623dfbe9a2f3c4" /><div class="article-meta">June  6, 2017 - <a href="/authors/piotr-misiurek.html">Piotr Misiurek</a>  in <a href="/categories/development.html">development</a>, <a href="/categories/blockchain.html">blockchain</a></div><h1 class="article-title"><a href="/2017/06/06/bitcoin-multi-sig-transaction-part-1.html">Bitcoin multi-sig transaction part 1</a></h1></header><img src='/2017/06/06/bitcoin-multi-sig-transaction-part-1/cover-c0c9233863.png'/><p>Welcome again. In this episode, we will code a bitcoin multi-sig transaction based on the bitcore library.</p>
+
+<p>A multi-sig transaction means that an output has to be signed by more than one private key. This kind of transactions has a lot of practical use cases. Let’s say we have a company founded by three people. They decided that any outcome has to be confirmed by at least two of them. They create a special bitcoin address where companies bitcoins are stored. The address will require at least two signatures to make any outgoing transaction valid.</p>
+
+<p></p>
+
+<p>Let&#39;s start with creating this address. We will need public keys of our co-founders. To create them we need to firstly create a private key for each of them. So let&#39;s generate three private and public keys:</p>
+<pre class="highlight plaintext"><code>var bitcore = require("bitcore-lib");
+
+var privateKeys = [];
+var publicKeys = [];
+
+for (var i = 0; i &lt; 3; i++) {
+  privateKeys[i] = new bitcore.PrivateKey;
+  publicKeys[i] = bitcore.PublicKey(privateKeys[i]);
+  console.log("Private " + i + ": " + privateKeys[i].toWIF());
+  console.log("Public " + i + ": " + publicKeys[i]);
+}
+</code></pre>
+
+<p>Print an output and save it aside. We will need those addresses in next scripts.</p>
+
+<p>When we have public keys creating the multi-sig address is easy as that:</p>
+<pre class="highlight plaintext"><code>var address = new bitcore.Address(publicKeys, 2, bitcore.Networks.testnet);
+
+console.log(address);
+</code></pre>
+
+<p>Save this address like you did with your private and public keys. You will need them in the next script.</p>
+
+<p>We created the new <code>bitcore.Address</code> by passing following attributes:</p>
+
+<ul>
+<li>array of public keys</li>
+<li>a number of signatures required to make a transaction valid. In our case, it is 2 of 3 (we have three public keys)</li>
+<li>we want to create a <code>testnet</code> address. Change to <code>bitcore.Networks.livenet</code> if you want to use it for real bitcoins transactions</li>
+</ul>
+
+<p>The address is ready but empty. We need to transfer to it some test bitcoins. To do this, we just have to make a standard transaction. Like the one we did in the previous post: <a href="https://blog.ragnarson.com/2017/04/06/code-your-own-bitcoin-transaction.html">Code your own bitcoin transaction</a> !</p>
+
+<p>When we have some test bitcoins at our address we can try to pay with them. You can try to use the code from the regular transaction and sign it with one of the private keys. It won’t work. It will let you know that some inputs are not signed. It is because the transaction has to be signed by at least two private keys.</p>
+
+<p>Let&#39;s code it from the scratch.</p>
+
+<p>In the first step, we will import all three public keys and two of private keys as well as our multi-sig address:</p>
+<pre class="highlight plaintext"><code>var bitcore = require("bitcore-lib");
+
+var privateKeys = [
+  bitcore.PrivateKey.fromWIF("Kyu2q39avSmjuJbFp9mfh5mh8ZPYpyDxfZvRLSrcosdBiX6xWbG1"),
+  bitcore.PrivateKey.fromWIF("KwJ5KYx4fDCNEHG4jmmoQUveGkSxEJ4CqeEpTTDNgP5hmQLt41Ex")
+];
+
+var publicKeys = [
+  "02284cc8b2717d564d79cae638679ca1afd4a0f84fdc3ddb5fa1fe4698423d836b",
+  "03a98271626ff1bdff6dd18393b565e8675124ab43eab24efb6af352a06b56f91a",
+  "02d9e82923328f3dc434b8ff796c720321ce4e4874f248a2a8c38c1878717ca9f8"
+];
+
+var sourceAddress = "2NCv16HwcaTy2NV3XRSSfUEqmubhYesZfPm";
+</code></pre>
+
+<p>As a <code>targetAddress</code> we will use a new one:</p>
+<pre class="highlight plaintext"><code>var targetAddress = (new bitcore.PrivateKey).toAddress(bitcore.Networks.testnet);
+</code></pre>
+
+<p>Now, we have to ask  bitcoin blockchain about <code>UTXOs</code> for our multi-sig address.
+As we don&#39;t have a bitcoin full-node we will use <code>Insight</code> library to read the blockchain for us and broadcast our transactions to the network.</p>
+<pre class="highlight plaintext"><code>var Insight = require("bitcore-explorers").Insight;
+var insight = new Insight("testnet");
+
+insight.getUnspentUtxos(sourceAddress, function(error, utxos){
+  if (error) {
+    console.log(error);
+  } else {
+    // we will create our transaction here
+  }
+</code></pre>
+
+<p>When we know the <code>UTXOs</code> we can create a transaction.</p>
+<pre class="highlight plaintext"><code>var tx = new bitcore.Transaction();
+</code></pre>
+
+<p>The object for the transaction was created.</p>
+<pre class="highlight plaintext"><code>tx.from(utxos, publicKeys, 2);
+</code></pre>
+
+<p>Bitcoins we want to spend are included in <code>UTXOs</code> we have just received. Because they belong to the multi-sign address we also have to pass an array of all public keys that were used to create the <code>address</code>. In the last argument, we will require signatures of two of private keys.</p>
+<pre class="highlight plaintext"><code>tx.to(targetAddress, 48792);
+</code></pre>
+
+<p>We set up the receiver and the amount we want to transfer.</p>
+<pre class="highlight plaintext"><code>tx.change(sourceAddress);
+</code></pre>
+
+<p>The change should go back to us.</p>
+
+<p>It is time to sign the transaction with two private keys:</p>
+<pre class="highlight plaintext"><code>tx.sign(privateKeys[0]); // first signature
+tx.sign(privateKeys[1]); // second signature
+</code></pre>
+
+<p>The transaction is signed. It can be broadcasted to network:</p>
+<pre class="highlight plaintext"><code>insight.broadcast(tx, function(error, transactionId) {
+  if (error) {
+    console.log(error)
+  } else {
+    console.log(transactionId);
+  }
+});
+</code></pre>
+
+<p>As a result, you will receive the transaction id. You can copy &amp; paste it to any testnet blockchain explorer to confirm that it works.</p>
+
+<p>Yes, it works but our implementation is still far from being a reality. We used <code>Transaction#sign</code> where owners of both private keys use the same computer to sign the transaction. In real live, they will use different machines and they will need to somehow export/import transaction signatures. We will take care of it in the next blog post. See ya!</p>
+
+<p>You are welcome to leave a tip if you like the content:</p>
+
+<ul>
+<li>BTC: 14DgncjAnqM3Wd2pYyoJTXckSXuVv43cNx</li>
+<li>ETH: 0x3e6bE376ef37D96bd3E7F792098c90B87B84B042</li>
+</ul>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

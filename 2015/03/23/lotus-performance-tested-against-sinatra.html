@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Lotus performance tested against Sinatra - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/03/23/lotus-performance-tested-against-sinatra.html" property="og:url" /><meta content="Lotus performance tested against Sinatra" property="og:title" /><meta content="Some time ago I heard about Lotus. A fresh Ruby framework for building web applications. It is created from stand-alone parts which are shipped as separated gems. This means that I am able to pick only the essential components for my project. The source code can be found on github." property="og:description" /><meta content="Maciej Małecki" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@smefju" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Maciej Małecki","image":"https://www.gravatar.com/avatar/6b844a73471cf2b060cb54d0b2f16161.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Lotus performance tested against Sinatra","url":"https://blog.ragnarson.com/2015/03/23/lotus-performance-tested-against-sinatra.html","author":{"@type":"Person","name":"Maciej Małecki","image":"https://www.gravatar.com/avatar/6b844a73471cf2b060cb54d0b2f16161.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-03-23","dateModified":"2015-03-23"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/6b844a73471cf2b060cb54d0b2f16161.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="6b844a73471cf2b060cb54d0b2f16161" /><div class="article-meta">March 23, 2015 - <a href="/authors/maciej-malecki.html">Maciej Małecki</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2015/03/23/lotus-performance-tested-against-sinatra.html">Lotus performance tested against Sinatra</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>Some time ago I heard about <a href="http://lotusrb.org">Lotus</a>. A fresh Ruby framework for building web applications. It is created from stand-alone parts which are shipped as separated gems. This means that I am able to pick only the essential components for my project. The source code can be found on <a href="https://github.com/lotus/lotus">github</a>. </p>
+
+<p>After a while, I began thinking about its performance. Finally, I decided to make a simple benchmark to check the following scenarios:</p>
+
+<ol>
+<li>render a simple view using Slim and some helpers</li>
+<li>render a view with the latest <em>Posts</em> from PostgreSQL database</li>
+<li>create a new <em>Post</em> from request <em>params</em></li>
+</ol>
+
+<p>Initially, I considered Rails as an opponent, but this would be an unfair competition. Rails is a mature framework with a lot of built-in staff and Lotus does not have all these facilities. It was obvious that Rails would be significantly slower, so I decided to use <a href="http://www.sinatrarb.com">Sinatra</a>.</p>
+
+<h2>Background</h2>
+
+<p>For stress tests, I used <a href="https://github.com/wg/wrk">wrk</a> tool with a basic lua script for performing a fake <a href="https://gist.github.com/smt116/acaf11f50eb46428b4f3">POST request with params</a>.</p>
+
+<p>In both cases, Sinatra and Lotus, I used <a href="https://github.com/jeremyevans/sequel">Sequel</a> as a database adapter, PostgreSQL as a database, <a href="http://slim-lang.com">Slim</a> as a template engine and <a href="http://puma.io">Puma</a> as an application web server. Source code can be found on github for both <a href="https://github.com/smt116/lotus-sample-application/tree/blog-post/lotus-performance-tested-against-sinatra">Lotus</a> and <a href="https://github.com/smt116/sinatra-sample-application/tree/blog-post/lotus-performance-tested-against-sinatra">Sinatra</a>.</p>
+
+<p>Puma was configured to use four threads in production environment:</p>
+<pre class="highlight shell"><code> <span class="nv">$ RACK_ENV</span><span class="o">=</span>production puma <span class="se">\</span>
+    --threads 4:4 <span class="se">\</span>
+    --port 2500 <span class="se">\</span>
+    --preload <span class="se">\</span>
+    --quiet
+</code></pre>
+
+<p>All tests were performed using the following command:</p>
+<pre class="highlight shell"><code>wrk --connections 4 <span class="se">\</span>
+  --duration 30 <span class="se">\</span>
+  --threads 4 <span class="se">\</span>
+  http://localhost:2500/
+</code></pre>
+
+<p>with the optional <code>--script post.lua</code> argument for the last test. As you can see, <code>wrk</code> tries to keep 4 connections running for 30 seconds. The output will contain a number of handled requests with some additional statistics.</p>
+
+<p>The database was cleared and seeded with the sample data (1000 <em>Posts</em>) before each test to avoid dummy queries:</p>
+<pre class="highlight shell"><code> <span class="nv">$ </span>rake db:clean <span class="o">&amp;&amp;</span> rake db:seed
+</code></pre>
+
+<p>I ran code on the newest Ruby MRI 2.2.1, PostgreSQL 9.4.1 and the most recent versions of all used gems at the time.</p>
+
+<h2>Test 1: Rendering a simple slim view using helpers</h2>
+
+<p>The first test was about rendering a view using:</p>
+
+<ol>
+<li><a href="http://getbootstrap.com">bootstrap</a> linked from the CDN for CSS stylesheets</li>
+<li>gif from <code>public</code> directory</li>
+<li>helpers for current date and time</li>
+</ol>
+
+<p>Sinatra was able to handle around 42k requests in 30 seconds while Lotus took twice as many. This means that Lotus was able to process <strong>2.8k</strong> requests per second, while Sinatra processed &quot;only&quot; <strong>1.4k</strong>.</p>
+
+<h2>Test 2: Rendering a view with the latest Posts from the database</h2>
+
+<p>The second test was about selecting the latest 15 <em>Posts</em> from the database, then rendering the view with the <code>title</code>, <code>body</code> and <code>created_at</code> fields for each <em>Post</em>.</p>
+
+<p>The difference between Lotus and Sinatra was much lower than in the first test. Lotus served around <strong>401</strong> requests per second while Sinatra managed &quot;only&quot; <strong>313</strong>.</p>
+
+<h2>Test 3: Creating a new Post from request params</h2>
+
+<p>The last test was about creating a new <em>Post</em> from given params (<code>title</code> and <code>body</code>), and redirecting to the <code>/</code> page.</p>
+
+<p>In this case, Sinatra handled <strong>589</strong> requests per second and Lotus, again, was two times faster with a result of <strong>1.1k</strong> requests per second.</p>
+
+<h2>&quot;Benchmarks do not make sense...&quot;</h2>
+
+<p>You may say that these kind of benchmarks do not make any sense because it is a bit like comparing an orange with an apple, but in my personal opinion, every benchmark says something about tools. It can also lead to some unexpected results. For example, I discovered that Lotus has some <a href="https://github.com/lotus/lotus/issues/185">problems with rendering partials</a>, and with iterating over an array of objects from the database, which results in poor performance. I think that it could be even faster after further investigation of these issues.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

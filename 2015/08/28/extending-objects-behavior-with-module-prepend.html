@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Extending Objects' Behavior With Module#prepend - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/08/28/extending-objects-behavior-with-module-prepend.html" property="og:url" /><meta content="Extending Objects' Behavior With Module#prepend" property="og:title" /><meta content="Ruby 2.0 came with some pretty useful features like lazy enumerators, keyword arguments, convention for converting to hash. There is also Module#prepend, which is not that commonly used, but there are some cases  where it really shines. Let's see what we can get from that feature then" property="og:description" /><meta content="Karol Galanciak" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@azdaroth" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Karol Galanciak","image":"https://www.gravatar.com/avatar/40716cc1589577b8eb672d97953c264f.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Extending Objects' Behavior With Module#prepend","url":"https://blog.ragnarson.com/2015/08/28/extending-objects-behavior-with-module-prepend.html","author":{"@type":"Person","name":"Karol Galanciak","image":"https://www.gravatar.com/avatar/40716cc1589577b8eb672d97953c264f.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-08-28","dateModified":"2015-08-28"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/40716cc1589577b8eb672d97953c264f.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="40716cc1589577b8eb672d97953c264f" /><div class="article-meta">August 28, 2015 - <a href="/authors/karol-galanciak.html">Karol Galanciak</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2015/08/28/extending-objects-behavior-with-module-prepend.html">Extending Objects' Behavior With Module#prepend</a></h1></header><p>Ruby 2.0 came with some pretty useful features like lazy enumerators, keyword arguments, convention for converting to hash. There is also <code>Module#prepend</code>, which is not that commonly used, but there are some cases  where it really shines. Let&#39;s see what we can get from that feature then.</p>
+
+<h2>What is Module#prepend?</h2>
+
+<p><code>Module#prepend</code> alters the ancestors hierarchy in a way that the prepended module has the highest precedence. In other words, the method from prepended module is executed before the method you are directly calling. Consider the example below:</p>
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">A</span>
+  <span class="k">def</span> <span class="nf">print_stuff</span>
+    <span class="nb">puts</span> <span class="s2">"I'm from module"</span>
+    <span class="k">super</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">B</span>
+  <span class="n">prepend</span> <span class="no">A</span>
+  <span class="k">def</span> <span class="nf">print_stuff</span>
+    <span class="nb">puts</span> <span class="s2">"I'm from class"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">B</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">print_stuff</span>
+<span class="c1"># =&gt; I'm from module</span>
+<span class="c1"># =&gt; I'm from class</span>
+</code></pre>
+
+<p>As you can see, the method from module was executed as the first one. So how useful can it prove to be in real world?</p>
+
+<h2>Unobtrusive core logic extensions</h2>
+
+<p>Imagine you have some service objects in your Rails application implementing the same interface, e.g. they all have process method accepting params argument:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">MyServiceObject</span>
+  <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="c1"># perform some logic here</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>And now you want to add some instrumentation (e.g. <a href="http://edgeguides.rubyonrails.org/active_support_instrumentation.html">with ActiveSupport</a>) to your services layer to extract later some info about potential performance issues. Not really a problem, you can simply wrap you logic with one block:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">MyServiceObject</span>
+  <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="p">.</span><span class="nf">instrument</span> <span class="s2">"MyServiceObject.process"</span> <span class="k">do</span>
+      <span class="c1"># do your custom stuff here</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>But adding it to every method call might be cumbersome. Thanks to <code>Module#prepend</code>, we can make it pretty painless. Let&#39;s create Instrumentable module for that purpose:</p>
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">Instrumentable</span>
+  <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Notifications</span><span class="p">.</span><span class="nf">instrument</span> <span class="s2">"</span><span class="si">#{</span><span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">name</span><span class="si">}</span><span class="s2">.process"</span> <span class="k">do</span>
+       <span class="k">super</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>And you can refactor your service objects now:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">MyServiceObject</span>
+  <span class="n">prepend</span> <span class="no">Instrumentable</span>
+
+  <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="c1"># perform logic</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Nice! As the instrumentation is not really a core part of your business logic, you can create some kind of initializer where you would prepend Instrumentable to all classes being service objects. As a bonus, you won&#39;t need to remember about prepending module in new classes. Here&#39;s a quick idea how you may want to implement such initializer:</p>
+<pre class="highlight ruby"><code><span class="no">Dir</span><span class="p">[</span><span class="s2">"app/services/**/*.rb"</span><span class="p">].</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">service_object_file</span><span class="o">|</span>
+    <span class="n">service_object_file</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">"app/services/"</span><span class="p">,</span> <span class="s2">""</span><span class="p">).</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">".rb"</span><span class="p">,</span> <span class="s2">""</span><span class="p">).</span>
+      <span class="nf">split</span><span class="p">(</span><span class="s2">"/"</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:camelize</span><span class="p">).</span><span class="nf">join</span><span class="p">(</span><span class="s2">"::"</span><span class="p">).</span><span class="nf">constantize</span><span class="p">.</span><span class="nf">prepend</span><span class="p">(</span><span class="no">Instrumentable</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+
+<p>What&#39;s happening here? We take all files from <code>app/services</code> directory (recursively from all subdirectories) and get the classes constants from the files&#39; names respecting the namespace. And that&#39;s it! You don&#39;t need to remember about prepending Instrumentable module any more.</p>
+
+<h2>Notable examples in the wild</h2>
+
+<p><code>Module#prepend</code> is a pretty new feature, so it&#39;s not that commonly used. However, there are some nice examples in the wild showing how useful it is.</p>
+
+<p>Remember <code>alias_method_chain</code> from Rails? Now you can forget about it, <a href="https://github.com/rails/rails/pull/19434"><code>alias_method_chain</code> is deprecated in favor of <code>Module#prepend</code></a>, which makes the code much more understandable and cleaner.</p>
+
+<p>It is also used in Lotus framework. Here&#39;s an example of very simple controller:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">UserController</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Action</span>
+
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Looks nice, but it&#39;s supposed to be compatible with Rack middleware, how? Where&#39;s the env?</p>
+
+<p>Such nice interface is possible thanks to <code>Module#prepend</code> again. Inside the <code>Lotus::Action</code> module the <code>Lotus::Action::Callable</code> module is being prepended and the entire magic happens inside the <a href="https://github.com/lotus/controller/blob/0.4.x/lib/lotus/action/callable.rb#L68">call method</a> there:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+  <span class="n">_rescue</span> <span class="k">do</span>
+    <span class="vi">@_env</span>    <span class="o">=</span> <span class="n">env</span>
+    <span class="vi">@headers</span> <span class="o">=</span> <span class="o">::</span><span class="no">Rack</span><span class="o">::</span><span class="no">Utils</span><span class="o">::</span><span class="no">HeaderHash</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">configuration</span><span class="p">.</span><span class="nf">default_headers</span><span class="p">)</span>
+    <span class="vi">@params</span>  <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">params_class</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="vi">@_env</span><span class="p">)</span>
+    <span class="k">super</span> <span class="vi">@params</span>
+  <span class="k">end</span>
+  <span class="n">finish</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2>Wrapping up</h2>
+
+<p><code>Module#prepend</code> turns out to be an excellent addition to Ruby. There are not that many cases where you may need this feature, but when it happens so, it will make your code much more flexible and understandable.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

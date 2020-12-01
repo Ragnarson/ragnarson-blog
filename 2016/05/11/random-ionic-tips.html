@@ -1,0 +1,354 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>8 random Ionic tips - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2016/05/11/random-ionic-tips.html" property="og:url" /><meta content="8 random Ionic tips" property="og:title" /><meta content="Ionic is a leading hybrid mobile app development framework. With Ionic 2 still in its infancy and multitude of production apps that will need maintenance, the current version is not going away any time soon. I've been developing Ionic apps for about a year now. This blogpost presents 8 random tips which I wish I had known when I started to play with it." property="og:description" /><meta content="Paweł Urbanek" name="author" /><meta content="https://blog.ragnarson.com/2016/05/11/random-ionic-tips/ionic_cover-c038d74002.jpg" property="og:image" /><meta content="@_pawurb" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Paweł Urbanek","image":"https://www.gravatar.com/avatar/afd10449c8a73947a45c76c7ff5c2ba5.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"8 random Ionic tips","url":"https://blog.ragnarson.com/2016/05/11/random-ionic-tips.html","author":{"@type":"Person","name":"Paweł Urbanek","image":"https://www.gravatar.com/avatar/afd10449c8a73947a45c76c7ff5c2ba5.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2016-05-11","dateModified":"2016-05-11","image":"https://blog.ragnarson.com/2016/05/11/random-ionic-tips/ionic_cover-c038d74002.jpg"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/afd10449c8a73947a45c76c7ff5c2ba5.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="Afd10449c8a73947a45c76c7ff5c2ba5" /><div class="article-meta">May 11, 2016 - <a href="/authors/pawel-urbanek.html">Paweł Urbanek</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2016/05/11/random-ionic-tips.html">8 random Ionic tips</a></h1></header><img src='/2016/05/11/random-ionic-tips/ionic_cover-c038d74002.jpg'/><p><a href="http://ionicframework.com/">Ionic</a> is a leading hybrid mobile app development framework. With <a href="http://ionic.io/2">Ionic 2</a> still in its infancy and multitude of production apps that will need maintenance, the current version is not going away any time soon. I&#39;ve been developing Ionic apps for about a year now. This blogpost presents 8 random tips which I wish I had known when I started to play with it.</p>
+
+<p></p>
+
+<h3>1. Delay splashscreen</h3>
+
+<p>Default Ionic app booting time user experience is not the best. The user is presented with a splash screen, then a white flash for a second or two when WebView is initializing the application. Only then is the app ready for use. A simple config can improve the feeling significantly. The first step towards doing this is adding the <a href="https://github.com/apache/cordova-plugin-splashscreen">cordova splashscreen plugin</a> to your app:</p>
+<pre class="highlight shell"><code>cordova plugin add cordova-plugin-splashscreen
+</code></pre>
+
+<p>Just add the following line to <code>config.xml</code>:</p>
+<pre class="highlight xml"><code>  <span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"AutoHideSplashScreen"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+</code></pre>
+
+<p>then the following code:</p>
+<pre class="highlight javascript"><code><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">,</span> <span class="nx">$timeout</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">cordova</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">$timeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">navigator</span><span class="p">.</span><span class="nx">splashscreen</span><span class="p">.</span><span class="nx">hide</span><span class="p">()</span>
+       <span class="p">}</span> <span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Thanks to these couple of lines of code, the splash screen will only be dismissed after your app has been fully initialized contributing to a significantly improved initial user experience.</p>
+
+<h3>2. Encapsulate navigation logic into a service</h3>
+
+<p>Navigating around the app with custom animation and history behaviour is a common requirement. This <code>Navigator</code> service makes it possible for you to handle all this without cluttering up your controllers:</p>
+<pre class="highlight javascript"><code><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">'Navigator'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$state</span><span class="p">,</span> <span class="nx">$ionicHistory</span><span class="p">,</span> <span class="nx">$ionicViewSwitcher</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">go</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stateName</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">stateParams</span><span class="p">:</span> <span class="p">{},</span>
+          <span class="na">noBack</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">animation</span><span class="p">:</span> <span class="s1">'forward'</span>
+        <span class="p">};</span>
+      <span class="p">}</span>
+      <span class="nx">$ionicViewSwitcher</span><span class="p">.</span><span class="nx">nextDirection</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">animation</span><span class="p">);</span>
+      <span class="nx">$state</span><span class="p">.</span><span class="nx">go</span><span class="p">(</span><span class="nx">stateName</span><span class="p">,</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">stateParams</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">noBack</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$ionicHistory</span><span class="p">.</span><span class="nx">nextViewOptions</span><span class="p">({</span>
+          <span class="na">disableBack</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">goBack</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$ionicHistory</span><span class="p">.</span><span class="nx">goBack</span><span class="p">();</span>
+    <span class="p">},</span>
+    <span class="na">current</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">$state</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Usage:</p>
+
+<ul>
+<li><code>Navigator.go(&quot;products.index&quot;)</code> - standard transition</li>
+<li><code>Navigator.go(&quot;products.index&quot;, animation: &#39;none&#39;)</code> - custom animation</li>
+<li><code>Navigator.go(&quot;products.index&quot;, noBack: true)</code> - don&#39;t show back button after transition</li>
+<li><code>Navigator.go(&quot;products.show&quot;, stateParams: { product_id: 1 })</code> - additional UI router params</li>
+</ul>
+
+<h3>3. Add a default back state</h3>
+
+<p>Ionic states transition history mechanism out of the box lets you go back to the previous view. However, when developing an app, you probably use some kind of livereload tool. After reloading the page, all the saved in-memory history state is lost and you are left in a view that you cannot leave as the back button no longer appears. Although users are not affected by this (for them the page never reloads), it does become a hindrance during the development process.</p>
+
+<p>This <a href="https://github.com/driftyco/ionic/issues/1647">directive</a> lets you provide a default previous state for each route, even when in-memory history has been lost.</p>
+<pre class="highlight javascript"><code><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">'defaultNavBackButton'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$ionicHistory</span><span class="p">,</span> <span class="nx">$state</span><span class="p">,</span> <span class="nx">$stateParams</span><span class="p">,</span> <span class="nx">$ionicConfig</span><span class="p">,</span> <span class="nx">$ionicViewSwitcher</span><span class="p">,</span> <span class="nx">$ionicPlatform</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">link</span><span class="p">:</span> <span class="nx">link</span><span class="p">,</span>
+    <span class="na">restrict</span><span class="p">:</span> <span class="s1">'EA'</span>
+  <span class="p">};</span>
+
+  <span class="kd">function</span> <span class="nx">link</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">scope</span><span class="p">.</span><span class="nx">backTitle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">defaultBack</span> <span class="o">=</span> <span class="nx">getDefaultBack</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">$ionicConfig</span><span class="p">.</span><span class="nx">backButton</span><span class="p">.</span><span class="nx">previousTitleText</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">defaultBack</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">$ionicHistory</span><span class="p">.</span><span class="nx">backTitle</span><span class="p">()</span> <span class="o">||</span> <span class="nx">defaultBack</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">scope</span><span class="p">.</span><span class="nx">goBack</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">$ionicHistory</span><span class="p">.</span><span class="nx">backView</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nx">$ionicHistory</span><span class="p">.</span><span class="nx">goBack</span><span class="p">();</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">goDefaultBack</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">scope</span><span class="p">.</span><span class="nx">$on</span><span class="p">(</span><span class="s1">'$stateChangeSuccess'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">element</span><span class="p">.</span><span class="nx">toggleClass</span><span class="p">(</span><span class="s1">'hide'</span><span class="p">,</span> <span class="o">!</span><span class="nx">getDefaultBack</span><span class="p">());</span>
+    <span class="p">});</span>
+
+    <span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">registerBackButtonAction</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">$ionicHistory</span><span class="p">.</span><span class="nx">backView</span><span class="p">())</span> <span class="p">{</span>
+          <span class="nx">$ionicHistory</span><span class="p">.</span><span class="nx">goBack</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">getDefaultBack</span><span class="p">())</span> <span class="p">{</span>
+          <span class="nx">goDefaultBack</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">navigator</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">exitApp</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">getDefaultBack</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">$state</span><span class="p">.</span><span class="nx">current</span> <span class="o">||</span> <span class="p">{}).</span><span class="nx">defaultBack</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">goDefaultBack</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$ionicViewSwitcher</span><span class="p">.</span><span class="nx">nextDirection</span><span class="p">(</span><span class="s1">'back'</span><span class="p">);</span>
+    <span class="nx">$ionicHistory</span><span class="p">.</span><span class="nx">nextViewOptions</span><span class="p">({</span>
+      <span class="na">disableBack</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">historyRoot</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">});</span>
+
+    <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">getDefaultBack</span><span class="p">().</span><span class="nx">getStateParams</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">params</span> <span class="o">=</span> <span class="nx">getDefaultBack</span><span class="p">().</span><span class="nx">getStateParams</span><span class="p">(</span><span class="nx">$stateParams</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">$state</span><span class="p">.</span><span class="nx">go</span><span class="p">(</span><span class="nx">getDefaultBack</span><span class="p">().</span><span class="nx">state</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>You can use it like this when specifying your routes:</p>
+<pre class="highlight javascript"><code><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">config</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$stateProvider</span><span class="p">,</span> <span class="nx">$urlRouterProvider</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$stateProvider</span><span class="p">.</span><span class="nx">state</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s1">'/?name'</span><span class="p">,</span>
+    <span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'views/hello.html'</span><span class="p">,</span>
+    <span class="na">controller</span><span class="p">:</span> <span class="s1">'HelloCtrl'</span>
+  <span class="p">}).</span><span class="nx">state</span><span class="p">(</span><span class="s1">'about'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s1">'/about'</span><span class="p">,</span>
+    <span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'views/about.html'</span><span class="p">,</span>
+    <span class="na">controller</span><span class="p">:</span> <span class="s1">'AboutCtrl'</span><span class="p">,</span>
+    <span class="na">defaultBack</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">state</span><span class="p">:</span> <span class="s1">'hello'</span><span class="p">,</span>
+      <span class="na">getStateParams</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="na">name</span><span class="p">:</span> <span class="s2">"guest"</span>
+        <span class="p">};</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="nx">$urlRouterProvider</span><span class="p">.</span><span class="nx">otherwise</span><span class="p">(</span><span class="s1">'/'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3>4. Handle timeout errors globally</h3>
+
+<p>Mobile network connection quality is not always perfect. You should always handle connection timeout errors in a user-friendly way. Adding custom handling to each API call might work, however, there would be a lot of code repetition. Instead, you can add a custom angular <code>$http</code> service interceptor and handle all the timeout errors in one place.</p>
+
+<p>Add the following api service (I always use the <a href="https://github.com/lodash/lodash">lodash</a> library and I highly recommend that you do so too):</p>
+<pre class="highlight javascript"><code><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">'Api'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">default_opts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">cache</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">timeout</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'Content-Type'</span><span class="p">:</span> <span class="s1">'application/json;charset=UTF-8'</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="kd">var</span> <span class="nx">api_host</span> <span class="o">=</span> <span class="nb">window</span><span class="p">[</span><span class="s1">'Settings'</span><span class="p">].</span><span class="nx">API_HOST</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">$http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">api_host</span> <span class="o">+</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">_</span><span class="p">.</span><span class="nx">merge</span><span class="p">({},</span> <span class="nx">default_opts</span><span class="p">,</span> <span class="p">(</span><span class="nx">opts</span> <span class="o">||</span> <span class="p">{})));</span>
+    <span class="p">},</span>
+    <span class="na">put</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">params</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">$http</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">api_host</span> <span class="o">+</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">params</span><span class="p">,</span> <span class="nx">_</span><span class="p">.</span><span class="nx">merge</span><span class="p">({},</span> <span class="nx">default_opts</span><span class="p">,</span> <span class="p">(</span><span class="nx">opts</span> <span class="o">||</span> <span class="p">{})));</span>
+    <span class="p">},</span>
+    <span class="na">post</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">params</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">$http</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">api_host</span> <span class="o">+</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">params</span><span class="p">,</span> <span class="nx">_</span><span class="p">.</span><span class="nx">merge</span><span class="p">({},</span> <span class="nx">default_opts</span><span class="p">,</span> <span class="p">(</span><span class="nx">opts</span> <span class="o">||</span> <span class="p">{})));</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Then add the following <code>$http</code> service interceptor:</p>
+<pre class="highlight javascript"><code><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">config</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$provide</span><span class="p">,</span> <span class="nx">$httpProvider</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$provide</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">'timeoutHandler'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$q</span><span class="p">,</span> <span class="nx">$injector</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">isTimeout</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rejection</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">rejection</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">responseError</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rejection</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">isTimeout</span><span class="p">(</span><span class="nx">rejection</span><span class="p">))</span> <span class="p">{</span>
+          <span class="nx">$injector</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$ionicPopup</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">$ionicPopup</span><span class="p">.</span><span class="nx">alert</span><span class="p">({</span>
+              <span class="na">title</span><span class="p">:</span> <span class="s1">'Timeout'</span><span class="p">,</span>
+              <span class="na">template</span><span class="p">:</span> <span class="s1">'Connection timeout'</span>
+            <span class="p">});</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+        <span class="nx">$q</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">rejection</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">'timeoutHandler'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Now, whenever a timeout error occurs, the user will be presented with an informative pop-up.</p>
+
+<h3>5. Configure multiple environment settings with gulp-preprocess</h3>
+
+<p>The ability to switch easily between production/staging/development environments is usually necessary during the development process. One of the ways to automate it is to use a <a href="https://www.npmjs.com/package/gulp-preprocess">gulp-preprocess</a> plugin in combination with a separate settings file. To use it, first install the gulp plugin:</p>
+<pre class="highlight plaintext"><code>npm install gulp-preprocess --save
+</code></pre>
+
+<p>Then add the following code to <code>gulpfile.js</code></p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">preprocess</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp-preprocess'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">ENV</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ENV</span> <span class="o">||</span> <span class="s1">'DEVELOPMENT'</span><span class="p">;</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'settings'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s1">'./settings.js'</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">preprocess</span><span class="p">({</span>
+    <span class="na">context</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">ENV</span><span class="p">:</span> <span class="nx">ENV</span>
+    <span class="p">}</span>
+  <span class="p">})).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">'./www/js/'</span><span class="p">));</span>
+<span class="p">});</span>
+
+</code></pre>
+
+<p>Create the following configuration file in the <code>config/settings.js</code> directory:</p>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">Settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// @if ENV == 'DEVELOPMENT'</span>
+  <span class="na">API_HOST</span><span class="p">:</span> <span class="s1">'http://localhost:3000'</span>
+  <span class="c1">// @endif</span>
+  <span class="c1">// @if ENV == 'PRODUCTION'</span>
+  <span class="na">API_HOST</span><span class="p">:</span> <span class="s1">'https://production.com'</span>
+  <span class="c1">// @endif</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>and require the resulting file in your index.html:</p>
+<pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'js/settings.js'</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+<p>Then you can run the gulp task to change the setting for your app:</p>
+<pre class="highlight plaintext"><code>ENV=PRODUCTION gulp settings
+</code></pre>
+
+<p>Current setting values will be available on the <code>window[&#39;Settings&#39;]</code> object. Alternatively, you could preprocess an injectable service, but I found the global singleton approach to be acceptable in this particular case.</p>
+
+<h3>6. Use gulp-ng-annotate to simplify js code minification</h3>
+
+<p>Typical Ionic app files are hosted locally on the phone and minifying them might not be as crucial as it is for online apps. However, if you would like to <a href="http://blog.ragnarson.com/2016/02/23/cordova-instant-code-updates.html">update your code without going through the app store review</a>, you should minify all the assets. Out-of-the-box Angular offers a syntax to support js minification but it is a little clunky. A much better idea is to use standard syntax and preprocess your js code with <a href="https://github.com/Kagami/gulp-ng-annotate">gulp-ng-annotate</a>.</p>
+
+<p>Move your application code to <code>javascript/app.js</code> and add the following task to <code>gulpfile.js</code>:</p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">swallowErr</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">annotate</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp-ng-annotate'</span><span class="p">);</span>
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'annotate'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s1">'javascript/app.js'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">annotate</span><span class="p">())</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nx">swallowErr</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">'www/js/'</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3>7. Track js errors</h3>
+
+<p>There will be bugs so make sure you monitor when and why they happen. There are a lot of commercial services which allow bugs monitoring and logging. However, rolling a basic custom solution is very simple and it’s also cheaper. You just need to hook up to angular exception handler and send data about error to your api:</p>
+<pre class="highlight javascript"><code><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">config</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$provide</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">$provide</span><span class="p">.</span><span class="nx">decorator</span><span class="p">(</span><span class="s1">'$exceptionHandler'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$delegate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">exception</span><span class="p">,</span> <span class="nx">cause</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">initInjector</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">injector</span><span class="p">([</span><span class="s1">'ng'</span><span class="p">]);</span>
+      <span class="nx">$http</span> <span class="o">=</span> <span class="nx">initInjector</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'$http'</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">message</span><span class="p">:</span> <span class="nx">exception</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="na">cause</span><span class="p">:</span> <span class="nx">cause</span><span class="p">,</span>
+        <span class="na">stack</span><span class="p">:</span> <span class="nx">exception</span><span class="p">.</span><span class="nx">stack</span>
+      <span class="p">};</span>
+      <span class="nx">$http</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nb">window</span><span class="p">[</span><span class="s1">'Settings'</span><span class="p">].</span><span class="nx">API_HOST</span> <span class="o">+</span> <span class="s1">'/js_errors.json'</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span>
+      <span class="nx">$delegate</span><span class="p">(</span><span class="nx">exception</span><span class="p">,</span> <span class="nx">cause</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3>8. Run gulp tasks on ionic serve</h3>
+
+<p>You can hook up any gulp tasks to <code>ionic serve</code> command. Triggering <code>annotate</code> and <code>watch</code> commands is a good way of making sure that you always have the latest version of the app running in the browser.</p>
+
+<p>Edit the <code>ionic.project</code> file so it looks like this:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_app"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"app_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gulpStartupTasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"annotate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"watch"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Next time you run ionic serve, the project will be built and the watcher started.</p>
+
+<h3>Sample repo</h3>
+
+<p>You can find a demo Ionic app with all the tips applied in <a href="https://github.com/Ragnarson/ionic-tips">this repo</a>.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

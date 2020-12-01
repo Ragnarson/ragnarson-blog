@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Who watches the watcher - infrastructure monitoring heartbeat - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2018/02/01/who-watches-the-watcher.html" property="og:url" /><meta content="Who watches the watcher - infrastructure monitoring heartbeat" property="og:title" /><meta content="At Ragnarson we believe that monitoring every aspect of the infrastructure is crucial for a long-term maintenance of
+infrastructure projects. This is extremely important, it is unlikely for us to take on projects with no budget for the
+monitoring. But even if you set up alerts for every service, there is one aspect of the monitoring which is
+overlooked by many beginner engineers.
+
+I have seen and heard many times about infrastructure failing together with monitoring. The app goes down, but the same
+issue that causes the app to fail also takes down the monitoring service. No one noticed until the customer called and
+asked why the website is down. It happened to me in the early days of my career. Now setting up additional guards for
+the monitoring is a mandatory feature of any monitoring system we set up.
+
+This important topic is rarely discussed and difficult to find resources for using Google or any other search methods.
+In this blog post, I will discuss how you to prevent situations when your infrastructure is down and you do not notice." property="og:description" /><meta content="Szymon Szypulski" name="author" /><meta content="https://blog.ragnarson.com/2018/02/01/who-watches-the-watcher/cover-c0ad899008.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Szymon Szypulski","image":"https://www.gravatar.com/avatar/d3eadd8e8a8ab3db2fd6b032a67903e9.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Who watches the watcher - infrastructure monitoring heartbeat","url":"https://blog.ragnarson.com/2018/02/01/who-watches-the-watcher.html","author":{"@type":"Person","name":"Szymon Szypulski","image":"https://www.gravatar.com/avatar/d3eadd8e8a8ab3db2fd6b032a67903e9.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2018-02-01","dateModified":"2018-02-01","image":"https://blog.ragnarson.com/2018/02/01/who-watches-the-watcher/cover-c0ad899008.png"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/d3eadd8e8a8ab3db2fd6b032a67903e9.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="D3eadd8e8a8ab3db2fd6b032a67903e9" /><div class="article-meta">February  1, 2018 - <a href="/authors/szymon-szypulski.html">Szymon Szypulski</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2018/02/01/who-watches-the-watcher.html">Who watches the watcher - infrastructure monitoring heartbeat</a></h1></header><img src='/2018/02/01/who-watches-the-watcher/cover-c0ad899008.png'/><p>At Ragnarson we believe that monitoring every aspect of the infrastructure is crucial for a long-term maintenance of
+infrastructure projects. This is extremely important, it is unlikely for us to take on projects with no budget for the
+monitoring. But even if you set up alerts for every service, there is one aspect of the monitoring which is
+overlooked by many beginner engineers.</p>
+
+<p>I have seen and heard many times about infrastructure failing together with monitoring. The app goes down, but the same
+issue that causes the app to fail also takes down the monitoring service. No one noticed until the customer called and
+asked why the website is down. It happened to me in the early days of my career. Now setting up additional guards for
+the monitoring is a mandatory feature of any monitoring system we set up.</p>
+
+<p>This important topic is rarely discussed and difficult to find resources for using Google or any other search methods.
+In this blog post, I will discuss how you to prevent situations when your infrastructure is down and you do not notice.</p>
+
+<p></p>
+
+<p>There are two approaches, each has its own trade-offs. First is more expensive, but it is simpler to deploy. However,
+you may violate data protection laws choosing external monitoring provider. The second option will cost you less
+long-term, it is more complex and harder to deploy and you will have full control over your data location.</p>
+
+<h2>First case - external monitoring</h2>
+
+<p>Where a budget allows or time to deliver is short, we are using <a href="https://www.datadoghq.com/">DataDog</a>. It is all-in-one
+monitoring and alerting solution, it can monitor every aspect of your infrastructure. </p>
+
+<p>It can be easily integrated with external services like <a href="https://www.pagerduty.com/">PagerDuty</a>. It can keep you
+awake if something bad happens to your infrastructure - you will hate it and love it at the same time.</p>
+
+<p>Without getting too much into technical details, DataDog is an agent-based, push solution. This means, there is a
+process running on each server, it is gathering data from all the services every minute and sends them to DataDog HQ.</p>
+
+<p>Below you can see the default ‘Process’ type alert. If there is no agent process reporting for a given host for longer
+than 2 minutes - trigger an alert. In our case, the alert will be passed to PagerDuty.</p>
+
+<p><img src="/2018/02/01/who-watches-the-watcher/datadog_alert-c0bc8b9fdc.png" alt="DataDog alert overview" /></p>
+
+<p>I am cheating a little bit here and I have done nothing exceptional. DataDog has a built-in watchdog if it detects there
+is no new data. </p>
+
+<p>If you are running critical systems and you have to be an extra paranoid you can also check DataDog
+<a href="https://status.datadoghq.com/">status page</a>. There is an option to subscribe to their status in various ways - phone,
+webhook, email, RSS.</p>
+
+<p>If you use something else than DataDog. A tool with the status page from the past, without convenient notification
+options, you can always try to <a href="https://zapier.com/zapbook/pagerduty/rss/">integrate it over Zapier</a>.</p>
+
+<h2>Self-hosted monitoring</h2>
+
+<p>DataDog requires some hefty budget and you may be restricted by various national or health-related data laws. Or you
+simply prefer in-house solutions.</p>
+
+<p>Internally, we are experimenting with an on-premise monitoring solution based on Prometheus. From our point of view, it
+seems to be the best tool suited for metrics-based monitoring and alerting. It has a big community <a href="https://prometheus.io/blog/2017/11/08/announcing-prometheus-2-0/">and version 2.0 was
+released recently. With some great improvements, especially in resource usage &#39;department&#39;.</a></p>
+
+<p>In case of an in-house monitoring, there is no upstream status page, we are the single user of the service. If a
+monitoring node goes down you will not even know. If a service goes down (or is not operating as supposed to) there will
+be no alert.</p>
+
+<p>I did not find any obvious agent check-ups, like in case of DataDog. So I have started with simple google searches for
+generic ideas how people may handle ‘monitoring the monitoring’. Picks from the top of my head were:</p>
+
+<ul>
+<li>monitoring heartbeat</li>
+<li>verify monitoring system</li>
+<li>ensure monitoring software is running</li>
+<li>monitoring dead man switch (Do not ask me how I have connected monitoring with bomb trigger. This is not a search
+phrase which will be used by most of the people)</li>
+</ul>
+
+<p>Unfortunately, my google-fu was poor. Most of the results were about ‘real life’/heart monitoring. I have even learned a
+new trick - the <a href="https://searchresearch1.blogspot.se/2010/10/around-has-always-been-around.html">AROUND keyword</a>.
+However, in conjunction with various self-hosted monitoring solutions did not give me any good results. Only the last
+phrase gave me some ideas how to ensure my monitoring is up and running. Yet, it was still far from a ready-made
+solution.</p>
+
+<p>I left the idea for a few days to grow on me. It was not urgent since we are just experimenting with Prometheus.</p>
+
+<p>After a few days, I have stumbled on <a href="https://docs.google.com/presentation/d/1xMnqKHNfBS1DWcnMQ6S3iTS10_DMISoDfNt6If4ihe4/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.g16d63954a7_0_68">this short five-step overview</a> on #monitoring at
+<a href="https://signup.hangops.com">Hangops slack</a> (a highly recommended community). It describes how to configure
+<a href="https://prometheus.io/">Prometheus</a> with <a href="https://www.pagerduty.com/">PagerDuty</a> and 
+<a href="https://deadmanssnitch.com/">DeadManSnitch</a>. It was the biggest eye-opener. The best approach to my issue I was able to
+find. I do not know who is the author, but he/she deserves a medal.</p>
+
+<p>It is not my goal to copy the slides, see it by yourself. The basic idea applies almost to any on-premise monitoring.
+Fire an automatic alert periodically. If there are no alerts, our alerting software does not work, call on-duty team.
+Since we are using PagerDuty anyway it is almost a perfect fit. Of course, there is no ideal solution which covers all
+the corners, even this has some strong and weak points:</p>
+
+<p>Advantages:</p>
+
+<ul>
+<li>It can be adapted to most self-hosted monitoring/alerting solutions.</li>
+<li><a href="https://zapier.com/zapbook/zaps/6688/trigger-daily-incidents-on-pagerduty/">Zapier</a> or
+<a href="https://cronitor.io/">Cronitor</a> can be used instead of DeadManSnitch.</li>
+<li>If you are not tied to PagerDuty, there are some alternatives like <a href="https://victorops.com">VictorOps</a> or
+<a href="https://docs.opsgenie.com/docs/miscellaneous/heartbeat-monitoring">OpsGenie</a>,
+<a href="https://docs.opsgenie.com/docs/miscellaneous/heartbeat-monitoring">which has Heartbeat Monitoring out of the box</a>.</li>
+<li>It is not <a href="https://github.com/prometheus/alertmanager#high-availability">HA</a>, it does not need more than one server.</li>
+</ul>
+
+<p>Disadvantages:</p>
+
+<ul>
+<li>You are adding another point of failure to the infrastructure.</li>
+<li>Requires extra services, which adds a complexity and an implementation/maintenance cost.</li>
+<li>If you run <a href="https://www.pagerduty.com/blog/failure-friday-at-pagerduty/">‘Failure Friday’</a>, it is another point on the
+checklist.</li>
+<li>It is not HA, it may fail as well.</li>
+</ul>
+
+<p>Overall I think it adds a reasonable level of the complexity for what it gives. I would not go anywhere further - the watcher
+who watches the watcher who watches the watcher is enough ;-)</p>
+
+<p>I hope now you have a better overview how to &#39;watch the watcher&#39; in your infrastructure. Anyway, if something seems to
+be unclear, please leave us a comment. Yet, if you would like us to set it up for you,
+<a href="https://calendly.com/macias/30min/">give us a call</a> or <a href="sales@ragnarson.com">send us an email</a>.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

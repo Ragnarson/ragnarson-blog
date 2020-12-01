@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>How I work on new features - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/04/13/how-i-work-on-new-features.html" property="og:url" /><meta content="How I work on new features" property="og:title" /><meta content="tl;dr Collect feedback from your customers; always plan what to do next; think about the user interface before you start writing code; discuss with your team your current work often; test what you have done.
+
+Many developers encounter a variety of difficulties when they have to work on new features. From things like: &quot;how exactly should I start?&quot; to more complex issues, for example, in the middle of a development, they notice that everything they have done is wrong and that it is necessary to start over. Therefore, I have decided to share information about my workflow and how I usually get things done." property="og:description" /><meta content="Bartłomiej Kozal" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@_bkzl" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"How I work on new features","url":"https://blog.ragnarson.com/2015/04/13/how-i-work-on-new-features.html","author":{"@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-04-13","dateModified":"2015-04-13"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="11ec30dedeb7889af512461ba7ce6a45" /><div class="article-meta">April 13, 2015 - <a href="/authors/bartlomiej-kozal.html">Bartłomiej Kozal</a>  in <a href="/categories/development.html">development</a>, <a href="/categories/entrepreneurship.html">entrepreneurship</a></div><h1 class="article-title"><a href="/2015/04/13/how-i-work-on-new-features.html">How I work on new features</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p><em>tl;dr Collect feedback from your customers; always plan what to do next; think about the user interface before you start writing code; discuss with your team your current work often; test what you have done.</em></p>
+
+<p>Many developers encounter a variety of difficulties when they have to work on new features. From things like: &quot;how exactly should I start?&quot; to more complex issues, for example, in the middle of a development, they notice that everything they have done is wrong and that it is necessary to start over. Therefore, I have decided to share information about my workflow and how I usually get things done. </p>
+
+<p>Please note that the described process refers to working on a new feature from an individual perspective. I understand that in most scenarios, the work is delegated to a number of people. I may have even exaggerated in some cases when it comes to simple tasks, but this is due to the fact that my main focus is on ideas; ways to help you avoid making mistakes as early as possible in the process.</p>
+
+<h2>Which feature should I implement?</h2>
+
+<p>Essentially, every feature you want to add should be added as a consequence of your customer’s needs. Don&#39;t solely depend on your own guesswork, as quite often, you could be the only person who thinks that a particular feature is important and necessary. Always try to verify your assumptions with raw data. The easiest way to start with this is by obtaining feedback from your clients. Use tools like email, surveys or even better: simply talk with them. Of course, you don&#39;t have to discuss every minute detail with the customer, but be mindful of the fact that generally, evaluating customer needs is a crucial practice. Moreover, there are services like <a href="https://www.intercom.io">Intercom</a>, <a href="https://mixpanel.com">Mixpanel</a> or <a href="https://www.kissmetrics.com/">Kissmetrics</a> which can really help understand how people use your application, discovering what problems they encounter and what would work better. Don&#39;t forget to think about the fit of a new feature in terms of your business. Compare the advantages and disadvantages and ensure it&#39;s is a good move. If you determine that your idea makes sense, create a new task in your tickets tracker and explain it to your team.</p>
+
+<h2>Make a good plan</h2>
+
+<p>How should you start? First, conduct good research. There is a good chance that the thing you want to do has already been done by someone else. Explore sites with user interface patterns (like <a href="http://pttrns.com/">pttrns</a> or <a href="https://www.goodui.org/">goodui</a>). Do you want to allow your users to manage account settings for example? If so, study websites which you use every day. See how they solve this problem, compare their solutions and consider which has the most suitable answer in your opinion. Think which parts of the UI make it work and which parts annoy you. Don&#39;t be afraid to learn from others.</p>
+
+<p>Ok, so you have got some general ideas about how your feature should work. Now, write this down on a sheet of paper or in your preferred text editor. List all the parts which form the feature as a whole:</p>
+<pre class="highlight plaintext"><code>Account Settings Page
+---------------------
+Avatar
+Two-factor authentication status
+Allow to change email and password
+Allow to manage ssh keys
+Login with username
+</code></pre>
+
+<p>Next, strike off all the points which aren&#39;t required in your first iteration and then sort them by priority.</p>
+<pre class="highlight plaintext"><code>Account Settings Page
+---------------------
+Two-factor authentication status
+Allow to change email and password
+Allow to manage ssh keys
+</code></pre>
+<pre class="highlight plaintext"><code>Account Settings Page
+---------------------
+Allow to change email and password
+Two-factor authentication status
+Allow to manage ssh keys
+</code></pre>
+
+<p>When you have this ready, talk to your team once again.</p>
+
+<p>The last step in this section is to divide each point into the smallest possible tasks. Do this frequently, even during the regular development. It&#39;s better to have twenty tiny and verifiable to-do’s than one large to-do accompanied by countless details. When you are coding, this ensures that you are able to finish things instead of stressing out over the fact that you can&#39;t deliver your work for two weeks.</p>
+
+<h2>First, design the User Experience</h2>
+
+<p>Check your list of positives and negatives and design the interface. It doesn&#39;t have to be perfect, but try to visualize the user experience as a whole. Choose the design technique which gives you the fastest feedback. Here are some example methods:</p>
+
+<ul>
+<li>Sketch on paper</li>
+<li>Make a mock-up. I prefer an app called <a href="https://balsamiq.com/products/mockups/">Balsamiq Mockups</a> for that.</li>
+<li>Make HTML &amp; CSS only prototype. Don&#39;t worry about the quality of your code, you will fix it later.</li>
+<li>Take a screenshot of your existing page, load it into the graphic editor and design new elements on top of it. <a href="http://bohemiancoding.com/sketch/">Sketch</a> app is very good for this.</li>
+</ul>
+
+<p>Update and discuss with your team the designed interface.</p>
+
+<h2>Writing code</h2>
+
+<p>When you have a designed interface and user flow it&#39;s time to make it work. Again, before you write your first line of code, it&#39;s a good idea initially to think about the implementation. Consider classes which you will need, the relations between them, how to store data in the database and how to test your code. Through a little planning, you can avoid so many problems whereas starting to code immediately without seeing the bigger picture invites problems.</p>
+
+<p>Regarding the code, start by writing some very general integration tests covering the whole feature. After that, implement in detail all views as static pages. All backend work on logic should be done at the end. Work on the highest abstraction first, slowly moving to low-level parts.</p>
+
+<p>When you finish, create a pull request and spend some time on your code quality; review and refactor it. Once everything is ready, push your new feature to production.</p>
+
+<h2>Post-release</h2>
+
+<p>You are not done yet! Besides the changelog update and notifying your client’s about the new functionality, e.g. a blog post, you should immediately start obtaining feedback about your latest feature. Ensure that everything works as expected. Set up A/B tests. Iterate on existing features to improve them. Don&#39;t be afraid to remove those which nobody uses and which don&#39;t fit your business.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

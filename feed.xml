@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Ragnarson Blog</title>
+  <subtitle>Blog of Ragnarson, a Ruby and JS consultancy</subtitle>
+  <id>https://blog.ragnarson.com/</id>
+  <link href="https://blog.ragnarson.com/"/>
+  <link href="https://blog.ragnarson.com/feed.xml" rel="self"/>
+  <updated>2020-11-18T01:00:00+01:00</updated>
+  <entry>
+    <title>Impact investing: money vs purpose</title>
+    <link rel="alternate" href="https://blog.ragnarson.com/2020/11/18/impact-investing-money-vs-purpose.html"/>
+    <id>https://blog.ragnarson.com/2020/11/18/impact-investing-money-vs-purpose.html</id>
+    <published>2020-11-18T01:00:00+01:00</published>
+    <updated>2020-12-01T10:49:19+01:00</updated>
+    <author>
+      <name>Maciej Gałkiewicz</name>
+    </author>
+    <summary type="html">&lt;p&gt;There is a common problem that we’ve seen in many pitch decks of impact-driven startups.&lt;/p&gt;
+
+&lt;p&gt;It’s the lack of balance between emphasizing financial returns and the purpose behind ideas and companies.&lt;/p&gt;
+
+&lt;p&gt;Some startups focus too much on the financial side...&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;There is a common problem that we’ve seen in many pitch decks of impact-driven startups.&lt;/p&gt;
+
+&lt;p&gt;It’s the lack of balance between emphasizing financial returns and the purpose behind ideas and companies.&lt;/p&gt;
+
+&lt;p&gt;Some startups focus too much on the financial side and forget about the impact side or vice versa, whereas the motivation is one of the most important things that the investor wants to know about the founders and the startup itself.&lt;/p&gt;
+
+&lt;p&gt;Together with Kasia Zalewska, we discussed this problem in our latest video.&lt;/p&gt;
+&lt;iframe width="100%" height="378" src="https://www.youtube.com/embed/RoYjXkKpci0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;
+&lt;/iframe&gt;</content>
+  </entry>
+  <entry>
+    <title>The first step to a self managed company: transparency</title>
+    <link rel="alternate" href="https://blog.ragnarson.com/2020/09/09/the-first-step-to-a-self-managed-company-transparency.html"/>
+    <id>https://blog.ragnarson.com/2020/09/09/the-first-step-to-a-self-managed-company-transparency.html</id>
+    <published>2020-09-09T02:00:00+02:00</published>
+    <updated>2020-12-01T10:43:55+01:00</updated>
+    <author>
+      <name>Maciej Gałkiewicz</name>
+    </author>
+    <summary type="html">&lt;p&gt;It took us 6 years and a lot of trial and error to transform Ragnarson into a self-managed company &lt;a href="https://maciejgalkiewicz.com/2018/05/08/self-set-salaries/"&gt;where people get to even set their own salaries&lt;/a&gt;. This series of blog posts is a step-by-step guide to changing your organisation into a self-managed one.&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;It took us 6 years and a lot of trial and error to transform Ragnarson into a self-managed company &lt;a href="https://maciejgalkiewicz.com/2018/05/08/self-set-salaries/"&gt;where people get to even set their own salaries&lt;/a&gt;. This series of blog posts is a step-by-step guide to changing your organisation into a self-managed one.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Self-management is fueled by transparency. If you want people to take more responsibility, then knowing not only the problem at hand but also the full context of the entire organisation is the key to achieving this.&lt;/p&gt;
+
+&lt;p&gt;The CEO is not the smartest person in the company. It’s the person that has the biggest context. And that is why in organisations where people lack data to make their own decisions, most of the important calls are made by the CEO.&lt;/p&gt;
+
+&lt;p&gt;Imagine that you want every employee to become a mini-CEO who makes independent decisions, guided by the company&amp;#39;s goals and situation. The first thing you need to do to achieve that is giving them information and context.&lt;/p&gt;
+
+&lt;h2&gt;Why are most companies not transparent?&lt;/h2&gt;
+
+&lt;p&gt;In traditional organisations, access to information depends on hierarchy. CEOs know more than VPs, VPs know more than managers, and so on. Why is that so?&lt;/p&gt;
+
+&lt;p&gt;Mostly, because of fear. We are afraid that when people know more, they see all the injustices and flaws in the company, and we have to face the consequences of that.&lt;/p&gt;
+
+&lt;p&gt;Some companies don’t share their revenue so that people don’t ask for a raise. But the real problem is the remuneration system, not the information itself.&lt;/p&gt;
+
+&lt;p&gt;Other organizations don’t want to share the information that they are losing money. They fear that if employees knew that, they would start looking for a new job. The real problem here is that people simply don’t trust management to handle the situation.&lt;/p&gt;
+
+&lt;p&gt;Each piece of data represents some flaws and fears in an organization. Becoming transparent means facing those challenges, and sharing more and more information with your people. It’s a long process, not a one-time event.&lt;/p&gt;
+
+&lt;p&gt;Whenever in doubt whether something should become public, ask yourself a question: If you want your employees to be mini-CEOs, will they need this information to be fully independent and make good decisions?&lt;/p&gt;
+
+&lt;p&gt;Our approach at Ragnarson is to share everything by default, including salaries. We even plan to make our KPIs available for everyone and release them on our website. But it took us 6 years to get to a place where we are not afraid to share almost everything.&lt;/p&gt;
+
+&lt;h2&gt;Why do people need to know those things?&lt;/h2&gt;
+
+&lt;p&gt;First of all, your team needs to know that you trust them, and they need to trust you. If they know more, there will be no place for assumptions and guesses. In time, they will start to feel that they understand more and more about how the organization works and how it is doing.&lt;/p&gt;
+
+&lt;p&gt;Because of that - thanks to a bigger context - they will know how to act. For example - during the COVID-19 pandemic, due to the uncertain situation, Ragnarson’s team decided to postpone most of the pay raises. It was a bottom-up initiative and it showed how well our team members understood the situation on the market.&lt;/p&gt;
+
+&lt;p&gt;From your perspective, instead of having to control each aspect of the organisation, you will be able to let go and trust that the team can handle most of the problems on its own. You will be able to focus on growing the business instead of putting out fires.
+&lt;strong&gt;This process needs to start with transparency and context.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;What can go wrong?&lt;/h2&gt;
+
+&lt;p&gt;Transparency forces organisations and employees to become mature. As time goes by, the safety net of the “all-knowing and almighty management” will disappear, and everyone will understand that running a business is tough and full of risks.&lt;/p&gt;
+
+&lt;p&gt;Some people might quit because it’s too difficult and stressful for them to take more upon themselves. It&amp;#39;s fine when that happens. Different environments suit different people. After some time, you will see who fits and who doesn’t, and you will be able to recruit better.&lt;/p&gt;
+
+&lt;h2&gt;Start with the basics&lt;/h2&gt;
+
+&lt;p&gt;My recommendation is to start slowly. The first thing you should do is to think about all KPIs and financial data you might share and tackle objections that come to your mind. Each organisation is at a different stage of transparency, so I would start with the suggested order of which data should you make available first:&lt;/p&gt;
+
+&lt;h2&gt;1. Business KPIs&lt;/h2&gt;
+
+&lt;p&gt;This is the easiest way to start. Each team or part of the business has its main KPIs. For Marketing, it’s leads; for Sales - deals; for Product - releases, etc. The first step I would recommend is building a KPI dashboard with all those data, available for the entire company. This is how your team gets to know how the company is doing.&lt;/p&gt;
+
+&lt;p&gt;Pros: This will give people a bigger context when it comes to other teams in the company. For example, people from the product team might start to worry because of the weaker results of the marketing team. With the right facilitation, it might lead to an exchange of ideas or resources on how to tackle the problem. If product people have a broader context (marketing means more customers, more money, faster development), they might start to care about this part of the company as well.&lt;/p&gt;
+
+&lt;p&gt;Cons: At first, people might feel uncomfortable with the organisation watching (and judging) the effectiveness of their work. In immature teams, this might lead to blaming other departments for the company’s situation. That’s why there should be a story behind the raw numbers;, a context - Why are we experiencing problems here? What are we doing to handle this? Etc.&lt;/p&gt;
+
+&lt;h2&gt;2. Communication&lt;/h2&gt;
+
+&lt;p&gt;This is a vast topic and I’ll cover it more in the next posts. But for starters: if you begin to share more data, you need people to understand it better. It means that you need to give them an opportunity to hear what’s behind those numbers. The simplest ways are regular email updates from the CEO and teams, company-wide meetings with every manager telling the story behind the numbers. Your job here is to give as much context as possible, to build a story that will make people understand what is really going on.&lt;/p&gt;
+
+&lt;p&gt;Pros: It will allow discussion between teams, generate new ideas, and allow for constructive critique. It will give people more understanding of how the company’s “engine” works. Thanks to context, better decisions and productivity emerge.&lt;/p&gt;
+
+&lt;p&gt;Cons: It will take some of yours and your team’s time each week. It will make space for - sometimes - heated discussions.&lt;/p&gt;
+
+&lt;h2&gt;3. Financial KPIs&lt;/h2&gt;
+
+&lt;p&gt;This is stepping to the next level, because knowing how much money the company is earning (or losing), means that the team needs to be more mature. If team members don’t understand the basic principles of running a business (e.g. that high revenue doesn’t mean that everyone should get a raise), there might arise a lot of misunderstanding.&lt;/p&gt;
+
+&lt;p&gt;Pros: Your team will be aware of where your business stands. They will be able to make decisions depending on the condition of the business. If times are tough - they will understand that it requires more effort and fewer perks; if times are good - they might have ideas about what they should improve next. Including your team in strategic decisions is a step forward.&lt;/p&gt;
+
+&lt;p&gt;Cons: At first, there might be a lot of context about the business to give here. People tend to have a lot of misconceptions about how companies work. You need to help your team interpret the financial standing of your organisation.&lt;/p&gt;
+
+&lt;h2&gt;4. Feedback&lt;/h2&gt;
+
+&lt;p&gt;If people are increasingly involved in the company goals, they need mechanisms that allow them to share their thoughts and give honest feedback. The more they know, the more ideas and criticism they will have, so you should create a way to share it. One on one feedback, team-level feedback, company-wide feedback - all of those are necessary.&lt;/p&gt;
+
+&lt;p&gt;Pros: There will be no place for holding a grudge. With good feedback mechanisms, people will be able to talk honestly about their feelings and thoughts.&lt;/p&gt;
+
+&lt;p&gt;Cons: It might be a lot to take at first. Negative feedback is hard to take - for you, and for other members of the team. In time, you will learn to separate yourself from the feedback and it will all become much easier. But the beginning is quite hard. Also, people need to understand that not all feedback will be acted upon, and you need to learn to act upon the feedback that is truly important.&lt;/p&gt;
+
+&lt;h2&gt;Next steps&lt;/h2&gt;
+
+&lt;p&gt;Those are the first steps I would recommend to take. I will share more insights later on about the next key steps - decision sharing, shared salaries, and shareholders. As for now, let me know which points you would like me to describe more, and don’t hesitate to DM me if you have any questions.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>When  your company is just like everyone else's</title>
+    <link rel="alternate" href="https://blog.ragnarson.com/2020/08/27/When-your-company-is-just-like-everyone-elses.html"/>
+    <id>https://blog.ragnarson.com/2020/08/27/When-your-company-is-just-like-everyone-elses.html</id>
+    <published>2020-08-27T02:00:00+02:00</published>
+    <updated>2020-12-01T10:43:55+01:00</updated>
+    <author>
+      <name>Maciej Gałkiewicz</name>
+    </author>
+    <summary type="html">&lt;p&gt;In 2016, a crisis was at our doorstep at Ragnarson. We just lost two major clients, needed to lay off our people, and struggled to get new projects. There were more and more software agencies appearing around us, and we felt like we were “just like everyone else,” with the same, undifferentiated offering.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;In 2016, a crisis was at our doorstep at Ragnarson. We just lost two major clients, needed to lay off our people, and struggled to get new projects. There were more and more software agencies appearing around us, and we felt like we were “just like everyone else,” with the same, undifferentiated offering.
+&lt;/p&gt;
+
+&lt;p&gt;In the mid-2000s, when Ragnarson started its operation, we were one of the first Ruby On Rails development agencies in Central Europe. We were experts in a niche technology. We felt that we were in the right place. Ten years later, we realized that we are no longer unique. Software agencies with a similar value proposition were popping up all over the place. Software development became a commodity product.&lt;/p&gt;
+
+&lt;p&gt;And it felt bad, especially when you struggle with sales and have no idea how to differentiate yourself.&lt;/p&gt;
+
+&lt;p&gt;Operating on a crowded market is a common struggle. If you don’t have any competition, it’s likely that there is no business to be made there. Competition is good. It motivates you to keep pushing forward and care about every aspect of your company.&lt;/p&gt;
+
+&lt;p&gt;The problem starts when you can’t say what makes your organization better anymore. It means that you’ve lost touch with your company and your market. You’ve become just like everyone else.&lt;/p&gt;
+
+&lt;h2&gt;In search of the Holy Grail&lt;/h2&gt;
+
+&lt;p&gt;When companies realize that they’re just like everyone else, they’re often looking for a big business change that would lead to overnight success. A change that would move their business ahead of their competition. But in reality, every big change is made up of numerous small changes that compound together. Oftentimes, there’s no need to reinvent the wheel, but just to get back to the basics and find 1-2 things that help in standing out from the crowd.&lt;/p&gt;
+
+&lt;p&gt;Of course, when we realized that we are “just like everyone else,” we started to search for this one big change immediately.&lt;/p&gt;
+
+&lt;p&gt;Maybe we should pivot? We’ve had previous experiences with running our own hosting platform, shellycloud.com. But at the time, we had no idea what product we could build. We started to research this and ended up with few ideas.&lt;/p&gt;
+
+&lt;p&gt;To speed up the process, we organized a workshop with Sustainable Natives (huge thanks to Marco, Matthias, Christian, and Marius). They helped us to narrow down the list of ideas to precision farming.&lt;/p&gt;
+
+&lt;p&gt;After a few months, we realised that without prior experience in agriculture and farmers in our network, building a relevant product and bringing it to the market would take ages. We started looking for experts with domain knowledge and very early-stage startups that we could join forces with.&lt;/p&gt;
+
+&lt;p&gt;This was a challenge in itself. After several conversations with startups, it became clear that the level of trust that was needed here was difficult to build. On the other hand, a pattern emerged. Many of the startups we spoke with would benefit from additional capital and software expertise. We could easily bring both to the table. Then, after an amazing workshop with Hubert and Matthias from SmartHectar, we recognized that it makes more sense for us to invest in several companies instead of co-founding one.&lt;/p&gt;
+
+&lt;p&gt;The story continues. With time, one of our biggest lessons learned was that instead of carrying out a 180-degree change of our business model, we’re starting to get back to what we are good at - creating successful software, but with a slightly different approach.&lt;/p&gt;
+
+&lt;p&gt;There are still many steps ahead of us, but we learned that the most important thing is a constant feedback loop between our ideas and the niche we are thinking about. The fact that we started the process that after 2 years resulted in changing Ragnarson from a software development agency into a Digital Venture Builder focused on impactful startups.&lt;/p&gt;
+
+&lt;h2&gt;Process, not outcome&lt;/h2&gt;
+
+&lt;p&gt;It’s a cliche, but just like most cliches, it’s true. Instead of locking yourself in a room, doing research, and talking about ideas, focus on the process that could help you generate them. In this particular case, it means a sales process that enables you to constantly talk with potential customers or experts in your niche.&lt;/p&gt;
+
+&lt;p&gt;They are the best source of information and inspiration on how to differentiate yourself. Your job is to actively listen to their opinions and watch their reactions to what you tell them.&lt;/p&gt;
+
+&lt;p&gt;In order to do so, you need to have a number of regular calls/meetings each week. Whether it’s 2, 5, or 15, to have a constant stream of people who listen to you, you need a good sales process.&lt;/p&gt;
+
+&lt;p&gt;This is super important: you need to do it in the right volume in order to move forward. Random meetings and calls won’t do, as you might be easily biased by strong opinions. With a larger volume, you will know which insights are worthwhile and which aren’t. When you’re at the point where most of the feedback you get repeats itself, it means that you’ve done enough.&lt;/p&gt;
+
+&lt;p&gt;That’s why you need a repeatable sales process that will allow you to do it. But how to create one - it’s a topic for a different blog post.&lt;/p&gt;
+
+&lt;h2&gt;To sum up&lt;/h2&gt;
+
+&lt;p&gt;Finding your business soul is a process that never ends. Losing touch with your company and the market will make you end up in the crowd of lookalike companies. How not to lose touch? By regularly talking with relevant people who know your niche and aren’t directly involved in your company. They will give you insights needed to see things from a new perspective.&lt;/p&gt;
+
+&lt;p&gt;I don’t feel that at Ragnarson, we found “the Holy Grail” of standing out from the crowd. But I’m convinced that with the constant feedback loop we created, we’re headed in the right direction. We believe in the process, not in its outcome.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>A motivated team starts with the recruitment process</title>
+    <link rel="alternate" href="https://blog.ragnarson.com/2020/08/06/Motivated-team-starts-with-the-recruitment-process.html"/>
+    <id>https://blog.ragnarson.com/2020/08/06/Motivated-team-starts-with-the-recruitment-process.html</id>
+    <published>2020-08-06T02:00:00+02:00</published>
+    <updated>2020-12-01T10:43:55+01:00</updated>
+    <author>
+      <name>Maciej Gałkiewicz</name>
+    </author>
+    <summary type="html">&lt;p&gt;In April 2018, my business partners at Ragnarson and I joined a local group of IT entrepreneurs in Lodz, Poland. We usually meet once a month and discuss topics that are relevant to our interests. It's a place to learn from each other and share our struggles.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;In April 2018, my business partners at Ragnarson and I joined a local group of IT entrepreneurs in Lodz, Poland. We usually meet once a month and discuss topics that are relevant to our interests. It&amp;#39;s a place to learn from each other and share our struggles.
+&lt;/p&gt;
+
+&lt;p&gt;One of the most common problems that keep popping up is the low motivation of employees to do their best at work. They&amp;#39;re often not engaged enough or lack a proactive attitude. Instead of bringing out the best in them, the company seems to drag them down.&lt;/p&gt;
+
+&lt;p&gt;We&amp;#39;ve been through this at Ragnarson.&lt;/p&gt;
+
+&lt;p&gt;We kept improving our environment to tackle those problems. This means that we experimented with our company culture, vision and mission, projects, organizational structure, and many other elements.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ultimately, we learned that no matter how &amp;#39;good&amp;#39; your environment is, it&amp;#39;s only one part of the equation.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The other part is about the kind of people you bring to the table.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Every environment is attractive only to a specific group of people. If you hire &amp;#39;everyone&amp;#39; without considering how they fit into what you offer, the chances are high that &amp;#39;everyone&amp;#39; will end up disappointed and unmotivated.&lt;/p&gt;
+
+&lt;p&gt;The question is not how to motivate every single employee on the market. That&amp;#39;s just impossible. Instead, we need to focus on recruiting the right people for our organizations. We need to know who they are - and then get them on board.&lt;/p&gt;
+
+&lt;p&gt;If you have ever:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Hired someone who left after a few months because &amp;#39;the company was not what they expected&amp;#39;,&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Dealt with an unmotivated employee who struggled with their responsibilities and delivered little value,&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Hired a person who didn&amp;#39;t get along well with the rest of the team,&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;then let me introduce you to our secret sauce that helps to handle this problem.&lt;/p&gt;
+
+&lt;p&gt;In what follows, we share an overview of our recruitment framework. It has been tremendously helpful for minimizing such problems and brought us a lot of other benefits.&lt;/p&gt;
+
+&lt;p&gt;Note that we&amp;#39;ve been tweaking the process for years and adding new features that help to attract desirable candidates, give them more value, and filter out the undesirable ones. Moreover, we constantly adapt it to changing market conditions.&lt;/p&gt;
+
+&lt;h1&gt;Our interview process&lt;/h1&gt;
+
+&lt;p&gt;Our recruitment process consists of three steps.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The first interview with our HR team,&lt;/li&gt;
+&lt;li&gt;Technical interview,&lt;/li&gt;
+&lt;li&gt;Cultural fit and soft skills check.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The importance lies in what&amp;#39;s being checked and how. This order works for us, but it doesn&amp;#39;t mean that it will also work for you. Moreover, the entire process is done remotely. Let me walk you through it with more detail.&lt;/p&gt;
+
+&lt;h2&gt;First interview&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/2020/08/06/Motivated-team-starts-with-the-recruitment-process/screen1-c03ce860cf.png" alt="Team overview" /&gt;
+Most companies are adept at the initial interview with candidates. It&amp;#39;s chiefly about getting to know each other, talking about basic expectations, checking their language skills, and getting a general impression of the candidate.&lt;/p&gt;
+
+&lt;p&gt;Some companies engage the final decision-makers at this point. They speak with a candidate for an hour, and if they like what they hear, they make a hire. In my opinion, this is where the greatest danger lies. All you can do in an hour is to get a vague idea about someone. That&amp;#39;s why we do more than that.&lt;/p&gt;
+
+&lt;p&gt;The main question marks we want to address at this stage are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Do the communications skills and maturity of the candidate correspond with our requirements?&lt;/p&gt;
+
+&lt;p&gt;As a self-managed company, our expectations need to be at the top end of the spectrum. For example, most of our employees communicate directly with clients. They are responsible for making decisions which in traditional environments are handled by more experienced managers.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Can we provide the candidate with what they&amp;#39;re looking for (and vice versa)?&lt;/p&gt;
+
+&lt;p&gt;In our case, the responsibilities of developers are broad. They not only code but also manage the relationship with our clients. This means they engage in tasks like collecting feedback, organizing in-person meetings, learning about the business of our clients, and handling issues if any arise. A person looking for a calm environment where their concerns are limited to the technical challenges of the project wouldn&amp;#39;t be a good fit for us.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Does the candidate speak English fluently?&lt;/p&gt;
+
+&lt;p&gt;Practically all developers write code in English and need to understand this language to be able to learn new things. In terms of speaking English, not all companies on the market require that. This creates a pool of specialists whose speaking skills don&amp;#39;t allow for smooth business communication.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Do our mutual expectations meet (like salary level, flexible working hours, or remote work)?&lt;/p&gt;
+
+&lt;p&gt;Flexible working hours and remote work provide a lot of freedom to employees who can work from any place and at any time, assuming that their team and clients get enough time overlap. But not everyone wants that. People who need a bit more structure in their lives and/or prefer working from an office aren&amp;#39;t going to appreciate the option (or necessity) of remote work as much.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If we don&amp;#39;t see any major red flags at this point, we move forward with the process.&lt;/p&gt;
+
+&lt;p&gt;From the candidate perspective, they get a basic overview of our offer and recruitment process. It gives them the first glimpse of our culture to decide whether this is what they are looking for. Nobody proposes marriage on the first date, and the same logic applies here. Both sides need time to figure out if they fit well together.&lt;/p&gt;
+
+&lt;h2&gt;Technical interview&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="/2020/08/06/Motivated-team-starts-with-the-recruitment-process/screen3-c0396e0489.png" alt="Team overview" /&gt;
+Once we have an overview of the candidate, it&amp;#39;s time to make sure that they possess the relevant skills for the job. Depending on the type of individual we are looking for, we ask them to perform different tasks.&lt;/p&gt;
+
+&lt;p&gt;Most of the time, we hire software developers. In this case, there are two steps to complete:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;A programming challenge carried out offline at their convenience&lt;/p&gt;
+
+&lt;p&gt;This is the first technical step that gives us an overview of how the candidate thinks and what kind of quality they deliver. It&amp;#39;s not enough for us to reject the candidate at this stage. In practice, some candidates give up without completing the challenge for various reasons. It saves time for us both.        &lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A call with one of our senior developers consisting of:&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;A discussion about the solution of the programming challenge prepared by the candidate (around 30 minutes)&lt;/p&gt;
+
+&lt;p&gt;This step is crucial in understanding how the candidate approached the challenge and why they solved it in this particular way. It tells us a lot about their perspective and how broadly they look at problem-solving.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Theoretical questions (30-60 minutes)&lt;/p&gt;
+
+&lt;p&gt;Contrary to how it sounds, this step doesn&amp;#39;t aim to bore the candidate. The goal is to uncover whether they have a deeper understanding of the technologies they use. It&amp;#39;s crucial, especially if someone aspires to a technical leadership role. In the case of less experienced candidates, it tells us a lot about their potential.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Live coding (around 60 minutes)&lt;/p&gt;
+
+&lt;p&gt;Theoretical knowledge is nice but not very useful if the candidate struggles to apply it. At this step, we see their problem-solving capabilities in real time. The task also simulates everyday challenges they are bound to encounter at work. Both sides get a chance to see how the collaboration may look like once we decide to work together.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Q&amp;amp;A and next steps&lt;/p&gt;
+
+&lt;p&gt;At the end of the process, we summarize it - we describe our expectations regarding each step, provide candidates with feedback, and answer their questions.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;During the technical interview, two good things usually happen for candidates.&lt;/p&gt;
+
+&lt;p&gt;First, they get a chance to get to know us better, understand what technologies we use, and what maturity level we represent. This allows them to imagine their future working environment in more detail.&lt;/p&gt;
+
+&lt;p&gt;Second, they get a professional evaluation of their skills in relation to market expectations. This is invaluable for understanding how they&amp;#39;re doing in comparison to other professionals in their fields. Moreover, when the live coding session is over, many candidates who did well are very satisfied. It boosts their confidence and makes the process valuable, even if, for some reason, we end up rejecting their application.&lt;/p&gt;
+
+&lt;h2&gt;Cultural fit and soft skills&lt;/h2&gt;
+
+&lt;p&gt;After the first two steps of the interview process, we have a brief understanding of the candidate&amp;#39;s experience. We know that their hard skills are on the required level. We still need to dive deeper into soft skills, previous responsibilities, expectations, and cultural fit. It helps us to find potential blind spots.&lt;/p&gt;
+
+&lt;p&gt;At the last step, our process engages around 6 employees. Each of them has a 30-minute call with a candidate. Involving so many people sounds expensive and time-consuming, but so is making a bad hire. The more team members participate in the process (up to a certain level), the more comprehensive the candidate image we are able to build. It minimizes the number of bad hiring decisions and allows the team to pick their new workmates.&lt;/p&gt;
+
+&lt;p&gt;In our experience, companies rarely make this kind of effort. That&amp;#39;s why our approach not only gives a chance to gather more information about the candidate but also helps us stand out from the crowd. On the other hand, for candidates, it offers a great opportunity to get to know the team and the company.&lt;/p&gt;
+
+&lt;p&gt;It&amp;#39;s crucial to have a structure for each conversation. We don&amp;#39;t want to just hang out with candidates but also spot potential problems. Here&amp;#39;s what we especially look for during these calls.&lt;/p&gt;
+
+&lt;h3&gt;Soft skills and expectations&lt;/h3&gt;
+
+&lt;p&gt;From the candidate&amp;#39;s perspective, it&amp;#39;s essential to understand how we differ from the competitors. This is also something that we mention during the first interview, but it requires constant reminders. Now is the time to give them a proper introduction and lay out the concept in more detail.&lt;/p&gt;
+
+&lt;p&gt;Oftentimes we experience &amp;#39;aha&amp;#39; moments when the candidate realizes what our environment really looks like. I always tell the story of how we help T-shaped individuals &lt;sup&gt;&lt;a href="#note-1"&gt;[1]&lt;/a&gt;&lt;/sup&gt; to flourish. One of the best examples involves our &lt;a href="https://maciejgalkiewicz.com/2018/05/08/self-set-salaries/"&gt;self-set salary process&lt;/a&gt;. By the time I have a chance to speak with the candidate, they usually have a vague idea about how it works. They often don&amp;#39;t realize that they will be ultimately responsible for their own salary, and no one, not even me, can influence it.&lt;/p&gt;
+
+&lt;p&gt;But back to what matters now: understanding the value proposition makes all the difference in the long run.&lt;/p&gt;
+
+&lt;p&gt;We want to avoid a situation where someone leaves after 3 to 6 months because the job is not what they expected to be.&lt;/p&gt;
+
+&lt;p&gt;From the company perspective, we need to make sure that the candidate is really able to handle the job.&lt;/p&gt;
+
+&lt;p&gt;An example of that would be asking about the experience of working with external clients. All of our projects require such interactions. If we see potential red flags here, we note them down and discuss them with the rest of the interviewers later on.&lt;/p&gt;
+
+&lt;p&gt;Another good example is when interviewing someone who is or was a team leader. Our expectation is that such people should be able to solve problems within the team, pick new team members, and, of course, handle interactions with the client. Oftentimes, the experience of candidates is limited to interacting with clients to some degree or simply being the most experienced member in a team.&lt;/p&gt;
+
+&lt;h3&gt;Culture fit&lt;/h3&gt;
+
+&lt;p&gt;Culture fit is my favorite part. We look at our &lt;a href="https://ragnarson.com/core-values/"&gt;core values&lt;/a&gt; for guidance. We also have a scorecard with sample questions to make sure that every &amp;quot;recruiter&amp;quot; is on the same page during the last stage of our recruitment process.&lt;/p&gt;
+
+&lt;p&gt;For example, one of our core values is growth. Obviously, every candidate claims that they are looking for it.&lt;/p&gt;
+
+&lt;p&gt;Perhaps that&amp;#39;s even true in most cases. The difference is how we define growth. How often are people expected to leave their comfort zone? What kind of skills should they be developing?&lt;/p&gt;
+
+&lt;p&gt;We ask many indirect questions to understand how we both see it.&lt;/p&gt;
+
+&lt;p&gt;Another important aspect is how the candidate fits into the team in general. Since we&amp;#39;re a self-managed company, there are many responsibilities covered by people who wouldn&amp;#39;t necessarily be involved in them at other organizations. We try to understand whether the candidate is interested and willing to engage with various aspects of the company.&lt;/p&gt;
+
+&lt;p&gt;There are many people who have a narrow specialization and would rather have only responsibilities related to it directly.&lt;/p&gt;
+
+&lt;p&gt;There&amp;#39;s nothing wrong with that. It just means that such candidates are not always a good fit for us.&lt;/p&gt;
+
+&lt;h1&gt;Finalizing the process&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src="/2020/08/06/Motivated-team-starts-with-the-recruitment-process/screen2-c0732a5193.png" alt="Team overview" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once we have all pieces of the puzzle in place, it&amp;#39;s time to summarize what we know and accept or reject the candidate.&lt;/p&gt;
+
+&lt;p&gt;All interviewers participate in a 30- to 60-minute call.&lt;/p&gt;
+
+&lt;p&gt;We voice our impressions one by one and vote for or against the hire. This is not a democratic process. We always select one person who bears the burden of the decision. This person is responsible for managing the probation period and firing the candidate if something goes wrong.&lt;/p&gt;
+
+&lt;p&gt;Usually, the best person for the job is the team leader of the project who is going to be working with the candidate once they are hired. Usually, it&amp;#39;s one of the developers or our project manager. Such leaders emerge naturally and are expected to encourage their team in decision making. In the case of adding a new team member, the entire team provides feedback during the probation period and decides whether the new person stays at the company. If for some reason, things go wrong and the new hire needs to be fired, it&amp;#39;s the leader who pulls the trigger.&lt;/p&gt;
+
+&lt;p&gt;If the hiring decision is positive, we always make referral calls. For some obscure reason, I noticed that companies often omit this step.&lt;/p&gt;
+
+&lt;p&gt;I remember situations in which we learned that the candidate was responsible for a project that failed or had been fired. It gave us a chance to confront these findings with them and openly discuss their lessons learned to avoid such cases in the future.&lt;/p&gt;
+
+&lt;p&gt;If for some reason, the candidate is rejected, we provide them with extensive feedback. This is another way of improving the process and making the experience more valuable to them.&lt;/p&gt;
+
+&lt;h1&gt;Best practices&lt;/h1&gt;
+
+&lt;p&gt;Let&amp;#39;s summarize the most important aspects of the process. It should give you a better indication of how to design yours.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Make your recruitment process two-sided. Candidates need to &amp;#39;recruit&amp;#39; you as well. Otherwise, you risk losing them after a few months of working when they realize that your company is not what they were looking for.&lt;/li&gt;
+&lt;li&gt;Don&amp;#39;t sugarcoat your environment. There is always something that doesn&amp;#39;t work great, and I strongly suggest you be open about it. If it discourages the candidate, you might be saving both of you a lot of time and nerves.&lt;/li&gt;
+&lt;li&gt;Engage your team. It brings so many benefits to the process that it&amp;#39;s even hard to mention them all. The most important thing for the candidate is getting to know their future teammates beforehand. They can ask questions about the company first-hand and get honest feedback. And you can get a much broader and comprehensive picture of the candidate.&lt;/li&gt;
+&lt;li&gt;I believe that just like in sales, the best recruiters act as advisors to the candidate. They&amp;#39;re not someone looking to close a deal at all costs. We often challenge the decisions and preferences of candidates. We want to know how well-thought those choices are and whether our offer makes sense for them in the foreseeable future.&lt;/li&gt;
+&lt;li&gt;Provide candidates with feedback. It&amp;#39;s extremely valuable to them as it provides a reference point for future improvements. If the candidate was rejected, it also helps you to keep the door open and encourages them to get back to you once they meet your requirements.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Building thriving working environments is not only about their design and features. An important part of it is the people you invite to the table. Candidates have diverse preferences and because of that require different environments.&lt;/p&gt;
+
+&lt;p&gt;To minimize the chance of hiring someone who isn&amp;#39;t a good fit for your company, establish a process that makes the selection more accurate.&lt;/p&gt;
+
+&lt;p&gt;One of the biggest pitfalls I&amp;#39;ve seen is having a hiring process that is too one-sided. Companies check whether the candidate is good for them but not the other way around. They have little knowledge about candidates and hope that it all works itself out.&lt;/p&gt;
+
+&lt;p&gt;If there was only one thing I could ask a candidate, it would be about what drives them.&lt;/p&gt;
+
+&lt;p&gt;If what your organization offers doesn&amp;#39;t match their interests, don&amp;#39;t expect them to be motivated or engaged.&lt;/p&gt;
+
+&lt;p&gt;Managing expectations is the key.&lt;/p&gt;
+
+&lt;h1&gt;Notes&lt;/h1&gt;
+
+&lt;p&gt;&lt;span id="note-1"&gt;
+[1] More about t-shaped individuals can be found in &lt;a href="http://coevolving.com/blogs/index.php/archive/t-shaped-professionals-t-shaped-skills-hybrid-managers/"&gt;T-shaped Professionals, T-shaped Skills, Hybrid Managers by David Ing.&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>The right time to introduce structure to a development process</title>
+    <link rel="alternate" href="https://blog.ragnarson.com/2020/07/09/The-right-time-to-introduce-structure-to-a-development-process.html"/>
+    <id>https://blog.ragnarson.com/2020/07/09/The-right-time-to-introduce-structure-to-a-development-process.html</id>
+    <published>2020-07-09T02:00:00+02:00</published>
+    <updated>2020-12-01T10:43:55+01:00</updated>
+    <author>
+      <name>Grzesiek Kołodziejczyk</name>
+    </author>
+    <summary type="html">&lt;p&gt;Have you ever worked on a project where everything just flowed smoothly, work was getting done fast,  and your team was killing it? And have you ever worked on one that was complete chaos, where everyone was busy and nothing seemed to be getting done...&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;Have you ever worked on a project where everything just flowed smoothly, work was getting done fast,  and your team was killing it? And have you ever worked on one that was complete chaos, where everyone was busy and nothing seemed to be getting done?&lt;/p&gt;
+
+&lt;p&gt;We would all love to be part of projects that feel just right, where meaningful work gets done at a sustainable pace. One of the keys to achieving that is having an appropriate project management structure that matches the stage of the project.&lt;/p&gt;
+
+&lt;p&gt;When we start a new project, the possibilities are endless, but we narrow the scope down to just a few achievable areas. At this point, there&amp;#39;s hardly any complexity and the team is small. Everyone can keep track of everything that&amp;#39;s going on easily. It all &amp;quot;fits in your mind&amp;quot;.&lt;/p&gt;
+
+&lt;p&gt;Then, as the project grows, so does its complexity and the team size. We&amp;#39;re no longer working on exciting new things, we also have to deal with fixing bugs introduced before, and customer requests and support. As the project grows further, even more non-feature tasks come in: infrastructure, scaling, compliance, requests from the sales team, etc.&lt;/p&gt;
+
+&lt;h2&gt;First, you need to notice the problem&lt;/h2&gt;
+
+&lt;p&gt;Those transitions don&amp;#39;t happen overnight. They are slow processes. If you don&amp;#39;t pay attention, you might not even notice them happening. Here are a few questions that might help with that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Have you ever added a ticket/story for something that needed to be done, decided to plan it for later, only to come back to it a few months later and had no idea what the ticket is actually about and whether it&amp;#39;s still relevant?&lt;/li&gt;
+&lt;li&gt;Has your team spent an entire week working on &amp;quot;important&amp;quot; things that &amp;quot;just came up&amp;quot; during that week, and completed nothing you actually planned to do? Was it hard to even tell what you worked on during the next meeting?&lt;/li&gt;
+&lt;li&gt;Have you ever forgotten about issues reported by users or the internal team, only to have them reported again a few weeks later with even more frustration?&lt;/li&gt;
+&lt;li&gt;Have you ever wondered about the ratio of features, bugs and &amp;quot;other stuff&amp;quot; the team is working on, and had no way of checking that?&lt;/li&gt;
+&lt;li&gt;Do you feel that more new bugs are reported than fixed?&lt;/li&gt;
+&lt;li&gt;Do you feel that the project is becoming too complex and keeping track of everything is more challenging?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If those questions resonate with you, it might be the right time to update your project workflow.&lt;/p&gt;
+
+&lt;h2&gt;Reflect on your process&lt;/h2&gt;
+
+&lt;p&gt;At this point, you’re probably hoping that I’ll give you a golden solution that solves all those problems.&lt;/p&gt;
+
+&lt;p&gt;I wish there was an easy answer like &amp;quot;when you have more than five developers&amp;quot; or &amp;quot;when the backlog is this long&amp;quot;, then you should move from tool Y to tool X, and have exactly three meetings per week.&lt;/p&gt;
+
+&lt;p&gt;Instead, the best thing I can offer is to plan for regular pauses where you get the team together, look back at the past few weeks, and discuss the process. In the Scrum world, this is called a &lt;a href="https://www.agilealliance.org/glossary/heartbeatretro/#q=~(infinite~true~filters~(postType~(~'page~'post~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video~'aa_podcast)~tags~(~'retrospective))~searchTerm~'~sort~false~sortDirection~'asc~page~1)"&gt;Retrospective&lt;/a&gt;, but you don&amp;#39;t need to stick to any specific process. The main goal is to figure out what went well, what could be improved, and find some ideas for how to do it. Then try them during the next iteration.&lt;/p&gt;
+
+&lt;h2&gt;Strike the right balance&lt;/h2&gt;
+
+&lt;p&gt;People have a tendency to overreact. The questions above might prompt you to attempt resolving the problem &amp;quot;once and for all&amp;quot;. After all, we don&amp;#39;t want to spend more time than necessary on administrative issues.&lt;/p&gt;
+
+&lt;p&gt;It&amp;#39;s easy to add way too much structure than necessary in reaction to a frustrating lack of structure. You don&amp;#39;t want the paperwork to drag your team down. When you notice the first symptoms, don’t move straight to a full Scrum process with daily standups and a dedicated Scrum Master.&lt;/p&gt;
+
+&lt;h2&gt;The rule we&amp;#39;re using is: add more structure only if it hurts, and only enough so that it stops.&lt;/h2&gt;
+
+&lt;p&gt;Try to fine-tune smaller things first. Focus on describing the problem better in each ticket. Show to stakeholders why doing that is important. Improve your estimations - measure the time actually spent and compare it to what you expected on a regular basis. Set aside some time each week for the “unknown unknowns” - embrace the thought that something will always come up, and don’t let it break your schedule.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>How I transformed from a regular developer into a CEO of 30 people company overnight</title>
+    <link rel="alternate" href="https://blog.ragnarson.com/2020/06/16/How-I-transformed-from-a-regular-developer-into-a-CEO-of-30-people-company-overnight.html"/>
+    <id>https://blog.ragnarson.com/2020/06/16/How-I-transformed-from-a-regular-developer-into-a-CEO-of-30-people-company-overnight.html</id>
+    <published>2020-06-16T02:00:00+02:00</published>
+    <updated>2020-12-01T10:43:55+01:00</updated>
+    <author>
+      <name>Maciej Gałkiewicz</name>
+    </author>
+    <summary type="html">&lt;p&gt;During my studies, I became a DevOps engineer at Ragnarson, a software consultancy based in Łódź, Poland. The company was run by Łukasz Piestrzeniewicz, one of the key people in the Polish Ruby on Rails scene.&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;During my studies, I became a DevOps engineer at Ragnarson, a software consultancy based in Łódź, Poland. The company was run by Łukasz Piestrzeniewicz, one of the key people in the Polish Ruby on Rails scene.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;The work environment Łukasz and other colleagues have created was awesome. We felt like we owned a part of the company, and actually me and a few other people became its minor shareholders within the next few years.&lt;/p&gt;
+
+&lt;p&gt;But in late 2013, things weren’t looking good. We lost a major customer. &lt;a href="https://shellycloud.com/"&gt;Shellycloud.com&lt;/a&gt;, our own hosting startup (a Heroku alternative) was burning more money than we predicted. Łukasz was very stressed and we felt that he lost control over the company.&lt;/p&gt;
+
+&lt;p&gt;We’ve seen his struggle and together with the team decided to have a serious talk with him. We wanted to help, but didn’t know how. All we’ve been doing so far was just coding. The talk was tough but it resulted in Łukasz sharing some of his responsibilities with us. &lt;strong&gt;And then, 6 months later, he died.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;It was brain cancer. Three weeks after his diagnosis, he went through a surgery that failed. We were all deep in grief and shock.&lt;/p&gt;
+
+&lt;p&gt;And we didn’t know what to do. We just couldn’t throw away everything Łukasz built, and we really felt like the company is a part of our family. But, on the other hand, we didn’t know anything about managing a company. Where did the customers come from? How to manage the cash flow? How to run the company? And so on.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Normally, entrepreneurs build their companies from the ground up, learning everything as they go.&lt;/strong&gt; We were left with the decision to take over and run quite a big operation without any of that. Also, when we analysed the situation, it didn’t look so bright. The biggest project (30% of our revenue) was about to finish soon. The company had $30k cash in the bank and we were able to maintain a positive cashflow only thanks to a revolving loan.&lt;/p&gt;
+
+&lt;p&gt;We were scared, but we decided to stand up to the challenge. Together with me, four minor shareholders took over the management of the company. I became a CEO at 25 years old.&lt;/p&gt;
+
+&lt;p&gt;This is when the most challenging and rewarding five years of my life started.&lt;/p&gt;
+
+&lt;h2&gt;Crazy times&lt;/h2&gt;
+
+&lt;p&gt;The first episode of this story was the crazy 6 months we spent on trying to understand the company and take over responsibilities from simple tasks like paying taxes to negotiations with the customers. We didn’t know what to do but we started to do it, and with each month things became more understandable. We divided the responsibilities, met with customers, analysed our finances, and so on.&lt;/p&gt;
+
+&lt;p&gt;In the end we realised that, as for now the most important thing and at the same the toughest one, was bringing in new customers to fill a massive revenue gap after a loss of a big customer.&lt;/p&gt;
+
+&lt;p&gt;During all those years when Łukasz ran the company, our customers mainly came from Germany. The best idea we came up with was having me move to Berlin and start a “sales office” there. I still didn’t know how to get across to those people, but being there made it all more real.&lt;/p&gt;
+
+&lt;h2&gt;Berlin&lt;/h2&gt;
+
+&lt;p&gt;On November 1st, 2014, I arrived in Berlin, rented an Airbnb and started thinking about what to do next. I needed to meet some people and build my business network - and do it fast (no pressure at all).&lt;/p&gt;
+
+&lt;p&gt;I started meeting with people from Łukasz’s network, our customers, past customers, everyone I could contact. We didn’t have a proper CRM in place, so a lot of those contacts disappeared with Łukasz. The meetings were nice and compassionate (imagine meeting a 25-year-old scared kid who moved to a big city with a business card labeled “CEO”) but didn’t bring any business.&lt;/p&gt;
+
+&lt;p&gt;So I started to attend every kind of business networking event I could find in Berlin. Most of the time, I met guys like me coming from Eastern Europe and trying to pitch their services to German startups. I became better and better at networking, but it still didn’t work well. There was a lot of competition and I lacked confidence in what I was trying to sell.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, I tried to organize my personal life in Berlin. My girlfriend moved with me and we tried to find our place in the city.&lt;/p&gt;
+
+&lt;h2&gt;Up and to the right&lt;/h2&gt;
+
+&lt;p&gt;Then, a small miracle happened. Out of the blue, one of our past customers introduced us to a startup that needed exactly the skills we had. They needed to hire a large team fast; fortunately, we had people ready to work right away. The project was big enough to totally turn the table. We began 1.5 years of prosperity. Soon, the next big project happened, we became fully booked, and started to hire new people. We were able to find a project for each new developer almost instantly.&lt;/p&gt;
+
+&lt;p&gt;We started to make internal changes, parted with two founders and brought one more (Grzegorz Kołodziejczyk) onboard. We were in love with ideas like teal organizations and holocracy so we started to slowly change into a flat, totally transparent company.&lt;/p&gt;
+
+&lt;p&gt;From sad-poles-looking-for-hire we changed into kings of life as money poured into the company like never before. We were so confident that we were nailing it that during the next months we hired 8 people we didn’t have a project for, waiting for the next customer to call us.&lt;/p&gt;
+
+&lt;p&gt;We weren’t the wolves of Wall Street yet, but we came pretty close. It lasted for over a year.&lt;/p&gt;
+
+&lt;p&gt;On August 12th, 2016, Friday at 17.44 (I remember the moment as if  it was yesterday) our biggest customer called us saying that he was ending the contract immediately and within 2 weeks several developers were going to be left without a project.&lt;/p&gt;
+
+&lt;p&gt;We still believed that we would figure it out with our good run. But 6 weeks later, the second biggest customer told us that his funding is finished and we need to stop our collaboration.&lt;/p&gt;
+
+&lt;h2&gt;The crisis and the second miracle&lt;/h2&gt;
+
+&lt;p&gt;Things started to look really bad. We were burning more cash than ever and needed to act fast. We decided to lay off 30% of the people and cut all of the costs we could. And then get back to figuring out how to get new customers on board.&lt;/p&gt;
+
+&lt;p&gt;2017 was the year when we tried all the ideas we could come up with. From content marketing to networking, ad campaigns and cold mailing. We traveled all over Europe trying to find a new project.&lt;/p&gt;
+
+&lt;p&gt;Eventually, we were able to bring in a few smaller projects, but they didn’t change our situation.&lt;/p&gt;
+
+&lt;p&gt;The help came from a totally different direction. Back in the beginning of 2016, Guy, a friend of Ragnarson, called me saying that he had spotted an awesome startup that needed our help. But they didn’t have any cash at the time.&lt;/p&gt;
+
+&lt;p&gt;A few months later, he called me again, this time to tell me that this startup still didn’t have cash for our services, but he decided to join them. I knew that if Guy decided to engage, there was a big chance that they would succeed.&lt;/p&gt;
+
+&lt;p&gt;After an internal discussion, we decided to take the risk and lend a few developers for this project free of charge, counting on the idea to sprout.&lt;/p&gt;
+
+&lt;p&gt;This startup was Vehiculum, today one of the leaders in the car rental space with over 100 employees and 10 mln EUR in funding. In 2017, they were able to start paying for our services and their needs grew. We began to secure our situation.&lt;/p&gt;
+
+&lt;p&gt;At the same time, referrals from our customers started to come in and we kicked off new projects. At the end of 2017, we were back on track. But this time, we did it without the “wolves of Wall Street” attitude. We rebuilt the company slowly up to the point where we are right now.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/2020/06/16/How-I-transformed-from-a-regular-developer-into-a-CEO-of-30-people-company-overnight/Teamcover-c0420d08c0.jpg" alt="team overview" /&gt;
+&lt;em&gt;Ragnarson 10th anniversary, Łódź&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2&gt;And where are we exactly?&lt;/h2&gt;
+
+&lt;p&gt;Our customers include some of the top European startups, such as Vehiculum, HeyJobs, GrowthMentor, and mature organisations like A-connect, Verivox, and the Zurich University of Art.&lt;/p&gt;
+
+&lt;p&gt;Our team is smaller than during the times of prosperity, but we constantly hire new developers.&lt;/p&gt;
+
+&lt;p&gt;We have a stable situation and were able to secure enough cash that we decided to invest in impactful pre-seed startups. In 2019 we started the &lt;a href="https://ragnarson.com/pdf/ragnarson-fund-one-pager.pdf"&gt;Ragnarson Fund&lt;/a&gt; which is a big part of our strategy for the years to come.&lt;/p&gt;
+
+&lt;p&gt;We feel that we understand and control our business. We changed into a &lt;a href="https://en.wikipedia.org/wiki/Teal_organisation#:~:text=A%20Teal%20organisation%20is%20an,the%20operations%20of%20an%20organization."&gt;teal organisation&lt;/a&gt;, hired a marketing team, and know exactly where we are and where we want to be. We are still keeping Łukasz’s legacy alive, but made it our own way.&lt;/p&gt;
+
+&lt;h2&gt;What did I learn?&lt;/h2&gt;
+
+&lt;p&gt;I had no idea what I was getting into back in 2014 when I decided to take over as a CEO. It happened to be a rocky road, with a lot of ups and downs. It was the most challenging time of my life but also the time when I learned the most about running a business and myself.&lt;/p&gt;
+
+&lt;p&gt;Here are three important takeaways I got from my story.&lt;/p&gt;
+
+&lt;h2&gt;Humility&lt;/h2&gt;
+
+&lt;p&gt;Failures and crises bring a lot of learning opportunities. When you go through all the phases of the business cycle, you start to understand how easy it is to lose everything. It reminds you of the times of prosperity and how you wasted it on doing the wrong things while you still had the chance to have some control over your future. I was quite aware of the danger of going bankrupt but I still had a hard time doing something about it. I’m much more humble today after all those lessons.&lt;/p&gt;
+
+&lt;h2&gt;There are a lot of things that you can do, but only a few that really matter&lt;/h2&gt;
+
+&lt;p&gt;At the beginning of this journey, I had a vague and limited understanding of the complexity of running a business. Once you focus on improving something, you quickly learn that things are more complicated than you thought. You can spend 12h each day running a business, but still feel that there is much more you should do. That&amp;#39;s why you have to focus on the essentials. In our case, it was sales and it took some time before we realized that despite how hard it is for us, it’s the only thing we need to focus on.&lt;/p&gt;
+
+&lt;h2&gt;Sharing the responsibility&lt;/h2&gt;
+
+&lt;p&gt;It takes time to learn how deep you should go, and where the right balance between quality and a good-enough solution is. In the meantime, life happens and messes with you, your team, and your plans. To be able to navigate the situation &lt;strong&gt;I needed to appreciate how complex, unpredictable and messy the world of building companies is, and how many skills and how much collaboration is required to make it work in the long run&lt;/strong&gt;. That’s why having a team of employees and co-founders that have your back is what helped me the most. Being a teal organisation means that the responsibility for the success and failures is shared among the team, and though difficult to build, it helped us to survive the toughest moments.&lt;/p&gt;
+</content>
+  </entry>
+</feed>

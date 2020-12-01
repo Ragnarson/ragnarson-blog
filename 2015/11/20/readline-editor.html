@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Readline Editor - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/11/20/readline-editor.html" property="og:url" /><meta content="Readline Editor" property="og:title" /><meta content="Last weekend I watched a really enjoyable talk about the Readline editor
+by George Brocklehurst.
+It interested me enough to do some extra investigation.
+This article shares the results of my little research." property="og:description" /><meta content="Bartłomiej Kozal" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@_bkzl" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Readline Editor","url":"https://blog.ragnarson.com/2015/11/20/readline-editor.html","author":{"@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-11-20","dateModified":"2015-11-20"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="11ec30dedeb7889af512461ba7ce6a45" /><div class="article-meta">November 20, 2015 - <a href="/authors/bartlomiej-kozal.html">Bartłomiej Kozal</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2015/11/20/readline-editor.html">Readline Editor</a></h1></header><p>Last weekend I watched a really enjoyable talk about the <a href="https://www.youtube.com/watch?v=MxRTh8wlmJk">Readline editor
+by George Brocklehurst</a>.
+It interested me enough to do some extra investigation.
+This article shares the results of my little research.</p>
+
+<p></p>
+
+<p>What is Readline? In one sentence, it&#39;s an inline text editor extracted from
+GNU Bash. You&#39;re using it every time you type things in the Unix shell.
+Its implementation is widespread, used by other software like IRB, well-known
+to Ruby programmers.</p>
+
+<p><em>If you are a Z shell user you need to know that zsh has its own library,
+similar to Readline, called ZLE (Zsh Line Editor). This means that key
+shortcuts won&#39;t work in the same way they do in Bash, and configuration
+is totally different.</em></p>
+
+<h2>Config file</h2>
+
+<p>Readline has some interesting additional options that are disabled by default.
+To enable them you should create an <code>.inputrc</code> file in your home directory and
+put your settings there. Below is an example configuration file with
+some explanations:</p>
+<pre class="highlight shell"><code><span class="c"># always expand `~` to user's directory full path</span>
+<span class="nb">set </span>expand-tilde on
+
+<span class="c"># show extra information in the output, similar to `ls -F`</span>
+<span class="nb">set </span>visible-stats on
+
+<span class="c"># make autocomplete case-insensitive</span>
+<span class="nb">set </span>completion-ignore-case on
+
+<span class="c"># immediately show the completions list</span>
+<span class="nb">set </span>show-all-if-ambiguous on
+<span class="nb">set </span>show-all-if-unmodified on
+
+<span class="c"># add a trailing slash to symlinked directories</span>
+<span class="nb">set </span>mark-symlinked-directories on
+
+<span class="c"># disable the "-- more --" prompt for long lists</span>
+<span class="nb">set </span>page-completions off
+
+<span class="c"># show the "Display (...) possibilities?" prompt only for long lists</span>
+<span class="nb">set </span>completion-query-items 400
+
+<span class="c"># disable the sound bell</span>
+<span class="nb">set </span>bell-style none
+
+<span class="c"># edit a long command line in a single screen line</span>
+<span class="nb">set </span>horizontal-scroll-mode on
+</code></pre>
+
+<h2>Keyboard shortcuts</h2>
+
+<p>Firstly, make sure that you have enabled meta key support in your terminal
+preferences, OS X Terminal doesn&#39;t do this by default. This special key,
+usually the left “alt” on the keyboard, is used for some key shortcuts.</p>
+
+<p>Secondly, you can switch editing mode from emacs to vim, just add the
+following line to inputrc: <code>set editing-mode vi</code>. In my opinion, the emacs
+mode is more natural and handier, even for the vim users. This is a list of the
+most useful bindings:</p>
+<pre class="highlight shell"><code>ctrl-w <span class="c"># delete the previous word</span>
+</code></pre>
+
+<p><img src="/2015/11/20/readline-editor/ctrl-w-c084c3c482.gif" alt="ctrl-w" /></p>
+<pre class="highlight shell"><code>ctrl-_ <span class="c"># undo the last editing</span>
+ctrl-y <span class="c"># paste the last deleted word</span>
+</code></pre>
+
+<p><img src="/2015/11/20/readline-editor/ctrl-y-c02ef8c686.gif" alt="ctrl-y" /></p>
+<pre class="highlight shell"><code>ctrl-a <span class="c"># move the cursor to the start of the line</span>
+ctrl-e <span class="c"># move the cursor to the end of the line</span>
+</code></pre>
+
+<p><img src="/2015/11/20/readline-editor/ctrl-a-ctrl-e-c085bee1c7.gif" alt="ctrl-a-ctrl-e" /></p>
+<pre class="highlight shell"><code>meta-b <span class="c"># move the cursor one word backward</span>
+meta-f <span class="c"># move the cursor one word forward</span>
+</code></pre>
+
+<p><img src="/2015/11/20/readline-editor/meta-b-meta-f-c0afd6ce97.gif" alt="meta-b-meta-f" /></p>
+<pre class="highlight shell"><code>meta-t <span class="c"># swap the places of the last two words</span>
+</code></pre>
+
+<p><img src="/2015/11/20/readline-editor/meta-t-c0b1b1b31a.gif" alt="meta-t" /></p>
+<pre class="highlight shell"><code>ctrl-meta-y <span class="c"># paste the first argument of the last executed command</span>
+meta-_ <span class="c"># paste the last argument of the last executed command</span>
+</code></pre>
+
+<p><img src="/2015/11/20/readline-editor/ctrl-meta-y-c01b253629.gif" alt="ctrl-meta-y" /></p>
+
+<p>And that&#39;s all. If this topic seems interesting to you, check out these links:</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=MxRTh8wlmJk">George Brocklehurst talk</a></li>
+<li><a href="http://cnswww.cns.cwru.edu/php/chet/readline/rluserman.html">Readline documentation</a></li>
+<li><a href="http://www.bigsmoke.us/readline/shortcuts">More keyboard shortcuts</a></li>
+<li><a href="http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html">ZLE documentation</a></li>
+</ul>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

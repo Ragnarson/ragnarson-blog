@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Introduction to fragment caching in Rails - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2016/11/02/introduction-to-fragment-caching-in-rails.html" property="og:url" /><meta content="Introduction to fragment caching in Rails" property="og:title" /><meta content="You’ve probably read or heard a lot that the two most difficult concepts in computer science are naming things and cache invalidation. The quote has appeared numerous times in books, blogs, and other programming sources in one form or another. While the only remedies for coming up with names are practicing a lot, being clear in our intentions or having a sudden epiphany (none of which are quick and simple), Rails tries to help us with the caching part as much as possible. Caching can significantly improve web application performance. This requires little additional code, especially if we have a large number of complex partial rendering." property="og:description" /><meta content="Marcin Drozd" name="author" /><meta content="https://blog.ragnarson.com/2016/11/02/introduction-to-fragment-caching-in-rails/cover-c08338316e.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Marcin Drozd","image":"https://www.gravatar.com/avatar/405b27118b744cfdf9031fd8686c2f01.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Introduction to fragment caching in Rails","url":"https://blog.ragnarson.com/2016/11/02/introduction-to-fragment-caching-in-rails.html","author":{"@type":"Person","name":"Marcin Drozd","image":"https://www.gravatar.com/avatar/405b27118b744cfdf9031fd8686c2f01.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2016-11-02","dateModified":"2016-11-02","image":"https://blog.ragnarson.com/2016/11/02/introduction-to-fragment-caching-in-rails/cover-c08338316e.png"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/405b27118b744cfdf9031fd8686c2f01.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="405b27118b744cfdf9031fd8686c2f01" /><div class="article-meta">November  2, 2016 - <a href="/authors/marcin-drozd.html">Marcin Drozd</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2016/11/02/introduction-to-fragment-caching-in-rails.html">Introduction to fragment caching in Rails</a></h1></header><img src='/2016/11/02/introduction-to-fragment-caching-in-rails/cover-c08338316e.png'/><p>You’ve probably read or heard a lot that the two most difficult concepts in computer science are naming things and cache invalidation. The quote has appeared numerous times in books, blogs, and other programming sources in one form or another. While the only remedies for coming up with names are practicing a lot, being clear in our intentions or having a sudden epiphany (none of which are quick and simple), Rails tries to help us with the caching part as much as possible. Caching can significantly improve web application performance. This requires little additional code, especially if we have a large number of complex partial rendering.</p>
+
+<p></p>
+
+<p>There is a lot of different things that we can cache in Rails: actions, SQL queries which are taken care of automatically for us, and page fragments. You can find an overview of all of those in <a href="http://guides.rubyonrails.org/">the official Rails guides</a>. Here we will focus on the fragment caching in views. We will discuss how it works, when it can be used and what are some gotchas or things we need to be mindful of.</p>
+
+<p>We will also uncover the mystery of the cover for this post (that is unless you are already familiar with this concept).</p>
+
+<h3>What exactly is fragment caching?</h3>
+
+<p>In order to help you understand fragment caching, let me first show an example structure that we will be working with throughout this article. This is a rather standard fragment of code that we can encounter in a typical Rails application. We have posts and these posts have multiple comments. We are displaying all of them on a page using appropriate partials:</p>
+<pre class="highlight erb"><code># posts/show.html.erb
+
+<span class="nt">&lt;h1&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">body</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+
+<span class="cp">&lt;%=</span> <span class="n">render</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">comments</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>The last part will look for <code>_comment.html.erb</code> partial and use it for displaying a collection of comments for this particular post. The partial is very simple as we will just use it as an example for caching:</p>
+<pre class="highlight erb"><code># comments/_comment.html.erb
+
+<span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">comment</span><span class="p">.</span><span class="nf">body</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+</code></pre>
+
+<p>Whenever we visit a post page, Rails on the server side will fetch all the required objects from the database, render the views and send the requested page back to the browser. This may not be a problem in such a simple case, but when we have multiple nested partial views and multiple records (such as comments), then rendering the page for each request can take some time. It can be easily sped up with caching. This is especially useful if a page is requested by multiple users and is not likely to change very frequently.</p>
+
+<p>When we turn the caching on, the application will do all the usual stuff for the first request and then save the completely rendered view to some kind of storage. It can be stored in memory, but usually Memcached or Redis will be used in the production environment. Then, whenever the same view is requested again, the application will check whether a version of it is already available in the cache. If it finds it there, then instead of getting data from the database, transforming it, rendering the views, etc. it will grab the saved version from the storage and send it to the browser. This will make our page faster and work for all the users visiting the page, not just the one who submitted the initial request. We just need to be aware of two things:</p>
+
+<ul>
+<li>A partial should not have elements that are specific to the context, e.g. to a particular user visiting the page. Therefore, any references to the <code>current_user</code> should be removed from the cached element. The partials should be built in a way that would work for multiple people without any changes.</li>
+<li>We need to be able to determine when something on the page has changed, like another comment was added. If we don’t let the application know that something has been updated, then the user would see the old stored version of the page. Fortunately, Rails makes this part easier for us and we will see an example a bit later.</li>
+</ul>
+
+<p>Fragment caching is a lot more useful than full page caching, especially in complex applications. They are usually built with smaller components and it would not be productive to cache the entire pages. A change to one small part of the site would require re-rendering the full page and storing it again. That would negate the benefits of caching quite quickly. It is more useful and manageable just to target smaller bits.</p>
+
+<h3>Turning on caching in development mode in Rails</h3>
+
+<p>Before we start with some examples, we need to turn on the caching in the development environment as it is turned off by default (though it is enabled in production). To do this in Rails 4, we need to change the appropriate option in the configuration settings.</p>
+<pre class="highlight plaintext"><code>config.action_controller.perform_caching = true
+</code></pre>
+
+<p>Rails 5 made it quicker and easier to toggle. We can use a rake task, by typing <code>rails dev:cache</code> in our shell and pressing enter. To turn it off, we just use the same command once again.</p>
+
+<h3>How fragment caching works in Rails</h3>
+
+<p>In order to cache some part of a view in Rails we surround it with a <code>cache</code> block, like the following example for comments:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="n">cache</span> <span class="k">do</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">comment</span><span class="p">.</span><span class="nf">body</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>Everything between the <code>cache do … end</code> block will be cached and saved to a selected store. We need a way to properly identify the cached elements. Otherwise, the application would use the same cached item for each element in the collection and display the same comment over and over again. We also need a way to tell when something has changed and the version of the page we have in the cache is no longer the one that we want. We need to add some key for identification purposes. We can pass a second argument to the <code>cache</code> method. The key needs to be unique for each partial that is generated so that proper details are written and read from the cache. There is a column that is unique for objects in our database so we can use a part of the key. It is the object&#39;s id.</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="n">cache</span> <span class="s2">"comment-</span><span class="si">#{</span><span class="n">comment</span><span class="p">.</span><span class="nf">id</span><span class="si">}</span><span class="s2">"</span> <span class="k">do</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">comment</span><span class="p">.</span><span class="nf">body</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>Now every comment will be saved under <code>view/comment-id-of-the-comment</code> in the cache storage. This will work fine, but Rails will do a better job for us automatically if we pass the object instance to the method:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="n">cache</span> <span class="n">comment</span> <span class="k">do</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">comment</span><span class="p">.</span><span class="nf">body</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>Now when we refresh the page, Rails will parse the object mentioned after the <code>cache</code> method and write it under a folder like this:
+<code>views/comments/1-20160820173406734241/dc2dabdcef7aee08968d3c45b8b9b0de</code></p>
+
+<p>We are getting something extra with the above code. The automatically assigned key contains object model name, id, updated_at timestamp and a hash value with some additional details (more on these a bit later). All that information is automatically taken from the object itself and we don’t need to do anything else. Now each cached comment will have its own unique identifier so Rails will know what is saved where and when. It will also get the required elements for us on the subsequent requests to this page.</p>
+
+<p>The date part of the cache key is used when we update a comment - the timestamp will change and since Rails will not find the cached view with that key, it will write a new one. The last part in the above example is a hash value that holds information about the template used for the view. So when we add something to our comment partial (like an additional field or some new HTML code), it will know that something has changed, cache key is invalid and a new entry should be created. All this is done automatically for us.</p>
+
+<p>The <code>cache</code> method accepts also an array if we want more details saved as a cache key. For example, we can add some string:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="n">cache</span> <span class="p">[</span><span class="s2">"test"</span><span class="p">,</span> <span class="n">comment</span><span class="p">]</span> <span class="k">do</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>This will result in the following folder structure: <code>views/test/comments/the-remaining-part-as-above</code>. This might be useful if we want to build more complex cache keys.</p>
+
+<p>With the cache block in place when we access the page for the first time and look into the logs we will see that the rendered partials are being stored.</p>
+<pre class="highlight ruby"><code><span class="no">Read</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">20160820173406734241</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Write</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">20160820173406734241</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Read</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">20160820173412761671</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Write</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">20160820173412761671</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Read</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">3</span><span class="o">-</span><span class="mi">20160820173416161439</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Write</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">3</span><span class="o">-</span><span class="mi">20160820173416161439</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="n">ms</span><span class="p">)</span>
+</code></pre>
+
+<p>Next time, they will be read from the cache.</p>
+<pre class="highlight ruby"><code><span class="no">Read</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">20160820173406734241</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Read</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">20160820173412761671</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Read</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">3</span><span class="o">-</span><span class="mi">20160820173416161439</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="n">ms</span><span class="p">)</span>
+</code></pre>
+
+<p>When we change something in the first comment, the cache for it will be rewritten. Other comments will still be grabbed from the cache.</p>
+<pre class="highlight ruby"><code><span class="no">Read</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">20160820173946997647</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Write</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">20160820173946997647</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Read</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">20160820173412761671</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Read</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">3</span><span class="o">-</span><span class="mi">20160820173416161439</span><span class="o">/</span><span class="n">dc2dabdcef7aee08968d3c45b8b9b0de</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="n">ms</span><span class="p">)</span>
+</code></pre>
+
+<h3>Working with the nested partials</h3>
+
+<p>We have now cached our comments with one command. We would also like to cache the parent object, the post that holds the comments. First, we will add the <code>cache</code> keyword again, with the appropriate object as a key, <code>@post</code> in this example.</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="n">cache</span> <span class="vi">@post</span> <span class="k">do</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;h1&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">body</span> <span class="cp">%&gt;</span><span class="nt">&lt;/h2&gt;</span>
+
+  <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">comments</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>Great, now the post is saved to the cache with a proper key and everything should be awesome. The best part is that when we have the post and underlying comments cached, it will just check the parent element and grab everything from the cache (including comments), without hitting the database or re-rendering the comments:</p>
+<pre class="highlight ruby"><code><span class="no">Started</span> <span class="no">GET</span> <span class="s2">"/posts/1"</span> <span class="k">for</span> <span class="o">::</span><span class="mi">1</span> <span class="n">at</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">20</span> <span class="mi">19</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="mi">53</span> <span class="o">+</span><span class="mo">0200</span>
+<span class="no">Processing</span> <span class="n">by</span> <span class="no">PostsController</span><span class="c1">#show as HTML</span>
+<span class="no">Parameters</span><span class="p">:</span> <span class="p">{</span><span class="s2">"id"</span><span class="o">=&gt;</span><span class="s2">"1"</span><span class="p">}</span>
+<span class="no">Post</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="n">ms</span><span class="p">)</span>  <span class="no">SELECT</span>  <span class="s2">"posts"</span><span class="p">.</span><span class="nf">*</span> <span class="no">FROM</span> <span class="s2">"posts"</span> <span class="no">WHERE</span> <span class="s2">"posts"</span><span class="o">.</span><span class="s2">"id"</span> <span class="o">=</span> <span class="p">?</span> <span class="no">LIMIT</span> <span class="p">?</span>  <span class="p">[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="s2">"LIMIT"</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="no">Rendering</span> <span class="n">posts</span><span class="o">/</span><span class="n">show</span><span class="p">.</span><span class="nf">html</span><span class="p">.</span><span class="nf">erb</span> <span class="n">within</span> <span class="n">layouts</span><span class="o">/</span><span class="n">application</span>
+<span class="no">Read</span> <span class="n">fragment</span> <span class="n">views</span><span class="o">/</span><span class="n">posts</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">20160820173300335185</span><span class="o">/</span><span class="n">d9d3e5734628bf0ed839791c0d9e965b</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Rendered</span> <span class="n">posts</span><span class="o">/</span><span class="n">show</span><span class="p">.</span><span class="nf">html</span><span class="p">.</span><span class="nf">erb</span> <span class="n">within</span> <span class="n">layouts</span><span class="o">/</span><span class="n">application</span> <span class="p">(</span><span class="mi">3</span><span class="o">.</span><span class="mi">6</span><span class="n">ms</span><span class="p">)</span>
+<span class="no">Completed</span> <span class="mi">200</span> <span class="no">OK</span> <span class="k">in</span> <span class="mi">22</span><span class="n">ms</span> <span class="p">(</span><span class="no">Views</span><span class="p">:</span> <span class="mi">19</span><span class="o">.</span><span class="mi">1</span><span class="n">ms</span> <span class="o">|</span> <span class="no">ActiveRecord</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="n">ms</span><span class="p">)</span>
+</code></pre>
+
+<p>There is just one issue resulting from the above behavior. When you add a new comment or edit existing one for the cached post and then refresh the page it will still look like the old one. What happened?</p>
+
+<p>Well, the post was saved to the cache with all the cached partials and with the appropriate key. When we changed a comment, this did not change the key for the parent post, so the application did not know that anything has changed. It just checked the key for the post first, found it and never bothered to compare anything beneath it. This is not good, but there is a quick fix for this.</p>
+
+<p>We know that a part of a key for the cached elements contains information about the object update time. We just need a way to change the parent post’s <code>updated_at</code> date when we change something in the comments. In order to do this in Rails, we need to add <code>touch: true</code> for the comments to posts <code>belongs_to</code> association.</p>
+<pre class="highlight ruby"><code><span class="c1"># models/comment.rb</span>
+<span class="n">belongs_to</span> <span class="ss">:post</span><span class="p">,</span> <span class="ss">touch: </span><span class="kp">true</span>
+</code></pre>
+
+<p>Now, whenever we add new or update existing comment, <code>updated_at</code> for the parent post will be updated as well and cache key will expire. This will re-render the required partials and update those that need updating. Everything will be working as expected again.</p>
+
+<p>You may be wondering what will happen if we change the template for the comment, though? Will the cached post know about it? Yes, it will. The hash value part of the cache key contains details about the parent partial as well as information about all the children partials so no work is required here. Everything will happen automatically.</p>
+
+<p>The nested caching that we’ve done above, where one partial is cached inside of another, is called Russian doll caching (yay for the cover!). It gives us some benefits. Whenever one of the comments changes, the cache will be updated just for this one comment. The others will still be read from the cache as previously. Also when the parent object changes, only this object will be added to the cache, children comments will still be grabbed from the store.</p>
+
+<p>There is one more thing that we can do to make our comment collection caching better. When you look at the logs, you can see that each partial for a comment is read individually. We can improve this with an additional option passed to the partial rendering. This will make reading from cache even faster. The option is <code>cached: true</code>.</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%=</span> <span class="n">render</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">comments</span><span class="p">,</span> <span class="ss">cached: </span><span class="kp">true</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>Now everything will be grabbed by Rails in one go. If anything needs updating, it will also be updated immediately and summary will be displayed in one line in the logs. Everything will work as previously but with a single trip to the cache instead of one per element.</p>
+<pre class="highlight ruby"><code><span class="no">Rendered</span> <span class="n">collection</span> <span class="n">of</span> <span class="n">comments</span><span class="o">/</span><span class="n">_comment</span><span class="p">.</span><span class="nf">html</span><span class="p">.</span><span class="nf">erb</span> <span class="p">[</span><span class="mi">8</span> <span class="o">/</span> <span class="mi">9</span> <span class="n">cache</span> <span class="n">hits</span><span class="p">]</span> <span class="p">(</span><span class="mi">2</span><span class="o">.</span><span class="mi">6</span><span class="n">ms</span><span class="p">)</span>
+</code></pre>
+
+<p>If Memcached is used as a storage, this will automatically make it use <code>get multi</code> instead of regular <code>get</code> to read all the record at once as well.</p>
+
+<h3>Wrap up</h3>
+
+<p>Fragment caching is a great and easily accessible tool that we can use to quickly improve the performance of our applications. This is just an introductory post, but I wanted to give you an idea of how everything works and what tools are available in Rails out of the box. There are some other things to consider, like storage options for cached elements, more complex view fragments, other elements that can be cached etc. Still, I hope this article will familiarize you with the basics and encourage experimenting with caching in Rails.</p>
+
+<p>I have also prepared a simple application for you to quickly test caching, check other available options or just play around with the code. <a href="https://github.com/marcindrozd/fragment-caching-example">The application can be found here.</a></p>
+
+<p><br></p>
+
+<h5>Further reading:</h5>
+
+<ul>
+<li><a href="http://guides.rubyonrails.org/caching_with_rails.html">http://guides.rubyonrails.org/caching_with_rails.html</a></li>
+<li><a href="https://www.nateberkopec.com/2015/07/15/the-complete-guide-to-rails-caching.html">https://www.nateberkopec.com/2015/07/15/the-complete-guide-to-rails-caching.html</a></li>
+</ul>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Problems with typical Rails controllers and before actions - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/09/30/problems-with-typical-rails-controllers-and-before-actions.html" property="og:url" /><meta content="Problems with typical Rails controllers and before actions" property="og:title" /><meta content="One of the most common practices when writing controllers in Rails is using before_actions to keep them DRY. Sure, repeating code is a bad practice and leads to maintenance nightmare, but what happens when the readability drastically deteriorates after making the code DRY to the max? Is it still worth it? Let's see how it applies to controllers, what are the consequences and possible solutions" property="og:description" /><meta content="Karol Galanciak" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@azdaroth" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Karol Galanciak","image":"https://www.gravatar.com/avatar/40716cc1589577b8eb672d97953c264f.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Problems with typical Rails controllers and before actions","url":"https://blog.ragnarson.com/2015/09/30/problems-with-typical-rails-controllers-and-before-actions.html","author":{"@type":"Person","name":"Karol Galanciak","image":"https://www.gravatar.com/avatar/40716cc1589577b8eb672d97953c264f.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-09-30","dateModified":"2015-09-30"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/40716cc1589577b8eb672d97953c264f.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="40716cc1589577b8eb672d97953c264f" /><div class="article-meta">September 30, 2015 - <a href="/authors/karol-galanciak.html">Karol Galanciak</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2015/09/30/problems-with-typical-rails-controllers-and-before-actions.html">Problems with typical Rails controllers and before actions</a></h1></header><p>One of the most common practices when writing controllers in Rails is using <code>before_actions</code> to keep them DRY. Sure, repeating code is a bad practice and leads to maintenance nightmare, but what happens when the readability drastically deteriorates after making the code DRY to the max? Is it still worth it? Let&#39;s see how it applies to controllers, what are the consequences and possible solutions.</p>
+
+<h2>Anatomy of typical Rails controller</h2>
+
+<p>Let&#39;s take a look how typical Rails controller may look like:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationControler</span>
+  <span class="n">before_action</span> <span class="ss">:load_article</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:show</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="vi">@articles</span> <span class="o">=</span> <span class="no">Article</span><span class="p">.</span><span class="nf">all</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">show</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">new</span>
+    <span class="vi">@article</span> <span class="o">=</span> <span class="no">Article</span><span class="p">.</span><span class="nf">new</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="vi">@article</span> <span class="o">=</span> <span class="no">Article</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">article_params</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="vi">@article</span><span class="p">.</span><span class="nf">save</span>
+      <span class="n">redirect_to</span> <span class="p">[</span><span class="ss">:articles</span><span class="p">]</span>
+    <span class="k">else</span>
+      <span class="n">render</span> <span class="ss">:new</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">edit</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">update</span>
+    <span class="k">if</span> <span class="vi">@article</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">article_params</span><span class="p">)</span>
+      <span class="n">redirect_to</span> <span class="p">[</span><span class="ss">:articles</span><span class="p">]</span>
+    <span class="k">else</span>
+      <span class="n">render</span> <span class="ss">:edit</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">destroy</span>
+    <span class="vi">@article</span><span class="p">.</span><span class="nf">destroy</span>
+    <span class="n">redirect_to</span> <span class="p">[</span><span class="ss">:articles</span><span class="p">]</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">load_article</span>
+    <span class="vi">@article</span> <span class="o">||=</span> <span class="no">Article</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">article_params</span>
+    <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:article</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="ss">:body</span><span class="p">,</span> <span class="ss">:author_ids</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Looks pretty innocent, nothing fancy is going on here. The <code>load_article</code> method keeps the controller DRY so that we don&#39;t need to repeat loading an article in show, edit, update and destroy actions.</p>
+
+<p>That&#39;s very similar what scaffold generator would create. Seems like it&#39;s also considered as The Rails Way <a href="http://rails-bestpractices.com/posts/2010/07/24/use-before_filter/">best practice</a>. What could possibly go wrong here?</p>
+
+<p>Let&#39;s see if we can make it a bit more complex. The articles can have many authors, so we can add loading authors in before actions to still keep the controller DRY.</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArticlesContrller</span>  <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="n">before_action</span> <span class="ss">:load_authors</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">]</span>
+
+<span class="c1"># other actions</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">load_authors</span>
+    <span class="vi">@authors</span> <span class="o">||=</span> <span class="no">Author</span><span class="p">.</span><span class="nf">all</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Is there any problem with such code? If we take a look at the views we will see some instane variables: <code>@article</code> and <code>@authors</code>, now let&#39;s take a look e.g. at <code>edit</code>
+action:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">edit</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Any idea where the instance variables come from? Nothing is in the action body. Well, we can of course scan the entire controller looking for proper before action, then go to private method etc., but it&#39;s not really ideal. The method is broken into several pieces which are all around controller making it difficult to follow. That example is trivial and already causes some problems. Can you imagine a controller with multiple before actions with only and except options where the the views for creating and editing record are totally different? Good luck with understanding where all the instance variables come from in each action.</p>
+
+<h2>Abusing before actions even more</h2>
+
+<p>There are actually even more nasty examples of misusing before actions - modifying params. Imagine that the article can have multiple owners that are selectable in the views, but we also want to add current user to be the owner of the article when creating a new one. To avoid adding some more logic in create method body for whatever reason (maybe to comply with some gems that drive the controller&#39;s method flow which happens quite often) or extracting the logic to some proper object (Fear Of New Classes) someone decides to add current user to params in before action:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="c1"># multiple before actions</span>
+  <span class="n">before_action</span> <span class="ss">:add_current_user_as_owner</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:create</span><span class="p">]</span>
+  <span class="c1"># even more before actions</span>
+
+  <span class="c1"># proper actions</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">add_current_user_as_owner</span>
+    <span class="c1"># gotcha!</span>
+    <span class="n">owner_ids</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:article</span><span class="p">][</span><span class="ss">:owner_ids</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">current_user</span><span class="p">.</span><span class="nf">id</span>
+    <span class="n">params</span><span class="p">.</span><span class="nf">deep_merge!</span><span class="p">(</span><span class="ss">article: </span><span class="p">{</span> <span class="ss">owner_ids: </span><span class="n">owner_ids</span> <span class="p">})</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">article_params</span>
+    <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:article</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:body</span><span class="p">,</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:author_ids</span><span class="p">,</span> <span class="ss">:owner_ids</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Any idea how could the data in params in create action be different than the one sent with form? Good luck with debugging such issues, especially in legacy apps with huge controllers.</p>
+
+<h2>What are the before actions good for</h2>
+
+<p>The only justified usecase for before actions should be something that doesn&#39;t have any side effects concerning the state - example would be redirecting to sign in page when the user is not logged in. It doesn&#39;t brake the main flow of the action into several pieces, doesn&#39;t set any instance variables and works more like a guard clause.</p>
+
+<h2>Making controllers readable again</h2>
+
+<p>The proper fix should be to move all the logic from before actions to method body. Just don&#39;t fall into another trap where it&#39;s not clear where the instance variables come from. Such code is still better than before actions:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">show</span>
+    <span class="n">load_article</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">load_article</span>
+    <span class="vi">@article</span> <span class="o">||=</span> <span class="no">Article</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>but it&#39;s not obvious what&#39;s available in views, setting some state in private methods is almost always a bad idea. Other semi-fix would be to use <code>helper_method</code> to indicate that something is going to be available in views:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="n">helper_method</span> <span class="ss">:article</span>
+
+   <span class="k">def</span> <span class="nf">show</span>
+    <span class="n">load_article</span>
+   <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">article</span>
+    <span class="vi">@article</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">load_article</span>
+    <span class="vi">@article</span> <span class="o">=</span> <span class="no">Article</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>but it only looks nice if you have one action in controllers, for multiple actions it doesn&#39;t really solve the problem. If you want to keep the controllers readable you should make all the instance variables explicit:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">new</span>
+    <span class="vi">@article</span> <span class="o">=</span> <span class="n">find_article</span>
+    <span class="vi">@authors</span> <span class="o">=</span> <span class="n">find_authors</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Or pass the variables explicitly to the views:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArticlesContoller</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">new</span>
+    <span class="n">render</span> <span class="ss">:new</span><span class="p">,</span> <span class="ss">locals: </span><span class="p">{</span> <span class="ss">article: </span><span class="n">find_article</span><span class="p">,</span> <span class="ss">authors: </span><span class="n">find_authors</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>which is actually the safest option: instance variables that are not set return nil, so you won&#39;t accidentally run into <code>NoMethodError</code> when dealing with non-existent instant variables.</p>
+
+<h2>Wrapping up</h2>
+
+<p>Before actions are misused in many situations: either for making the controller DRY or to make the methods look still like typical CRUD, even when it&#39;s not the case, which leads to serious deterioration in code readability. Fortunately, you can keep the code readable by setting the state explicitly in method&#39;s body.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>
