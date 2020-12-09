@@ -5,7 +5,37 @@
   <id>https://blog.ragnarson.com/</id>
   <link href="https://blog.ragnarson.com/"/>
   <link href="https://blog.ragnarson.com/feed.xml" rel="self"/>
-  <updated>2020-12-02T01:00:00+01:00</updated>
+  <updated>2020-12-09T01:00:00+01:00</updated>
+  <entry>
+    <title>Open-sourced impact investor list</title>
+    <link rel="alternate" href="https://blog.ragnarson.com/2020/12/09/opensourced-impact-investors-list.html"/>
+    <id>https://blog.ragnarson.com/2020/12/09/opensourced-impact-investors-list.html</id>
+    <published>2020-12-09T01:00:00+01:00</published>
+    <updated>2020-12-09T11:00:19+01:00</updated>
+    <author>
+      <name>Maciej Gałkiewicz</name>
+    </author>
+    <summary type="html">&lt;p&gt;One of the common problems impact-driven founders face is finding the right investor.
+It means someone who cares both about the profit and impact.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;One of the common problems impact-driven founders face is finding the right investor.
+It means someone who cares both about the profit and impact.
+&lt;/p&gt;
+
+&lt;p&gt;The reason behind this problem might be simply targeting the wrong type of investors.&lt;/p&gt;
+
+&lt;p&gt;That’s not a surprise since there are dozens of VCs and business angel lists online, but hardly any, presenting the impact-focused investor scene.&lt;/p&gt;
+
+&lt;p&gt;That’s why we decided to gather them all in one place, one spreadsheet.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://docs.google.com/spreadsheets/d/1RYEtoC8PoDbTZCpztXiw1oBNoUIdiMTfFUnnSz_yrWI/edit#gid=0"&gt;&lt;img src="/2020/12/09/opensourced-impact-investors-list/spreadsheet-c0f886c6d4.png" alt="spreadsheet" /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Our goal is to provide a ready-to-use investors list for impact-driven startups looking for funding and map the impact-investor ecosystem. That’s why everyone has edit rights.&lt;/p&gt;
+
+&lt;p&gt;Do you know a VC or angel investor who should be listed there? Do you see any missing data points? Don’t hesitate to edit this spreadsheet and add even incomplete data.&lt;/p&gt;
+
+&lt;p&gt;We will do our best to gather the missing information.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Impact investing: how to ask for intros to investors</title>
     <link rel="alternate" href="https://blog.ragnarson.com/2020/12/02/impact-investing-how-to-ask-for-intros-to-investors.html"/>
@@ -417,58 +447,6 @@ Once we have an overview of the candidate, it&amp;#39;s time to make sure that t
 &lt;p&gt;&lt;span id="note-1"&gt;
 [1] More about t-shaped individuals can be found in &lt;a href="http://coevolving.com/blogs/index.php/archive/t-shaped-professionals-t-shaped-skills-hybrid-managers/"&gt;T-shaped Professionals, T-shaped Skills, Hybrid Managers by David Ing.&lt;/a&gt;
 &lt;/span&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>The right time to introduce structure to a development process</title>
-    <link rel="alternate" href="https://blog.ragnarson.com/2020/07/09/The-right-time-to-introduce-structure-to-a-development-process.html"/>
-    <id>https://blog.ragnarson.com/2020/07/09/The-right-time-to-introduce-structure-to-a-development-process.html</id>
-    <published>2020-07-09T02:00:00+02:00</published>
-    <updated>2020-12-01T10:43:55+01:00</updated>
-    <author>
-      <name>Grzesiek Kołodziejczyk</name>
-    </author>
-    <summary type="html">&lt;p&gt;Have you ever worked on a project where everything just flowed smoothly, work was getting done fast,  and your team was killing it? And have you ever worked on one that was complete chaos, where everyone was busy and nothing seemed to be getting done...&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;Have you ever worked on a project where everything just flowed smoothly, work was getting done fast,  and your team was killing it? And have you ever worked on one that was complete chaos, where everyone was busy and nothing seemed to be getting done?&lt;/p&gt;
-
-&lt;p&gt;We would all love to be part of projects that feel just right, where meaningful work gets done at a sustainable pace. One of the keys to achieving that is having an appropriate project management structure that matches the stage of the project.&lt;/p&gt;
-
-&lt;p&gt;When we start a new project, the possibilities are endless, but we narrow the scope down to just a few achievable areas. At this point, there&amp;#39;s hardly any complexity and the team is small. Everyone can keep track of everything that&amp;#39;s going on easily. It all &amp;quot;fits in your mind&amp;quot;.&lt;/p&gt;
-
-&lt;p&gt;Then, as the project grows, so does its complexity and the team size. We&amp;#39;re no longer working on exciting new things, we also have to deal with fixing bugs introduced before, and customer requests and support. As the project grows further, even more non-feature tasks come in: infrastructure, scaling, compliance, requests from the sales team, etc.&lt;/p&gt;
-
-&lt;h2&gt;First, you need to notice the problem&lt;/h2&gt;
-
-&lt;p&gt;Those transitions don&amp;#39;t happen overnight. They are slow processes. If you don&amp;#39;t pay attention, you might not even notice them happening. Here are a few questions that might help with that:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Have you ever added a ticket/story for something that needed to be done, decided to plan it for later, only to come back to it a few months later and had no idea what the ticket is actually about and whether it&amp;#39;s still relevant?&lt;/li&gt;
-&lt;li&gt;Has your team spent an entire week working on &amp;quot;important&amp;quot; things that &amp;quot;just came up&amp;quot; during that week, and completed nothing you actually planned to do? Was it hard to even tell what you worked on during the next meeting?&lt;/li&gt;
-&lt;li&gt;Have you ever forgotten about issues reported by users or the internal team, only to have them reported again a few weeks later with even more frustration?&lt;/li&gt;
-&lt;li&gt;Have you ever wondered about the ratio of features, bugs and &amp;quot;other stuff&amp;quot; the team is working on, and had no way of checking that?&lt;/li&gt;
-&lt;li&gt;Do you feel that more new bugs are reported than fixed?&lt;/li&gt;
-&lt;li&gt;Do you feel that the project is becoming too complex and keeping track of everything is more challenging?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If those questions resonate with you, it might be the right time to update your project workflow.&lt;/p&gt;
-
-&lt;h2&gt;Reflect on your process&lt;/h2&gt;
-
-&lt;p&gt;At this point, you’re probably hoping that I’ll give you a golden solution that solves all those problems.&lt;/p&gt;
-
-&lt;p&gt;I wish there was an easy answer like &amp;quot;when you have more than five developers&amp;quot; or &amp;quot;when the backlog is this long&amp;quot;, then you should move from tool Y to tool X, and have exactly three meetings per week.&lt;/p&gt;
-
-&lt;p&gt;Instead, the best thing I can offer is to plan for regular pauses where you get the team together, look back at the past few weeks, and discuss the process. In the Scrum world, this is called a &lt;a href="https://www.agilealliance.org/glossary/heartbeatretro/#q=~(infinite~true~filters~(postType~(~'page~'post~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video~'aa_podcast)~tags~(~'retrospective))~searchTerm~'~sort~false~sortDirection~'asc~page~1)"&gt;Retrospective&lt;/a&gt;, but you don&amp;#39;t need to stick to any specific process. The main goal is to figure out what went well, what could be improved, and find some ideas for how to do it. Then try them during the next iteration.&lt;/p&gt;
-
-&lt;h2&gt;Strike the right balance&lt;/h2&gt;
-
-&lt;p&gt;People have a tendency to overreact. The questions above might prompt you to attempt resolving the problem &amp;quot;once and for all&amp;quot;. After all, we don&amp;#39;t want to spend more time than necessary on administrative issues.&lt;/p&gt;
-
-&lt;p&gt;It&amp;#39;s easy to add way too much structure than necessary in reaction to a frustrating lack of structure. You don&amp;#39;t want the paperwork to drag your team down. When you notice the first symptoms, don’t move straight to a full Scrum process with daily standups and a dedicated Scrum Master.&lt;/p&gt;
-
-&lt;h2&gt;The rule we&amp;#39;re using is: add more structure only if it hurts, and only enough so that it stops.&lt;/h2&gt;
-
-&lt;p&gt;Try to fine-tune smaller things first. Focus on describing the problem better in each ticket. Show to stakeholders why doing that is important. Improve your estimations - measure the time actually spent and compare it to what you expected on a regular basis. Set aside some time each week for the “unknown unknowns” - embrace the thought that something will always come up, and don’t let it break your schedule.&lt;/p&gt;
 </content>
   </entry>
 </feed>
