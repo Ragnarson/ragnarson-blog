@@ -15,7 +15,7 @@ That’s not a surprise since there are dozens of VCs and business angel lists o
 
 That’s why we decided to gather them all in one place, one spreadsheet.
 
-[![spreadsheet](2020-12-09-opensourced-impact-investors-list/spreadsheet.png)](https://docs.google.com/spreadsheets/d/1RYEtoC8PoDbTZCpztXiw1oBNoUIdiMTfFUnnSz_yrWI/edit#gid=0)
+[![spreadsheet](2020-12-09-opensourced-impact-investors-list/spreadsheet.png)](https://docs.google.com/spreadsheets/u/1/d/1xm4hNGFL-Ex1YVumWxFQYJ7jTXMMF0otzVnN2_OANTI/edit?usp=sharing)
 
 Our goal is to provide a ready-to-use investors list for impact-driven startups looking for funding and map the impact-investor ecosystem. That’s why everyone has edit rights.
 
