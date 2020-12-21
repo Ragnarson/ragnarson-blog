@@ -193,6 +193,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/2020/12/16/impact-investing-the-relationship-between-founders.html</loc>
+    <lastmod>2020-12-21T16:55:42+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/2016/11/02/introduction-to-fragment-caching-in-rails.html</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -553,6 +559,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/categories/video.html</loc>
+    <lastmod>2020-12-01T10:43:55+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/categories/recruitment.html</loc>
     <lastmod>2020-12-01T10:43:55+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -566,6 +578,12 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/2020/12.html</loc>
+    <lastmod>2020-12-01T10:43:54+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/2020/12/16.html</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
