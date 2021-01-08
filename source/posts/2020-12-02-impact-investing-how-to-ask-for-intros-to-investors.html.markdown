@@ -2,7 +2,7 @@
 title: "Impact investing: how to ask for intros to investors"
 author: macias
 cover_photo: cover.png
-tags: impact investing,
+tags: impact investing, video
 ---
 Getting a referral to an investor is one of the best ways to speed up your fundraising process.
 

@@ -2,7 +2,7 @@
 title: "Impact investing: money vs purpose"
 author: macias
 cover_photo: cover.png
-tags: impact investing,
+tags: impact investing, video
 ---
 
 There is a common problem that we’ve seen in many pitch decks of impact-driven startups.
