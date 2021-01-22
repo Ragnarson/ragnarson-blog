@@ -145,6 +145,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/2021/01/20/impact-fundraising-public-money-sounds-easy.html</loc>
+    <lastmod>2021-01-22T21:37:56+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/2016/12/15/javascript-generators.html</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -584,6 +590,12 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/2021/01.html</loc>
+    <lastmod>2020-12-01T10:43:54+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/2021/01/20.html</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1394,6 +1406,12 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/page/8/</loc>
+    <lastmod>2020-12-01T10:43:54+01:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/page/9/</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
