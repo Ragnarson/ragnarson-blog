@@ -2,7 +2,7 @@
 title: "How I transformed from a regular developer into a CEO of 30 people company overnight"
 author: macias
 cover_photo: cover.png
-tags: video
+tags: video, entrepreneurship, transparency,
 ---
 Huge crises happened to us a few times.
 
@@ -27,10 +27,17 @@ Watch the full episode and find out the most important takeaways from our story.
 <iframe width="100%" height="378" src="https://www.youtube.com/embed/pmztpgrrvic" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Check out our other videos👇
+
 * [Money vs purpose](https://youtu.be/RoYjXkKpci0)  
+
 * [How to ask for intros to investors?](https://youtu.be/Wzmwwi51XN4)
-* [The relationship between founders](https://youtu.be/w0bft9bNrg0) 
+
+* [The relationship between founders](https://youtu.be/w0bft9bNrg0)
+
 * [Mistakes to avoid in your pitch deck](https://youtu.be/LWmBceXCnTE)
+
 * [Public money? Sounds easy with Jonas Schorr from Urban Impact](https://www.youtube.com/watch?v=UXN5QES0lbA)
+
 * [Water as a foundation of our economy with Nicola Lei Ravello from White Stag Investing](https://www.youtube.com/watch?v=pESX_jIALs0)
+
 * [Exploring the impact startup scene in Romania](https://youtu.be/ALKRm-AE7ns)
