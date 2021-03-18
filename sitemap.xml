@@ -248,7 +248,7 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/2021/03/10/how-i-transformed-from-a-regular-developer-into-a-ceo-of-30-people-company-overnight.html</loc>
-    <lastmod>2021-03-18T09:15:59+01:00</lastmod>
+    <lastmod>2021-03-18T10:24:41+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -1634,6 +1634,12 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/authors/maciej-galkiewicz.html</loc>
+    <lastmod>2020-12-01T10:43:54+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/authors/kasia-zalewska.html</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
