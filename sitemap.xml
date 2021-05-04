@@ -193,6 +193,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/2021/04/29/lessons-we-learned-from-our-mishires-at-ragnarson.html</loc>
+    <lastmod>2021-05-04T14:27:48+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/2020/07/09/The-right-time-to-introduce-structure-to-a-development-process.html</loc>
     <lastmod>2020-12-01T10:43:55+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -620,6 +626,12 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/2021/04.html</loc>
+    <lastmod>2020-12-01T10:43:54+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/2021/04/29.html</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
