@@ -1,6 +1,6 @@
 ---
 title: "Founding impact: how hard is it to reduce companies' emissions"
-author: kasiazalewska,
+author: kasiazalewska
 cover_photo: cover_emissions.png
 tags: entrepreneurship, impact, video
 ---
