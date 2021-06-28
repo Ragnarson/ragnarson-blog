@@ -19,6 +19,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/2021/06/24/founding-impact-why-founders-cant-ignore-their-mental-wellbeing.html</loc>
+    <lastmod>2021-06-28T13:05:56+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/2013/10/10/adding-search-and-autocomplete-to-a-rails-app-with-elasticsearch.html</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -535,8 +541,8 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://blog.ragnarson.com/categories/video/page/2.html</loc>
-    <lastmod>2020-12-01T10:43:55+01:00</lastmod>
+    <loc>https://blog.ragnarson.com/2021/page/2.html</loc>
+    <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -589,6 +595,18 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/categories/impact.html</loc>
+    <lastmod>2020-12-01T10:43:55+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/categories/video.html</loc>
+    <lastmod>2020-12-01T10:43:55+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/categories/remote-work.html</loc>
     <lastmod>2020-12-01T10:43:55+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -619,18 +637,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://blog.ragnarson.com/categories/video.html</loc>
-    <lastmod>2020-12-01T10:43:55+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://blog.ragnarson.com/categories/impact.html</loc>
-    <lastmod>2020-12-01T10:43:55+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://blog.ragnarson.com/categories/recruitment.html</loc>
     <lastmod>2020-12-01T10:43:55+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -644,6 +650,12 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/2021/06.html</loc>
+    <lastmod>2020-12-01T10:43:54+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/2021/06/24.html</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1586,6 +1598,12 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/categories/entrepreneurship/page/3.html</loc>
+    <lastmod>2020-12-01T10:43:55+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/categories/video/page/2.html</loc>
     <lastmod>2020-12-01T10:43:55+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
