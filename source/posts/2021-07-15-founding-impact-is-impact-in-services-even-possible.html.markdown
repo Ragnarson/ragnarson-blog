@@ -4,9 +4,13 @@ author: kasiazalewska
 cover_photo: YT5.png
 tags: entrepreneurship, impact, video
 ---
-There are two ways we do business at Ragnarson. On the one hand, we invest in impact-driven startups, on the other, we act as an agency with technical expertise, helping other businesses build different kinds of products, like software as service solutions and online marketplaces.
+There are two ways we do business at Ragnarson.
 
+On the one hand, we invest in impact-driven startups, on the other, we act as an agency with technical expertise
 READMORE
+, helping other businesses build different kinds of products, like software as service solutions and online marketplaces.
+
+
 
 Those two pillars, however, differ a bit.
 
@@ -15,7 +19,7 @@ While it’s relatively easy to focus on impact-driven startups on the investor�
 
 We’re looking for ways to innovate our offer and bring the impact to the table also on the software development side - and that’s exactly what we discussed in this episode.
 
-If you want to find out more, watch the video below :point_down:
+If you want to find out more, watch the video below 👇
 
 <iframe width="100%" height="378" src="https://www.youtube.com/embed/M2RIOQADiWA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
