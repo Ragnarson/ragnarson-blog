@@ -241,6 +241,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/2021/07/15/founding-impact-is-impact-in-services-even-possible.html</loc>
+    <lastmod>2021-07-16T14:39:43+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/2021/01/07/impact-investing-mistakes-to-avoid-in-your-pitch-deck.html</loc>
     <lastmod>2021-01-08T11:50:52+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -644,6 +650,18 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/2021.html</loc>
+    <lastmod>2020-12-01T10:43:54+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/2021/07.html</loc>
+    <lastmod>2020-12-01T10:43:54+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/2021/07/15.html</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -1556,6 +1574,12 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/page/9/</loc>
+    <lastmod>2020-12-01T10:43:54+01:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/page/10/</loc>
     <lastmod>2020-12-01T10:43:54+01:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
