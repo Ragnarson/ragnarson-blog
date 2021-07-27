@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Why do we need SSL certificates? - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2013/10/18/why-do-we-need-ssl.html" property="og:url" /><meta content="Why do we need SSL certificates?" property="og:title" /><meta content="What is SSL/TLS?
+
+Secure Sockets Layer (SSL) and its successor Transport Layer Security (TLS) are
+cryptographic protocols designed to provide secure connection between a server
+and a client, typically a web server and a browser or a mail server and a mail
+client." property="og:description" /><meta content="Sebastian Wojtczak" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@s_wojtczak" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Sebastian Wojtczak","image":"https://www.gravatar.com/avatar/1bcc0f22f6de3bb0942c9a187e1d1ac1.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Why do we need SSL certificates?","url":"https://blog.ragnarson.com/2013/10/18/why-do-we-need-ssl.html","author":{"@type":"Person","name":"Sebastian Wojtczak","image":"https://www.gravatar.com/avatar/1bcc0f22f6de3bb0942c9a187e1d1ac1.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2013-10-18","dateModified":"2013-10-18"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/1bcc0f22f6de3bb0942c9a187e1d1ac1.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="1bcc0f22f6de3bb0942c9a187e1d1ac1" /><div class="article-meta">October 18, 2013 - <a href="/authors/sebastian-wojtczak.html">Sebastian Wojtczak</a>  in <a href="/categories/development.html">development</a>, <a href="/categories/entrepreneurship.html">entrepreneurship</a></div><h1 class="article-title"><a href="/2013/10/18/why-do-we-need-ssl.html">Why do we need SSL certificates?</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><h2>What is SSL/TLS?</h2>
+
+<p>Secure Sockets Layer (SSL) and its successor Transport Layer Security (TLS) are
+cryptographic protocols designed to provide secure connection between a server
+and a client, typically a web server and a browser or a mail server and a mail
+client. </p>
+
+<p>SSL protocol defines the structure of the data transfered and the procedure to
+establish an encrypted connection, it also makes sure of the integrity of the
+data.</p>
+
+<p>Normally, data is sent between browsers and web servers in plain text,
+which is vulnerable to eavesdropping. SSL allows sensitive information such
+as credit card numbers, user names and passwords, personal details to be
+transmitted securely.</p>
+
+<p>SSL is used on a daily basis. Internet users recognize secure connection in
+browsers by a padlock icon next to the website address or a green address bar
+that comes with extended validation certificates. SSL secured websites also
+begin with https.</p>
+
+<h2>What is an SSL certificate</h2>
+
+<p>An SSL certificate consists of a public and a private key. Those two keys are used
+to establish a secure connection. The certificate contains information about
+the issuer, subject, which is the identity of the website owner, and the
+validity of the certificate.</p>
+
+<h3>Certificate Authority</h3>
+
+<p>SSL certificates are signed by Certificate Authority (CA), after verifying
+identity of an applicant. Depending on the certificate type Certificate
+Authority might require different forms of validation. For domain validated
+certificate ownership of the domain has to be proven. In case of Extended
+validation certificates require verification of the legal, physical and
+operational existence of the requesting entity, as well as it has exclusive
+right to use the domain.</p>
+
+<p>All Internet browsers are capable of interacting with secured websites using SSL
+protocol. Many Certificate Authorities have their root certificates embedded
+in browsers so your web browser automatically trusts them. They will sign an
+entity’s certificate using their trusted root certificate (or an intermediate
+of it) to create a &quot;chain of trust&quot; so the browser will trust the entity’s
+certificate.</p>
+
+<p>A Certificate Authority will need a Certificate Signing Request to sign your
+SSL certificate.</p>
+
+<h3>Certificate Signing Request</h3>
+
+<p>To get a certificate you need to generate a Certificate Signing Request (CSR)
+which contains all information that will be included in your certificate such
+as your organization name, domain name, locality and country. It also contains
+the public key that will be included in your certificate. A private key is
+usually created at the same time that you create the CSR.</p>
+
+<p>The following command will generate a 2048-bit RSA private key with a CSR.</p>
+<pre class="highlight plaintext"><code>$ openssl req -new -newkey rsa:2048 -nodes -keyout &lt;em&gt;server.key&lt;/em&gt; -out &lt;em&gt;server.csr&lt;/em&gt;
+...
+&lt;span class="output"&gt;Country Name (2 letter code) [AU]:&lt;/span&gt; &lt;em&gt;PL&lt;/em&gt;
+&lt;span class="output"&gt;Common Name (e.g. server FQDN or YOUR name) []:&lt;/span&gt; &lt;em&gt;shellycloud.com&lt;/em&gt;
+...
+</code></pre>
+
+<p>Created CSR <code>server.csr</code> can be sent to a Certificate Authority of
+your choice, to sign your certificate. Make sure to keep your private key
+secret and safe. The certificate created with a particular CSR will only work
+with the private key that was generated with it. So if you lose the private
+key, the certificate will no longer work.</p>
+
+<h2>Secure connection with a SSL certificate</h2>
+
+<p>When a browser attempts to access a website that is secured by SSL, the
+browser and the web server establish a secure connection using a process
+called SSL Handshake. This process is responsible for specifying encryption
+methods and keys that will be used for the remainder of the communications.
+SSL Handshake is transparent to the end user and happens instantaneously.</p>
+
+<p>SSL Handshake uses asymmetric cryptography as well as the symmetric cryptography.
+Asymmetric cryptography uses two separate keys, one public and one private. Public
+key is used for encryption or verification of a digital signature. Private key
+is used for decrypting or creating digital signature. Symmetric cryptography uses
+the same key for both encryption and decryption.</p>
+
+<p>SSL Handshake uses your certificate&#39;s public and private key, and a session key
+which is generated during that process. Asymmetric cryptography takes more processing power, therefore your public and private key are used only to
+create a symmetric session key.</p>
+<figure>
+<p><img src="/2013/10/18/why-do-we-need-ssl/handshake-c0ca7331dc.png" alt="SSL Handshake" /></p>
+</figure>
+<ol>
+<li>Browser makes a request to a secure page with https.</li>
+<li>Web server sends its SSL Certificate, its public key.</li>
+<li>Browser ensures that the certificate is valid, was issued by a trusted
+Certificate Authority and that its common name is valid for the website that
+it is connecting to. If the browser trusts the certificate it creates
+a symmetric session key using server&#39;s public key and sends it back.</li>
+<li>Symmetric session key is decrypted with the private key and web server sends
+back an acknowledgment encrypted with the session key to start the encrypted
+session.</li>
+<li>Web server and browser encrypts all transmitted data with the session key.</li>
+</ol>
+
+<h2>Why you should use SSL?</h2>
+
+<p>One of the most important factors of creating a successful on-line business is
+trust of customers. One of the way to accomplish this is by securing your
+website with SSL Certificates, making sure that all your customer data, logins,
+passwords, personal information, are transmitted safely between your web server
+and user browsers.</p>
+
+<h2>Installing SSL certificates</h2>
+
+<p>Installing an SSL certificate will vary depending on the type of the web server.
+In case of Nginx web server installation will look as follows:</p>
+
+<ol>
+<li>Copy SSL certificate and key to your Nginx server</li>
+<li><p>Configure Nginx Server Block</p>
+<pre class="highlight shell"><code>  server <span class="o">{</span>
+    listen                    443 ssl;
+    server_name               www.example.com;
+    ssl_certificate           /path/to/www.example.com.crt;
+    ssl_certificate_key       /path/to/www.example.com.key;
+    ssl_protocols             SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers               <span class="s1">'recommended ciphersuite, see below'</span>
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache         shared:SSL:50m;
+    ...
+  <span class="o">}</span>
+</code></pre></li>
+<li><p>Confirm that your Nginx configuration is correct and reload your server</p>
+<pre class="highlight shell"><code><span class="c"># nginx -t</span>
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf <span class="nb">test </span>is successful
+
+<span class="c"># /etc/init.d/nginx reload</span>
+<span class="o">[</span> ok <span class="o">]</span> Reloading nginx configuration: nginx.
+</code></pre></li>
+<li><p>Verify your website using <a href="https://www.ssllabs.com/ssltest">SSL testing suite</a></p></li>
+</ol>
+
+<h3>Recommended ciphersuite</h3>
+
+<p>Using the proper ciphersuite is very important. Specifying SSL protocols and
+used ciphers ensures that SSL attacks like CRIME, LUCKY13, BEAST are mitigated.
+We encourage to use <a href="https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_Ciphersuite">Mozilla recommended cipersuite</a>.</p>
+
+<h3>Shelly Cloud users</h3>
+
+<p>If your a Shelly Cloud user, adding an SSL certificate to your application will
+be as easy as <a href="/documentation/ssl_support">issuing one command with shelly utility</a>.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

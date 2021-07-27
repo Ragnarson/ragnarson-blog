@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Blockchains: A brief introduction - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2016/12/01/blockchains-a-brief-introduction.html" property="og:url" /><meta content="Blockchains: A brief introduction" property="og:title" /><meta content="This post begins a series about the blockchain technology wherein I will try to answer the common questions like what it is, how it works and where blockchains are used. However, I will not go into technical details, I will only focus on a general overview." property="og:description" /><meta content="Michał Dulat" name="author" /><meta content="https://blog.ragnarson.com/2016/12/01/blockchains-a-brief-introduction/cover-c0cd3a9f8e.png" property="og:image" /><meta content="@michaldulat" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Michał Dulat","image":"https://www.gravatar.com/avatar/34a7e79ad1a625db8dfc3907c418db20.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Blockchains: A brief introduction","url":"https://blog.ragnarson.com/2016/12/01/blockchains-a-brief-introduction.html","author":{"@type":"Person","name":"Michał Dulat","image":"https://www.gravatar.com/avatar/34a7e79ad1a625db8dfc3907c418db20.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2016-12-01","dateModified":"2016-12-01","image":"https://blog.ragnarson.com/2016/12/01/blockchains-a-brief-introduction/cover-c0cd3a9f8e.png"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/34a7e79ad1a625db8dfc3907c418db20.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="34a7e79ad1a625db8dfc3907c418db20" /><div class="article-meta">December  1, 2016 - <a href="/authors/michal-dulat.html">Michał Dulat</a>  in <a href="/categories/development.html">development</a>, <a href="/categories/entrepreneurship.html">entrepreneurship</a>, <a href="/categories/blockchain.html">blockchain</a></div><h1 class="article-title"><a href="/2016/12/01/blockchains-a-brief-introduction.html">Blockchains: A brief introduction</a></h1></header><img src='/2016/12/01/blockchains-a-brief-introduction/cover-c0cd3a9f8e.png'/><p>This post begins a series about the blockchain technology wherein I will try to answer the common questions like what it is, how it works and where blockchains are used. However, I will not go into technical details, I will only focus on a general overview.</p>
+
+<p></p>
+
+<h3>Genesis</h3>
+
+<p>I am pretty sure you heard about Bitcoin, a cryptocurrency that has its own electronic payment infrastructure which allows transferring money between parties. Bitcoin compared with traditional payment systems does not have a centralised authority like banks where all transactions are stored. In contrast, all computers in Bitcoin network running a special software carry out this function. Also, Bitcoin has no physical value like coins or bills, it only has a digital value. Main goals of Bitcoin are to decentralise payments around the world, keep them safer and uncheatable by applying cryptographic methodologies.</p>
+
+<p>When first bitcoins were spent in 2009, a new technology called the blockchain was introduced. It provided a security layer and allowed broadcasting bitcoins without a trusted intermediary. The blockchain is the main technology which stands behind Bitcoin.</p>
+
+<h3>What is the blockchain?</h3>
+
+<p>Technically, the blockchain is a database that stores all records (blocks) since its inception joining them into an inseparable chain. The blockchain is distributed through a peer-to-peer network. The network enables communication without a centralised server and all machines (nodes) have the same privileges. In other words, they are clients and servers at the same time. Each node in the network stores a copy of the blockchain and once it gets updated all other nodes are kept in sync. This approach helps to decentralise a system and reduces the risk of data loss as long as at least one node holds the blockchain. The only way to delete it permanently is to erase the blockchain from all the nodes what is virtually impossible for such huge systems like Bitcoin.</p>
+
+<h3>How does the blockchain work?</h3>
+
+<p>There are many implementations of the blockchain concept, but let us focus on the most popular network, Bitcoin.</p>
+
+<p>Before I explain more about the process, you need to know what is a block and a transaction.</p>
+
+<p>A block is a group of valid transactions identified by a hash, a unique, random value determined by a proof-of-work (I will describe it later on). A transaction contains information about bitcoins transferred between people. Let me explain it with an example. Let’s say, we have three users: Tom, Alice and Bob. Alice gets 15 bitcoins from Tom and it is her total amount of funds. Next, Alice sends 5 bitcoins to Bob. The transaction stores these steps individually both as an input and an output. It also contains a change between all Alice’s funds and the amount of bitcoins that she is going to spend, in our case it would be 10 bitcoins. Furthermore, the change is reduced by a transaction fee that Alice pays for verifying the transaction. I will describe a transaction verification closer soon.</p>
+
+<p>Before any transaction can be sent to the network it has to be signed cryptographically using a unique private key (which can be identified with a very long unique password) of a person who is going to make this transaction. The signature is required to unlock a number of assets that the person wants to spend and ensures that resources can be transferred only by their owner.</p>
+
+<p>When all the data in the transaction are ready, the transaction is transmitted to all nodes in the network and awaits a verification. After submitting, it becomes irreversible. Special nodes called miners are responsible for verifying transactions. Each miner does the same checks. <a href="https://www.cryptocompare.com/coins/guides/how-does-a-bitcoin-node-verify-a-transaction">Among other things</a>, it verifies if the sender has enough assets to spend (it prevents double-spending). The transaction will be rejected if the person wants to send more than a number of available funds. Once the transaction is valid, it becomes a part of a candidate block (every miner has its own candidate block). It means it is not yet a part of the chain.</p>
+
+<p>Each block includes a hash of the previous block. This combination connects blocks in the chain. At the same time, only one candidate block can get chosen as the next one in the blockchain. In order to determine which candidate block should be merged, the miners have to provide the proof-of-work (POW). The first miner who supplies POW will add its candidate block to the chain.</p>
+
+<p>POW resembles a mathematical puzzle. It boils down to finding a hash of the candidate block with certain characteristics. It is very time-consuming task caused by a high level of randomness and uses a lot of computing power. When a miner finds a solution, it attaches the candidate block to a local chain and propagates the solution to the network. The nodes verify the correctness of the solution and then the miner gets a fixed profit (newly generated bitcoins) for solving the problem. From this moment, the remaining miners will stop solving the proof-of-work of the current candidate block and start working on the next one. This workflow is repeated over and over again.</p>
+
+<p>All the above steps such as verifying transactions, composing the candidate block and providing POW are called Bitcoin mining. The drawing below illustrates the whole process.</p>
+<figure>
+<p><img src="/2016/12/01/blockchains-a-brief-introduction/mining-c0c52c751f.png" alt="Mining" /></p>
+</figure>
+<p>As you can see the mining is a kind of a race, where each miner tries to be the first to solve the problem for profit (a block reward + transaction fees). However, as long as the proof-of-work is the extremely random operation to perform, the race seems to be fair. Is it right? What if some people had a farm of supercomputers that would solve such problems much faster than computers we have? They would probably have a greater chance to guess the puzzle, but it would still be a gamble and the profit might not be adequate to the processing costs.</p>
+
+<h3>How much time does the mining process take?</h3>
+
+<p>Every system might have different requirements regarding a mining time. In Bitcoin network, an average mining time of each block takes about 10 minutes. After every 2016 block, the mining time is adjusted to keep it on the same level. The level of adjustment depends on the increasing computing power in the network. With the growing number of more and more efficient miners, the mining reward decreases twice every 4 years approximately (210,000 blocks).</p>
+
+<h3>Why is the mining process needed?</h3>
+
+<p>The problem comes down to three questions:</p>
+
+<ol>
+<li>How to verify transactions without a centralised authority?</li>
+<li>How to produce new digital assets on the market assuming it should not be for free?</li>
+<li>Would you channel your computer resources for challenging work for free?</li>
+</ol>
+
+<p>All blockchain-based systems that are required to do some work, like transaction confirmations, should implement some sort of a reward to keep miners profitable. In the case of Bitcoin, the block reward reflects the processing costs for verifying transactions and solving POW by the miners. This is also a fair way to introduce new digital resources into circulation and keep the digital market continuously growing. The rate of resources emission depends on rules agreed by a community. For example, a bitcoin emission depends on POW complexity and the reward for each verified block. The bitcoin emission will stop at 21 million bitcoins and it is expected to happen around 2140.</p>
+
+<h3>What will happen when all bitcoins will be mined?</h3>
+
+<p>There is no one, true and clear answer what will happen then. However, it is pretty obvious that we have to avoid frauds by verifying transactions. But how to keep verifiers still profitable without the block reward? In my personal opinion, there are a couple of aspects that are worth considering. Firstly, the proof-of-work could be simplified to speed up processing. Secondly, transaction fees could be sufficient to cover the processing costs. Thirdly, around 2140 our computers can be so powerful, that there will not be a reason to care about that. Of course, these are only assumptions and luckily, we have a lot of time to think how the problem could be solved.</p>
+
+<h3>Should transactions be always grouped in blocks?</h3>
+
+<p>Not really. For example, <a href="https://www.openchain.org">openchain.org</a> implements something called a transaction chain where transactions are appended directly to a chain instead of forming a block first. This approach seems to be very interesting for systems where low-level latency is very important. In blockchains, the mining process can take a significant amount of time. Even if some systems can reduce this value to a couple of seconds, it could still be too much for certain applications. <a href="https://www.openchain.org">Openchain.org</a> performs real-time transaction confirmations where transactions become a part of the chain immediately.</p>
+
+<h3>Where are blockchains used?</h3>
+
+<p>Apart from Bitcoin, there is a lot of other cryptocurrencies such as Litecoin or Peercoin. Besides financial systems, the blockchain technology was applied to online voting (<a href="https://followmyvote.com">followmyvote.com</a>), a data verification system (<a href="https://tierion.com">tierion.com</a>) or a cloud storage (<a href="https://storj.io">storj.io</a>). All of them and many others are a proof that the blockchain concept is a viable solution for many problems and, hopefully, other applications will be created using the blockchain in the nearest future.</p>
+
+<h3>Summation</h3>
+
+<p>The blockchain solves specific kind of problems where security and reliability are critical. The most valuable feature is performing transactions without any intermediaries and trust between parties. The blockchain is still not super popular and as every new technology requires an adoption process that takes time and needs a lot of experiments. Some people say that the blockchain technology is revolutionary and compare it to the invention of the Internet. Are they right? I do not know, I have just started my adventure with the blockchain and will continue it for sure. I strongly encourage you to try it yourself. We need people like you to keep this community growing and develop the blockchain technology.</p>
+
+<p>Worth reading / watching:</p>
+
+<ul>
+<li><a href="https://www.oreilly.com/ideas/understanding-the-blockchain">https://www.oreilly.com/ideas/understanding-the-blockchain</a></li>
+<li><a href="https://www.khanacademy.org/economics-finance-domain/core-finance/money-and-banking/bitcoin">https://www.khanacademy.org/economics-finance-domain/core-finance/money-and-banking/bitcoin</a></li>
+<li><a href="http://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html">http://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html</a></li>
+<li><a href="https://bitcoin.org/bitcoin.pdf">https://bitcoin.org/bitcoin.pdf</a></li>
+</ul>
+
+<hr>
+
+<p><a href="http://blockchainweekly.net">Subscribe our newsletter Blockchain Weekly to be up to date with the most interesting topics from the Blockchain world.</a></p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

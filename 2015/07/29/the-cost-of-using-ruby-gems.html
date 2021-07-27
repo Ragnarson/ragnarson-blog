@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>The cost of using Ruby Gems - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/07/29/the-cost-of-using-ruby-gems.html" property="og:url" /><meta content="The cost of using Ruby Gems" property="og:title" /><meta content="Gems are great...
+
+Gems are a superb tool for every Rubyist. They can help you rapidly
+implement complex solutions in your applications without having to
+reinvent the wheel" property="og:description" /><meta content="Jonasz Grochowski" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Jonasz Grochowski","image":"https://www.gravatar.com/avatar/9de6bb72e517c276516d85e2e9fef89a.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"The cost of using Ruby Gems","url":"https://blog.ragnarson.com/2015/07/29/the-cost-of-using-ruby-gems.html","author":{"@type":"Person","name":"Jonasz Grochowski","image":"https://www.gravatar.com/avatar/9de6bb72e517c276516d85e2e9fef89a.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-07-29","dateModified":"2015-07-29"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/9de6bb72e517c276516d85e2e9fef89a.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="9de6bb72e517c276516d85e2e9fef89a" /><div class="article-meta">July 29, 2015 - <a href="/authors/jonasz-grochowski.html">Jonasz Grochowski</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2015/07/29/the-cost-of-using-ruby-gems.html">The cost of using Ruby Gems</a></h1></header><h2>Gems are great...</h2>
+
+<p>Gems are a superb tool for every Rubyist. They can help you rapidly
+implement complex solutions in your applications without having to
+reinvent the wheel.</p>
+
+<p>The very rich ecosystem of gems can provide you with basically any
+functionality you could think of: authorization, admin panels,
+pagination – you name it.</p>
+
+<h2>...but not when overused</h2>
+
+<p>One could think that you can&#39;t go wrong with something as useful as
+gems. Yet, careless addition of new gems might be harmful in the long
+run.</p>
+
+<p>Adding too many gems to your application might cause several problems.
+Some of them are more immediate while others might show up later on in
+application&#39;s lifecycle.</p>
+
+<h1>To code or not to code</h1>
+
+<p>One of the reasons to use gems is to not reinvent the wheel – someone
+already wrote some code which tackles the problem at hand. In some cases
+it&#39;s instead worth to code the functionality yourself.</p>
+
+<p>One case is when the needed functionality is simple enough that it won&#39;t
+take you more than 30-60 minutes to create.</p>
+
+<p>Other case would be when the solution needed in the project is very
+specific and no gem would be able solve it without modifications.</p>
+
+<h1>Code bloat</h1>
+
+<p>With each new gem added to your application, your application&#39;s process
+will grow larger and larger, consuming more server resources and slowing
+response and startup times.</p>
+
+<p>Each gem also brings it&#39;s dependencies to your application, making your
+application&#39;s size grow faster than you might expect.</p>
+
+<h1>Magic!</h1>
+
+<p>Gems just work and you don&#39;t really know how in order to use them. It&#39;s
+often enough when you&#39;re on tight deadlines in your projects.</p>
+
+<p>But if you strive to be a better programmer and really understand the
+code you&#39;re writing, it&#39;s a good idea to take a look at how gems you use
+work.</p>
+
+<p>High reliance on gems might also make getting familiar with the project
+more difficult, especially if someone isn&#39;t used to gems included in the
+project.</p>
+
+<h1>Update hell</h1>
+
+<p>Updating gems sounds easy – but when you&#39;re using many gems with a lot
+of dependencies it might become a nightmare.</p>
+
+<p>Different gems, depending on their update schedules, might become
+incompatible with one another after some time, due to being dependent on
+different versions of the same gems.</p>
+
+<p>Monkey patching those incompatibilities or trying to replace the
+incompatible gems – either by other gems or own code – is something most
+developers would prefer to avoid.</p>
+
+<h1>Other incompatibilities</h1>
+
+<p>Except already mentioned incompatibilities due to gem dependencies some
+gems might be just incompatible due to similar functionality they
+provide. If the code in those gems gets in each other&#39;s way those gems
+probably won&#39;t work well together.</p>
+
+<p>Like before, you might be able to find workarounds to make them work,
+but it&#39;s best to just avoid them if possible.</p>
+
+<h1>Conclusion</h1>
+
+<p>Gems are a great tool – but like every tool, they can be used
+irresponsibly.</p>
+
+<p>If you need some basic guidelines, you might try answering some
+questions before adding a new gem to your app.</p>
+
+<p>Does the gem you want to add:</p>
+
+<ul>
+<li>Provide functionality simple enough to be implemented without a gem?</li>
+<li>Meet all the specific functionality requirements needed by the application?</li>
+<li>Bring overhead worth functionality it provides?</li>
+<li>Have an active maintainer?</li>
+</ul>
+
+<p>I&#39;m not saying you should abandon using gems – only to be more conscious
+about it.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

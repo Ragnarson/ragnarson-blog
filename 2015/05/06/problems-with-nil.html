@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Problems with nil and how to avoid them - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/05/06/problems-with-nil.html" property="og:url" /><meta content="Problems with nil and how to avoid them" property="og:title" /><meta content="Have you recently got an exception saying NoMethodError: undefined method `name' for nil:NilClass? Most likely more than once. And how did you solve it? Maybe you used try and thought the problem is solved... until the same exception happened in a different place! Using methods like try is just treating symptoms, it doesn't even touch the real problem. Maybe the right question would be: why was it nil in the first place? Could it be avoided? Was the possibility of nil a desired behavior? And why at all is nil even a problem? Let's find out and investigate some usecases" property="og:description" /><meta content="Karol Galanciak" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@azdaroth" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Karol Galanciak","image":"https://www.gravatar.com/avatar/40716cc1589577b8eb672d97953c264f.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Problems with nil and how to avoid them","url":"https://blog.ragnarson.com/2015/05/06/problems-with-nil.html","author":{"@type":"Person","name":"Karol Galanciak","image":"https://www.gravatar.com/avatar/40716cc1589577b8eb672d97953c264f.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-05-06","dateModified":"2015-05-06"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/40716cc1589577b8eb672d97953c264f.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="40716cc1589577b8eb672d97953c264f" /><div class="article-meta">May  6, 2015 - <a href="/authors/karol-galanciak.html">Karol Galanciak</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2015/05/06/problems-with-nil.html">Problems with nil and how to avoid them</a></h1></header><p>Have you recently got an exception saying <code>NoMethodError: undefined method `name&#39; for nil:NilClass</code>? Most likely more than once. And how did you solve it? Maybe you used <code>try</code> and thought the problem is solved... until the same exception happened in a different place! Using methods like <code>try</code> is just treating symptoms, it doesn&#39;t even touch the real problem. Maybe the right question would be: why was it nil in the first place? Could it be avoided? Was the possibility of nil a desired behavior? And why at all is <code>nil</code> even a problem? Let&#39;s find out and investigate some usecases.</p>
+
+<h2>Finding the origin of nil</h2>
+
+<p>Take a look at the code below and try to find the places where <code>nil</code> could occur:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">SomeController</span>
+  <span class="k">def</span> <span class="nf">show</span>
+    <span class="vi">@view_object</span> <span class="o">=</span> <span class="no">SomeViewObject</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">SomeViewObject</span>
+  <span class="kp">attr_reader</span> <span class="ss">:email</span>
+  <span class="kp">private</span>     <span class="ss">:email</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="vi">@email</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:emal</span><span class="p">]</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">user</span>
+    <span class="vi">@user</span> <span class="o">||=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by</span><span class="p">(</span><span class="ss">email: </span><span class="n">email</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">user_name</span>
+    <span class="n">user</span><span class="p">.</span><span class="nf">name</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="highlight erb"><code># views
+<span class="cp">&lt;%=</span> <span class="vi">@view_object</span><span class="p">.</span><span class="nf">user_name</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>Running the above code will raise <code>NoMethodError: undefined method `name&#39; for nil:NilClass</code> in the view. You would be probably confused why the <code>user</code> turned out to be <code>nil</code>. So the first place to look at would be the <code>user</code> method and the <code>find_by</code>. But why the user was <code>nil</code>? Was the <code>email</code> incorrect? Or maybe the <code>email</code> itself was a nil? Let&#39;s try to dig deeper. In constructor we extract email from <code>params</code> and it looks like there&#39;s a typo! Probably that was an issue. Or there was no <code>email</code> in the <code>params</code> hash. It took some time to debug why the user was nil and that was a trivial usecase. In complex logic that would be even worse.
+Can such problems be avoided? Is it possible to catch nil in the exact place where it occurs? Fortunately, the answer is yes. You just need to:</p>
+
+<h2>Use the right set of methods</h2>
+
+<p>Most occurences of nils in Rails applications originate from hashes and ActiveRecord finders returning <code>nil</code> where it was not supposed to be nil. When it comes to hashes, the fix is pretty simple: always use <code>Hash#fetch</code> instead of <code>Hash#[]</code> unless you have good reasons for it. How is <code>Hash#fetch</code> different? It works like <code>[]</code>, but raises <code>KeyError</code> if the specified key can&#39;t be found. You can also return a default value, raise custom error or whatever else you want; just pass it as a second argument or in a block:</p>
+<pre class="highlight ruby"><code><span class="n">params</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:email</span><span class="p">,</span> <span class="s2">"default@email.com"</span><span class="p">)</span>
+<span class="n">params</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="p">{</span> <span class="k">raise</span> <span class="no">EmailNotFoundError</span> <span class="p">}</span>
+</code></pre>
+
+<p>You may always stick to using blocks instead of second argument, even for returning default values - if you have some expensive computation it will always be called in second argument, whereas in block it will be called when the key is not found.
+What about ActiveRecord finders? There&#39;s a little inconsistency in Rails as <code>find</code> raises <code>ActiveRecord::RecordNotFound</code> if the record is not found, but <code>find_by</code> returns nil. It&#39;s not really a big deal if you already know it: just use bang equivalent:</p>
+<pre class="highlight ruby"><code><span class="no">User</span><span class="p">.</span><span class="nf">find_by!</span><span class="p">(</span><span class="ss">email: </span><span class="n">email</span><span class="p">)</span>
+</code></pre>
+
+<p>Applying the right methods can save you a lot of time and makes it much easier to trace <code>nil</code>&#39;s origin.
+But what if the user may be nil and it&#39;s a desired behavior? In such case you can&#39;t use bang finders (unless you want to rescue from errors). Maybe adding a conditional in view would solve the problem:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@view_object</span><span class="p">.</span><span class="nf">user</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="vi">@view_object</span><span class="p">.</span><span class="nf">user_name</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
+  Anonymous user
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>You will avoid errors that way, but it&#39;s not really a great solution. It would be much better to use:</p>
+
+<h2>The Null Object Pattern</h2>
+
+<p>Null Object is an object with some default behavior that implements the same interface as an other object that might be used in a given case.
+Ok, cool, but how can we apply it to the example below? Let&#39;s start with the <code>user</code> method:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">user</span>
+  <span class="vi">@user</span> <span class="o">||=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by</span><span class="p">(</span><span class="ss">email: </span><span class="n">email</span><span class="p">)</span> <span class="o">||</span> <span class="no">NullUser</span><span class="p">.</span><span class="nf">new</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>And now we can implement <code>NullUser</code>:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">NullUser</span>
+  <span class="k">def</span> <span class="nf">name</span>
+    <span class="s2">"Anonymous user"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Last step is to refactor views:</p>
+<pre class="highlight erb"><code> <span class="cp">&lt;%=</span> <span class="vi">@view_object</span><span class="p">.</span><span class="nf">user_name</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>No conditionals, no nils and the code looks beautiful and is bulletproof at the same time.
+Let&#39;s add some more features and see what else we can achieve with The Null Object Pattern. How would we eg. handle comments for null user? If there&#39;s no user, there are probably no comments. Sounds like empty array:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">NullUser</span>
+  <span class="k">def</span> <span class="nf">name</span>
+    <span class="s2">"Anonymous user"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">comments</span>
+    <span class="p">[]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>No problems so far. But what happens if we would like to use methods like <code>where</code> or <code>order</code>, for example to display ten last comments? The best way would be to add <code>ten_last_comments</code> to <code>User</code> and implement the same method in <code>NullUser</code> which would still return an empty array. But let&#39;s imagine that for some reason we can&#39;t do that.</p>
+
+<p>Since Rails 4 we can use <code>NullRelation</code> (Null Object pattern again) which implements the same interface as any other &quot;real&quot; relation. We just need to call <code>none</code> on <code>Comment</code>:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">NullUser</span>
+  <span class="k">def</span> <span class="nf">name</span>
+    <span class="s2">"Anonymous user"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">comments</span>
+    <span class="no">Comment</span><span class="p">.</span><span class="nf">none</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Now we can call whatever relation methods we want on null user&#39;s comments!
+The Null Object pattern can be applied in many other usecases. Imagine have a service object where we create a user and want to log that the user has been created if the logger is provided. Without using Null Object pattern we would have something like that:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">User</span><span class="o">::</span><span class="no">Create</span>
+  <span class="kp">attr_reader</span> <span class="ss">:logger</span>
+  <span class="kp">private</span>     <span class="ss">:logger</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="ss">logger: </span><span class="kp">nil</span><span class="p">)</span>
+    <span class="vi">@logger</span> <span class="o">=</span> <span class="n">logger</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="no">User</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="s2">"User created"</span><span class="p">)</span> <span class="k">if</span> <span class="n">logger</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Doesn&#39;t really look that great. And we&#39;ve got some serious problems if we forget about the <code>if</code> statement and the <code>logger</code> is nil. Let&#39;s try to make it bulletproof:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">User</span><span class="o">::</span><span class="no">Create</span>
+  <span class="kp">attr_reader</span> <span class="ss">:logger</span>
+  <span class="kp">private</span>     <span class="ss">:logger</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="ss">logger: </span><span class="no">NullLogger</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
+    <span class="vi">@logger</span> <span class="o">=</span> <span class="n">logger</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="no">User</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="s2">"User created"</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">NullLogger</span>
+    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Feels great - no conditionals, no possibility of accidental errors.</p>
+
+<p>It might look that most of the cases are covered so far, but not really. Let&#39;s continue with user and the comments example. We have a blogging platform, a user added some comments and decides to cancel his/her account which causes User record to be deleted. What are the possible implications? We probably don&#39;t want to delete all the comments related to that user.</p>
+
+<p>Does the comment without assigned user makes sense? Well, it might, we can use Null Object pattern - if there&#39;s no <code>user_id</code> persisted with comment - we would just return instance of NullUser. But what if it doesn&#39;t make sense in our domain to have a comment without a user, because we want to display e.g. an email in views, like:</p></p>
+<pre class="highlight erb"><code><span class="cp">&lt;%=</span> <span class="vi">@comment</span><span class="p">.</span><span class="nf">author</span><span class="p">.</span><span class="nf">email</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>and we forgot about implementing soft delete for users? We would have a nasty error because the user has been already deleted. The good news is that we can easily guard ourselves by:</p>
+
+<h2>Using database constraints</h2>
+
+<p>The most common constraint for such problems (if you use a relational database like Postgres) is using <code>null: false</code> constraint on foreign keys. But is it enough? Not really, it just means that the <code>user_id</code> can&#39;t be nil, nothing protects us against deleting user and having a reference to the deleted record. Fortunately, we can use foreign key constraints, which are supported since Rails 4.2 (or you can just use gems like <a href="https://github.com/SchemaPlus/schema_plus" target="_blank">schema_plus</a> for that). With foreign keys it is impossible to delete a record which is referenced by other records and the protection is on database level, so there is no possiblity to bypass it. We would still have a bug, as the user who wants to delete own account would see that an error have occured, but at least we can easily fix it and nothing will break in comments section.</p>
+
+<p>Let&#39;s imagine another usecase: we forgot about database constraints and soft delete. Futhermore, the user has already deleted the account. Can we do anything about it besides adding some conditionals in views or using <code>try</code>? Let&#39;s do a little refactoring and take a look at the views again:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%=</span> <span class="vi">@comment</span><span class="p">.</span><span class="nf">author</span><span class="p">.</span><span class="nf">email</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>The problem with this code is that it introduces some structural coupling (and makes <a href="http://en.wikipedia.org/wiki/Law_of_Demeter" target="_blank">Demeter</a> unhappy): to display the <code>email</code> we know that we need to ask the author of the comment for that. Do we really need to know everywhere that a comment belongs to an author? And what if we decide to denormalize data and add an <code>author_email</code> field to comments for performance or other reasons? We would need to change it everywhere. Why not use <code>comment.author_email</code> in the first place? Thanks to ActiveSupport, we can use:</p>
+
+<h2>The Delegate Macro</h2>
+
+<p>The <code>delegate</code> macro offers a feature similar to <a href="http://ruby-doc.org/stdlib-2.0/libdoc/forwardable/rdoc/Forwardable.html" target="_blank">Forwardable</a>, but comes with some additional options and better syntax. We can easily delegate <code>email</code> to <code>author</code> with the following code:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Comment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">delegate</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">to: </span><span class="n">author</span><span class="p">,</span> <span class="ss">prefix: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">allow_nil: </span><span class="kp">true</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>It will add <code>author_email</code> method (with <code>prefix</code>) which would return <code>nil</code> if <code>author</code> is not present. That way we reduced structural coupling and are guarded  <code>NoMethodError</code> from non-existent user.</p>
+
+<h2>Bonus: persisting records with null objects</h2>
+
+<p>Sometimes you may come across a usecase, where you have an object which can be either a real model or a null object and want to assign it to other model and maybe even persist it. But you can&#39;t do it out-of-the-box, if you try to do something like:
+<code>Comment.new(author: NullUser.new)</code>, you will get <code>ActiveRecord::AssociationTypeMismatch</code>. With persistence you will have even more problems. Fortunately, you can implement a simple concern to make ActiveRecord happy and simply treat the null object in persistence context as if it was blank. Here&#39;s an example:</p>
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">NullObjectPersistable</span>
+  <span class="kp">extend</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Concern</span>
+
+  <span class="n">included</span> <span class="k">do</span>
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">mimics_persistence_from</span><span class="p">(</span><span class="n">real_model_class</span><span class="p">)</span>
+      <span class="vi">@real_model_class</span> <span class="o">=</span> <span class="n">real_model_class</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">real_model_class</span>
+      <span class="vi">@real_model_class</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">table_name</span>
+      <span class="vi">@real_model_class</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">tableize</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">primary_key</span>
+      <span class="s2">"id"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">real_model_class</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">real_model_class</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">id</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">[]</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">is_a?</span><span class="p">(</span><span class="n">klass</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">klass</span> <span class="o">==</span> <span class="n">real_model_class</span>
+      <span class="kp">true</span>
+    <span class="k">else</span>
+      <span class="k">super</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">destroyed?</span>
+    <span class="kp">false</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">new_record?</span>
+    <span class="kp">false</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">persisted?</span>
+    <span class="kp">false</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>And just use it in the <code>NullUser</code> class:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">NullUser</span>
+  <span class="kp">include</span> <span class="no">NullObjectPersistable</span>
+
+  <span class="n">mimics_persistence_from</span> <span class="no">User</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>There&#39;s no magic here, it&#39;s just adding methods one by one to make ActiveRecord not raise any error and behave as we want it to.</p>
+
+<h2>Wrapping up</h2>
+
+<p>Having accidental errors with <code>nil</code> is in most cases a symptom of bad design decisions, lack of some concepts in domain or not adding proper constraints to database. Fortunately, you can easily protect yourself from such problems with the discussed strategies.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

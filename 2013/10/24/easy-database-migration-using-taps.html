@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Easy database migration using Taps(-taps) - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2013/10/24/easy-database-migration-using-taps.html" property="og:url" /><meta content="Easy database migration using Taps(-taps)" property="og:title" /><meta content="Migrating databases from one host to another can be a boring and time
+consuming task. Usually you need to make a database dump on the host A,
+compress it, transfer it to the host B, uncompress it and
+finally load it into the database. Things get even more complicated
+when we want to transfer database to a different database engine,
+say from MySQL to PostgreSQL.
+
+Fortunately there is taps. It's a tool for migrating databases. From this post you will learn how to use it, how it works and how to resolve its most common problems." property="og:description" /><meta content="Mariusz Pietrzyk" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@wijet" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Mariusz Pietrzyk","image":"https://www.gravatar.com/avatar/d87b50f7d7d0b0314dc4714a247c2022.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Easy database migration using Taps(-taps)","url":"https://blog.ragnarson.com/2013/10/24/easy-database-migration-using-taps.html","author":{"@type":"Person","name":"Mariusz Pietrzyk","image":"https://www.gravatar.com/avatar/d87b50f7d7d0b0314dc4714a247c2022.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2013-10-24","dateModified":"2013-10-24"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/d87b50f7d7d0b0314dc4714a247c2022.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="D87b50f7d7d0b0314dc4714a247c2022" /><div class="article-meta">October 24, 2013 - <a href="/authors/mariusz-pietrzyk.html">Mariusz Pietrzyk</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2013/10/24/easy-database-migration-using-taps.html">Easy database migration using Taps(-taps)</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>Migrating databases from one host to another can be a boring and time
+consuming task. Usually you need to <strong>make a database dump</strong> on the host A,
+<strong>compress it</strong>, <strong>transfer it</strong> to the host B, <strong>uncompress it</strong> and
+finally <strong>load it</strong> into the database. Things get even more complicated
+when we want to transfer database to a different database engine,
+say from MySQL to PostgreSQL.</p>
+
+<p>Fortunately there is taps. It&#39;s a tool for migrating databases. From this post you will learn how to use it, how it works and how to resolve its most common problems. </p>
+
+<h2>Quick usage example</h2>
+
+<p>Let&#39;s assume we have a database named <code>gremlins</code> that we want to transfer
+from MySQL on <code>src-host</code> to PostgreSQL on <code>dst-host</code>.</p>
+
+<ol>
+<li><p>Before we begin make sure that at least major Ruby version is the same on both machines using <code>ruby -v</code>. Otherwise you can stumble into problems with marshaling some data types.</p></li>
+<li><p>Install <strong><a href="https://rubygems.org/gems/taps-taps">taps-taps</a></strong> on both machines. I&#39;ll explain later <a href="/blog/2013/10/easy-database-migration-using-taps#why-taps-taps">why not the regular taps gem</a>.</p></li>
+</ol>
+<pre class="highlight shell"><code>   <span class="nv">$ </span>gem install taps-taps
+</code></pre>
+
+<ol>
+<li>Run taps server on the <code>src-host</code>. It uses HTTP basic for
+authentication, so that only you will be able to access it.
+Use a non-trivial password for security.</li>
+</ol>
+<pre class="highlight shell"><code>   <span class="nv">$ </span>taps server mysql://mysqluser:mysqlpass@localhost/gremlins user pass123
+</code></pre>
+
+<ol>
+<li>On the <code>dst-host</code> run the client to pull data and load it into
+a new database. You will need to specify user name and password set
+in the previous step.</li>
+</ol>
+<pre class="highlight shell"><code>   <span class="nv">$ </span>taps pull postgres://pguser:pgpass@localhost/gremlins http://user:pass123@src-host:5000
+</code></pre>
+
+<ol>
+<li>Wait for the import to complete. Progress will be printed on the console:</li>
+</ol>
+<pre class="highlight shell"><code>   Receiving schema
+   Schema:          0% |                                          | ETA:  --:--:--
+   Schema:          2% |                                          | ETA:  00:00:16
+   Schema:          5% |<span class="o">==</span>                                        | ETA:  00:00:15
+   ...
+   Schema:        100% |<span class="o">==========================================</span>| Time: 00:00:16
+   Receiving data
+   34 tables, 6,800 records
+   admins:        100% |<span class="o">==========================================</span>| Time: 00:00:00
+   ...
+   versions:      100% |<span class="o">==========================================</span>| Time: 00:00:00
+   Resetting sequences
+</code></pre>
+
+<h2>How it works?</h2>
+
+<p><a href="https://github.com/ricardochimal/taps">Taps</a> creates temporary services
+for migrating databases. In short it creates an HTTP server on the host from
+which we want to transfer the database. On the destination host it provides
+a client for pulling data from the server.</p>
+
+<p><img alt="Database migration" class="push--ends" width: "100%" src="/assets/posts/2013-10-24-easy-database-migration-using-taps/migration.png"></p>
+
+<p>Main advantages:</p>
+
+<ul>
+<li>Easy to use.</li>
+<li>Database agnostic, for example we can migrate from SQLite to MySQL.</li>
+<li>You don&#39;t need to expose your database to the outside world.</li>
+</ul>
+
+<p>Disadvantages:</p>
+
+<ul>
+<li>It can be slow on huge databases and tables without primary keys.</li>
+<li>Foreign key constraints are not transferred.</li>
+<li>Only works with the default database schema.</li>
+</ul>
+<h3 id="why-taps-taps">
+<p>Last commit to taps was submitted a year ago. Does it even work?</p>
+</h3>
+<p>Sure. Despite the fact that the <a href="https://github.com/ricardochimal/taps">project</a>
+looks abandoned, people are using it and submitting issues and pull
+requests. I&#39;ve <a href="https://github.com/wijet/taps">gathered bug-fixes</a>
+submitted by the community so that taps is usable again. It&#39;s available
+as a gem under <strong>taps-taps</strong> name.</p>
+
+<h3>Nice, but my foreign keys constrains are gone.</h3>
+
+<p>One of Taps weaknesses is that it doesn&#39;t transfer foreign keys constrains.
+To restore them we can use <a href="https://github.com/jenseng/immigrant">immigrant</a>
+gem which generates <strong>all missing constrains</strong> based on associations in
+your Active Record models. To use it, add the gem to your Gemfile:</p>
+<pre class="highlight ruby"><code><span class="c1"># Gemfile</span>
+<span class="n">gem</span> <span class="s1">'immigrant'</span>
+</code></pre>
+
+<p>and run a generator to create a migration file:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>rails generate immigration AddKeys
+</code></pre>
+
+<p>If you don&#39;t need all the constrains you can simply remove them from the
+migration before running it.</p>
+
+<h2>Using taps for migration from MySQL to PostgreSQL on Shelly</h2>
+
+<p>Taps becomes extremely useful when migrating to Shelly Cloud as
+we don&#39;t support MySQL. This instruction assumes that your have
+<a href="/documentation/quick_start">shelly gem properly set up</a>
+and that your app is already deployed on Shelly.</p>
+
+<ol>
+<li>First we create taps server on source host. This may be your
+production server, or your local machine with the most recent backup
+loaded.</li>
+</ol>
+<pre class="highlight shell"><code>  <span class="nv">$ </span>taps server mysql://mysqluser:mysqlpass@src-host/shop user pass
+</code></pre>
+
+<ol>
+<li>Then we create a tunnel to database on Shelly on our local machine:</li>
+</ol>
+<pre class="highlight shell"><code>   <span class="nv">$ </span>shelly database tunnel postgresql
+   Connection details
+   host:     localhost
+   port:     9900
+   database: cloud-name
+   username: cloud-name
+   password: 58cc478a414505a3cda6da810495a2
+</code></pre>
+
+<ol>
+<li>Finally we can transfer the database by running
+the command below on our local machine:</li>
+</ol>
+<pre class="highlight shell"><code>   <span class="nv">$ </span>taps pull postgres://cloud-name:58cc478a414505a3cda6da810495a2@localhost:9900/cloud-name http://user:pass@src-host:5000
+</code></pre>
+
+<p>That&#39;s it! Should you have any questions regarding the migration you can
+   contact <a href="/support">our support</a>.</p>
+
+<p>As we can see taps provides pretty elegant solution to transferring
+databases and it&#39;s certainly a gem worth knowing.</p>
+<div class="article-author-note">COO at Ragnarson. Built self-managed remote dev company. Decentralisation & blockchain believer. Ruby ex-developer. Motorcyclist, cat owner. Here is my <a href="https://wijet.pl">home page</a>.</div><div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

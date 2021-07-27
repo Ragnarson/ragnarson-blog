@@ -1,0 +1,406 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Your own free PaaS with Dokku and Let's Encrypt - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2017/03/28/your-own-free-paas-with-dokku-and-letsencrypt.html" property="og:url" /><meta content="Your own free PaaS with Dokku and Let's Encrypt" property="og:title" /><meta content="I've been working with Platform as a Service products for almost 3 years. I truly believe that an introduction of PaaS solutions was a breakthrough for web development.
+
+There are many online services that provide an efficient and relatively cheap entry-level PaaS (e.g. Heroku, EngineYard), but what about self-hosted alternatives? Do they exist? Are they a good call?" property="og:description" /><meta content="Stanisław Tuszyński" name="author" /><meta content="https://blog.ragnarson.com/2017/03/28/your-own-free-paas-with-dokku-and-letsencrypt/cover-c08d46bb17.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Stanisław Tuszyński","image":"https://www.gravatar.com/avatar/3254f15ea674eb387b83ebc59253a97d.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Your own free PaaS with Dokku and Let's Encrypt","url":"https://blog.ragnarson.com/2017/03/28/your-own-free-paas-with-dokku-and-letsencrypt.html","author":{"@type":"Person","name":"Stanisław Tuszyński","image":"https://www.gravatar.com/avatar/3254f15ea674eb387b83ebc59253a97d.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2017-03-28","dateModified":"2017-03-28","image":"https://blog.ragnarson.com/2017/03/28/your-own-free-paas-with-dokku-and-letsencrypt/cover-c08d46bb17.png"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/3254f15ea674eb387b83ebc59253a97d.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="3254f15ea674eb387b83ebc59253a97d" /><div class="article-meta">March 28, 2017 - <a href="/authors/stanislaw-tuszynski.html">Stanisław Tuszyński</a>  in <a href="/categories/development.html">development</a>, <a href="/categories/entrepreneurship.html">entrepreneurship</a></div><h1 class="article-title"><a href="/2017/03/28/your-own-free-paas-with-dokku-and-letsencrypt.html">Your own free PaaS with Dokku and Let's Encrypt</a></h1></header><img src='/2017/03/28/your-own-free-paas-with-dokku-and-letsencrypt/cover-c08d46bb17.png'/><p>I&#39;ve been working with <a href="https://en.wikipedia.org/wiki/Platform_as_a_service">Platform as a Service</a> products for almost 3 years. I truly believe that an introduction of PaaS solutions was a breakthrough for web development.</p>
+
+<p>There are many online services that provide an efficient and relatively cheap entry-level PaaS (e.g. Heroku, EngineYard), but what about self-hosted alternatives? Do they exist? Are they a good call?</p>
+
+<p></p>
+
+<p>Yes, there are production ready platforms (e.g. <a href="https://deis.com/docs/workflow/">Deis Workflow</a>, or <a href="https://flynn.io/">Flynn</a>), but it depends on when it will pay off to use them. The tools that we use and create to manage one of our platform products were already described <a href="https://blog.ragnarson.com/2017/01/23/building-a-set-of-tools-for-managing-a-hosting-platform.html">by Maciej Małecki on our blog</a>. You may just deduce from it, how much work it would take to ship such solution from scratch. Eventually, it was a good call, for a big, multitenant project it covers. But what about smaller use cases?</p>
+
+<p>I was wondering if there is such minimal stack that provides a real PaaS experience for personal or development usage and it looks like I found one.</p>
+
+<p>In this post, I’ll show you how to build a self-hosted PaaS to host web applications in almost any modern technology (<a href="https://devcenter.heroku.com/articles/buildpacks#officially-supported-buildpacks">inc. Ruby, Node.js, Go and more</a>) in around 15 minutes.</p>
+
+<h2>What do we want?</h2>
+
+<p>Our goal is a platform that automates the process of deployment and publishing of an application. It should manage a database on a single server. Just like with all the modern PaaS solutions, we would like to use <code>git push</code> to deploy our code. Also, we would like to use Let’s Encrypt to have a valid certificate for our application.</p>
+
+<h2>Ingredients</h2>
+
+<ul>
+<li>A fresh machine with a public IP address running on Ubuntu (14.04/16.04) LTS x64 with at least 1GB of memory (e.g. <a href="https://aws.amazon.com/free/">AWS free tier</a> - <code>t2.micro</code> instance).</li>
+<li>A domain with access to DNS settings - optional for Dokku, but required to request a certificate from Let’s Encrypt.</li>
+</ul>
+
+<h2>Dokku</h2>
+
+<p><a href="http://dokku.viewdocs.io/dokku/">Dokku</a> is called the smallest PaaS implementation you’ve ever seen. It’s an extensible, open source Platform as a Service that runs on a single server.</p>
+
+<p>Back in the days (~2-3 years ago) it had around of 100 lines of Bash code. It uses the power of <a href="https://devcenter.heroku.com/articles/buildpacks">Heroku Buildpacks</a> and a the Docker container engine. Over the years it gained a lot of plugins that provides additional services (e.g. databases).</p>
+
+<h2>Let’s Encrypt</h2>
+
+<p><a href="https://letsencrypt.org">Let&#39;s Encrypt</a> is a free, automated and open Certificate Authority. Service is provided by <a href="https://letsencrypt.org/isrg/">Internet Security Research Group (ISRG)</a>. They want to make the internet more secure and privacy-respecting place. Let’s Encrypt provides digital certificates in order to enable HTTPS (SSL/TLS) for free, in the user-friendly and automated process.</p>
+
+<h1>Let’s blend it</h1>
+
+<h2>Configure DNS records</h2>
+
+<p>To properly resolve your application&#39;s virtualhost naming, you need to add a wildcard A record that will resolve any subdomain to your machine’s public IP address. Configuration is similar for all DNS providers. The example below is based on <a href="http://namecheap.com/">Namecheap</a> &gt; Advanced DNS configuration:</p>
+
+<p><img src="/2017/03/28/your-own-free-paas-with-dokku-and-letsencrypt/dns-setup-c0aaa018ca.jpg" alt="DNS setup" /></p>
+
+<p>Where <code>@</code> means your domain name (e.g. example.com), and <code>*</code> is a wildcard for any subdomain (e.g. blog.example.com). As a value, use the public IP address of your machine.</p>
+
+<h2>Install Dokku</h2>
+
+<p><em>At the day this blog post was published the stable version of Dokku was <code>v0.8.2</code>. You should check the <a href="https://github.com/dokku/dokku/releases">https://github.com/dokku/dokku/releases</a> page for the current release.</em></p>
+
+<p>Dokku is designed for usage on a fresh machine and should install all necessary dependencies itself upon the bootstrap process. You can download a bootstrap script and run the installation using the following command on your remote machine:</p>
+<pre class="highlight plaintext"><code>$ wget https://raw.githubusercontent.com/dokku/dokku/&lt;current-dokku-version&gt;/bootstrap.sh;
+$ sudo DOKKU_TAG=&lt;current-dokku-version&gt; bash bootstrap.sh
+</code></pre>
+
+<p>The installation process takes a while, depending on the CPU and network connection of the machine. After that, you should be able to use a <code>dokku</code> command on your remote machine.</p>
+<pre class="highlight plaintext"><code>$ dokku version
+0.8.2
+</code></pre>
+
+<p>Alternatively, if you are not a fan of bootstrap scripts, you can use an <a href="http://dokku.viewdocs.io/dokku/getting-started/install/debian/">official .deb repository guide</a> to install Dokku.</p>
+
+<h2>Setup Dokku</h2>
+
+<p>The next step is to configure your Dokku installation. Open your favorite browser and navigate to machine’s hostname:</p>
+
+<p><img src="/2017/03/28/your-own-free-paas-with-dokku-and-letsencrypt/dokku-setup-c081ede991.jpg" alt="Dokku setup" /></p>
+
+<p>On this site, setup your SSH key (used for <code>git push</code>) and virtualhost settings. Enter your hostname in <code>Hostname</code> field, and check the <code>Use virtualhost naming for apps</code> feature. Remember to save your settings by pressing the <code>Finish Setup</code> button.</p>
+
+<p>At this moment, you already have a running Dokku platform (yay!), where you are able to create, and deploy applications.</p>
+
+<p>Besides, you can now run commands remotely over SSH for your Dokku server. To simplify further usage, use an alias on your local workstation:</p>
+<pre class="highlight plaintext"><code>$ alias dokku='ssh -t dokku@&lt;your-machine-hostname&gt;`
+$ dokku version
+0.8.0
+</code></pre>
+
+<p>The <code>-t</code>  flag is used to request a PTY, which makes possible to attach to your app’s containers terminal via <code>dokku enter &lt;app-name&gt;</code> command.</p>
+
+<p>Protip: You can store aliases in your <code>~/.bash_profile</code> file to make it permanent.</p>
+
+<h2>Install Plugins</h2>
+
+<p>You have a working platform, but we still need a database and Let’s Encrypt support. We’ll use an additional Dokku plugins for that:</p>
+
+<ul>
+<li><a href="https://github.com/dokku/dokku-postgres">https://github.com/dokku/dokku-postgres.git</a> - creates and manages databases on Dokku server using existing Docker environment.</li>
+<li><a href="https://github.com/dokku/dokku-letsencrypt">https://github.com/dokku/dokku-letsencrypt.git</a> - automatically request and install TLS/SSL certificates from Let’s Encrypt CA.</li>
+</ul>
+
+<p>To install those plugins use following commands on Dokku machine.</p>
+<pre class="highlight plaintext"><code>$ sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git
+$ sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+</code></pre>
+
+<h1>Deploying an application</h1>
+
+<h2>Prepare the code</h2>
+
+<p>We will use the Rails sample application provided by Heroku, but feel free to use your own Ruby based application:</p>
+<pre class="highlight plaintext"><code>$ git clone git@github.com:heroku/ruby-rails-sample.git
+$ cd ruby-rails-sample
+</code></pre>
+
+<h2>Create an application</h2>
+
+<p>Use the following command to create an application on Dokku:</p>
+<pre class="highlight plaintext"><code>$ dokku apps:create ruby-rails-sample
+Creating ruby-rails-sample... done
+</code></pre>
+
+<p>The subdomain for your application will be inherited from the application name (e.g. <code>ruby-rails-sample.example.com</code>), so adjust it to your own needs. You can add additional domains/subdomains after creation but this main name can’t be changed later.</p>
+
+<p>Use the following command to list all existing applications:</p>
+<pre class="highlight plaintext"><code>$ dokku apps
+=====&gt; My Apps
+ruby-rails-sample
+</code></pre>
+
+<h2>Create a database</h2>
+
+<p>Create a new PostgreSQL database on Dokku using <code>dokku-postgres</code> plugin:</p>
+<pre class="highlight plaintext"><code>$ dokku postgres:create rails-database
+...
+=====&gt; Postgres container created: rails-database
+=====&gt; Container Information
+       Config dir:          /var/lib/dokku/services/postgres/rails-database/config
+       Data dir:            /var/lib/dokku/services/postgres/rails-database/data
+       Dsn:                 postgres://postgres:[generated-secret]@dokku-postgres-rails-database:5432/rails_database
+       Exposed ports:       -
+       Id:                  8fb232073d50ae3f52de8a01a59f6761fad5506070322a686d9d5372a49ce235
+       Internal ip:         172.17.0.4
+       Links:               -
+       Service root:        /var/lib/dokku/services/postgres/rails-database
+       Status:              running
+       Version:             postgres:9.6.1
+
+</code></pre>
+
+<p>Link the database to your application:</p>
+<pre class="highlight plaintext"><code>$ dokku postgres:link rails-database ruby-rails-sample
+no config vars for sample
+-----&gt; Setting config vars
+       DATABASE_URL: postgres://postgres:[generated-secret]@dokku-postgres-rails-database:5432/rails_database
+-----&gt; Restarting app sample
+App sample has not been deployed
+</code></pre>
+
+<h2>Push it</h2>
+
+<p>Add a remote to your local repository:</p>
+<pre class="highlight plaintext"><code>$ git remote add dokku dokku@&lt;dokku-server-hostname&gt;:ruby-rails-sample
+</code></pre>
+
+<p>Finally, push your code to your Dokku server:</p>
+<pre class="highlight plaintext"><code>$ git push dokku master
+Counting objects: 236, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (135/135), done.
+Writing objects: 100% (236/236), 41.85 KiB | 0 bytes/s, done.
+Total 236 (delta 85), reused 236 (delta 85)
+-----&gt; Cleaning up...
+-----&gt; Building sample from herokuish...
+-----&gt; Adding BUILD_ENV to build environment...
+-----&gt; Ruby app detected
+-----&gt; Compiling Ruby/Rails
+-----&gt; Using Ruby version: ruby-2.2.1
+-----&gt; Installing dependencies using bundler 1.11.2
+       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin -j4 --deployment
+       Fetching gem metadata from https://rubygems.org/...........
+       Fetching version metadata from https://rubygems.org/...
+       Fetching dependency metadata from https://rubygems.org/..
+       Using rake 10.4.2
+       Installing i18n 0.7.0
+       Installing minitest 5.5.1
+       Installing json 1.8.2 with native extensions
+       Installing builder 3.2.2
+       Installing thread_safe 0.3.5
+       Installing mini_portile 0.6.2
+       Installing erubis 2.7.0
+       Installing rack 1.6.0
+       Installing mime-types 2.4.3
+       Installing arel 6.0.0
+       Installing coffee-script-source 1.9.1
+       Installing execjs 2.5.2
+       Installing hike 1.2.3
+       Installing thor 0.19.1
+       Installing multi_json 1.11.0
+       Using bundler 1.11.2
+       Installing tilt 1.4.1
+       Installing pg 0.18.1 with native extensions
+       Installing rails_serve_static_assets 0.0.4
+       Installing rails_stdout_logging 0.0.3
+       Using rdoc 4.2.0
+       Installing sass 3.4.13
+       Installing tzinfo 1.2.2
+       Installing nokogiri 1.6.6.2 with native extensions
+       Installing rack-test 0.6.3
+       Installing puma 2.11.1 with native extensions
+       Installing mail 2.6.3
+       Installing coffee-script 2.4.1
+       Installing sprockets 2.12.3
+       Installing rails_12factor 0.0.3
+       Installing activesupport 4.2.1
+       Installing sdoc 0.4.1
+       Installing uglifier 2.7.1
+       Installing rails-deprecated_sanitizer 1.0.3
+       Installing globalid 0.3.5
+       Installing activemodel 4.2.1
+       Installing jbuilder 2.2.12
+       Installing activejob 4.2.1
+       Installing activerecord 4.2.1
+       Installing rails-dom-testing 1.0.6
+       Installing loofah 2.0.1
+       Installing rails-html-sanitizer 1.0.2
+       Installing actionview 4.2.1
+       Installing actionpack 4.2.1
+       Installing actionmailer 4.2.1
+       Installing railties 4.2.1
+       Installing sprockets-rails 2.2.4
+       Installing coffee-rails 4.1.0
+       Installing sass-rails 5.0.3
+       Installing jquery-rails 4.0.3
+       Installing rails 4.2.1
+       Installing turbolinks 2.5.3
+       Bundle complete! 13 Gemfile dependencies, 53 gems now installed.
+       Gems in the group's development and test were not installed.
+       Bundled gems are installed into ./vendor/bundle.
+       Bundle completed (27.08s)
+       Cleaning up the bundler cache.
+-----&gt; Preparing app for Rails asset pipeline
+       Running: rake assets:precompile
+       I, [2017-02-17T15:36:53.928771 #1033]  INFO -- : Writing /tmp/build/public/assets/application-47fe71a3b34a93e1929c175b1755d405.js
+       I, [2017-02-17T15:36:53.948369 #1033]  INFO -- : Writing /tmp/build/public/assets/application-c06dd6a542ea15147e6794e03643f87c.css
+       Asset precompilation completed (4.42s)
+       Cleaning assets
+       Running: rake assets:clean
+
+-----&gt; Discovering process types
+       Procfile declares types -&gt; web
+-----&gt; Releasing sample (dokku/sample:latest)...
+-----&gt; Deploying sample (dokku/sample:latest)...
+-----&gt; Attempting to run scripts.dokku.predeploy from app.json (if defined)
+-----&gt; App Procfile file found (/home/dokku/sample/DOKKU_PROCFILE)
+-----&gt; DOKKU_SCALE file not found in app image. Generating one based on Procfile...
+-----&gt; New DOKKU_SCALE file generated
+=====&gt; web=1
+-----&gt; Attempting pre-flight checks
+       For more efficient zero downtime deployments, create a file CHECKS.
+       See http://dokku.viewdocs.io/dokku/deployment/zero-downtime-deploys/ for examples
+       CHECKS file not found in container: Running simple container check...
+-----&gt; Waiting for 10 seconds ...
+-----&gt; Default container check successful!
+-----&gt; Running post-deploy
+-----&gt; Attempting to run scripts.dokku.postdeploy from app.json (if defined)
+=====&gt; renaming container (d7089963847a) adoring_kirch to sample.web.1
+-----&gt; Creating new /home/dokku/sample/VHOST...
+-----&gt; Setting config vars
+       DOKKU_NGINX_PORT: 80
+-----&gt; Setting config vars
+       DOKKU_PROXY_PORT_MAP: http:80:5000
+-----&gt; Configuring ruby-rails-sample.&lt;your-domain&gt;...(using built-in template)
+-----&gt; Creating http nginx.conf
+-----&gt; Running nginx-pre-reload
+       Reloading nginx
+-----&gt; Setting config vars
+       DOKKU_APP_RESTORE: 1
+=====&gt; Application deployed:
+       http://ruby-rails-sample.&lt;your-domain&gt;
+</code></pre>
+
+<p>And.. that&#39;s it! You can now navigate to <code>http://ruby-rails-sample.&lt;your-domain&gt;</code> and see your awesome web application, ready to serve.</p>
+
+<h2>What happened?</h2>
+
+<p>After you pushed your code, the certain after push <code>git-hook</code> triggered a script that identifies your application as a Ruby application and decided which buildpack to choose. A proper buildpack was downloaded and it built a Docker image with your application and all dependencies (install gems, compiled assets etc.). When the image was ready, Dokku parsed application’s <code>Procfile</code> and found a <code>web</code> process (default process). Then, it scaled your application to one process which, in fact, just mean that one container of your application was started on the server. After your application booted up, Dokku configured Nginx to proxy the application&#39;s subdomain to that container.</p>
+
+<p>You can use the following command to check which processes (all applications) are running on your Dokku server:</p>
+<pre class="highlight plaintext"><code>$ dokku ls
+-----&gt; App Name           Container Type            Container Id              Status
+ruby-rails-sample          web                          31eb5d37e42a
+</code></pre>
+
+<h2>Let’s encrypt it.</h2>
+
+<p>Your application is up, but we still want a TLS/SSL encryption. After you installed the <code>dokku-letsencrypt</code> plugin, you have following options to proceed:</p>
+<pre class="highlight plaintext"><code>$ dokku letsencrypt:help
+    letsencrypt &lt;app&gt;                       Enable or renew letsencrypt certificate for app
+    letsencrypt:auto-renew                  Auto-renew all apps secured by letsencrypt if renewal is necessary
+    letsencrypt:auto-renew &lt;app&gt;            Auto-renew app if renewal is necessary
+    letsencrypt:cleanup &lt;app&gt;               Cleanup stale certificates and configurations
+    letsencrypt:cron-job &lt;--add|--remove&gt;   Add or remove an auto-renewal cronjob
+    letsencrypt:ls                          List letsencrypt-secured apps with certificate expiry
+    letsencrypt:revoke &lt;app&gt;                Revoke letsencrypt certificate for app
+</code></pre>
+
+<p>First, you need to set an e-mail to register for a certificate on Let’s Encrypt.</p>
+<pre class="highlight plaintext"><code>$ dokku config:set --no-restart ruby-rails-sample DOKKU_LETSENCRYPT_EMAIL=your@email.tld
+</code></pre>
+
+<p>The <code>--no-restart</code> flag means that we do not want to restart the application after adding new config entry.</p>
+
+<p>Request a certificate running the following command:</p>
+<pre class="highlight plaintext"><code>$ dokku letsencrypt ruby-rails-sample
+=====&gt; Let's Encrypt ruby-rails-sample...
+-----&gt; Updating letsencrypt docker image...
+latest: Pulling from dokkupaas/letsencrypt-simp_le
+
+Digest: sha256:20f2a619795c1a3252db6508f77d6d3648ad5b336e67caaf801126367dbdfa22
+Status: Image is up to date for dokkupaas/letsencrypt-simp_le:latest
+       done
+-----&gt; Enabling ACME proxy for ruby-rails-sample...
+-----&gt; Getting letsencrypt certificate for ruby-rails-sample...
+        - Domain ‘ruby-rails-sample.example.com'
+
+...
+
+-----&gt; Certificate retrieved successfully.
+-----&gt; Symlinking let's encrypt certificates
+-----&gt; Configuring SSL for ruby-rails-sample.example.com...(using /var/lib/dokku/plugins/available/nginx-vhosts/templates/nginx.ssl.conf.template)
+-----&gt; Creating https nginx.conf
+-----&gt; Running nginx-pre-reload
+       Reloading nginx
+-----&gt; Disabling ACME proxy for ruby-rails-sample...
+       done
+</code></pre>
+
+<p>Congratulation, you can now use HTTPS to navigate to your website!</p>
+
+<h1>Want more?</h1>
+
+<ul>
+<li><p>Deploy more applications and services - Dokku supports of deploying applications via <a href="https://devcenter.heroku.com/articles/buildpacks">Heroku buildpacks</a> with <a href="https://github.com/gliderlabs/herokuish#buildpacks">Herokuish</a>, or using a project&#39;s <a href="https://docs.docker.com/reference/builder/">dockerfile</a>. Also, you can use a <code>Procfile</code> to specify additional services within a single application (like Sidekiq, Clockwork etc.).</p></li>
+<li><p>Schedule periodical database backups using <a href="https://github.com/dokku/dokku-postgres#commands">dokku-postgres plugin builtin backup commands</a> (requires S3-compatible storage - eg. free-tier of <a href="https://aws.amazon.com/s3/">AWS S3</a>).</p></li>
+<li><p>Install <a href="http://dokku.viewdocs.io/dokku/community/plugins/#official-plugins-beta">more plugins</a> to support different databases and additional services.</p></li>
+<li><p>Configure <a href="http://dokku.viewdocs.io/dokku/configuration/domains/">more domains</a> to use with your Dokku server and support multiple projects.</p></li>
+<li><p>Hide behind a CDN to increase performance of serving static content and increase its availability (e.g free plan of <a href="http://cloudflare.com/">Cloudflare</a>, or free-tier of <a href="https://aws.amazon.com/cloudfront/">AWS CloudFront</a>).</p></li>
+<li><p><a href="http://dokku.viewdocs.io/dokku/deployment/process-management/#psscale-command">Scale your applications</a> vertically using <code>ps:scale</code> command. It would spawn more processes which better utilize your remaining machine resources.</p></li>
+<li><p>If you have multiple processes (containers) of one application, you can <a href="http://dokku.viewdocs.io/dokku/deployment/zero-downtime-deploys/">configure zero downtime deployments</a>.</p></li>
+</ul>
+
+<h1>Summary</h1>
+
+<p>There are more and more features that Dokku may provide you. Unfortunately, Dokku is not a perfect solution. First, all applications containers, no matter how much you scale them, they&#39;re still running on a single node. This is a huge vulnerability that may put your whole stack down on the single service or hardware failure. Also, the databases and additional services created by the plugins are sharing the same resources with your applications, which in some cases my decrease performance of the whole stack.</p>
+
+<p>This and more issues may be resolved by use of some more complicated solutions that I mention before, but they would definitely require more hardware resources and probably even more DevOps manpower to ship it.</p>
+
+<p>Anyway, I still believe that Dokku is just enough for small or internal projects (e.g. blog, staging applications) where High Availability is not that important. And at last, for everyone (just like me) who want to peek under the hood of a complete PaaS solution, just for themselves.</p>
+
+<h1>TL;DR;</h1>
+<pre class="highlight plaintext"><code># on remote machine
+$ wget https://raw.githubusercontent.com/dokku/dokku/v0.8.0/bootstrap.sh;
+$ sudo DOKKU_TAG=v0.8.0 bash bootstrap.sh
+$ sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git
+$ sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+
+# on local workstation
+$ alias dokku='ssh -t dokku@&lt;remote-machine&gt;'
+$ dokku apps:create ruby-rails-sample
+$ dokku postgres:create rails-database
+$ dokku postgres:link rails-database ruby-rails-sample
+$ git remote add dokku dokku@&lt;remote-machine&gt;:ruby-rails-sample
+$ git push dokku master
+$ dokku config:set --no-restart ruby-rails-sample DOKKU_LETSENCRYPT_EMAIL=me@example.com
+$ dokku letsencrypt ruby-rails-sample
+
+# Go to the website and be happy.
+</code></pre>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

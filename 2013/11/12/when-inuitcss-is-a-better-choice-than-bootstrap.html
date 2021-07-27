@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>When Inuit.css is a better choice than Bootstrap - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2013/11/12/when-inuitcss-is-a-better-choice-than-bootstrap.html" property="og:url" /><meta content="When Inuit.css is a better choice than Bootstrap" property="og:title" /><meta content="&quot;Inuit.css is a powerful little framework designed for serious developers.&quot;
+says the first sentence in a README file.
+
+The biggest advantage of Inuit over other frameworks is modularity
+and focus on abstractions. It doesn't enforce how elements should look.
+Instead, it gives a set of tools which speed up your work and allow to
+test new things faster." property="og:description" /><meta content="Bartłomiej Kozal" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@_bkzl" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"When Inuit.css is a better choice than Bootstrap","url":"https://blog.ragnarson.com/2013/11/12/when-inuitcss-is-a-better-choice-than-bootstrap.html","author":{"@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2013-11-12","dateModified":"2013-11-12"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="11ec30dedeb7889af512461ba7ce6a45" /><div class="article-meta">November 12, 2013 - <a href="/authors/bartlomiej-kozal.html">Bartłomiej Kozal</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2013/11/12/when-inuitcss-is-a-better-choice-than-bootstrap.html">When Inuit.css is a better choice than Bootstrap</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p><em>&quot;<a href="http://inuitcss.com/">Inuit.css</a> is a powerful little framework designed for serious developers.&quot;</em>
+says the first sentence in a README file.</p>
+
+<p>The biggest advantage of Inuit over other frameworks is modularity
+and focus on abstractions. It doesn&#39;t enforce how elements should look.
+Instead, it gives a set of tools which speed up your work and allow to
+test new things faster. </p>
+
+<p>In a certain sense you can compare it to the extended version of <a href="http://necolas.github.io/normalize.css/">normalize</a>
+(which nota bene is included in Inuit), complemented by set of defaults, helpers
+and CSS patterns.</p>
+
+<p>The author of the project, <a href="https://twitter.com/csswizardry/">Harry Roberts</a>, is a well-known
+front-end developer recognized for his impressive blog - <a href="http://csswizardry.com">csswizardry</a>.
+If you don&#39;t know him, you should definitely check his site, absolutely one of the best
+resource about modern CSS techniques that you can find in the Internet.</p>
+
+<p>This text will refer to the latest version of Inuit - 5.0, released on March 11th 2013.</p>
+
+<h2>Why another framework when I have Bootstrap?</h2>
+
+<p>The main difference between Bootstrap and Inuit is that Inuit doesn&#39;t provide
+design for elements. What does it mean?</p>
+
+<p>Let&#39;s compare implementation of a pagination.
+In bootstrap <code>.pagination</code> class adds borders, colors, link hover effect etc. In Inuit
+you only get text alignment and margins, an abstraction of pagination element
+without styling details.</p>
+
+<p>From my experience Inuit&#39;s approach scales better, because you&#39;re adding
+your design to convenient defaults. You don&#39;t need to override existing attributes
+in classes, and you don&#39;t have problems with framework upgrades.</p>
+
+<p>Generally, I recommend to stay with Bootstrap only if you won&#39;t edit CSS files.</p>
+
+<h2>Installation</h2>
+
+<p>There are two ways to integrate Inuit with your project.</p>
+
+<p>As described in Inuit&#39;s README, you can use the <a href="https://github.com/csswizardry/inuit.css-web-template">inuit.css-web-template</a>
+to set up your project.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>git clone --recursive git@github.com:csswizardry/inuit.css-web-template.git your-project-folder
+<span class="gp">$ </span><span class="nb">cd </span>your-project-folder
+<span class="gp">$ </span>./go
+</code></pre>
+
+<p>Or - the solution which I prefer more - by using bower:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>bower install --save inuitcss
+</code></pre>
+
+<p><em>You can find more details how to integrate bower with a Rails application <a href="https://shellycloud.com/blog/2013/09/how-to-manage-front-end-packages-in-rails-with-bower">in
+one of our previous posts</a>.</em></p>
+
+<p>Either way, you have to include Inuit in your main stylesheet. I also recommend creating
+a separate file for variables - <code>_vars.css.scss</code>.</p>
+<pre class="highlight scss"><code><span class="k">@import</span> <span class="s1">'vars'</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s1">'inuit.css/inuit'</span><span class="p">;</span>
+</code></pre>
+
+<h2>How to start</h2>
+
+<p>You should start working on your project by setting some variables. What I like
+in Inuit is that most features are disabled by default. You turn them on
+only when you really need them.</p>
+
+<p>At the beginning I suggest the following setup:</p>
+<pre class="highlight scss"><code><span class="c1">// _vars.css.scss
+</span>
+<span class="c1">// Default font-family
+</span><span class="nv">$base-font-family</span><span class="p">:</span> <span class="s1">'Helvetica'</span><span class="o">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+
+<span class="c1">// Default color for borders, horizontal rule etc.
+</span><span class="nv">$base-ui-color</span><span class="p">:</span> <span class="mh">#EEE</span><span class="p">;</span>
+
+<span class="c1">// Color and font-family for the brand object
+</span><span class="nv">$brand-face</span><span class="p">:</span> <span class="s1">'Helvetica Neue'</span><span class="o">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+<span class="nv">$brand-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+
+<span class="c1">// Push classes to move grid items
+</span><span class="nv">$push</span><span class="p">:</span> <span class="bp">true</span><span class="p">;</span>
+
+<span class="c1">// Grid
+</span><span class="nv">$use-grids</span><span class="p">:</span> <span class="bp">true</span><span class="p">;</span>
+
+<span class="c1">// Nav abstraction, e.g. throws the list into horizontal mode
+</span><span class="nv">$use-nav</span><span class="p">:</span> <span class="bp">true</span><span class="p">;</span>
+
+<span class="c1">// Island and islet objects - http://csswizardry.com/2011/10/the-island-object
+</span><span class="nv">$use-island</span><span class="p">:</span> <span class="bp">true</span><span class="p">;</span>
+
+<span class="c1">// Buttons toolkit - http://csswizardry.com/beautons/
+</span><span class="nv">$use-beautons</span><span class="p">:</span> <span class="bp">true</span><span class="p">;</span>
+</code></pre>
+
+<h2>Inuit.css</h2>
+
+<p>Inuit is written in SCSS and based on
+<a href="http://oocss.org">the OOCSS methodology</a>. OOCSS is growing in popularity
+because of its flexibility in creating stylesheets for complex websites.
+Also worth noting, it is using <a href="http://bem.info">the BEM convenction</a>
+for class naming. Inuit is compatible with every modern browser and IE8+.</p>
+
+<p>Let&#39;s take a closer look at what Inuit offers.</p>
+
+<p>The framework is divided into three main categories: <code>generic</code>, <code>base</code> and <code>objects</code>.
+I will explain the concept of each one and describe the most interesting parts,
+but you should definitely check the sources yourself because Inuit has a lot of more
+interesting things.</p>
+
+<h3>Generic</h3>
+
+<p>Very basic, low-level things like: global margins (for vertical rhythm of text),
+normalize library, custom reset and the most important in my opinion shared helper
+classes and collection of mixins.</p>
+
+<p>Highlights:</p>
+
+<ul>
+<li><code>brand</code> - handy helpers which allow you to apply your brand font or color to any element</li>
+<li><code>debug</code> - when you enable this, Inuit will detect and mark invalid or wrong nested markup on site</li>
+<li><code>helper</code> - must read, a lot of classes to use arbitrarily, but note that all of them have the <code>!important</code> directive</li>
+<li><code>mixins</code> - SCSS helpers, <code>=font-size</code>, <code>=arrow</code> and <code>=media-query</code> are very helpful</li>
+<li><code>push</code> - classes for moving grid elements</li>
+<li><code>reset</code> - Inuit additions to normalize i.e. global box-sizing with border-box, pointer cursor for inputs and labels</li>
+<li><code>widths</code> - sizes in human readable format, mostly used to build a grid</li>
+</ul>
+
+<h3>Base</h3>
+
+<p>Design-free styles and modifiers for existing base HTML elements. Things likes code,
+headings, paragraphs, images or forms.</p>
+
+<p>Highlights:</p>
+
+<ul>
+<li><code>forms</code> - instead of a <code>[type]</code> selector, add a <code>.text-input</code> class to style any kind of form input</li>
+<li><code>main</code> - global settings for html element</li>
+<li><code>tables</code> - columns helpers and table modifiers like <code>.table--bordered</code> or <code>.table--striped</code></li>
+</ul>
+
+<h3>Objects</h3>
+
+<p>Abstractions of more complex constructs. Patterns like navigation, fluid grid
+or pagination. As I said earlier, all objects are disabled by default.</p>
+
+<p>Highlights:</p>
+
+<ul>
+<li><code>beautons</code> - buttons toolkit</li>
+<li><code>grids</code> - fluid and nestable grid system</li>
+<li><code>icon-text</code> - helper for creating links with icons</li>
+<li><code>island</code> - boxed off content e.g. special blocks in sidebar</li>
+<li><code>matrix</code> - grid of items created from regular list</li>
+<li><code>nav</code> - allows to create horizontal and stacked lists</li>
+<li><code>rules</code> - modifiers for <code>hr</code></li>
+<li><code>stats</code> - useful to display key-value informations</li>
+</ul>
+
+<h2>How to customize Inuit.css</h2>
+
+<p>I&#39;m using these simple rules.</p>
+
+<p>First, I check if I can change the styling by editing an Inuit variable. If
+that&#39;s the case I simply set the variable in <code>_vars.css.scss</code>.</p>
+
+<p>If not, I add a CSS override. I like to put my overrides in places analogical to Inuit.
+So, if I want to add styles for form inputs, I would create in the main stylesheets directory
+file <code>base/_forms.css.sass</code> with:</p>
+<pre class="highlight scss"><code><span class="nc">.text-input</span><span class="o">,</span>
+<span class="nt">textarea</span> <span class="p">{</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="nv">$base-ui-color</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Specific CCS rules, like <code>.registration-form</code> should be put in a separate layer: <code>ui</code>.</p>
+
+<p>So the final structure of directories should look like:</p>
+<pre class="highlight plaintext"><code>stylesheets/
+  inuit.css/
+    base/
+    generic/
+    objects/
+  base/
+    _forms.css.scss
+  ui
+    _registration-form.css.scss
+  application.css.scss
+  _vars.css.scss
+</code></pre>
+
+<h2>Summary</h2>
+
+<p>Inuit teaches a different way to code CSS, which works great for building
+complex websites. Variety of components available in Inuit speed up styling
+and encourages reuse of elements common to all web applications.</p>
+
+<p>Sadly, it has two major problems.</p>
+
+<p>First, it lacks good documentation. Although it has great
+descriptions in sources even with examples of markup, for many people it isn&#39;t enough.</p>
+
+<p>Second, it is not actively maintained. There have been no new commits in the master
+branch for five months, and the project has 65 issues and 21 pull requests. Some days ago
+the author mentioned on Twitter that he&#39;s thinking about founding on Kickstarter to
+bring the project back on track. I cross my fingers for this.</p>
+
+<h3>Further research</h3>
+
+<p>If you like this topic and want to know more about Inuit, check following links:</p>
+
+<ul>
+<li><a href="https://github.com/csswizardry/inuit.css">Project on GitHub</a></li>
+<li><a href="http://csswizardry.com">Harry Roberts&#39; blog</a></li>
+<li><a href="http://bem.info/method/">BEM Methodology</a></li>
+<li><a href="http://oocss.org">Object-Oriented CSS</a></li>
+</ul>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

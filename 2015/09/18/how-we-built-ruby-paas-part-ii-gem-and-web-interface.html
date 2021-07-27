@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>How we built Ruby PaaS - Part II: Gem and web interface - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/09/18/how-we-built-ruby-paas-part-ii-gem-and-web-interface.html" property="og:url" /><meta content="How we built Ruby PaaS - Part II: Gem and web interface" property="og:title" /><meta content="This is the second post of the series on our blog, in which I'll present to you the part of our infrastructure that is visible to the users. Here you can find links to past and, when we publish them, future posts:" property="og:description" /><meta content="Bartłomiej Kozal" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@_bkzl" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"How we built Ruby PaaS - Part II: Gem and web interface","url":"https://blog.ragnarson.com/2015/09/18/how-we-built-ruby-paas-part-ii-gem-and-web-interface.html","author":{"@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-09-18","dateModified":"2015-09-18"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="11ec30dedeb7889af512461ba7ce6a45" /><div class="article-meta">September 18, 2015 - <a href="/authors/bartlomiej-kozal.html">Bartłomiej Kozal</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2015/09/18/how-we-built-ruby-paas-part-ii-gem-and-web-interface.html">How we built Ruby PaaS - Part II: Gem and web interface</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>This is the second post of the series on our blog, in which I&#39;ll present to you the part of our infrastructure that is visible to the users. Here you can find links to past and, when we publish them, future posts:</p>
+
+<p></p>
+
+<ul>
+<li><a href="http://blog.ragnarson.com/2015/06/15/how-we-built-ruby-paas-part-i-overview-of-our-stack.html">Part I - Overview of the stack</a></li>
+<li><a href="http://blog.ragnarson.com/2015/09/18/how-we-built-ruby-paas-part-ii-gem-and-web-interface.html">Part II - Gem and web interface</a></li>
+<li>Part III - API</li>
+<li>Part IV - Architecture, servers, and virtualization</li>
+</ul>
+
+<h2>Cloudfile &amp; Git</h2>
+
+<p><a href="https://shellycloud.com/documentation/cloudfile">Cloudfile</a> is our solution to manage application environments, server layout, and services. Basically, it&#39;s a YAML file stored in the project&#39;s repository. We parse it during the deployment.</p>
+
+<p>Upsides:</p>
+
+<ol>
+<li>Convention of a single file where you can always find server layout. A concept similar to Gemfile, Rakefile etc.</li>
+<li>Very easy to understand and manage. There is no problem when you need to add a new service like a new database or increase the number of servers.</li>
+<li>Cloudfile is included in a repository, so it&#39;s simple to track the history of infrastructure changes.</li>
+</ol>
+
+<p>Downsides:</p>
+
+<ol>
+<li>Hard to implement a handy interface for auto-scaling (we plan to do that someday).</li>
+</ol>
+
+<p>Deployment is handled by Git. Developer runs deployment and update code on remote machines by plain <code>push</code> command. On our side, to make it work we don&#39;t use anything more than Git hooks. Repositories storage is replicated and backed up daily.</p>
+
+<h2>Shelly Gem</h2>
+<figure>
+<p><img src="/2015/09/18/how-we-built-ruby-paas-part-ii-gem-and-web-interface/shelly-gem-c0f1cd48ba.png" alt="Shelly Gem" /></p>
+</figure>
+<p>The main interface to interact with our platform is a CLI written in Ruby. We focus to allow customers to do everything from the shell. That&#39;s why we are called Shelly Cloud.</p>
+
+<p>Our gem is named <code>shelly</code> and hosted as many other gems on RubyGems, and <a href="http://github.com/shellycloud/shelly">it&#39;s open sourced</a>.</p>
+
+<p>Actions available in gem:</p>
+
+<ol>
+<li>Setting up user&#39;s account, clouds and organizations;</li>
+<li>Managing databases, file storage, backups, access to clouds, application logs, deployment logs, configuration files, IP endpoints;</li>
+<li>Cloud statistics;</li>
+<li>Application console and dbconsole (like mongoconsole or redis-cli);</li>
+<li>Connecting to virtual servers by SSH;</li>
+<li>Setting up a tunnel to database;</li>
+<li>Planning any maintenance.</li>
+</ol>
+
+<p>Our gem is built on top of the Thor framework. It&#39;s good enough for our needs, but we wouldn&#39;t use it again. Anyway, we don&#39;t plan to rewrite the CLI now. The biggest issues which we had:</p>
+
+<ol>
+<li>Thor generates a wrong help message for subcommands</li>
+<li>Customers try to include our gem in Rails app Gemfile. Thor doesn&#39;t work well then. We have to validate that.</li>
+<li>Missing action hooks</li>
+</ol>
+
+<p>Communication with API is managed by rest-client. We don&#39;t have any special feelings about this, it just works.</p>
+
+<p>For test purposes, we use RSpec with the addition of <a href="https://github.com/defunkt/fakefs">fakefs</a> gem which simulate a file system and <a href="https://github.com/chrisk/fakeweb">fakeweb</a> gem to mock web requests.</p>
+
+<h2>Web interface - shelly-app</h2>
+<figure>
+<p><img src="/2015/09/18/how-we-built-ruby-paas-part-ii-gem-and-web-interface/shelly-app-c02f6aee9c.png" alt="Shelly App" /></p>
+</figure>
+<p>Our web interface is a regular Rails application, running on the newest available version, 4.2.x. One specific thing is the lack of a database, everything is done with API. Shelly-app is hosted on Shelly Cloud itself.</p>
+
+<p>We use web app to:</p>
+
+<ol>
+<li>Display landing page, pricing, documentation, contact details and blog</li>
+<li>Manage billing details</li>
+<li>Manage user account</li>
+<li>Start/stop clouds</li>
+<li>Display statistics</li>
+</ol>
+
+<p>As a template language, we use <a href="https://github.com/slim-template/slim">slim</a>. Stylesheets are generated from SASS files and we use <a href="https://github.com/csswizardry/inuit.css/">inuit.css</a> as a CSS starter kit. Angular handles our JavaScript, but we didn&#39;t implement routing. We only use Angular&#39;s directives as HTML components.</p>
+
+<p>To manage external frontend libraries we use <a href="http://rails-assets.org">rails-assets</a>.</p>
+
+<p>In backend to communicate with the API we use a gem called <a href="https://github.com/remiprev/her">her</a>.</p>
+
+<p>Our blog is built on top of the library called <a href="https://github.com/ennova/postmarkdown">postmarkdown</a>. We&#39;ve added to it a custom implementation of the archive.</p>
+
+<p>From external tools, we have integrated <a href="https://intercom.io">Intercom</a> to manage emails and provide support. <a href="https://swiftype.com">Swiftype</a> to search documentation. <a href="http://newrelic.com">New Relic</a> for server monitoring. <a href="http://fontello.com">Fontello</a> for custom font icons.</p>
+
+<p>We have a handy set of tools for development. This is a list of libraries which we use daily: <a href="https://github.com/postcss/autoprefixer">autoprefixer</a>, <a href="https://github.com/evrone/quiet_assets">quiet_assets</a>, <a href="https://github.com/charliesome/better_errors">better_errors</a>, <a href="https://github.com/johnbintz/rack-livereload">rack-livereload</a> and <a href="https://github.com/guard/guard-livereload">guard-livereload</a>.</p>
+
+<p>Last but not least, popular nowadays is a set of tools to test our Rails app: RSpec, <a href="https://github.com/jasmine/jasmine">Jasmine</a> and <a href="https://github.com/jnicklas/capybara">Capybara</a>.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

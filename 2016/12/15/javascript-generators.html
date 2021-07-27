@@ -1,0 +1,367 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>JavaScript Generators - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2016/12/15/javascript-generators.html" property="og:url" /><meta content="JavaScript Generators" property="og:title" /><meta content="Introduction
+
+ECMAScript 2015(ES6) brings a lot of new great features and overall language improvements. Among them we will find Generators which seems to be one of the most exciting and enjoyable JS extensions. The primary and the most important thing about them is ability to pause and resume them at a desired moment. Implementation standard by itself allows us to use it in two ways. We can think of them as data producers (iterators) and data consumers (observers). Combination of those two allow us to turn them also into coroutines to handle more sophisticated tasks. How does all this work and in which situations we can use generators to make our code more readable and maintainable?" property="og:description" /><meta content="Maciej Kubiak" name="author" /><meta content="https://blog.ragnarson.com/2016/12/15/javascript-generators/cover-c058ac01b9.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Maciej Kubiak","image":"https://www.gravatar.com/avatar/0715b35770d74e3815d64dc7b4f6edf9.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"JavaScript Generators","url":"https://blog.ragnarson.com/2016/12/15/javascript-generators.html","author":{"@type":"Person","name":"Maciej Kubiak","image":"https://www.gravatar.com/avatar/0715b35770d74e3815d64dc7b4f6edf9.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2016-12-15","dateModified":"2016-12-15","image":"https://blog.ragnarson.com/2016/12/15/javascript-generators/cover-c058ac01b9.png"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/0715b35770d74e3815d64dc7b4f6edf9.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="0715b35770d74e3815d64dc7b4f6edf9" /><div class="article-meta">December 15, 2016 - <a href="/authors/maciej-kubiak.html">Maciej Kubiak</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2016/12/15/javascript-generators.html">JavaScript Generators</a></h1></header><img src='/2016/12/15/javascript-generators/cover-c058ac01b9.png'/><h1>Introduction</h1>
+
+<p>ECMAScript 2015(ES6) brings a lot of new great features and overall language improvements. Among them we will find Generators which seems to be one of the most exciting and enjoyable JS extensions. The primary and the most important thing about them is ability to pause and resume them at a desired moment. Implementation standard by itself allows us to use it in two ways. We can think of them as data producers (iterators) and data consumers (observers). Combination of those two allow us to turn them also into coroutines to handle more sophisticated tasks. How does all this work and in which situations we can use generators to make our code more readable and maintainable?</p>
+
+<p></p>
+
+<h1>Syntax and basics</h1>
+
+<p>The most simple approach to define generator function:</p>
+<pre class="highlight javascript"><code><span class="kd">function</span><span class="o">*</span> <span class="nx">simpleGeneratorFunction</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// (1)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'1'</span><span class="p">);</span>
+  <span class="k">yield</span> <span class="c1">//(2)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'2'</span><span class="p">);</span>
+  <span class="c1">// (3)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>or</p>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">simpleGeneratorFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="o">*</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// (1)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'1'</span><span class="p">);</span>
+  <span class="k">yield</span><span class="p">;</span> <span class="c1">// (2)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'2'</span><span class="p">);</span>
+  <span class="c1">// (3)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Basically we need to pay attention to <code>function*</code> keyword and <code>yield</code> operator. With <code>yield</code> we can force generator to suspend itself and consume, literally yield, some data. Generator method definition can contain multiple <code>yield</code> expressions. This helps us to gain accurate control flow of an execution and allows to pause and resume generator at particular <code>yield</code>.</p>
+
+<p>It can be a little surprising that when we try to invoke our <code>generatorFunction()</code>, the body is not executed. Instead, we will receive a generator object.</p>
+
+<h1>Generator object and iteration. Producing data.</h1>
+<pre class="highlight javascript"><code>  <span class="kr">const</span> <span class="nx">generatorFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="o">*</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">yield</span> <span class="s1">'1'</span><span class="p">;</span>
+    <span class="k">yield</span> <span class="s1">'2'</span><span class="p">;</span>
+    <span class="k">return</span> <span class="s1">'our return value'</span>
+  <span class="p">}</span>
+
+  <span class="kr">const</span> <span class="nx">generatorObject</span> <span class="o">=</span> <span class="nx">generatorFunction</span><span class="p">()</span>
+</code></pre>
+
+<p>Here are a few things we need to know about generator object. It implements few standards by itself: iterator protocol and iterable protocol. Our generator object is <code>iterable</code> (we can traverse data structure). Iterator protocol on the other hand allows us to use <code>next()</code> method on it.</p>
+
+<p>According to Iterator specification <code>next()</code> is zero argument function which returns object with two properties: <code>done: booolean</code> and <code>value</code> (it can be any value returned by the iterator).</p>
+
+<p>This dualistic nature allows us to make a handy use of generators as a data producers.</p>
+
+<p>Presence of Iterators <code>next()</code> allows us to iterate through our generator object.</p>
+<pre class="highlight javascript"><code>  <span class="nx">generatorObject</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span> <span class="c1">// { value: '1', done: false }</span>
+  <span class="nx">generatorObject</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span> <span class="c1">// { value: '2', done: false }</span>
+  <span class="nx">generatorObject</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span> <span class="c1">// { value: 'our return value', done: true }</span>
+</code></pre>
+
+<p>We can think of generators as data producers. Here is a <code>randomNumberGenerator</code>.</p>
+<pre class="highlight javascript"><code><span class="kd">function</span><span class="o">*</span> <span class="nx">randomNumberGenerator</span><span class="p">(</span><span class="nx">counter</span> <span class="o">=</span> <span class="kc">Infinity</span><span class="p">,</span> <span class="nx">topRange</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">counter</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">yield</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">topRange</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="c1">//yield random integer number from 1 to 'range'</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="s1">'Out of the numbers'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//We limit our iteration in this case just for two 'products'</span>
+<span class="kr">const</span> <span class="nx">generateTwoRandomNumbers</span> <span class="o">=</span> <span class="nx">randomNumberGenerator</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">generateTwoRandomNumbers</span><span class="p">.</span><span class="nx">next</span><span class="p">());</span>
+<span class="c1">//{ value: 53, done: false }</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">generateTwoRandomNumbers</span><span class="p">.</span><span class="nx">next</span><span class="p">());</span>
+<span class="c1">//{ value: 37, done: false }</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">generateTwoRandomNumbers</span><span class="p">.</span><span class="nx">next</span><span class="p">());</span>
+<span class="c1">//{ value: 'Out of the numbers', done: true }</span>
+</code></pre>
+
+<p>If we want to obtain an array of 6 numbers from a range (1-52) there is an easy way to go:</p>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">sixNumbers</span> <span class="o">=</span> <span class="nx">randomNumberGenerator</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">52</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">([...</span><span class="nx">sixNumbers</span><span class="p">]);</span>
+
+<span class="c1">//To iterate we use just ECMAScript2015 spread operator.</span>
+<span class="c1">//Sample result: [ 31, 16, 40, 6, 2, 41 ].</span>
+</code></pre>
+
+<p>We need to be aware that most of the generic methods designed for iterables will omit our <code>value</code> for <code>done: true</code>. <code>done: true</code> is treated rather like a signal for the end of a collection and just breaks an interation. This behaviour might be confusing in some cases. To avoid this kind of problems it might be a good practice to treat generator  <code>return</code> statement only as a loop breaker and do not rely on its value. This is the reason why our <code>&#39;Out of the numbers&#39;</code> statement is not included in the generated array.</p>
+
+<p>According to our previous code, infinitive data producer will look like this:</p>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">infiniteNumbersIterator</span> <span class="o">=</span> <span class="nx">randomNumberGenerator</span><span class="p">();</span>
+<span class="nx">infiniteNumbersIterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span> <span class="c1">// 25</span>
+</code></pre>
+
+<p>Here this will always produce a new random number. End will not be reached. As we can see there, this approach can be used as a base for a sample <code>UUID</code> generator.</p>
+
+<h1>Data consumption</h1>
+
+<p>Is there a way to stop and terminate our generator? Yes, there is. We can finish it up with a <code>return()</code> method. This method can be executed at any moment of the iteration. It can also take 1 or 0 arguments by itself.</p>
+
+<p>Basically, the <code>return(value)</code> is responsible for returning the argument given by us and terminating the generator.</p>
+
+<p>Without an argument:</p>
+<pre class="highlight javascript"><code><span class="nx">infiniteNumbersIterator</span><span class="p">.</span><span class="k">return</span><span class="p">();</span> <span class="c1">// { value: undefined, done: true }</span>
+</code></pre>
+
+<p>Here we end up with <code>{ value: undefined, done: true }</code>. It&#39;s worth remembering that <code>return()</code> just ends the execution of our <code>infiniteNumberIterator</code> here. It does not care about our <code>return</code> statement inside generator&#39;s body. This can be misleading at the beginning due to the semantics similarities.</p>
+
+<p>However, there is a possibility to get something different than <code>undefined</code>. As we know, this method can receive an argument (<code>returns(value)</code>) so:</p>
+<pre class="highlight javascript"><code>  <span class="kd">let</span> <span class="nx">generatorObjectToTerminate</span> <span class="o">=</span> <span class="nx">generatorFunction</span><span class="p">();</span>
+  <span class="nx">genaratorObjectToTerminate</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// { value: 2, done: true }</span>
+</code></pre>
+
+<p>Here we have the first example of generator as a data consumer. <code>return</code> is not the only available method for processing external input.</p>
+
+<p>Method <code>next()</code> defined in <code>Generator.prototype</code> is also capable of doing that and it fits even better. It can receive and send argument to our generator function body. It redefines and extends capabilities of its counterpart method from <code>Iterator</code> protocol (Iterator <code>next()</code> which arity is 0).</p>
+
+<p>Treating generator object as a data consumer requires some understanding of how and when our value is delivered. First of all, we send values via <code>next(value)</code> and receiving them via <code>yield</code>. Secondly, we need to reach our <code>yield</code> statement at the very beginning. Starting the generator is easy and requires just invocation of <code>next()</code>. This is a mandatory step to reach first <code>yield</code>. Generator Object will be suspended there and prepared for our input value.</p>
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="o">*</span><span class="nx">fooBar</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">yield</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">b</span> <span class="o">=</span> <span class="k">yield</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//Starting out generator</span>
+<span class="c1">//yield represnted by 'a' const is reached</span>
+<span class="kr">const</span> <span class="nx">fooBarGenerator</span> <span class="o">=</span> <span class="nx">fooBar</span><span class="p">();</span>
+<span class="nx">fooBarGenerator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+
+<span class="c1">//Sending a 'foo' value and moving to next yield</span>
+<span class="nx">fooBarGenerator</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+
+<span class="c1">//'bar' value is send. No next yield available</span>
+<span class="c1">//return statement is resolved</span>
+<span class="nx">fooBarGenerator</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">);</span>
+<span class="c1">//{ value: 'fooBar', done: true }</span>
+</code></pre>
+
+<p>Note that in this step by definition we are just supplying values to variables, so as a result of calling <code>next(value)</code> we receive this kind of iterator return value object =&gt; <code>{ value: undefined, done: false }</code>.</p>
+
+<h1>Laziness</h1>
+
+<p>Due to the generators’ nature we can process data in a <code>lazy way</code>. On-demand operations are not a problem and they could be very useful for processing: streams or large data sets as received chunks.</p>
+
+<p>Here we will try to process randomly generated set of the numbers. We start from generating an array of 10 numbers in range 1 - 100. In the next step, numbers less than 26 will be taken out. At the end, we will convert chosen numbers to alphabet characters.</p>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">lessThan</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">end</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">value</span> <span class="o">&lt;</span> <span class="nx">end</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// 25 alphabet character letters</span>
+<span class="kr">const</span> <span class="nx">lessThan26</span> <span class="o">=</span> <span class="nx">lessThan</span><span class="p">(</span><span class="mi">26</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">lazyMap</span> <span class="o">=</span> <span class="kd">function</span><span class="o">*</span> <span class="p">(</span><span class="nx">iterable</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">value</span> <span class="nx">of</span> <span class="nx">iterable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">yield</span> <span class="nx">callback</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">numberToAlphabet</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//97 in ASCII is 'a'</span>
+  <span class="c1">//Our min value is 1</span>
+  <span class="k">return</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">96</span> <span class="o">+</span> <span class="nx">value</span><span class="p">);</span>
+ <span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">randomNumberGenerator</span><span class="p">(</span><span class="mi">10</span><span class="p">)];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span>
+<span class="c1">//[ 74, 16, 74, 24, 54, 96, 1, 71, 71, 77 ]</span>
+
+<span class="c1">//Our chained generator object</span>
+<span class="kd">let</span> <span class="nx">alphabebtCharIterator</span> <span class="o">=</span> <span class="nx">lazyMap</span><span class="p">(</span><span class="nx">filter</span><span class="p">(</span><span class="nx">numbers</span><span class="p">),</span> <span class="nx">lessThan26</span><span class="p">),</span> <span class="nx">numberToAlphabet</span><span class="p">);</span>
+
+<span class="nx">alphabetCharIterator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<span class="c1">//{ value: 'o', done: false }</span>
+
+<span class="nx">alphabetCharIterator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<span class="c1">//{ value: 'w', done: false }</span>
+
+<span class="nx">alphabetCharIterator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<span class="c1">//...</span>
+</code></pre>
+
+<h1>Chaining</h1>
+
+<p>As we have already seen, it is possible to chain generators. This pattern can be applied in a more elegant way. The usage of a helper function allows us to write more modular and cleaner code.</p>
+
+<p>First of all, we need to combine our <code>generatorsFunctions</code> and return one solid <code>generatorObject</code>.
+Our function will take <code>generatorFunctions</code> as a set of arguments and return already started <code>generatorObject</code>. This allows us to send data directly.</p>
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nx">composeGenerator</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Create an array of generatorFunctions</span>
+  <span class="kd">let</span> <span class="nx">generatorFunctions</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">arguments</span><span class="p">];</span>
+  <span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+ <span class="c1">// Take last generatorFunction (this is the last argument of our function)</span>
+ <span class="c1">// Create a starting point for compose chain - generatorObject</span>
+
+  <span class="kd">let</span> <span class="nx">generatorObject</span> <span class="o">=</span> <span class="nx">generatorFunctions</span><span class="p">[</span><span class="nx">i</span><span class="p">]();</span>
+
+ <span class="c1">// Start our generator object.</span>
+ <span class="c1">// Allow to receive data via next(value))</span>
+
+  <span class="nx">generatorObject</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+   <span class="k">while</span> <span class="p">(</span><span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Link current generator next one from an end of the list</span>
+    <span class="kd">let</span> <span class="nx">generatorFunction</span> <span class="o">=</span> <span class="nx">generatorFunctions</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+
+    <span class="c1">// Our generatorFunction by design take one argument - generatorObject</span>
+    <span class="nx">generatorObject</span> <span class="o">=</span> <span class="nx">generatorFunction</span><span class="p">(</span><span class="nx">generatorObject</span><span class="p">);</span>
+
+    <span class="c1">// We need to start our extended generatorObject</span>
+    <span class="nx">generatorObject</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+    <span class="c1">// We iterate till the end of generatorFunctions</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Return generatorObject composed of all our generatorFunctions</span>
+  <span class="k">return</span> <span class="nx">generatorObject</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Before we proceed to our <code>generatorsFunctions</code> we need to stop for a while.</p>
+
+<p>For demonstration purposes we supply our <code>generatorObject</code> with some sample data. The idea is to simulate some asynchronous behaviours and processes similarly to a stream.</p>
+
+<p>Function below allows to send chunks of data to our composed <code>generatorObject</code>.</p>
+
+<p>As usual this done via <code>next(chunk)</code> and here some time interval (1000ms) is set.</p>
+<pre class="highlight javascript"><code><span class="c1">// Our sample data set</span>
+<span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'m'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'e'</span><span class="p">,</span> <span class="mi">10</span><span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">sendChunk</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">mainGeneratorObject</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Yield each element of our 'arr'</span>
+  <span class="c1">// chunksGenerator function is defined at the bottom</span>
+
+  <span class="kd">let</span> <span class="nx">chunkIterator</span> <span class="o">=</span> <span class="nx">chunksGenerator</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+
+  <span class="kr">const</span> <span class="nx">asyncSend</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="p">{</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">done</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">chunkIterator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+    <span class="c1">// Iterate via next() in 1s interval</span>
+
+    <span class="nx">done</span> <span class="p">?</span> <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">asyncSend</span><span class="p">)</span> <span class="p">:</span> <span class="nx">mainGeneratorObject</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="c1">// Collection outage: done: true -&gt; cancel interval action (asyncSend)</span>
+    <span class="c1">// done: false -&gt; fullfill mainGeneratoObject with a 'chunk' of data</span>
+
+  <span class="c1">//Interval is set to 1s</span>
+  <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+
+  <span class="kd">function</span><span class="o">*</span> <span class="nx">chunksGenerator</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//Iterate over 'arr' yieliding each time an element of it</span>
+    <span class="k">yield</span><span class="o">*</span> <span class="nx">arr</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre>
+
+<p>Inside <code>chunksGenerator</code> we will find <code>yield*</code>. This operator allow us to do some special things. Here this is just a shortcut for</p>
+<pre class="highlight javascript"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">element</span> <span class="nx">of</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">yield</span> <span class="nx">element</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>it can also yield another <code>generator</code> but this is out of the scope of this article.</p>
+
+<p>Now we need to take care of some logic defined by <code>sub-generator</code>&#39;s functions.</p>
+
+<p>Each generator function must take generator object as an argument. This allow us to chain them nicely. As we can see below, logic inside each generator function is very simple.</p>
+
+<p>Flow of the transformation is the following: take only integer number from our stream of data; double its value; display the output. <code>yield</code> is wrapped by infinite loop. This action prevents our iteration from breaking after the first chunk of data was processed.</p>
+<pre class="highlight javascript"><code><span class="kd">function</span><span class="o">*</span> <span class="nx">pickInteger</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">chunk</span> <span class="o">=</span> <span class="k">yield</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nb">Number</span><span class="p">.</span><span class="nx">isInteger</span><span class="p">(</span><span class="nx">chunk</span><span class="p">))</span> <span class="p">{</span>
+      <span class="c1">//Target is our generatorObject</span>
+      <span class="nx">target</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="o">*</span> <span class="nx">doubleInt</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">intNumber</span> <span class="o">=</span> <span class="k">yield</span><span class="p">;</span>
+
+    <span class="nx">target</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nx">intNumber</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="o">*</span> <span class="nx">printOut</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">line</span> <span class="o">=</span> <span class="k">yield</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">line</span><span class="p">);</span>
+  <span class="p">}</span>
+</code></pre>
+
+<p>Sample usage:</p>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'m'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'e'</span><span class="p">,</span> <span class="mi">10</span><span class="p">];</span>
+<span class="kr">const</span> <span class="nx">combinedGeneratorObject</span> <span class="o">=</span> <span class="nx">composeGenerator</span><span class="p">(</span>
+  <span class="nx">pickInteger</span><span class="p">,</span>
+  <span class="nx">doubleInt</span><span class="p">,</span>
+  <span class="nx">printOut</span>
+<span class="p">);</span>
+
+<span class="nx">sendChunk</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">combinedGeneratorObject</span><span class="p">);</span>
+<span class="c1">// Time interval</span>
+<span class="c1">// 2</span>
+<span class="c1">// Time interval</span>
+<span class="c1">// 6</span>
+<span class="c1">// Time interval</span>
+<span class="c1">// 20</span>
+</code></pre>
+
+<p>We need to be aware that this is only an example usage and there are a few things missing there, for example: error handling.</p>
+
+<h1>Wrapping up</h1>
+
+<p>Generators are something definitely new in the JavaScript world. They have been present with us for some time bringing new opportunities to tackle certain kind of problems. They might be tricky or confusing at the beginning but learning them is a lot of fun.  This blogpost contains only some basic stuff and examples of usage.</p>
+
+<p>Native support should not also be a concern. Generators are supported by all modern desktop browsers and node since 4.x.</p>
+
+<p>Great libraries are built on top of them. Check out <a href="http://koajs.com/">KoaJs</a> and a great EmberJS addon (<a href="http://ember-concurrency.com/#/docs">ember-concurency</a>).</p>
+
+<p>I must admit that this topic is so large that it can easily be turned into a series of blog posts about <code>Generators</code>.</p>
+
+<p>There are a lot of interesting materials and code samples about generators around the Web:</p>
+
+<ol>
+<li><a href="http://www.2ality.com/2015/03/es6-generators.html">Dr. Axel Rauschmayer blogpost</a> I encourage you to check Dr. Axel&#39;s books</li>
+<li><a href="https://gist.github.com/Benvie/7478257">Chaining generators (gist) by Brandon Benvie</a></li>
+<li><a href="https://github.com/mjavascript/practical-es6/blob/master/chapters/ch05.asciidoc">Chapter 5 of Practical ES6 book</a></li>
+</ol>
+
+<p>This blogpost could not have been created without those resources.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

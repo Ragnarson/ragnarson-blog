@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Life of an HTTP Request - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2013/09/03/life-of-an-http-request.html" property="og:url" /><meta content="Life of an HTTP Request" property="og:title" /><meta content="When working on web applications we take a lot of supporting technology for
+granted. We build our code on top of a multi-layered network stack with HTTP as
+the glue. Each user interaction with our app may cause several HTTP requests
+that are routed and handled separately, often in parallel. Most of the time
+developers don't have to care how exactly this magic works. Sometimes though,
+performance requirements force them to dig deeper. We at Shelly Cloud want to
+empower our users, that's why we decided to share details of our internal
+architecture.
+
+Today we're going to describe what route an HTTP requests takes, from the moment
+it leaves the browser up to the moment a response gets back from the server.
+
+Second part of this article builds upon this knowledge and describes multiple
+failure scenarios." property="og:description" /><meta content="Michał Kwiatkowski" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@michalkw" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Michał Kwiatkowski","image":"https://www.gravatar.com/avatar/8361458e7cc9c0b897bfc2a70a15fde9.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Life of an HTTP Request","url":"https://blog.ragnarson.com/2013/09/03/life-of-an-http-request.html","author":{"@type":"Person","name":"Michał Kwiatkowski","image":"https://www.gravatar.com/avatar/8361458e7cc9c0b897bfc2a70a15fde9.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2013-09-03","dateModified":"2013-09-03"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/8361458e7cc9c0b897bfc2a70a15fde9.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="8361458e7cc9c0b897bfc2a70a15fde9" /><div class="article-meta">September  3, 2013 - <a href="/authors/michal-kwiatkowski.html">Michał Kwiatkowski</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2013/09/03/life-of-an-http-request.html">Life of an HTTP Request</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>When working on web applications we take a lot of supporting technology for
+granted. We build our code on top of a multi-layered network stack with HTTP as
+the glue. Each user interaction with our app may cause several HTTP requests
+that are routed and handled separately, often in parallel. Most of the time
+developers don&#39;t have to care how exactly this magic works. Sometimes though,
+performance requirements force them to dig deeper. We at Shelly Cloud want to
+empower our users, that&#39;s why we decided to share details of our internal
+architecture.</p>
+
+<p>Today we&#39;re going to describe what route an HTTP requests takes, from the moment
+it leaves the browser up to the moment a response gets back from the server.</p>
+
+<p>Second part of this article builds upon this knowledge and describes multiple
+failure scenarios. </p>
+
+<h2>From a browser to the application</h2>
+
+<p><strong>User clicks a link</strong> or enters the URL directly into the browser&#39;s address
+bar. Something like <a href="https://shellycloud.com/">https://shellycloud.com/</a>. After
+that the browser <strong>resolves the host name</strong> (some browsers even do it before you
+click). DNS request is made and it returns 46.4.70.228: IP of Shelly Cloud&#39;s
+front end server.</p>
+
+<p>Since the request goes over HTTPS, <strong>front end server is contacted</strong> on port
+443. At Shelly Cloud this <strong>traffic is handled by <a href="http://nginx.org/">Nginx</a></strong>
+which is also responsible for terminating SSL and SPDY. Behind it, the rest of
+the stack talks pure HTTP.</p>
+
+<p>After that a request is passed to <a href="https://www.varnish-cache.org/">Varnish</a> to
+handle <strong>caching</strong>. Each application on Shelly Cloud has a dedicated Varnish
+process. If the requested document is already in the cache, it is immediately
+returned, otherwise the request is passed further.</p>
+
+<p>Next in the request chain is the <strong>load balancer</strong>. In Shelly Cloud we use
+<a href="http://haproxy.1wt.eu/">HAProxy</a> to load balance each application&#39;s traffic
+over all of its available backends. HAProxy does periodic health checks and
+automatically removes dead backends from the pool. The load balancing algorithm
+first assigns requests to unoccupied backends. If none are immediately
+available, round robin scheme is used to select a backend to use. Thin web
+servers are assigned at most one connection, while pumas up to 16.</p>
+
+<p><strong>Backend server</strong>, be it thin or puma, upon receiving the request <strong>invokes the
+application</strong> allowing it to handle it. In Ruby, <a href="http://rack.github.io/">rack
+interface</a> mediates between the application and the web
+server. From the point of view of the application, those two interfaces matter
+the most: rack as a programming interface and HTTP as the network interface.</p>
+
+<p>After being processed, the request generates a <strong>response that goes all the way
+back</strong>, via backend servers through load balancer and cache server back to the
+front end that passes it to the client. Along the way, Varnish stores the
+response if <a href="https://shellycloud.com/documentation/caching#caching_on_front_end">the cache headers were properly set by the
+application</a>.</p>
+
+<p>Just to recap, here&#39;s a short list of all the steps described above:</p>
+
+<ol>
+<li>Browser resolves server&#39;s host name.</li>
+<li>Browser sends the request to the server.</li>
+<li>Nginx gets the request and terminates HTTPS/SPDY.</li>
+<li>Varnish handles HTTP caching.</li>
+<li>HAProxy load balances the traffic.</li>
+<li>Web server (thin/puma) receives the request and passes control to application code.</li>
+<li>Application prepares a response.</li>
+<li>Response goes through web server through HAProxy, Varnish and Nginx back to the browser.</li>
+</ol>
+
+<h2>Failure scenarios</h2>
+
+<p>Request-response cycle works as described above, but only when everything is
+running smoothly. Unfortunately, failures are common and any robust architecture
+should be prepared to handle them gracefully. Detailed failure scenarios are
+listed below, but most of them boil down to avoiding a single point of
+failure. In other words, redundancy is the key.</p>
+
+<p><strong>Q: What happens if a process of the application server dies?</strong><br>
+A: First, HAProxy health check will fail for this backend and it will be removed
+from the pool, so no more traffic is routed there. Second, local monitoring will
+restart the missing process. Once it is back up and ready to serve requests,
+load balancer will detect that and put it back into the active pool.</p>
+
+<p><strong>Q: What happens when all application servers are dead?</strong><br>
+A: After marking all backends as unavailable, HAProxy will start to return
+<em>503 Service Unavailable</em> error code to Nginx that will show maintenance page to
+users. This may happen in a number of situations. When application code has a
+fatal error (e.g. exception raised at loading time) none of the backends will
+start after deployment. If only one backend has been configured in
+<a href="https://shellycloud.com/documentation/cloudfile">Cloudfile</a>, any failure at the
+process level will again trigger the problem. Similarly, if only one virtual
+server is used, problem at OS or hardware level may also cause the same symptoms
+until faulty server is replaced. With only a single virtual server this
+situation may also be triggered during <a href="https://shellycloud.com/blog/2013/06/how-code-is-deployed-on-shelly-cloud">restart phase of
+deployment</a>.</p>
+
+<p><strong>Q: What happens in the case of a traffic spike, when there are more incoming
+connections than available end points?</strong><br>
+A: Connections will wait in a queue until backends can handle them. If a request
+stays in queue longer than <strong>2 minutes</strong> it will be dropped. The client will get
+<em>504 Gateway Timeout</em> HTTP error code.</p>
+
+<p><strong>Q: What happens when application servers are being restarted during deployment?</strong><br>
+A: When thin or puma is being restarted, it stops accepting new connections and
+it exits once all active connections has been handled. All backends on a given
+virtual server are restarted at once, so this may manifest the problem of all
+application servers being down (see two questions above), but only if a single
+virtual server is available. Even with more than one virtual server the symptoms
+may be the same as for a traffic spike, because number of active backends is
+temporarily lowered during deployment (see question above).</p>
+
+<p><strong>Q: What happens when the application doesn&#39;t respond in time?</strong><br>
+A: We have a hard <strong>50 seconds</strong> limit on backend reply, so if the application
+doesn&#39;t respond in that time, front end server sends back <em>504 Gateway Timeout</em>
+to the client.</p>
+
+<p><strong>Q: What happens when a front end server on a shard fails?</strong><br>
+A: In addition to all front end processes (Nginx, Varnish and HAProxy) being
+monitored locally, in case of an OS or hardware failure we have a failover
+mechanism through a floating IP that switches to a backup front end server. The
+backup server is always on stand by and ready to immediately process
+requests. Any active and incoming connections made between time of the failure
+and failover switch will be lost.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

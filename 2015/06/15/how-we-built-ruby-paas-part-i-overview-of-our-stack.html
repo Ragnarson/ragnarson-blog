@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>How we built Ruby PaaS - Part I: Overview of our stack - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/06/15/how-we-built-ruby-paas-part-i-overview-of-our-stack.html" property="og:url" /><meta content="How we built Ruby PaaS - Part I: Overview of our stack" property="og:title" /><meta content="I would like to share with you the details of how we built Shelly Cloud, our platform for hosting Ruby applications, and how it works.
+
+This is the first post of the series on our blog, in which I'll present you with an introduction to the company and an overview of our stack." property="og:description" /><meta content="Bartłomiej Kozal" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@_bkzl" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"How we built Ruby PaaS - Part I: Overview of our stack","url":"https://blog.ragnarson.com/2015/06/15/how-we-built-ruby-paas-part-i-overview-of-our-stack.html","author":{"@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-06-15","dateModified":"2015-06-15"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="11ec30dedeb7889af512461ba7ce6a45" /><div class="article-meta">June 15, 2015 - <a href="/authors/bartlomiej-kozal.html">Bartłomiej Kozal</a>  in <a href="/categories/development.html">development</a>, <a href="/categories/entrepreneurship.html">entrepreneurship</a></div><h1 class="article-title"><a href="/2015/06/15/how-we-built-ruby-paas-part-i-overview-of-our-stack.html">How we built Ruby PaaS - Part I: Overview of our stack</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>I would like to share with you the details of how we built Shelly Cloud, our platform for hosting Ruby applications, and how it works.</p>
+
+<p>This is the first post of the series on our blog, in which I&#39;ll present you with an introduction to the company and an overview of our stack.  You will also find links to future posts as and when we publish them:</p>
+
+<ul>
+<li><a href="http://blog.ragnarson.com/2015/06/15/how-we-built-ruby-paas-part-i-overview-of-our-stack.html">Part I - Overview of the stack</a></li>
+<li><a href="http://blog.ragnarson.com/2015/09/18/how-we-built-ruby-paas-part-ii-gem-and-web-interface.html">Part II - Gem and web interface</a></li>
+<li>Part III - API</li>
+<li>Part IV - Architecture, servers and virtualization</li>
+</ul>
+
+<h2>About the company</h2>
+
+<p>I&#39;ll begin by giving you a little background on how our business started. Shelly Cloud began as an internal project of <a href="http://ragnarson.com">Ragnarson</a>, the Ruby and JavaScript software house. Our goal was to create a common solution to deploy client applications. The first attempt was made in early 2010 and in the beginning it was nothing more than a collection of <a href="https://www.chef.io">Chef</a> cookbooks. In 2012, we decided to give the system API, a user interface and transform it into the regular product. Today, six people work on it full time, on a daily basis and three more part-time. We are bootstrapped, profitable and didn&#39;t get any external investment.</p>
+
+<p>Some facts:</p>
+
+<ul>
+<li>35+ bare physical servers, most of them are Intel Xeon 1x E5-2650v2 8c/16t with 2,6 GHz+/3,4 GHz and 128 GB DDR3 ECC 1600MHz of memory</li>
+<li>260+ apps running with over 400 virtual servers</li>
+<li>Our users made over 100 000+ deployments</li>
+<li>Two server regions which work separately: Europe and North America</li>
+</ul>
+
+<p>Shelly Cloud is built to run independently from the server providers, but for now we buy hardware from two providers: OVH and Hetzner. We don&#39;t use Amazon EC2, essentially because we don&#39;t want to add another layer of virtualization. Client virtual servers are only run in the OVH network.</p>
+
+<h2>The stack</h2>
+
+<p>Let&#39;s start with the diagram:</p>
+<figure>
+<p><img src="/2015/06/15/how-we-built-ruby-paas-part-i-overview-of-our-stack/shelly-cloud-stack-c0639d2ac3.png" alt="Shelly Cloud stack" /></p>
+</figure>
+<p>We can split the whole stack into four main segments:</p>
+
+<ul>
+<li>Tests: which verify stability and quality of the whole platform</li>
+<li>Front-end: where customers manage their account and applications</li>
+<li>Back-end: administration panel and API which communicates with front-end and configures servers using Chef</li>
+<li>Servers: front-end servers, physical servers where virtual servers are run, and several servers for specific additional services</li>
+</ul>
+
+<h3>Tests</h3>
+
+<p>We have our own custom solution which tests the entire stack. It&#39;s built with <a href="http://rspec.info">RSpec</a> and <a href="http://jnicklas.github.io/capybara">Capybara</a> and tests everything from typing a shell command like <code>shelly start</code> in the terminal, to spawning a configured virtual server with a working Rails app. I won&#39;t get into too many details here, mainly because we already published a blog post about it - <a href="https://shellycloud.com/blog/blog/2015/04/how-do-we-perform-system-integration-tests">&quot;How we perform system integration tests&quot;</a>. What is important here is that the test suite is run automatically every night, on both the production environment for both regions and on our staging. Moreover, we have a web application which allows us to browse the builds history, and send notifications to our internal chat room every time tests fail. We can start the test manually as well, even on our local machines. Right now, we have over 40 different test scenarios. Besides all this, we have regular unit tests in each element of the stack.</p>
+
+<h3>Front-end</h3>
+
+<p>There are three ways in which users can interact with our platform: command line interface, web application and Git.</p>
+
+<p>The first of these, command line interface (CLI), is written in Ruby, based on the <a href="http://whatisthor.com">Thor toolkit</a>, and distributed as a regular gem via RubyGems. It is important to note that <a href="https://github.com/shellycloud/shelly/">our CLI is open-sourced</a>, so if you want to you can browse its code or even contribute to it. CLI has 32 main commands and most of them have supplementary subcommands. The basic thing which gem is doing under the hood is communicating with the API. We use <a href="https://github.com/rest-client/rest-client">rest-client</a> to handle this.</p>
+
+<p>Secondly, the web application is a website which you browse - shellycloud.com. We use it as a landing page, to publish documentation, for blogging, and to allow clients to manage things which aren&#39;t that obvious in CLI, e.g. to edit billing details or for displaying cloud statistics. The funny thing is the site is deployed on Shelly Cloud itself. We used Rails 4.2 with <a href="http://slim-lang.com">Slim</a> + <a href="http://sass-lang.com">Sass</a> + <a href="http://coffeescript.org">CoffeeScript</a> combo to built it. We are also using AngularJS, but without JS routing, just to implement interactive elements as components. Webapp doesn&#39;t have a direct connection to the database. For people interested in gems, we use <a href="http://www.her-rb.org">Her</a> for API mapping and <a href="https://github.com/ennova/postmarkdown">Postmarkdown</a> as a blog engine.</p>
+
+<p>The last way to interact, Git, provides an easy route for users to do deployments. On our side, we don&#39;t use anything more than git hooks and a server for repositories storage.</p>
+
+<h3>Back-end</h3>
+
+<p>The main part of the back-end is our API. Besides the front-end described above, it interacts with three more elements:</p>
+
+<ul>
+<li>Administration panel</li>
+<li><a href="https://www.chef.io">Chef</a>, to configure and manage physical servers</li>
+<li><a href="http://fog.io">Fog</a>, to communicate with cloud computing software</li>
+</ul>
+
+<p>API is the Rails application with almost 110 gems. It&#39;s quite big and monolithic, but we regularly extract code from API to smaller services. To create JSON responds, we use <a href="https://github.com/rails-api/active_model_serializers">Rails serializers</a>. The main database is in PostgreSQL, but we also use Redis for <a href="https://github.com/resque/resque">Resque</a> to run background jobs and MongoDB for our custom logs streamer. API is running from the rest of the applications on its own server with Apache and <a href="https://www.phusionpassenger.com">Passenger</a>. We use <a href="http://capistranorb.com">Capistrano</a> to manage the deployment process.</p>
+
+<h3>Servers</h3>
+
+<p>System administration isn&#39;t just the core of our infrastructure, it&#39;s also the core of our business. Basically, people pay for us to handle maintenance, upgrades, configurations, monitoring, and automation on servers for them. As I mentioned, we use Chef to manage physical servers and our Chef repository has uploaded over 100 cookbooks. It allows us, for example, to set up and add a new node controller in less than 10 minutes, without any impact on the rest of stack. We gather stats from different services using <a href="https://github.com/etsy/statsd">statsd</a> + <a href="http://grafana.org">Grafana</a> + <a href="http://influxdb.com">InfluxDB</a> combo.</p>
+
+<p>The entry point of <a href="https://shellycloud.com/documentation/architecture">our architecture</a> for customer applications is the front-end server. It contains the following three services:</p>
+
+<ul>
+<li><a href="http://nginx.org">NGINX</a> which we use as a web server</li>
+<li><a href="https://www.varnish-cache.org">Varnish</a> for HTTP and static files cache</li>
+<li><a href="http://www.haproxy.org">HAProxy</a> to load balance traffic to the application servers</li>
+</ul>
+
+<p>They are all fully duplicated with automatic failover.</p>
+
+<p>To set up and administrate virtual servers, we use <a href="https://www.openstack.org">OpenStack</a>. Virtual machines run only on physical servers with SSD drives and <a href="http://ceph.com">Ceph</a> as a distributed object store and file system. The Linux distribution of our choice is Debian, and we are using aptly to manage package dependencies. Every virtual server has installed, configured and integrated by default:</p>
+
+<ul>
+<li><a href="https://rvm.io">RVM</a> to manage Ruby versions</li>
+<li><a href="http://www.fluentd.org">Fluentd</a> for collecting logs</li>
+<li><a href="http://memcached.org">Memcache</a> for local cache</li>
+<li><a href="http://www.postfix.org">Postfix</a> for emails</li>
+<li><a href="https://mmonit.com/monit/">Monit</a> and <a href="https://github.com/kostya/eye">Eye</a>, for monitoring purposes</li>
+</ul>
+
+<p>Number and specification of virtual servers are chosen by the user and stored in the application&#39;s repository in a YAML file called <a href="https://shellycloud.com/documentation/cloudfile">Cloudfile</a>. Customers can define which Ruby server, databases, background processing, or job scheduler they want to use for the app. There is also the possibility to start custom processes out of the processes supported by default. Databases are run on the same virtual servers with application processes, but databases storage is on separate machines, which also run on SSD drives with Ceph. Database storage is duplicated, and backed up regularly too. <a href="https://shellycloud.com/documentation/deployment_process">App&#39;s deployment</a> time depends heavily on the specification, but a full deployment of a new Rails application, from git push to start a new virtual server from scratch, doesn&#39;t take more than 35s.</p>
+
+<p>Besides the databases on virtual servers, we also offer databases with replication on dedicated hardware. Depending on the client&#39;s preference, they can be run directly on a dedicated physical server or on physical servers shared with other databases. In the second case, we use LXC to manage virtualization.</p>
+
+<p>The last thing to mention is our filesystem storage for static files. It runs on dedicated <a href="http://www.gluster.org">GlusterFS</a> cluster and is also backed up regularly.</p>
+
+<h3>Outsourcing</h3>
+
+<p>There are also some 3rd party services which we use and I want to mention:</p>
+
+<ul>
+<li><a href="http://newrelic.com">New Relic</a> for server monitoring</li>
+<li><a href="https://circleci.com">CircleCI</a> as a continuous integration system</li>
+<li><a href="https://www.intercom.io">Intercom</a> to communicate with our users and provide support</li>
+<li><a href="https://dnsimple.com">DNSimple</a> and <a href="https://www.zerigo.com/managed-dns">Zerigo</a> for DNS</li>
+<li><a href="https://www.pagerduty.com">PagerDuty</a> for phone notifications about platform issues</li>
+<li><a href="https://www.braintreepayments.com">Braintree</a> for credit card and PayPal payments</li>
+<li><a href="https://github.com">GitHub</a> for storing our code</li>
+<li><a href="https://www.pivotaltracker.com">Pivotal Tracker</a> as the tasks tracker</li>
+<li><a href="https://slack.com">Slack</a> for internal communication</li>
+<li><a href="http://invoiceocean.com">Fakturownia/InvoiceOcean</a> for invoices and accounts</li>
+<li>Lawyers office</li>
+</ul>
+
+<h2>To be continued...</h2>
+
+<p>Basically, that&#39;s all the general information. Please don&#39;t hesitate to ask questions in the comments section. As I mentioned at the beginning, please keep an eye out for the next part of this series, where I&#39;ll be explaining more about every section.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

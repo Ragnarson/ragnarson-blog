@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>How to manage front-end packages in Rails with Bower - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2013/09/24/how-to-manage-front-end-packages-in-rails-with-bower.html" property="og:url" /><meta content="How to manage front-end packages in Rails with Bower" property="og:title" /><meta content="Bower is an open source software created by Twitter, which
+simplifies dependencies management and updating of front-end packages (like
+gridism or normalize).
+In general it is the same thing for HTML/CSS/JS what Bundler is for Ruby.
+Not so long time ago version 1.0 has been released and the current stable version
+is 1.2. Let's take a look at how to use it and integrate with a Rails app." property="og:description" /><meta content="Bartłomiej Kozal" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@_bkzl" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"How to manage front-end packages in Rails with Bower","url":"https://blog.ragnarson.com/2013/09/24/how-to-manage-front-end-packages-in-rails-with-bower.html","author":{"@type":"Person","name":"Bartłomiej Kozal","image":"https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2013-09-24","dateModified":"2013-09-24"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/11ec30dedeb7889af512461ba7ce6a45.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="11ec30dedeb7889af512461ba7ce6a45" /><div class="article-meta">September 24, 2013 - <a href="/authors/bartlomiej-kozal.html">Bartłomiej Kozal</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2013/09/24/how-to-manage-front-end-packages-in-rails-with-bower.html">How to manage front-end packages in Rails with Bower</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p><a href="http://bower.io">Bower</a> is an open source software created by Twitter, which
+simplifies dependencies management and updating of front-end packages (like
+<a href="http://cobyism.com/gridism/">gridism</a> or <a href="http://necolas.github.io/normalize.css/">normalize</a>).
+In general it is the same thing for HTML/CSS/JS what Bundler is for Ruby.
+Not so long time ago version 1.0 has been released and the current stable version
+is 1.2. Let&#39;s take a look at how to use it and integrate with a Rails app. </p>
+
+<h2>Workflow</h2>
+
+<p>The easiest way to install Bower on your local machine is to use the <a href="http://nodejs.org/download/">NPM manager
+distributed with Node.js</a>. Just run in terminal
+<code>npm install -g bower</code>.</p>
+
+<p>Basic workflow is really simple. In the application directory create
+<code>bower.json</code> file. Next, add <code>name</code> key with your application code name and
+<code>dependencies</code> key with hash as a value which is used to list packages to
+install. Example file could look like this:</p>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"example"</span><span class="p">,</span>
+  <span class="s2">"dependencies"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"normalize-css"</span><span class="err">:</span> <span class="s2">"*"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Run <code>bower install</code>.</p>
+
+<p>By default Bower downloads all packages to <code>bower_components</code> in the main
+directory. If you want to add another one - edit <code>bower.json</code> and once again run
+<code>bower install</code> or use shorthand and just run <code>bower install --save package_name</code>,
+which will update the <code>bower.json</code> as well.</p>
+
+<p>The second most used command is <code>bower update</code>, which updates all
+packages to versions specified in the <code>bower.json</code> (or to the newest available if
+you use <code>*</code> as a version indicator).</p>
+
+<p>Last but not least, a command worth mentioning is <code>bower search</code>. Like its name suggest
+it is used to find packages in the Bower registry. You can also search
+the whole registry from <a href="http://sindresorhus.com/bower-components/">the web index</a>.</p>
+
+<h2>Integration with Rails</h2>
+
+<p>Before you start using Bower in a Rails application you have to set up two things.</p>
+
+<p>Firstly, you have to change the default path where packages are installed to
+<code>vendor/assets</code>. To do this add in the application directory a <code>.bowerrc</code> file
+with:</p>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"directory"</span><span class="err">:</span> <span class="s2">"vendor/assets/bower_components"</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Secondly, you have to add this path to Rails configuration so packages will be
+properly compiled. Modify your <code>application.rb</code> to contain the following line:</p>
+<pre class="highlight ruby"><code><span class="n">config</span><span class="p">.</span><span class="nf">assets</span><span class="p">.</span><span class="nf">paths</span> <span class="o">&lt;&lt;</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">root</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s1">'vendor'</span><span class="p">,</span> <span class="s1">'assets'</span><span class="p">,</span> <span class="s1">'bower_components'</span><span class="p">)</span>
+</code></pre>
+
+<p>Finally, you are able to require packages in sprockets manifests. For example for
+<code>normalize</code> it will look like this:</p>
+<pre class="highlight css"><code><span class="c">/*
+ *= require normalize-css/normalize
+ */</span>
+</code></pre>
+
+<p>The same thing can be achieved with <a href="https://github.com/42dev/bower-rails/">bower-rails gem</a>,
+which additionally allows to install packages in different paths and uses very
+similar DSL to Bundler to generate <code>bower.json</code>.</p>
+
+<h2>Summary</h2>
+
+<p>There is one problematic thing with libraries which are not Bower ready. You
+can still use it, but Bower just clone the whole package repository and store it
+with your code. It can be fixed by adding <code>bower_components</code> to <code>.gitignore</code>
+and installing packages during the deployment.</p>
+
+<p>Another annoying fact is that JavaScript packages are mixed with CSS packages in
+one directory. This can be solved using the <code>bower-rails</code> gem described above.</p>
+
+<p>Bower simplifies day to day usage of external front-end packages in your
+application. Managing them is a lot easier than performing it by hand. It is
+also a cleaner solution than using Ruby gems only to wrap front-end files
+which are often outdated.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

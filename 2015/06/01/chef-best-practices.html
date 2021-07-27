@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Chef best practices - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/06/01/chef-best-practices.html" property="og:url" /><meta content="Chef best practices" property="og:title" /><meta content="Chef is a framework written in Ruby, and partially in Erlang (Chef Server). It provides an API for numerous system services. With Chef, your infrastructure can be expressed as object-oriented code that is versionable, testable, and repeatable. One of the main ideas of Chef developers was to bury the walls that exist between software development and system administration, allowing them to bring system configuration to a higher level." property="og:description" /><meta content="Stanisław Tuszyński" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Stanisław Tuszyński","image":"https://www.gravatar.com/avatar/3254f15ea674eb387b83ebc59253a97d.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Chef best practices","url":"https://blog.ragnarson.com/2015/06/01/chef-best-practices.html","author":{"@type":"Person","name":"Stanisław Tuszyński","image":"https://www.gravatar.com/avatar/3254f15ea674eb387b83ebc59253a97d.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-06-01","dateModified":"2015-06-01"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/3254f15ea674eb387b83ebc59253a97d.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="3254f15ea674eb387b83ebc59253a97d" /><div class="article-meta">June  1, 2015 - <a href="/authors/stanislaw-tuszynski.html">Stanisław Tuszyński</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2015/06/01/chef-best-practices.html">Chef best practices</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>Chef is a framework written in Ruby, and partially in Erlang (<a href="https://docs.chef.io/server_components.html">Chef Server</a>). It provides an API for numerous system services. With Chef, your infrastructure can be expressed as object-oriented code that is versionable, testable, and repeatable. One of the main ideas of Chef developers was to bury the walls that exist between software development and system administration, allowing them to bring system configuration to a higher level. </p>
+
+<p>In Chef there are <a href="http://docs.chef.io/cookbooks.html">cookbooks</a> which act as code packages. Cookbooks have scripts called <a href="http://docs.chef.io/recipes.html">recipes</a> consisting of <a href="https://docs.chef.io/resource.html">resources</a>. All operations on your repository, and Chef Server, can be made via the <a href="https://docs.chef.io/knife.html">knife</a> command tool. There are also basic cookbooks that can be downloaded from <a href="https://supermarket.chef.io/cookbooks">Chef Supermarket</a>, developed and maintained by <a href="https://www.chef.io/community/">Chef Community</a>. You can also test your code by using your own <a href="https://docs.chef.io/kitchen.html">kitchen</a>.</p>
+
+<h2>Generic cookbooks</h2>
+
+<p>The main problem with designing and writing your own cookbooks is keeping them generic. This would probably not be an issue in small organizations, or in private usage, but if you ultimately want to publish your codes, or mix them with existing cookbooks, this is probably the issue in most cases (e.g. multiple declarations of the same service, additional packages/services installed but not required by our stack).</p>
+
+<p>The idea of a generic cookbook is to focus on specific tasks that the service would provide, and nothing more. In its ideal form, it should only install necessary packages and provide an <a href="https://docs.chef.io/lwrp.html">LWRP (Lightweight Resource/Provider)</a> for available actions (e.g. enabling site in nginx). You should avoid configuring any service that is not strictly related to the particular cookbook (e.g. monitoring, firewall etc.) or at least make it optional and do not include in your installation recipes.</p>
+
+<h2>One cookbook to rule them all</h2>
+
+<p>In Shelly Cloud, we use the concept of &#39;role cookbooks&#39; instead of the built-in roles structure in Chef. In basic terms, this means creating a wrapper cookbook for each role in your infrastructure, which then aggregates a generic cookbook and includes it in your nodes instead of roles. There are numerous advantages of using this approach, such as:</p>
+
+<ul>
+<li>cookbooks are versionable</li>
+<li>creates another layer for some additional organization-specific logic (e.g. some searches)</li>
+<li>can be distributed just like any other cookbook</li>
+<li>preserves site cookbooks not edited within our repository</li>
+</ul>
+
+<p>A theoretical example of a &#39;role cookbook&#39; recipe (web_server):</p>
+<pre class="highlight ruby"><code><span class="c1"># web_server/recipes/default.rb</span>
+
+<span class="c1"># configuring used cookbooks</span>
+<span class="n">node</span><span class="p">.</span><span class="nf">default</span><span class="p">[</span><span class="s1">'nginx'</span><span class="p">][</span><span class="s1">'port'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">node</span><span class="p">.</span><span class="nf">default</span><span class="p">[</span><span class="s1">'monit'</span><span class="p">][</span><span class="s1">'email'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'example@example.com'</span>
+
+<span class="c1"># including recipies to install components</span>
+<span class="n">include_recipe</span> <span class="s1">'nginx::install'</span>
+<span class="n">include_recipe</span> <span class="s1">'monit'</span>
+<span class="n">include_recipe</span> <span class="s1">'shorewall'</span>
+
+<span class="c1"># enabling some sites using nginx cookbook resource</span>
+<span class="sx">%w(default_site default_site2)</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">site</span><span class="o">|</span>
+  <span class="n">service_vhost</span> <span class="n">site</span> <span class="k">do</span>
+    <span class="n">notifies</span> <span class="ss">:reload</span><span class="p">,</span> <span class="s1">'service[nginx]'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># adding exceptions for nginx in firewall using shorewall cookbook resource</span>
+<span class="n">configure_shorewall4</span> <span class="s2">"nginx"</span> <span class="k">do</span>
+  <span class="n">port_number</span> <span class="n">node</span><span class="p">[</span><span class="s1">'nginx'</span><span class="p">][</span><span class="s1">'port'</span><span class="p">]</span>
+  <span class="n">protocol</span> <span class="s2">"tcp"</span>
+<span class="k">end</span>
+
+<span class="c1"># setting up monitoring from monit template file</span>
+<span class="n">monit_monitrc</span> <span class="s1">'nginx'</span>
+</code></pre>
+
+<p>The example above represents the concept of a role cookbook. On the very first lines, we are overwriting attributes of cookbooks we want to use. Then we include recipes which will trigger a default recipe (in most cases this is an installation and enabling of a service), or include a specific installation recipe (<code>nginx::install</code>). After this, we proceed to main service configuration by preparing and enabling 3 sites on our server, simply using ruby for each loop and <code>service_vhost</code> as described in <code>nginx</code> cookbook. Finally, we ensure that the desired port is open in our firewall (shorewall) and set up monitoring for nginx (monit).</p>
+
+<p>As you can see, if we did any firewall or monitoring configuration inside nginx site cookbook itself, we would not have the ability to choose which software we want to use for this purpose in our stack. The above method also gives us the ability to extend our logic in mixing those services.</p>
+
+<p>There are also some situations where it is just better to use role anyway. You can read more about this at <a href="https://www.chef.io/blog/2013/11/19/chef-roles-arent-evil/">Chef blog</a>.</p>
+
+<h2>Berkshelf</h2>
+
+<p>As you are interested in Chef, you are probably also familiar with Ruby. Rubists usually use <a href="http://bundler.io/">Bundler</a> to manage gems dependencies in their scripts. Over time, Chef gained its own equivalent called <a href="https://github.com/berkshelf/berkshelf">Berkshelf</a> and eventually this became part of <a href="https://downloads.chef.io/chef-dk/">Chef Development Kit</a>.</p>
+
+<p>The traditional pattern is to place all of your cookbooks in a directory called cookbooks or site-cookbooks, within your Chef Repository. This can be accomplished with a knife tool via the <code>knife cookbook site install [name]</code> command. From this point on, it works as a standard git submodule that can be developed independently within your repository.</p>
+
+<p>As a consequence of generic cookbooks design, distributed across multiple repositories, we do not need (and even do not want) to edit the cookbooks directly inside our main workspace repository. Using a berkshelf helps to better organize your repository, and keep it clean from site cookbooks that, if manually edited, can lead to a huge mess and unexpected behavior in future.</p>
+
+<p>Example of Berkshelf file inside your cookbook directory:</p>
+<pre class="highlight ruby"><code><span class="n">source</span> <span class="s2">"https://supermarket.chef.io"</span>
+
+<span class="n">metadata</span>
+
+<span class="n">cookbook</span> <span class="s2">"mysql"</span>
+<span class="n">cookbook</span> <span class="s2">"nginx"</span><span class="p">,</span> <span class="s2">"~&gt; 2.6"</span>
+</code></pre>
+
+<p>Note that the metadata method gathers existing information about dependencies directly from <code>metadata.rb</code>.</p>
+
+<p>You can install dependencies and then upload to the server using <code>berks install</code>, then use <code>berks upload</code> to upload all of them to Chef Server. By default, it downloads all cookbooks to <code>~/.berkshelf</code> directory and keeps all downloaded versions.</p>
+
+<h2>Attributes</h2>
+
+<p>Node attributes is one of the key features of Chef. It is used as a variable for your cookbooks that specify their state and help to create even more reusable recipes. The default attribute file (<code>attributes/default/default.rb</code>) should contain all necessary attributes declarations. As it appears to be common across most cookbooks, you should avoid adding any logic in that file. The best example of undesirable behavior in this case would be composing URLs using conditional blocks, e.g.:</p>
+<pre class="highlight ruby"><code><span class="n">default</span><span class="p">[</span><span class="s1">'service'</span><span class="p">][</span><span class="s1">'branch'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'stable'</span>
+
+<span class="k">case</span> <span class="n">node</span><span class="p">[</span><span class="s1">'platform_family'</span><span class="p">]</span>
+<span class="k">when</span> <span class="s1">'debian'</span>
+  <span class="n">default</span><span class="p">[</span><span class="s1">'service'</span><span class="p">][</span><span class="s1">'repo'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"https://example.com/debian/</span><span class="si">#{</span><span class="n">node</span><span class="p">[</span><span class="s1">'service'</span><span class="p">][</span><span class="s1">'branch'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">when</span> <span class="s1">'rhel'</span>
+  <span class="n">default</span><span class="p">[</span><span class="s1">'service'</span><span class="p">][</span><span class="s1">'repo'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"https://example.com/rhel/</span><span class="si">#{</span><span class="n">node</span><span class="p">[</span><span class="s1">'service'</span><span class="p">][</span><span class="s1">'branch'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Unfortunately the examples above have one annoying side effect; Even though Chef has a very clear and complex <a href="https://docs.chef.io/attributes.html#attribute-precedence">attribute precedence</a>, when it comes to loading the attribute file it will evaluate all blocks before applying all recipes. As a consequence of this, we can&#39;t reuse <code>default[&#39;service&#39;][&#39;branch&#39;]</code> in role cookbooks and we will have to override the <code>default[&#39;service&#39;][&#39;repo&#39;]</code> attribute as well.</p>
+
+<h2>Summary</h2>
+
+<p>The above is just a collection of good, effective and verified practices for using Chef on a larger scale. The Chef Community is a very big and diverse society which can offer you problem solving in many different ways that, in some cases, may be more suitable for you. But just as in The Ruby Way, we can still base our efforts on conventions that evolved over time from best practices, and that in turn can help us to become better Chefs.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

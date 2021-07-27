@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Adding search and autocomplete to a Rails app with Elasticsearch - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2013/10/10/adding-search-and-autocomplete-to-a-rails-app-with-elasticsearch.html" property="og:url" /><meta content="Adding search and autocomplete to a Rails app with Elasticsearch" property="og:title" /><meta content="This post will show a fast and easy way to add search to your Rails application.
+We will use Elasticsearch, an open source
+search engine, and Searchkick, an
+easy-to-use gem that integrates Elasticsearch with Rails." property="og:description" /><meta content="Grzesiek Kołodziejczyk" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@grkcodes" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Grzesiek Kołodziejczyk","image":"https://www.gravatar.com/avatar/ebdeb6de770c069ff6f2b37780d2a340.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Adding search and autocomplete to a Rails app with Elasticsearch","url":"https://blog.ragnarson.com/2013/10/10/adding-search-and-autocomplete-to-a-rails-app-with-elasticsearch.html","author":{"@type":"Person","name":"Grzesiek Kołodziejczyk","image":"https://www.gravatar.com/avatar/ebdeb6de770c069ff6f2b37780d2a340.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2013-10-10","dateModified":"2013-10-10"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/ebdeb6de770c069ff6f2b37780d2a340.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="Ebdeb6de770c069ff6f2b37780d2a340" /><div class="article-meta">October 10, 2013 - <a href="/authors/grzesiek-kolodziejczyk.html">Grzesiek Kołodziejczyk</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2013/10/10/adding-search-and-autocomplete-to-a-rails-app-with-elasticsearch.html">Adding search and autocomplete to a Rails app with Elasticsearch</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>This post will show a fast and easy way to add search to your Rails application.
+We will use <a href="http://www.elasticsearch.org/">Elasticsearch</a>, an open source
+search engine, and <a href="http://ankane.github.io/searchkick/">Searchkick</a>, an
+easy-to-use gem that integrates Elasticsearch with Rails. </p>
+
+<h2>Installing Elasticsearch</h2>
+
+<p>To get started, you need to install Elasticsearch. Mac users can use
+<a href="http://brew.sh/">Homebrew</a> for that - simply run <code>brew install elasticsearch</code>
+and follow the instructions. Alternatively, you can refer to the
+<a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/setup.html">Elasticsearch setup guide</a>.</p>
+
+<h2>Example Application</h2>
+
+<p>The code for an example application we&#39;ll be working with can be found
+<a href="https://github.com/grk/bookstore-example/">on Github</a>. If you want to follow
+the changes step-by-step on your machine, you can start with the
+<a href="https://github.com/grk/bookstore-example/tree/before-search">before-search branch</a>.</p>
+
+<p>After importing some books, we end up with a basic listing of books with
+their covers, paginated:</p>
+<figure>
+<p><img src="/2013/10/10/adding-search-and-autocomplete-to-a-rails-app-with-elasticsearch/before-search-c003a49a19.png" alt="Bookstore before search" /></p>
+</figure>
+<h2>Adding Search</h2>
+
+<p>With that as a base application, we can start working on adding search. The
+first step is adding searchkick to the Gemfile:</p>
+<pre class="highlight ruby"><code><span class="c1"># Gemfile</span>
+<span class="n">gem</span> <span class="s2">"searchkick"</span>
+</code></pre>
+
+<p>After running <code>bundle install</code>, we can configure the Book model to be
+searchable:</p>
+<pre class="highlight ruby"><code><span class="c1"># app/models/book.rb</span>
+<span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">searchkick</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Next, we need to build the index for the Book class so that the books we already
+have in the database will be added to Elasticsearch. When new records are
+created rebuilding isn&#39;t necessary, but you have to do it whenever you change
+the <code>searchkick</code> method in your model:</p>
+<pre class="highlight shell"><code>rake searchkick:reindex <span class="nv">CLASS</span><span class="o">=</span>Book
+</code></pre>
+
+<p>After that, we can try the search in the rails console:</p>
+<pre class="highlight plaintext"><code>2.0.0-p247 :001 &gt; results = Book.search("ruby")
+ =&gt; #&amp;lt;Searchkick::Results:0x007ff5a1bca158 ...
+2.0.0-p247 :002 &gt; results.map(&amp;:title)
+  Book Load (0.5ms)  SELECT "books".* FROM "books" WHERE "books"."id" IN (10, 9, 11)
+ =&gt; ["Programming Ruby", "The Ruby Way", "Ruby On Rails Bible"]
+</code></pre>
+
+<p>Now that our search is working, we can integrate it with the books controller:</p>
+<pre class="highlight ruby"><code><span class="c1"># app/controllers/books_controller.rb</span>
+<span class="k">class</span> <span class="nc">BooksController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="ss">:query</span><span class="p">].</span><span class="nf">present?</span>
+      <span class="vi">@books</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:query</span><span class="p">],</span> <span class="ss">page: </span><span class="n">params</span><span class="p">[</span><span class="ss">:page</span><span class="p">])</span>
+    <span class="k">else</span>
+      <span class="vi">@books</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">all</span><span class="p">.</span><span class="nf">page</span> <span class="n">params</span><span class="p">[</span><span class="ss">:page</span><span class="p">]</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>And add the search form in the view:</p>
+<pre class="highlight slim"><code><span class="err"># </span><span class="nt">app</span>/views/books/index<span class="nc">.html.slim</span>
+<span class="p">=</span> <span class="n">form_tag</span> <span class="n">books_path</span><span class="p">,</span> <span class="ss">class: </span><span class="s2">"form-inline"</span><span class="p">,</span> <span class="ss">method: :get</span> <span class="k">do</span>
+  <span class="nc">.form-group</span>
+    <span class="p">=</span> <span class="n">text_field_tag</span> <span class="ss">:query</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="ss">:query</span><span class="p">],</span> <span class="ss">class: </span><span class="s2">"form-control"</span>
+  <span class="p">'</span>
+  <span class="p">=</span> <span class="n">submit_tag</span> <span class="s2">"Search"</span><span class="p">,</span> <span class="ss">class: </span><span class="s2">"btn btn-primary"</span>
+  <span class="p">-</span> <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="ss">:query</span><span class="p">].</span><span class="nf">present?</span>
+    <span class="p">'</span>
+    <span class="p">=</span> <span class="n">link_to</span> <span class="s2">"clear"</span><span class="p">,</span> <span class="n">books_path</span>
+</code></pre>
+
+<p>With that change, we can search our bookstore using the form we just added:</p>
+<figure>
+<p><img src="/2013/10/10/adding-search-and-autocomplete-to-a-rails-app-with-elasticsearch/simple-search-c03b6fdc62.png" alt="Bookstore simple search" /></p>
+</figure>
+<p>You can check the code up to this point at the
+<a href="https://github.com/grk/bookstore-example/tree/simple-search">simple-search branch</a>
+on Github.</p>
+
+<h2>Autocomplete</h2>
+
+<p>One of the most useful features of any search engine is autocomplete. Luckily
+for us, searchkick provides a really easy way to do that. On the browser side,
+we can use the awesome <a href="http://twitter.github.io/typeahead.js/">typeahead.js library</a>
+from Twitter.</p>
+
+<p>We&#39;ll add this library in the application layout (because it&#39;s faster), but for
+production apps you should add it to your Asset Pipeline. You could use
+<a href="https://github.com/bower/bower">Bower</a> for that, and we posted
+<a href="/blog/2013/09/how-to-manage-front-end-packages-in-rails-with-bower">a guide for using Bower with Rails</a>
+a while ago.</p>
+<pre class="highlight plaintext"><code># app/views/layouts/application.html.slim
+= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js"
+</code></pre>
+
+<p>Next, we change the searchkick setup in our Book model to include autocomplete:</p>
+<pre class="highlight ruby"><code><span class="c1"># app/models/book.rb</span>
+<span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">searchkick</span> <span class="ss">autocomplete: </span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>As mentioned before, this change requires rebuilding the index, so we run</p>
+<pre class="highlight plaintext"><code>rake searchkick:reindex CLASS=Book
+</code></pre>
+
+<p>To confirm that the autocomplete is working, let&#39;s try it in the Rails console:</p>
+<pre class="highlight plaintext"><code>2.0.0-p247 :001 &gt; Book.search("the", autocomplete: true).map(&amp;:title)
+  Search (7.5ms)  {"query":{"multi_match":{"fields":["title.autocomplete"],"query":"the","analyzer":"searchkick_autocomplete_search"}},"size":100000,"from":0,"fields":[]}
+  Book Load (0.8ms)  SELECT "books".* FROM "books" WHERE "books"."id" IN (9, 12, 5)
+ =&gt; ["The Ruby Way", "The Art of Rails", "The  art of computer programming"]
+</code></pre>
+
+<p>Since it&#39;s working as expected, we can add an action to our books controller
+that will return the autocomplete results:</p>
+<pre class="highlight ruby"><code><span class="c1"># app/controllers/books_controller.rb</span>
+<span class="k">class</span> <span class="nc">BooksController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">autocomplete</span>
+    <span class="n">render</span> <span class="ss">json: </span><span class="no">Book</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:query</span><span class="p">],</span> <span class="ss">autocomplete: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">limit: </span><span class="mi">10</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:title</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Remember to add a route for this new action:</p>
+<pre class="highlight ruby"><code><span class="c1"># config/routes.rb</span>
+<span class="no">Bookstore</span><span class="o">::</span><span class="no">Application</span><span class="p">.</span><span class="nf">routes</span><span class="p">.</span><span class="nf">draw</span> <span class="k">do</span>
+  <span class="n">resources</span> <span class="ss">:books</span><span class="p">,</span> <span class="ss">only: :index</span> <span class="k">do</span>
+    <span class="n">collection</span> <span class="k">do</span>
+      <span class="n">post</span> <span class="ss">:import</span>
+      <span class="n">get</span> <span class="ss">:autocomplete</span> <span class="c1"># &lt;= add this line</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="n">root</span> <span class="ss">to: </span><span class="s1">'books#index'</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Now, we can add autocomplete to the search form. First, let&#39;s add some nicer
+styling:</p>
+<pre class="highlight plaintext"><code># app/views/books/index.html.slim
+= form_tag books_path, class: "form-inline", method: :get do
+  .input-group.input-group-lg
+    - if params[:query].present?
+      .input-group-btn
+        = link_to "clear", books_path, class: "btn btn-default"
+    = text_field_tag :query, params[:query], class: "form-control", id: "book_search", autocomplete: "off"
+    .input-group-btn
+      = submit_tag "Search", class: "btn btn-primary"
+</code></pre>
+
+<p>Note that we added the <code>book_search</code> id to the query input. All that&#39;s left is
+wiring up the javascript to fetch the autocomplete results:</p>
+<pre class="highlight coffeescript"><code><span class="c1"># app/assets/javascripts/books.js.coffee
+</span><span class="nx">$</span> <span class="o">-&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">'#book_search'</span><span class="p">).</span><span class="na">typeahead</span>
+    <span class="na">name</span><span class="o">:</span> <span class="s">"book"</span>
+    <span class="na">remote</span><span class="o">:</span> <span class="s">"/books/autocomplete?query=%QUERY"</span>
+</code></pre>
+
+<p>We&#39;re missing some styling for typeahead, which you can download from
+<a href="https://raw.github.com/grk/bookstore-example/master/app/assets/stylesheets/typeahead.css">here</a>
+and put in app/assets/stylesheets/typeahead.css.</p>
+
+<p>The result should look like this:</p>
+<figure>
+<p><img src="/2013/10/10/adding-search-and-autocomplete-to-a-rails-app-with-elasticsearch/autocomplete-c0b9034b47.gif" alt="Bookstore autocomplete" /></p>
+</figure>
+<h2>Deploying Elasticsearch</h2>
+
+<p>If you&#39;re deploying your app on your own infrastructure, you can use this
+<a href="https://github.com/elasticsearch/cookbook-elasticsearch">chef cookbook</a>. There
+is an official <a href="http://www.elasticsearch.org/tutorials/deploying-elasticsearch-with-chef-solo/">Elasticsearch guide</a>
+for deploying using chef-solo.</p>
+
+<p>For cloud deployments, you can use <a href="http://www.bonsai.io/">bonsai</a>,
+<a href="http://www.found.no/">found</a> or <a href="http://www.searchly.com/">searchly</a>.</p>
+
+<p>If you&#39;re using Shelly Cloud, adding Elasticsearch is as easy as
+<a href="/documentation/elasticsearch">adding one line to your Cloudfile</a>.</p>
+
+<h2>Further improvements</h2>
+
+<p>The example given in this post is very basic. Adding functionality is left
+as an excercise for the reader, but I suggest looking into
+<a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets.html">facets</a>
+and <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters.html">suggestions</a>.
+Both of those features will improve the usability of your app and delight
+your users.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Generating PDFs with custom fonts using wkhtmltopdf - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2014/01/13/generating-pdfs-with-custom-fonts-using-wkhtmltopdf.html" property="og:url" /><meta content="Generating PDFs with custom fonts using wkhtmltopdf" property="og:title" /><meta content="Generating PDF files with custom fonts can be tricky. In this tutorial we
+will create a simple Rails app and tackle this problem with two tools:
+wicked_pdf and
+wkhtmltopdf." property="og:description" /><meta content="Sebastian Wojtczak" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@s_wojtczak" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Sebastian Wojtczak","image":"https://www.gravatar.com/avatar/1bcc0f22f6de3bb0942c9a187e1d1ac1.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Generating PDFs with custom fonts using wkhtmltopdf","url":"https://blog.ragnarson.com/2014/01/13/generating-pdfs-with-custom-fonts-using-wkhtmltopdf.html","author":{"@type":"Person","name":"Sebastian Wojtczak","image":"https://www.gravatar.com/avatar/1bcc0f22f6de3bb0942c9a187e1d1ac1.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2014-01-13","dateModified":"2014-01-13"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/1bcc0f22f6de3bb0942c9a187e1d1ac1.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="1bcc0f22f6de3bb0942c9a187e1d1ac1" /><div class="article-meta">January 13, 2014 - <a href="/authors/sebastian-wojtczak.html">Sebastian Wojtczak</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2014/01/13/generating-pdfs-with-custom-fonts-using-wkhtmltopdf.html">Generating PDFs with custom fonts using wkhtmltopdf</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>Generating PDF files with custom fonts can be tricky. In this tutorial we
+will create a simple Rails app and tackle this problem with two tools:
+<a href="https://github.com/mileszs/wicked_pdf">wicked_pdf</a> and
+<a href="https://code.google.com/p/wkhtmltopdf/">wkhtmltopdf</a>. </p>
+
+<h2>Example application</h2>
+
+<p>The code for an example application we&#39;ll be working with can be found
+<a href="https://github.com/sabcio/generate_pdf">on Github</a>. It&#39;s a minimalistic app
+to create sales orders. It was created with
+<a href="http://railsapps.github.io/rails-composer">Rails Composer</a>, to start off
+fast.</p>
+
+<p>After importing some orders and items with <code>rake db:seed</code>, we can review
+them:</p>
+<figure>
+<p><img src="/2014/01/13/generating-pdfs-with-custom-fonts-using-wkhtmltopdf/orders_list-c04226cdbf.png" alt="Orders List" /></p>
+</figure>
+<h2>Generating PDF files</h2>
+
+<p>We will be using wicked_pdf to generate PDF files. Wicketd_pdf is a wrapper
+around shell utility wkhtmltopdf, which serves PDF files from plain HTML.
+Wicked_pdf doesn&#39;t require us to use any specific DSL to create PDF files.
+Instead it utilizes HTML views that we, Rails developers, are accustomed
+to. Wicked_pdf requires installed wkhtmltopdf, luckily there is a binary
+version released as a gem, that works on Linux, Mac OS X and Windows.
+We can start off by adding wicked_pdf and wkhtmltopdf-binary to <code>Gemfile</code>:</p>
+<pre class="highlight ruby"><code><span class="c1"># Gemfile</span>
+
+<span class="n">gem</span> <span class="s1">'wkhtmltopdf-binary'</span>
+<span class="n">gem</span> <span class="s1">'wicked_pdf'</span>
+</code></pre>
+
+<p>After running <code>bundle install</code>, we can move on to adding support for PDF format
+in <code>OrdersController</code>:</p>
+<pre class="highlight ruby"><code><span class="c1"># app/controllers/orders_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">show</span>
+  <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+    <span class="nb">format</span><span class="p">.</span><span class="nf">html</span>
+    <span class="nb">format</span><span class="p">.</span><span class="nf">pdf</span> <span class="k">do</span>
+      <span class="n">render</span> <span class="ss">pdf: </span><span class="vi">@order</span><span class="p">.</span><span class="nf">payer_name</span><span class="p">,</span>                  <span class="c1"># file name</span>
+             <span class="ss">layout: </span><span class="s1">'layouts/application.pdf.haml'</span><span class="p">,</span>  <span class="c1"># layout used</span>
+             <span class="ss">show_as_html: </span><span class="n">params</span><span class="p">[</span><span class="ss">:debug</span><span class="p">].</span><span class="nf">present?</span>    <span class="c1"># allow debuging</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Wicked_pdf <a href="https://github.com/mileszs/wicked_pdf#advanced-usage-with-all-available-options">supports many more options</a>,
+we can easily start off with these three. Let&#39;s create a layout for our PDF
+files:</p>
+<pre class="highlight ruby"><code><span class="c1"># app/views/layout/application.pdf.haml</span>
+
+<span class="o">!!!</span>
+<span class="o">%</span><span class="n">html</span>
+  <span class="o">%</span><span class="n">head</span>
+    <span class="o">%</span><span class="n">meta</span><span class="p">{</span><span class="ss">charset: </span><span class="s1">'utf8'</span><span class="p">}</span>
+
+  <span class="o">%</span><span class="n">body</span>
+    <span class="p">.</span><span class="nf">container</span>
+      <span class="o">%</span><span class="n">h1</span> <span class="no">Generate</span> <span class="no">PDF</span> <span class="n">example</span>
+      <span class="o">=</span> <span class="k">yield</span>
+</code></pre>
+
+<p>We still have to create a show view for PDF format (copied from scaffold HTML
+version):</p>
+<pre class="highlight ruby"><code><span class="c1"># app/views/orders/show.pdf.haml</span>
+
+<span class="o">%</span><span class="nb">p</span>
+  <span class="o">%</span><span class="n">b</span> <span class="no">Payer</span> <span class="ss">name:
+  </span><span class="o">=</span> <span class="vi">@order</span><span class="p">.</span><span class="nf">payer_name</span>
+<span class="o">%</span><span class="nb">p</span>
+  <span class="o">%</span><span class="n">b</span> <span class="no">Address</span><span class="p">:</span>
+  <span class="o">=</span> <span class="n">simple_format</span><span class="p">(</span><span class="vi">@order</span><span class="p">.</span><span class="nf">address</span><span class="p">)</span>
+
+<span class="c1"># the rest is omitted for brevity</span>
+</code></pre>
+
+<p>If we navigate to our first order and add <code>.pdf</code> extension to the URL, we will see
+the first generated PDF:</p>
+<figure>
+<p><img src="/2014/01/13/generating-pdfs-with-custom-fonts-using-wkhtmltopdf/first_pdf-c0bd5dc33f.png" alt="First PDF" /></p>
+</figure>
+<p>Great, we didn&#39;t add so much code and we are able to generate PDF files. What if
+we want to use custom fonts?</p>
+
+<h2>Adding custom fonts</h2>
+
+<p>I have picked <a href="http://www.google.com/fonts/specimen/Open+Sans">Open Sans</a> and
+<a href="http://www.google.com/fonts/specimen/Orbitron">Orbitron</a> fonts, both
+downloaded from <a href="http://www.google.com/fonts">Google Fonts</a>.</p>
+
+<p>To use them in our PDF we have to create a CSS file:</p>
+<pre class="highlight css"><code><span class="err">#</span> <span class="nt">app</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">pdf</span><span class="nc">.css.scss</span>
+
+<span class="nt">h1</span><span class="o">,</span> <span class="nt">li</span><span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s2">'Orbitron'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">p</span><span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s2">'Open Sans'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>And include it in our PDF layout with <code>wicked_pdf_stylesheet_link_tag</code>.
+<code>wicked_pdf_*</code> helpers embed CSS or Javascript in the HTML output, which is
+then used to generate PDF with wkhtmltopdf.</p>
+<pre class="highlight ruby"><code><span class="c1"># app/views/layout/application.pdf.haml</span>
+
+<span class="o">!!!</span>
+<span class="o">%</span><span class="n">html</span>
+  <span class="o">%</span><span class="n">head</span>
+    <span class="o">%</span><span class="n">meta</span><span class="p">{</span><span class="ss">charset: </span><span class="s1">'utf8'</span><span class="p">}</span>
+<span class="o">+</span>   <span class="o">=</span> <span class="n">wicked_pdf_stylesheet_link_tag</span> <span class="s2">"pdf"</span>
+
+  <span class="o">%</span><span class="n">body</span>
+    <span class="p">.</span><span class="nf">container</span>
+      <span class="o">%</span><span class="n">h1</span> <span class="no">Generate</span> <span class="no">PDF</span> <span class="n">example</span>
+      <span class="o">=</span> <span class="k">yield</span>
+</code></pre>
+
+<p>We still need to add these fonts in our operating system, it may vary
+depending on what OS you are using. In case of Mac OS X you can add them via
+native Font Book app. In Ubuntu installing fonts is either done by double
+clicking or by adding them to <code>~/.fonts</code> or <code>/usr/share/fonts</code> directories
+and rebuilding fonts cache with <code>fc-cache</code>.</p>
+
+<p>Let&#39;s try to generate the PDF again:</p>
+<figure>
+<p><img src="/2014/01/13/generating-pdfs-with-custom-fonts-using-wkhtmltopdf/fonts_pdf-c0b75be588.png" alt="PDF with custom fonts" /></p>
+</figure>
+<p>Fonts are rendered correctly! We can deploy our application to production.</p>
+
+<h2>Deploying on Shelly Cloud</h2>
+
+<p>We have installed fonts on our local machine. If we <a href="https://shellycloud.com/documentation/quick_start">deploy our application
+to Shelly Cloud</a>, we will
+notice that our neat fonts are gone. This is because
+they are missing on Shelly Cloud&#39;s virtual servers.</p>
+
+<p>To keep our fonts in one place, we can add them to <code>app/assets/fonts</code>
+directory. To make sure they are always present on our virtual servers
+we will create a <a href="https://shellycloud.com/documentation/deployment_hooks">before_restart hook</a>
+with the following content:</p>
+<pre class="highlight shell"><code><span class="c"># config/deploy/shelly/before_restart</span>
+
+<span class="nb">set</span> -e
+
+ln -sf ~/app/current/app/assets/fonts ~/.fonts
+
+<span class="nb">fc</span>-cache
+</code></pre>
+
+<p>It links <code>app/assets/fonts</code> directory to <code>~/.fonts</code> and scans the
+font directories on the system to rebuild font information cache files. Now our
+PDF will be generated with proper fonts. We are done.</p>
+
+<h2>Other solutions</h2>
+
+<p>I did some research on adding fonts to wkhtmltopdf generated PDF. I found a few
+other possible solutions to this problem, however none of them worked or
+I had different results on development and production environments.</p>
+
+<p>The first one was to add either absolute paths to fonts or URLs to external
+sources. I tried both but with no luck. The HTML was correctly rendered but
+the generated PDFs were actually blank.</p>
+
+<p>The other solution was to encode fonts with base64 and use @font-face rule
+in CSS. The only restriction was to use Truetype fonts. It worked, however there
+were problems when multiple @font-face rules were specified for normal and
+bold fonts. Also rendered fonts looked different, they were not clean and crisp.
+I found out, on wkhtmltopdf issue tracker, that this is actually
+<a href="https://code.google.com/p/wkhtmltopdf/issues/detail?id=410&amp;q=font-face">a qt-webkit bug</a>.
+I have created a separate
+<a href="https://github.com/sabcio/generate_pdf/tree/base64">github branch</a> with the
+last commit showing this technique.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

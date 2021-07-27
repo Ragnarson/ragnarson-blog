@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Test the things that matter - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2016/12/21/test-things-that-matter.html" property="og:url" /><meta content="Test the things that matter" property="og:title" /><meta content="Testing your application is a crucial thing to ensure that everything is working as expected. It gives you a quick feedback if the new feature can be shipped and you didn’t introduce any regression. It’s pretty much an integral part of development. If you like the TDD technique it means that you write your tests even before writing the actual code. But you have to remember that your tests are also an important part of your codebase and you have to take care of them. They should be easy to understand and modify in the future. It’s also important to isolate your tests as much as possible and check things that really matter. Let’s look at some example." property="og:description" /><meta content="Dawid Lenkiewicz" name="author" /><meta content="https://blog.ragnarson.com/2016/12/21/test-things-that-matter/cover-c0feeb9f5f.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Dawid Lenkiewicz","image":"https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Test the things that matter","url":"https://blog.ragnarson.com/2016/12/21/test-things-that-matter.html","author":{"@type":"Person","name":"Dawid Lenkiewicz","image":"https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2016-12-21","dateModified":"2016-12-21","image":"https://blog.ragnarson.com/2016/12/21/test-things-that-matter/cover-c0feeb9f5f.png"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="01caa77a1f122a1371fed292cab37c72" /><div class="article-meta">December 21, 2016 - <a href="/authors/dawid-lenkiewicz.html">Dawid Lenkiewicz</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2016/12/21/test-things-that-matter.html">Test the things that matter</a></h1></header><img src='/2016/12/21/test-things-that-matter/cover-c0feeb9f5f.png'/><p>Testing your application is a crucial thing to ensure that everything is working as expected. It gives you a quick feedback if the new feature can be shipped and you didn’t introduce any regression. It’s pretty much an integral part of development. If you like the TDD technique it means that you write your tests even before writing the actual code. But you have to remember that your tests are also an important part of your codebase and you have to take care of them. They should be easy to understand and modify in the future. It’s also important to isolate your tests as much as possible and check things that really matter. Let’s look at some example.</p>
+
+<p></p>
+
+<h1>Imaginary example</h1>
+
+<p>Let&#39;s follow some imaginary example. It&#39;s not that far away from our normal, typical workflow. While implementing a new feature you realize that its parts can be reused and are likely to be changed many times over the time. So let&#39;s assume we have a service object that is run after <code>User</code> registers in our application. It should create a User record and return some super secret token. The implementation details of generating the token are not really important. It could look like this:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">User</span><span class="o">::</span><span class="no">Register</span>
+  <span class="k">def</span> <span class="nf">call</span>
+    <span class="no">User</span><span class="p">.</span><span class="nf">create!</span><span class="p">(</span><span class="ss">email: </span><span class="n">email</span><span class="p">)</span>
+    <span class="n">generate_super_secret_token</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">generate_super_secret_token</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+    <span class="c1"># ...</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We also write tests for this class:</p>
+<pre class="highlight ruby"><code><span class="n">it</span> <span class="p">{</span> <span class="n">expect</span> <span class="p">{</span> <span class="n">subject</span><span class="p">.</span><span class="nf">call</span> <span class="p">}.</span><span class="nf">to</span> <span class="n">change</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="ss">:count</span><span class="p">).</span><span class="nf">by</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">it</span> <span class="p">{</span> <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">call</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s2">"TOP SECRET"</span><span class="p">)</span> <span class="p">}</span>
+</code></pre>
+
+<h1>Making a small mistake</h1>
+
+<p>It all works great, but now we have to reuse the generation of the token. So we move this logic into its own class and change our service object to:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">User</span><span class="o">::</span><span class="no">Register</span>
+  <span class="k">def</span> <span class="nf">call</span>
+    <span class="no">User</span><span class="p">.</span><span class="nf">create!</span><span class="p">(</span><span class="ss">email: </span><span class="n">email</span><span class="p">)</span>
+    <span class="no">User</span><span class="o">::</span><span class="no">GenerateToken</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The <code>User::GenerateToken</code> can be reused in as many places as needed. We can move the code around, write specs like the one existing before and think that our task is finished. And this is that small mistake, which could haunt us in the future. Specs are green, our tests checks if the correct token was created, so what could be the problem?</p>
+
+<h1>Changing the token generation</h1>
+
+<p>Now you have to change the algorithm for token generation. You changed it in the <code>User::GenerateToken</code> class. Now suddenly every spec for the class that uses it is failing. What has happened? It turns out that now you have to modify every spec for classes that use that service object. You could easily avoid it by refactoring also your specs when creating the <code>User::GenerateToken</code> class. It could look like that:</p>
+<pre class="highlight ruby"><code><span class="n">before</span> <span class="p">{</span> <span class="n">allow</span><span class="p">(</span><span class="no">User</span><span class="o">::</span><span class="no">GenerateToken</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:call</span><span class="p">)</span> <span class="p">{</span> <span class="s2">"TOP SECRET"</span> <span class="p">}</span> <span class="p">}</span>
+
+<span class="n">it</span> <span class="p">{</span> <span class="n">expect</span> <span class="p">{</span> <span class="n">subject</span><span class="p">.</span><span class="nf">call</span> <span class="p">}.</span><span class="nf">to</span> <span class="n">change</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="ss">:count</span><span class="p">).</span><span class="nf">by</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">it</span> <span class="p">{</span> <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">call</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s2">"TOP SECRET"</span><span class="p">)</span> <span class="p">}</span>
+</code></pre>
+
+<p>A simple stub gives us 3 really important wins here:</p>
+
+<ul>
+<li>It ensures we won’t need to modify this code in case of internal changes of the <code>User::GenerateToken</code></li>
+<li>It isolates our tests, meaning that they don’t rely on any other parts of the application. It also makes it easy to find the cause of a failed test</li>
+<li>It doesn’t even call this code, but automatically returns the &quot;TOP SECRET&quot; text when it is called. This way we can really speed up our tests and don’t run the same code over and over again in multiple places.</li>
+</ul>
+
+<p>This may seem like a trivial example, but it’s really important to look at your specs like that and isolate them. This example is written more like a pseudocode just to show you the main benefits of presented solution. I <a href="https://blog.ragnarson.com/2016/10/19/are-service-objects-enough.html">don’t like</a> returning any value from service objects and this spec could just use a mock:</p>
+<pre class="highlight ruby"><code><span class="n">expect</span><span class="p">(</span><span class="no">User</span><span class="o">::</span><span class="no">GenerateToken</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:call</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+</code></pre>
+
+<h1>Testing the right way</h1>
+
+<p>I would also like to present my &quot;ideal way&quot; of testing new features. We can divide it into 3 groups:</p>
+
+<h2>Feature specs</h2>
+
+<p>You should do a &quot;Happy path&quot; with this spec. The Happy path is pretty much the simplest optimistic scenario of a new feature. Feature specs do actual requests and go through the whole application stack. They can work with Javascript with <a href="https://github.com/teampoltergeist/poltergeist">poltergeist</a> and mimic the user interaction with the browser. You can use a very popular <a href="https://github.com/teamcapybara/capybara">capybara</a> gem, for example, to fill in form fields and submit them. Please keep in mind that your final expectations shouldn&#39;t check for changes in the database. They should rather verify if the user sees correct data on the page. This way you are actually testing the user’s behavior and that&#39;s what feature specs are for. Keep in mind that you shouldn&#39;t overuse them, because they are the slowest ones.</p>
+
+<h2>Request specs</h2>
+
+<p>Since Rails 5 there is a strong <a href="https://github.com/rails/rails/issues/18950">recommendation</a> to discard controller specs and go with request specs. They are really similar in terms of writing them. The main difference is that controller specs were more like unit tests for the controller classes. No real request was made, so, in reality, we couldn&#39;t assume that everything works the same when all layers of our app are involved. Request specs actually hit your endpoints. I like to use them for checking if commands or service objects are called with proper arguments. Also if the user is redirected to proper endpoint after certain outcome. Since I use controllers mostly for calling service objects and rendering/redirecting pretty much no business logic is tested here.</p>
+
+<h2>Unit specs</h2>
+
+<p>Where the real testing happens. Pretty much every method on your classes should be tested. The main thing is to test your business logic, which is good to keep in separate service objects. But don&#39;t forget about your models. It doesn&#39;t really matter if you use scopes or you like query objects. Also, it is not important if you use validations in models or use form objects. You should test it all thoroughly. Unit tests are the fastest ones, remember to try to isolate them as much as possible. It also doesn&#39;t matter if you use dependency injection or not. Stub all calls to other classes.</p>
+
+<h1>Wrapping up</h1>
+
+<p>Isolate your tests. With this approach, I think you can test the most important things. Could it be improved? Surely, but in the real world, we often work on quickly evolving projects. It&#39;s important to make good enough test coverage and move on to next task. I don&#39;t really see a point in testing for example associations or creating view specs. They could help us finding some regression, but writing and maintaining them isn&#39;t worth it in most cases.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

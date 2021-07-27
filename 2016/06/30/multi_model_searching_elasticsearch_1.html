@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Multi-model searching using Elasticsearch vol. 1 - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2016/06/30/multi_model_searching_elasticsearch_1.html" property="og:url" /><meta content="Multi-model searching using Elasticsearch vol. 1" property="og:title" /><meta content="For one of our projects I had to do some complex searching. To cut a long story short, admin users wanted
+a way to quickly search and assign one record of two models to another record. The client wanted searching
+to happen with only one text input. After considering the complexity of searching by every possible column,
+and the importance of speed, I decided to use Elasticsearch.
+This was my first experience with this search engine and I would like to share my ideas about how to
+implement it and organise the code. There is a lot of stuff to cover, so I’ll split it into 3 parts:
+installing and indexing data, simple searching by multiple models and, finally, making searching
+&quot;more intelligent&quot;. Let’s see now how to get started with Elasticsearch." property="og:description" /><meta content="Dawid Lenkiewicz" name="author" /><meta content="https://blog.ragnarson.com/2016/06/30/multi_model_searching_elasticsearch_1/cover-c0b3ae6320.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Dawid Lenkiewicz","image":"https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Multi-model searching using Elasticsearch vol. 1","url":"https://blog.ragnarson.com/2016/06/30/multi_model_searching_elasticsearch_1.html","author":{"@type":"Person","name":"Dawid Lenkiewicz","image":"https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2016-06-30","dateModified":"2016-06-30","image":"https://blog.ragnarson.com/2016/06/30/multi_model_searching_elasticsearch_1/cover-c0b3ae6320.png"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="01caa77a1f122a1371fed292cab37c72" /><div class="article-meta">June 30, 2016 - <a href="/authors/dawid-lenkiewicz.html">Dawid Lenkiewicz</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2016/06/30/multi_model_searching_elasticsearch_1.html">Multi-model searching using Elasticsearch vol. 1</a></h1></header><img src='/2016/06/30/multi_model_searching_elasticsearch_1/cover-c0b3ae6320.png'/><p>For one of our projects I had to do some complex searching. To cut a long story short, admin users wanted
+a way to quickly search and assign one record of two models to another record. The client wanted searching
+to happen with only one text input. After considering the complexity of searching by every possible column,
+and the importance of speed, I decided to use <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>.
+This was my first experience with this search engine and I would like to share my ideas about how to
+implement it and organise the code. There is a lot of stuff to cover, so I’ll split it into 3 parts:
+installing and indexing data, simple searching by multiple models and, finally, making searching
+&quot;more intelligent&quot;. Let’s see now how to get started with Elasticsearch.</p>
+
+<p></p>
+
+<hr>
+
+<p>This a part of a three post series:</p>
+
+<ol>
+<li><p><a href="http://blog.ragnarson.com/2016/06/30/multi_model_searching_elasticsearch_1.html">Part 1 - basic setup</a></p></li>
+<li><p><a href="http://blog.ragnarson.com/2016/07/14/multi-model-searching-elasticsearch-2.html">Part 2 - multi model searching</a></p></li>
+<li><p><a href="http://blog.ragnarson.com/2016/07/21/multi-model-searching-elasticsearch-3.html">Part 3 - improving searching intelligence</a></p></li>
+</ol>
+
+<hr>
+
+<h2>TL;DR</h2>
+
+<p>I&#39;ve created a sample app which will basically be the foundation for my blog posts. If you are
+already familiar with Elasticsearch you can <a href="https://github.com/Ragnarson/elastic_search_demo">check it out</a>
+right away. It&#39;s a complete demo with some complex searching using nGrams.</p>
+
+<h2>Installing Elasticsearch</h2>
+
+<p>If you are running the OS X operating system and use Homebrew, it’s as easy as this:</p>
+<pre class="highlight shell"><code>brew install elasticsearch
+</code></pre>
+
+<p>After installation, you will be asked if you want to have launchd start elasticsearch at login and I
+advise you to follow these instructions. You won’t have to remember to start it every time you restart your computer.
+Next, test if it really works by opening your browser and going to “localhost:9200” (9200 is the default port).
+You should see some info about Elasticsearch including its version, etc.</p>
+
+<p>Now it’s time to integrate it with a Rails application. It’s worth saying at this point that in the
+past the most popular gems were Searchkick and Tire. They allow easy integration and offer some DSL
+to work with but they are hard to customise if you want to use the full power of Elasticsearch. However,
+there is a great alternative now - <a href="https://github.com/elastic/elasticsearch-ruby">Elasticsearch for Ruby</a>.
+You will only need one gem so add it to your Gemfile and bundle:</p>
+<pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'elasticsearch-model'</span>
+</code></pre>
+
+<h2>Creating Indexes</h2>
+
+<p>What is an index in Elasticsearch? Well, it&#39;s just like a database in a relational database. To use
+searching, you need to import data so, firstly, let’s create a module which will be included in our
+models you want to search for.</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"elasticsearch/model"</span>
+
+<span class="k">module</span> <span class="nn">Searchable</span>
+  <span class="kp">extend</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Concern</span>
+
+  <span class="n">included</span> <span class="k">do</span>
+    <span class="kp">include</span> <span class="no">Elasticsearch</span><span class="o">::</span><span class="no">Model</span>
+
+    <span class="n">after_commit</span> <span class="k">do</span>
+      <span class="n">__elasticsearch__</span><span class="p">.</span><span class="nf">index_document</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Besides adding <code>include Elasticsearch::Model</code> to our models there is basically just one more important thing here:</p>
+
+<ul>
+<li>Every change to record should also be reflected in Elasticsearch and this can be achieved by
+adding the <code>after_commit</code> callback which automatically indexes a given record after a change has been
+committed in the database.</li>
+</ul>
+
+<p>Let’s assume you want to search for User and House records. Include the <code>Searchable</code> concern in
+both models. Please be aware that the Elasticsearch database is empty at the beginning and we have
+to do an initial import of our existing data from the SQL database manually. In the <code>elasticsearch-model</code>
+gem documentation, there is information that importing can be done simply by calling the <code>import</code>
+method on the model. If your dataset is pretty large it can be really slow, and as we know, being
+slow on production is always bad so let’s look at a better solution:</p>
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">ElasticsearchDataImporter</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">import</span>
+    <span class="p">[</span><span class="no">User</span><span class="p">,</span> <span class="no">House</span><span class="p">].</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">model_to_search</span><span class="o">|</span>
+      <span class="n">model_to_search</span><span class="p">.</span><span class="nf">__elasticsearch__</span><span class="p">.</span><span class="nf">create_index!</span><span class="p">(</span><span class="ss">force: </span><span class="kp">true</span><span class="p">)</span>
+
+      <span class="n">model_to_search</span><span class="p">.</span><span class="nf">find_in_batches</span> <span class="k">do</span> <span class="o">|</span><span class="n">records</span><span class="o">|</span>
+        <span class="n">bulk_index</span><span class="p">(</span><span class="n">records</span><span class="p">,</span> <span class="n">model_to_search</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">prepare_records</span><span class="p">(</span><span class="n">records</span><span class="p">)</span>
+    <span class="n">records</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">record</span><span class="o">|</span>
+      <span class="p">{</span>
+        <span class="ss">index: </span><span class="p">{</span>
+          <span class="ss">_id: </span><span class="n">record</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span>
+          <span class="ss">data: </span><span class="n">record</span><span class="p">.</span><span class="nf">__elasticsearch__</span><span class="p">.</span><span class="nf">as_indexed_json</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">bulk_index</span><span class="p">(</span><span class="n">records</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+    <span class="n">model</span><span class="p">.</span><span class="nf">__elasticsearch__</span><span class="p">.</span><span class="nf">client</span><span class="p">.</span><span class="nf">bulk</span><span class="p">({</span>
+      <span class="ss">index: </span><span class="n">model</span><span class="p">.</span><span class="nf">__elasticsearch__</span><span class="p">.</span><span class="nf">index_name</span><span class="p">,</span>
+      <span class="ss">type: </span><span class="n">model</span><span class="p">.</span><span class="nf">__elasticsearch__</span><span class="p">.</span><span class="nf">document_type</span><span class="p">,</span>
+      <span class="ss">body: </span><span class="n">prepare_records</span><span class="p">(</span><span class="n">records</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This way we can do a bulk import. If you want to use it on production I strongly advise you to run
+it in the background with a queue that can get stuck for some time. This way you won&#39;t need to worry
+about how quickly the import is progressing and whether it’s blocking anything important.
+Let’s take a step by step look at what it does:</p>
+
+<ul>
+<li><p>For each of the specified models it creates a new, empty index with the <code>create_index!</code> method</p></li>
+<li><p>It passes an array of no more than 1000 records to the <code>bulk_index</code> method</p></li>
+<li><p>The bulk_index method calls the Elasticsearch client.bulk API, which performs multiple operations in a single call</p></li>
+</ul>
+
+<p>Now you can run it and, after data is imported, start searching. You can test if it works in your rails console, assuming you have data like:</p>
+<pre class="highlight ruby"><code><span class="no">User</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"John Doe"</span><span class="p">,</span>    <span class="ss">city: </span><span class="s2">"San Francisco"</span><span class="p">)</span>
+<span class="no">User</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"Lorem Ipsum"</span><span class="p">,</span> <span class="ss">city: </span><span class="s2">"San Andreas"</span><span class="p">)</span>
+<span class="no">User</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"John Rambo"</span><span class="p">,</span>  <span class="ss">city: </span><span class="s2">"New York"</span><span class="p">)</span>
+</code></pre>
+
+<p>Please take note that it will be automatically indexed with the <code>after_commit</code> callback.
+The <code>Searchable</code> module includes the <code>search</code> method, so in your rails console it should look like this:</p>
+<pre class="highlight ruby"><code><span class="o">&gt;&gt;</span> <span class="no">User</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="s2">"Rambo"</span><span class="p">).</span><span class="nf">results</span><span class="p">.</span><span class="nf">total</span>
+<span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="o">&gt;&gt;</span> <span class="no">User</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="s2">"san"</span><span class="p">).</span><span class="nf">results</span><span class="p">.</span><span class="nf">total</span>
+<span class="o">=&gt;</span> <span class="mi">2</span>
+<span class="o">&gt;&gt;</span> <span class="no">User</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="s2">"john"</span><span class="p">).</span><span class="nf">results</span><span class="p">.</span><span class="nf">total</span>
+<span class="o">=&gt;</span> <span class="mi">2</span>
+<span class="o">&gt;&gt;</span> <span class="no">User</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="s2">"new york"</span><span class="p">).</span><span class="nf">results</span><span class="p">.</span><span class="nf">total</span>
+<span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="n">etc</span><span class="o">.</span>
+</code></pre>
+
+<p>As you can see simple searching by the exact word is working. But nonetheless I’ve found this a little confusing:</p>
+<pre class="highlight ruby"><code><span class="o">&gt;&gt;</span> <span class="no">User</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="s2">"lorem york"</span><span class="p">).</span><span class="nf">results</span><span class="p">.</span><span class="nf">total</span>
+<span class="o">=&gt;</span> <span class="mi">2</span>
+</code></pre>
+
+<p>There is no <code>User</code> with the city <code>New York</code> and name <code>Lorem Ipsum</code>. It works like this because
+Elasticsearch, by default, joins the query with the <code>OR</code> option, so we might say that every word
+is treated like a separate query. For me, it seems a little confusing because, when typing this kind
+of query, I expect to find users with the name <code>lorem</code> living in the city with the text <code>york</code>.
+We&#39;ll look at how to change that in future posts.</p>
+
+<h2>Wrapping up</h2>
+
+<p>So we got Elasticsearch running and we indexed our needed data, but that’s just the basic
+configuration. Next time, we’ll see how we can do a multi-model search in a single command.
+Let me know in the comments if you’ve got some other concepts or issues you would like to read about.</p>
+
+<hr>
+
+<p><em>As <a href="http://www.karmi.cz">Karel Minarik</a> pointed out in the comments the Ruby integration is split
+between 2 projects: The <a href="https://github.com/elastic/elasticsearch-ruby">low-level</a> client which provides
+a DSL for writing the search definitions and <a href="https://github.com/elastic/elasticsearch-rails">Rails integration</a>.
+Basically by requiring the elasticsearch-model gem we are automatically using part of the Rails
+integration. But I think that the low-level github repo is a good place to start, you can find there
+all informations you need (also link to the Rails integration repository).
+Also it turned out that we could simplify our importer by using the built in import method. It does
+basically <a href="https://github.com/elastic/elasticsearch-rails/blob/master/elasticsearch-model/lib/elasticsearch/model/importing.rb#L122-L126">the same</a>
+thing.</em></p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

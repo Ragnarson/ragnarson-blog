@@ -1,0 +1,441 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>InSpec - Inspect Your Infrastructure - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2017/03/13/inspec-inspect-your-infrastructure.html" property="og:url" /><meta content="InSpec - Inspect Your Infrastructure" property="og:title" /><meta content="We don't have many infrastructure related posts here. We have a few full-time DevOps, it's a part of  our normal offer.
+But, we're busy most of the time. When an opportunity to write a blog post emerged, I knew I've had to write about a
+thing which changed our workflow. During last two years, there were few ideas which helped us providing better and more
+reliable services - one of them is infrastructure integration testing." property="og:description" /><meta content="Szymon Szypulski" name="author" /><meta content="https://blog.ragnarson.com/2017/03/13/inspec-inspect-your-infrastructure/cover-c0d1592a8d.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Szymon Szypulski","image":"https://www.gravatar.com/avatar/d3eadd8e8a8ab3db2fd6b032a67903e9.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"InSpec - Inspect Your Infrastructure","url":"https://blog.ragnarson.com/2017/03/13/inspec-inspect-your-infrastructure.html","author":{"@type":"Person","name":"Szymon Szypulski","image":"https://www.gravatar.com/avatar/d3eadd8e8a8ab3db2fd6b032a67903e9.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2017-03-13","dateModified":"2017-03-13","image":"https://blog.ragnarson.com/2017/03/13/inspec-inspect-your-infrastructure/cover-c0d1592a8d.png"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/d3eadd8e8a8ab3db2fd6b032a67903e9.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="D3eadd8e8a8ab3db2fd6b032a67903e9" /><div class="article-meta">March 13, 2017 - <a href="/authors/szymon-szypulski.html">Szymon Szypulski</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2017/03/13/inspec-inspect-your-infrastructure.html">InSpec - Inspect Your Infrastructure</a></h1></header><img src='/2017/03/13/inspec-inspect-your-infrastructure/cover-c0d1592a8d.png'/><p>We don&#39;t have many infrastructure related posts here. We have a few full-time DevOps, it&#39;s a part of  our normal offer.
+But, we&#39;re busy most of the time. When an opportunity to write a blog post emerged, I knew I&#39;ve had to write about a
+thing which changed our workflow. During last two years, there were few ideas which helped us providing better and more
+reliable services - one of them is infrastructure integration testing.</p>
+
+<p></p>
+
+<p><em>Title is stolen from <a href="http://inspec.io">inspec.io</a>, I hope they don&#39;t mind.</em></p>
+
+<p>Before we start, few notes:</p>
+
+<ul>
+<li>This is only an introduction to the idea of infrastructure integration testing.</li>
+<li>It&#39;s opinionated.</li>
+<li>It&#39;s based on my two years experience with <a href="http://serverspec.org/">Serverspec</a> and few weeks with InSpec.</li>
+<li>By infrastructure, I mean everything, from your local workstation to your &gt;1024 machine cluster.</li>
+<li>Some ideas in this blog post may be closer to acceptance or functional testing. I&#39;m aware of this, it&#39;s a thin line in
+some cases.</li>
+<li>I will omit some InSpec features.</li>
+<li>Tests are hard.</li>
+</ul>
+
+<h1>Why not unit testing?</h1>
+
+<p>In our case, unit testing is strongly coupled with Chef and ChefSpec, which means this blog post would apply to the much
+narrower audience.</p>
+
+<p>Besides, it&#39;s easy to <a href="https://coderanger.net/overtesting/">overtest</a> in the case of unit tests, where only true logic
+should be verified.</p>
+
+<p>Integration tests are closer to the infrastructure and I&#39;ll focus on InSpec for now.</p>
+
+<h1>What is InSpec?</h1>
+
+<p><em>InSpec is an open-source testing framework for infrastructure with a human-readable language for specifying compliance,
+security and other policy requirements.</em></p>
+
+<p>This sentence is borrowed from <a href="http://inspec.io">inspec.io</a>. Is it true? Let&#39;s start with short code sample:</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="n">file</span><span class="p">(</span><span class="s1">'/etc/myapp.conf'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">exist</span> <span class="p">}</span>
+  <span class="n">its</span> <span class="p">(</span><span class="s1">'mode'</span><span class="p">)</span> <span class="p">{</span> <span class="n">should</span> <span class="n">cmp</span> <span class="s1">'0644'</span> <span class="p">}</span>
+<span class="k">end</span>
+<span class="n">describe</span> <span class="n">port</span><span class="p">(</span><span class="mi">8080</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">be_listening</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>It consists two resources (file and port) with basic matchers verifying file existence, proper mode and listening port.
+Resources are classes which help with verifying various aspects of infrastructure.</p>
+
+<p>And the output of execution:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>inspec <span class="nb">exec </span>foo.rb
+
+Target:  <span class="nb">local</span>://
+
+ File /etc/myap.conf
+    ✔  should exist
+    ✔  mode should cmp <span class="o">==</span> <span class="s2">"0644"</span>
+ Port 8080
+    ∅  should be listening
+    expected <span class="sb">`</span>Port 8080.listening?<span class="sb">`</span> to <span class="k">return </span><span class="nb">true</span>, got <span class="nb">false
+
+</span>Test Summary: 2 successful, 1 failures, 0 skipped
+</code></pre>
+
+<p>Is it readable? Well, it is, with basic English knowledge it shouldn&#39;t be too hard to understand what source code
+describes and what is the result. It can specify compliance rules and policy requirements.</p>
+
+<p>Also, the code is very similar to RSpec, which is used as the underlying foundation of InSpec. One <em>novelty</em> may be the
+<em>cmp</em> matcher. It helps to compare file modes, string, single element array strings and numbers. You can read more about
+cmp in <a href="http://inspec.io/docs/reference/matchers/">InSpec documentation</a>.</p>
+
+<p>The tool itself doesn&#39;t depend on any particular operating system. You can develop your code on almost anything which
+runs Ruby. For the best experience, you may want to use <a href="https://github.com/chef/chef-dk">ChefDK</a>. Most of the resources
+will work with common tools available on any system.</p>
+
+<p>I should mention that InSpec is developed by Chef Software Inc., but it&#39;s isn&#39;t tied to Chef it can be used without it.
+You don&#39;t even have to like Chef (but why wouldn&#39;t you?).</p>
+
+<h1>Why InSpec?</h1>
+
+<p>Why not $(another framework)? I assume you have a favorite integration testing tool, so I&#39;ll try to convince you to use
+InSpec.</p>
+
+<ol>
+<li>It&#39;s open source. I know most of the tools are, but it&#39;s a good start.</li>
+<li>Its development is supported by Chef Software Inc., it probably won&#39;t disappear like some nodejs libs in the past and
+it won&#39;t be abandoned.</li>
+<li>Awesome community. If you have any issues, you can always ask for help on
+<a href="http://community-slack.chef.io">Chef slack&#39;s InSpec channel</a>, core maintainers are frequently the first responders.</li>
+<li>Resource-rich. When I&#39;m writing this, there are <a href="http://inspec.io/docs/reference/resources/">over 60 resources</a>
+available and this number is growing. If you need something unusual you can always use file/command resources or
+contribute to InSpec.</li>
+<li><p>Can run anywhere. From your local workstation, you can verify machine over ssh, docker or winrm.</p>
+<pre class="highlight plaintext"><code>$ inspec exec test.rb -t ssh://user@hostname
+$ inspec exec test.rb -t winrm://Administrator@windowshost --password 'your-password'
+$ inspec exec test.rb -t docker://container_id
+</code></pre></li>
+<li><p>It has an interactive shell. I&#39;m so used to Chef Shell, I don&#39;t know how I was able to write integration tests
+without inspec shell.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>inspec shell
+Welcome to the interactive InSpec Shell
+To find out how to use it, <span class="nb">type</span>: <span class="nb">help
+</span><span class="gp">inspec&gt; </span>describe file<span class="o">(</span><span class="s1">'/home'</span><span class="o">)</span> <span class="k">do
+</span><span class="gp">inspec&gt;   </span>it <span class="o">{</span> should exist <span class="o">}</span>
+<span class="gp">inspec&gt; </span>end
+
+Profile: inspec-shell
+Version: unknown
+
+ File /home
+    ✔  should exist
+
+Test Summary: 1 successful, 0 failures, 0 skipped
+</code></pre></li>
+<li><p><a href="https://github.com/chef/inspec#supported-os">It works on most popular operating systems</a>. On less popular too!</p></li>
+<li><p>Ruby. As Serverspec/RSpec derivative, it&#39;s written in Ruby. If I need to, I can easily jump into the source and
+verify any doubts.</p></li>
+</ol>
+
+<h1>How to use InSpec?</h1>
+
+<p>First, we&#39;ll focus on possible scenarios.</p>
+
+<ol>
+<li>We have this awesome automation tool, it does things. Does it? Most basic usage, verify your provisioner - Chef,
+Puppet, Salt, Ansible, shell scripts.</li>
+<li>Our app/code has to run in various environments in a mix of conditions. Multiple Linux distributions, Docker,
+Windows.</li>
+<li>Operating system migration. It&#39;s similar to previous one, but it&#39;s worth separate mention. Ubuntu 14.04 LTS will be
+supported until April 2019. Get ahead and start testing your provisioning on next LTS before it will be too late.</li>
+<li>Security compliance. There are sets of InSpec profiles linked on
+<a href="https://supermarket.chef.io/tools?type=compliance_profile">Chef Supermarket</a> which can help you verify if your
+operating system is running under sane security settings.</li>
+<li>Cheap reporting. Describe your whole infrastructure in InSpec, run it periodically and store the reports for better
+times. Another department may ask for it, someone may ask if your environments are really the same, you may need to
+prepare for an external audit.</li>
+</ol>
+
+<h1>Examples</h1>
+
+<p>Time for some coding. I would like to show very basic examples of usage. Everything I&#39;ll show is available at
+<a href="https://gitlab.com/szymon.szypulski/inspec-blog-post">a Git repository</a>.</p>
+
+<h2>Tools</h2>
+
+<p>For running this demo I&#39;ll use a small cookbook which will install web/database server, everything will be tied with
+<a href="http://kitchen.ci/">Test Kitchen</a>. For running the code you will need Ruby with Bundler or you can use ChefDK.</p>
+
+<p>As mentioned, the whole thing will be driven by Test Kitchen. Everything is configured in
+<a href="https://gitlab.com/szymon.szypulski/inspec-blog-post/blob/master/.kitchen.yml">.kitchen.yml</a>.</p>
+<pre class="highlight yaml"><code><span class="nn">---</span>
+<span class="s">driver</span><span class="pi">:</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s">vagrant</span>
+  <span class="s">provision</span><span class="pi">:</span> <span class="s">true</span>
+  <span class="s">vm_hostname</span><span class="pi">:</span> <span class="s">inspec.ragnarson.com</span>
+<span class="s">provisioner</span><span class="pi">:</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s">chef_zero</span>
+  <span class="s">client_rb</span><span class="pi">:</span>
+    <span class="s">node_name</span><span class="pi">:</span> <span class="s">inspec.ragnarson.com</span>
+  <span class="s">require_chef_omnibus</span><span class="pi">:</span> <span class="s2">"</span><span class="s">12.18.31"</span>
+<span class="s">verifier</span><span class="pi">:</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s">inspec</span>
+<span class="s">platforms</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">ubuntu-14.04</span>
+  <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">ubuntu-16.04</span>
+</code></pre>
+
+<p>Vagrant will be our VM provider. Chef will provision the recipes. Everything will be verified by InSpec and we&#39;ve two
+versions of Ubuntu at our disposal. List of all instances used for testing is available after executing <code>kitchen list</code>:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>kitchen list
+Instance                   Driver   Provisioner  Verifier  Transport  Last Action    Last Error
+web-ubuntu-1404            Vagrant  ChefZero     Inspec    Ssh        &lt;Not Created&gt;  &lt;None&gt;
+web-ubuntu-1604            Vagrant  ChefZero     Inspec    Ssh        &lt;Not Created&gt;  &lt;None&gt;
+database-ubuntu-1604       Vagrant  ChefZero     Inspec    Ssh        &lt;Not Created&gt;  &lt;None&gt;
+ssh-hardening-ubuntu-1604  Vagrant  ChefZero     Inspec    Ssh        &lt;Not Created&gt;  &lt;None&gt;
+</code></pre>
+
+<h2>Web</h2>
+
+<p>Let&#39;s start with ‘web&#39; server.
+<a href="https://gitlab.com/szymon.szypulski/inspec-blog-post/blob/master/recipes/web.rb">Code is very simple, get me nginx</a>.</p>
+<pre class="highlight ruby"><code><span class="n">package</span> <span class="s1">'nginx'</span>
+</code></pre>
+
+<p>First, we&#39;ve to provision instance by running <code>kitchen converge web-ubuntu-1604</code>. Instance names are a combination of
+test suites and available platforms. Under suites in <em>.kitchen.yml</em> we&#39;ve a definition of <em>web</em> suite.</p>
+<pre class="highlight yaml"><code><span class="s">suites</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">web</span>
+    <span class="s">run_list</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">recipe[inspec-blog-post::web]</span>
+</code></pre>
+
+<p>While the machine is provisioning we can take a look at test file located in <code>test/integration/&lt;suite name&gt;/web_spec.rb</code>
+(there may be multiple test files for one suite). We&#39;ll verify few things.</p>
+
+<ol>
+<li><p>Is package installed?</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="n">package</span><span class="p">(</span><span class="s1">'nginx'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">be_installed</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>Is service running? If we would have monit installed we could also check if it&#39;s monitored.</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="n">service</span><span class="p">(</span><span class="s1">'nginx'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">be_running</span> <span class="p">}</span>
+  <span class="c1"># it { should be_monitored.by("monit") }</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>Is Nginx configuration file present and it has proper ssl_protocols set.</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="n">file</span><span class="p">(</span><span class="s1">'/etc/nginx/nginx.conf'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">exist</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="ss">:content</span><span class="p">)</span> <span class="p">{</span> <span class="n">should</span> <span class="n">match</span><span class="p">(</span><span class="sr">/ssl_protocols TLSv1 TLSv1.1 TLSv1.2;/</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>Our special CVE-2016-1247 case, on some systems it was possible to escalate from www-data to root user when log
+directory was owned by the www-data user. We can test against this in InSpec.</p>
+<pre class="highlight ruby"><code><span class="c1"># CVE-2016-1247</span>
+<span class="n">describe</span> <span class="n">file</span><span class="p">(</span><span class="s1">'/var/log/nginx'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">be_owned_by</span><span class="p">(</span><span class="s1">'www-data'</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></li>
+</ol>
+
+<p>To verify if our server does follow the rules run <code>kitchen verify web-ubuntu-1604</code>. You should see all green output, our
+instance state is matching our expectations.</p>
+<pre class="highlight shell"><code> System Package
+    ✔  nginx should be installed
+ Service nginx
+    ✔  should be running
+ File /etc/nginx/nginx.conf
+    ✔  should exist
+    ✔  content should match /ssl_protocols TLSv1 TLSv1.1 TLSv1.2;/
+ File /var/log/nginx
+    ✔  should not be owned by <span class="s2">"www-data"</span>
+
+Test Summary: 5 successful, 0 failures, 0 skipped
+</code></pre>
+
+<p>Let&#39;s see what will happen if we&#39;ll run the same test suite on Ubuntu 14.04. Execute <code>kitchen verify web-ubuntu-1404</code>.
+If the instance isn&#39;t converged it will be, as part of verify task.</p>
+<pre class="highlight shell"><code>...
+    ∅  content should match /ssl_protocols TLSv1 TLSv1.1 TLSv1.2;/
+...
+Test Summary: 4 successful, 1 failures, 0 skipped
+</code></pre>
+
+<p>The command should fail, because Ubuntu 14.04 doesn&#39;t have default SSL protocols list, well it doesn&#39;t even have SSL
+enabled. I know it&#39;s a trivial test, but it shows how you can use InSpec.</p>
+
+<h2>Database</h2>
+
+<p>Our <em>database</em> recipe is quite simple as well, it should just install PostgreSQL.</p>
+<pre class="highlight ruby"><code><span class="n">package</span> <span class="s1">'postgresql'</span>
+</code></pre>
+
+<p>Lets verify our test suite <code>kitchen verify database-ubuntu-1604</code>. In the meantime, look at our test suite code.</p>
+
+<ol>
+<li><p>As previously, is package installed?</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="n">package</span><span class="p">(</span><span class="s1">'postgresql'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">be_installed</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>Does it run?</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="n">service</span><span class="p">(</span><span class="s1">'postgresql'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">be_running</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>For PostgreSQL, there is the <em>postgres_conf</em> resource which is more convenient than regular expression used for
+<em>nginx.conf</em>.</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="n">postgres_conf</span> <span class="k">do</span>
+  <span class="n">its</span><span class="p">(</span><span class="s1">'max_connections'</span><span class="p">)</span> <span class="p">{</span> <span class="n">should</span> <span class="n">eq</span> <span class="s1">'100'</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>Is daemon running on proper host and port?</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="n">port</span><span class="p">(</span><span class="mi">5432</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">be_listening</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="s1">'addresses'</span><span class="p">)</span> <span class="p">{</span> <span class="n">should_not</span> <span class="kp">include</span> <span class="s1">'0.0.0.0'</span> <span class="p">}</span>
+  <span class="n">its</span><span class="p">(</span><span class="s1">'protocols'</span><span class="p">)</span> <span class="p">{</span> <span class="n">should</span> <span class="kp">include</span><span class="p">(</span><span class="s1">'tcp'</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>In this case, there should be no service running on ports between 22 and 80. Block can be passed to resource and code
+looks clean.</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="n">port</span><span class="p">.</span><span class="nf">where</span> <span class="p">{</span> <span class="n">protocol</span> <span class="o">=~</span> <span class="sr">/tcp/</span> <span class="o">&amp;&amp;</span> <span class="n">port</span> <span class="o">&gt;</span> <span class="mi">22</span> <span class="o">&amp;&amp;</span> <span class="n">port</span> <span class="o">&lt;</span> <span class="mi">80</span> <span class="p">}</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">be_listening</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></li>
+</ol>
+
+<p>The summary should be <em>all green</em>.</p>
+<pre class="highlight shell"><code>Test Summary: 7 successful, 0 failures, 0 skipped
+</code></pre>
+
+<h2>Profiles</h2>
+
+<p>There is one InSpec feature I didn&#39;t write much about. There are
+<a href="https://supermarket.chef.io/tools?type=compliance_profile">publicly available InSpec profiles</a> which describe best
+configuration practices for specific services. In our test suites as an example, I&#39;ve used [ssh-hardening] developed as
+part of the dev-sec group.</p>
+
+<p>If you are using external profile, Test Kitchen configuration is a little bit different.</p>
+<pre class="highlight yaml"><code><span class="nn">...</span>
+<span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">ssh-hardening</span>
+  <span class="s">includes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ubuntu-16.04</span>
+  <span class="s">verifier</span><span class="pi">:</span>
+    <span class="s">inspec_tests</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">ssh-hardening</span>
+        <span class="s">url</span><span class="pi">:</span> <span class="s">https://github.com/dev-sec/tests-ssh-hardening/archive/master.tar.gz</span>
+<span class="nn">...</span>
+</code></pre>
+
+<p>If you&#39;ll run verify, you will see how ssh and sshd are configured by default on Ubuntu 16.04.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>kitchen verify ssh-hardening-ubuntu-1604
+</code></pre>
+
+<p>You&#39;ll see lots of warnings, mostly because Ubuntu relies on sane defaults and it doesn&#39;t specify most of the options
+explicitly. But you can find some interesting things in kitchen output.</p>
+<pre class="highlight shell"><code>...
+×  sshd-06: Server: Do not permit root-based login or <span class="k">do </span>not allow password and keyboard-interactive authentication <span class="o">(</span>expected <span class="s2">"prohibit-password"</span> to match /no|without-password/
+   Diff:
+   @@ -1,2 +1,2 @@
+   -/no|without-password/
+   +<span class="s2">"prohibit-password"</span>
+   <span class="o">)</span>
+   ×  SSH Configuration PermitRootLogin should match /no|without-password/
+   expected <span class="s2">"prohibit-password"</span> to match /no|without-password/
+   Diff:
+   @@ -1,2 +1,2 @@
+   -/no|without-password/
+   +<span class="s2">"prohibit-password"</span>
+...
+</code></pre>
+
+<p>By default there is no root password on Ubuntu, therefore it isn&#39;t possible to log in as root remotely. In case anyone
+(or a tool) sets the password, it&#39;s good practice to double check if password-based logins are disabled.</p>
+
+<p>To cleanup after our examples, run <code>kitchen destroy</code>.</p>
+
+<h1>Limitations</h1>
+
+<p>It&#39;s easy to notice I like InSpec. However, there are few things which could be improved:</p>
+
+<ol>
+<li>Code sharing is less than ideal. Custom resources are stored in the <em>libraries</em> directory. If you want to share a
+resource across multiple cookbooks, you have to create a separate profile.</li>
+<li>Some resources are still missing from Serverspec, but it isn&#39;t a big problem. Maintainers are re-implementing/moving
+resources upon user request. You just may need to wait a while for release.</li>
+</ol>
+
+<h1>Alternatives</h1>
+
+<p>To achieve some level of objectivity, I would like to mention alternatives to InSpec.</p>
+
+<h2>Serverspec</h2>
+
+<p>It&#39;s probably a most common alternative to InSpec, migration between any of them
+<a href="http://inspec.io/docs/reference/migration/">isn&#39;t complicated</a>. In my opinion, it&#39;s closer to RSpec. It does support
+shared groups, which helps if you made some bad decisions and you are keeping too many cookbooks in a single repository.
+Unfortunately, it won&#39;t run so easily over docker/winrm protocols. In our case, it&#39;s also slower to re-run test after
+changes. Test files upload process can take over 60 seconds, where in the case of InSpec our tests start almost
+immediately.</p>
+
+<h2>Goss</h2>
+
+<p>Maybe it isn&#39;t a full blown alternative. It&#39;s a small infrastructure validation tool which I found in
+<a href="https://www.cronweekly.com/">Cron Weekly newsletter</a>. It&#39;s written in Go, it doesn&#39;t have many dependencies,
+it&#39;s self-contained, it&#39;s fast. Tests are written in YAML if you don&#39;t like Ruby. It doesn&#39;t have so many resources like
+InSpec or Serverspec, but there is one awesome feature - it can expose a health endpoint over HTTP. You can validate your
+infrastructure remotely. I wonder If it can be ported to InSpec or Serverspec. It would be so much easier to just run
+single query without any dependencies. It may be in a conflict with Chef Compliance tho.</p>
+
+<h1>Summary</h1>
+
+<p>How integration tests or InSpec are helping us?</p>
+
+<ol>
+<li>We had a highly experimental environment - sandbox. It was used during the very early stage of infrastructure
+development, where things were checked manually. We don&#39;t need it anymore, we just write integration tests and run them
+in Test-Kitchen. It saved us some money because we no longer need additional AWS instances.</li>
+<li>InSpec is a little bit faster than Serverspec. During development, when changes to test suite are made. Serverspec
+has to re-upload the code to run it on an instance. InSpec handles it much faster. This saves us 15-30 seconds on each
+test suite. With over 20 suites in our main repo, it helps a lot.</li>
+<li>It helped us nail multiple smaller and bigger bugs, most notably:
+
+<ul>
+<li>We were loosing HTTP2 at some stage across our HTTP stack serving Kibana, Ubuntu 14.04 had outdated OpenSSL. We
+didn&#39;t know about it until integration tests were introduced.</li>
+<li>Multiple cookbooks were overwriting the same sysctl value. We&#39;ve had different sysctl settings for different
+services. When two or more wrapper cookbooks were put on the same node it came to our attention that cookbooks were
+interfering with each other.</li>
+</ul></li>
+<li>It helps to mix wrapper cookbooks. Sometime in the past, we&#39;ve had a rule: never mix services on single node.
+Interactions with operating system were sometimes complex. However on the early stage of the project it&#39;s a resource
+waste to have one/two (replicated) instances for each service. Integration tests help with this, a lot.</li>
+<li>We&#39;re gradually preparing for new Ubuntu LTS. With each bigger change we&#39;re running tests against newer Ubuntu and
+we&#39;re fixing code which wasn&#39;t universal enough.</li>
+</ol>
+
+<p>That&#39;s all. I know I&#39;ve just scratched the surface of integration testing. I hope, if you didn&#39;t do integration testing, you&#39;ll at least reconsider introducing them into your workflow.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

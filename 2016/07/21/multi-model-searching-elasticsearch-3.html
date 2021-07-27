@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Multi-model searching using Elasticsearch vol. 3 - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2016/07/21/multi-model-searching-elasticsearch-3.html" property="og:url" /><meta content="Multi-model searching using Elasticsearch vol. 3" property="og:title" /><meta content="This is a final part of the series about Elasticsearch.
+We already covered installing
+and multi model searching.
+Now it’s time to talk about some of the more complicated stuff and try to improve the searching intelligence. Let’s dive in." property="og:description" /><meta content="Dawid Lenkiewicz" name="author" /><meta content="https://blog.ragnarson.com/2016/07/21/multi-model-searching-elasticsearch-3/cover-c07f92aa43.png" property="og:image" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Dawid Lenkiewicz","image":"https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Multi-model searching using Elasticsearch vol. 3","url":"https://blog.ragnarson.com/2016/07/21/multi-model-searching-elasticsearch-3.html","author":{"@type":"Person","name":"Dawid Lenkiewicz","image":"https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2016-07-21","dateModified":"2016-07-21","image":"https://blog.ragnarson.com/2016/07/21/multi-model-searching-elasticsearch-3/cover-c07f92aa43.png"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/01caa77a1f122a1371fed292cab37c72.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="01caa77a1f122a1371fed292cab37c72" /><div class="article-meta">July 21, 2016 - <a href="/authors/dawid-lenkiewicz.html">Dawid Lenkiewicz</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2016/07/21/multi-model-searching-elasticsearch-3.html">Multi-model searching using Elasticsearch vol. 3</a></h1></header><img src='/2016/07/21/multi-model-searching-elasticsearch-3/cover-c07f92aa43.png'/><p>This is a final part of the series about <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>.
+We already covered <a href="http://blog.ragnarson.com/2016/06/30/multi_model_searching_elasticsearch_1.html">installing</a>
+and <a href="http://blog.ragnarson.com/2016/07/14/multi-model-searching-elasticsearch-2.html">multi model searching</a>.
+Now it’s time to talk about some of the more complicated stuff and try to improve the searching intelligence. Let’s dive in.</p>
+
+<p></p>
+
+<hr>
+
+<p>This a part of a three post series:</p>
+
+<ol>
+<li><p><a href="http://blog.ragnarson.com/2016/06/30/multi_model_searching_elasticsearch_1.html">Part 1 - basic setup</a></p></li>
+<li><p><a href="http://blog.ragnarson.com/2016/07/14/multi-model-searching-elasticsearch-2.html">Part 2 - multi model searching</a></p></li>
+<li><p><a href="http://blog.ragnarson.com/2016/07/21/multi-model-searching-elasticsearch-3.html">Part 3 - improving searching intelligence</a></p></li>
+</ol>
+
+<hr>
+
+<h2>TL;DR</h2>
+
+<p>I&#39;ve created a sample app which is a foundation for my blog posts. If you already are familiar with
+Elasticsearch you can <a href="https://github.com/Ragnarson/elastic_search_demo">check it</a> right away.
+It&#39;s a complete demo with some complex searching using nGrams. All of the code examples can be found there.</p>
+
+<h2>Requirements</h2>
+
+<p>Firstly let’s do a quick round-up of how our searching is working right now:</p>
+
+<ul>
+<li>We use the <code>Autocompleter</code> service object to search by multiple models</li>
+<li>We can search by any column, but it has to be an exact match of the whole word. So we won’t
+find <code>John</code> if we would search by <code>Jo</code> or <code>ohn</code> or any other part of the word.</li>
+<li>We are searching with the default Elasticsearch <code>or</code> operator. That means that searching by
+<code>John York</code> will return all of the records with <code>John</code> or <code>York</code> somewhere in the columns. In simple words we will get all users from <code>New York</code> and all users with name <code>John</code>, no matter what city the live in.</li>
+</ul>
+
+<p>So it all works great, but let’s assume we just received a new ticket with some new requirements, like:</p>
+
+<ul>
+<li>Every word should narrow results, not expand them</li>
+<li>If found, the <code>House</code> records should be always on the top of the results list</li>
+<li>Searching should return max 50 results</li>
+<li>Searching should be allowed by any part of any column, not only by the exact match of the whole word</li>
+</ul>
+
+<p>All of those things would strongly improve searching intelligence and help users to find what they
+need faster. This is the place where Elasticsearch shows its full power. We can achieve all of
+these with little tweaks during indexing and searching.</p>
+
+<h2>Custom searching configuration</h2>
+
+<p>To make first 3 points from requirements list work you need to add custom searching definition.
+Add this private method to the <code>Autocompleter</code> class:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">search_query</span>
+  <span class="p">{</span>
+    <span class="s2">"size"</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">"query"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"function_score"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"query"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"match"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"_all"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"query"</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
+              <span class="s2">"operator"</span><span class="p">:</span> <span class="s2">"and"</span><span class="p">,</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">"functions"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">"filter"</span><span class="p">:</span> <span class="p">{</span> <span class="s2">"term"</span><span class="p">:</span> <span class="p">{</span> <span class="s2">"_type"</span><span class="p">:</span> <span class="s2">"house"</span> <span class="p">}},</span>
+            <span class="s2">"weight"</span><span class="p">:</span> <span class="mi">5_000</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>To use it when searching, change the <code>results</code> method to:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">results</span>
+  <span class="no">Elasticsearch</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">search_query</span><span class="p">,</span> <span class="no">MODELS_TO_SEARCH</span><span class="p">).</span><span class="nf">records</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Let’s see which parts are the most important here:</p>
+
+<ul>
+<li>You can specify the <code>size</code> option. Pretty self-explanatory</li>
+<li>To narrow results and get rid of the confusing <code>or</code> operator described with the <code>John York</code>
+example above just specify the <code>&quot;operator&quot;: &quot;and&quot;</code> option. Please take a look at it carefully,
+you can even read it loud. The query should <code>match</code> <code>_all</code> columns with <code>query</code> with the <code>operator: and</code>.
+I like how it is constructed, just by reading it loud you can understand what is going on</li>
+<li>Elasticsearch uses its own algorithm to calculate the searching score and sort results.
+To tweak it you can use the <code>function_score</code> and specify a custom weight for some term. In this
+example the <code>_type: house</code> will gain a big boost in score thanks to the big weight and always be returned before other types</li>
+</ul>
+
+<h2>Searching by parts of words</h2>
+
+<p>So far so good, but we still need to improve in my opinion the most important thing. Again with our
+example, users want to quickly type <code>joh yor</code> to find all of the Johns from New York. I think this
+is the most important improvement from the user perspective, but it’s also the most complicated
+one to do. You need to learn about nGrams and how using them when indexing data can help.</p>
+
+<p>In simple words with nGrams we can get more matches when searching. Every word is split into tokens,
+which are then associated with given record. Let’s see some example to fully understand
+what that means. For example a word &quot;john&quot; would be split into:</p>
+<pre class="highlight plaintext"><code>1-gram tokens ["j", "o", "h", "n"]
+2-gram tokens ["jo", "oh", "hn"]
+3-gram tokens ["joh", "ohn"]
+4-gram token  ["john"]
+</code></pre>
+
+<p>It allows us to pass any of these tokens to search method and get results including the <code>john</code> word.
+So how to implement it? There is a lot of information in the official documentation about nGrams and
+how to use them, but I would like to share with you a post which really helped me. Sloan Ahrens did a great
+job <a href="https://qbox.io/blog/multi-field-partial-word-autocomplete-in-elasticsearch-using-ngrams">describing</a>
+what we are trying to achieve and my solution is highly inspired by his suggestions. I did simplify
+it a little. Just add it to your <code>Searchable</code> module, inside the included block:</p>
+<pre class="highlight ruby"><code><span class="n">settings</span> <span class="ss">analysis: </span><span class="p">{</span>
+  <span class="ss">filter: </span><span class="p">{</span>
+    <span class="ss">ngram_filter: </span><span class="p">{</span>
+      <span class="ss">type: </span><span class="s2">"nGram"</span><span class="p">,</span>
+      <span class="ss">min_gram: </span><span class="mi">2</span><span class="p">,</span>
+      <span class="ss">max_gram: </span><span class="mi">20</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="ss">analyzer: </span><span class="p">{</span>
+    <span class="ss">ngram_analyzer: </span><span class="p">{</span>
+      <span class="ss">type: </span><span class="s2">"custom"</span><span class="p">,</span>
+      <span class="ss">tokenizer: </span><span class="s2">"standard"</span><span class="p">,</span>
+      <span class="ss">filter: </span><span class="p">[</span>
+        <span class="s2">"lowercase"</span><span class="p">,</span>
+        <span class="s2">"asciifolding"</span><span class="p">,</span>
+        <span class="s2">"ngram_filter"</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="ss">whitespace_analyzer: </span><span class="p">{</span>
+      <span class="ss">type: </span><span class="s2">"custom"</span><span class="p">,</span>
+      <span class="ss">tokenizer: </span><span class="s2">"whitespace"</span><span class="p">,</span>
+      <span class="ss">filter: </span><span class="p">[</span>
+        <span class="s2">"lowercase"</span><span class="p">,</span>
+        <span class="s2">"asciifolding"</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="k">do</span>
+  <span class="n">mappings</span> <span class="ss">_all: </span><span class="p">{</span>
+    <span class="ss">type: </span><span class="s2">"string"</span><span class="p">,</span>
+    <span class="ss">analyzer: </span><span class="s2">"ngram_analyzer"</span><span class="p">,</span>
+    <span class="ss">search_analyzer: </span><span class="s2">"whitespace_analyzer"</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>If it scares you don’t worry. It looks complicated but it’s just some concept of analyzers which are
+applied when indexing and searching is done. The most important thing is that is creates a <code>nGram</code>
+filter with the <code>min_gram</code> set to 2. This allows us to search by parts (from 2 chars long) of
+any field, not only by exact match of the whole word.</p>
+
+<p>I’m not gonna delve into details for this configuration. Sloan Ahren’s blog post is a great
+place to find detailed explanation what is going on here and I really advise you to read it.</p>
+
+<p>Please remember that when you change anything the way data is indexed, you need to import it once more. Run:</p>
+<pre class="highlight ruby"><code><span class="no">ElasticsearchDataImporter</span><span class="p">.</span><span class="nf">import</span>
+</code></pre>
+
+<p>and you are good to go.</p>
+
+<h2>Searching examples</h2>
+
+<p>As always let’s finish with some examples. Create some data:</p>
+<pre class="highlight ruby"><code><span class="no">User</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"John Doe"</span><span class="p">,</span> <span class="ss">city: </span><span class="s2">"San Francisco"</span><span class="p">)</span>
+<span class="no">User</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"John Rambo"</span><span class="p">,</span> <span class="ss">city: </span><span class="s2">"New York"</span><span class="p">)</span>
+
+<span class="no">House</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">city: </span><span class="s2">"New York"</span><span class="p">,</span> <span class="ss">information: </span><span class="s2">"Rambo’s house"</span><span class="p">)</span>
+<span class="no">House</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">city: </span><span class="s2">"Los Angeles"</span><span class="p">,</span> <span class="ss">information: </span><span class="s2">"Large villa"</span><span class="p">)</span>
+</code></pre>
+
+<p>And test our final version:</p>
+<pre class="highlight ruby"><code><span class="no">Autocompleter</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="s2">"joh ram ork"</span><span class="p">)</span>
+
+<span class="o">=&gt;</span> <span class="p">[{</span><span class="ss">:hint</span><span class="o">=&gt;</span><span class="s2">"Name: John Rambo, City: New York"</span><span class="p">,</span> <span class="ss">:record_type</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span> <span class="ss">:record_id</span><span class="o">=&gt;</span><span class="mi">16</span><span class="p">}]</span>
+
+<span class="no">Autocompleter</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="s2">"los ang villa"</span><span class="p">)</span>
+
+<span class="o">=&gt;</span> <span class="p">[{</span><span class="ss">:hint</span><span class="o">=&gt;</span><span class="s2">"City: Los Angeles, Information: Large villa"</span><span class="p">,</span> <span class="ss">:record_type</span><span class="o">=&gt;</span><span class="s2">"House"</span><span class="p">,</span> <span class="ss">:record_id</span><span class="o">=&gt;</span><span class="mi">13</span><span class="p">}]</span>
+</code></pre>
+
+<p>Awesome! And just to make sure that confusing <code>or</code> operator is no longer applied:</p>
+<pre class="highlight ruby"><code><span class="no">Autocompleter</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="s2">"los ange rambo"</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="p">[]</span>
+</code></pre>
+
+<p>Looks like John Rambo doesn’t have any houses in Los Angeles.</p>
+
+<h2>Wrapping up</h2>
+
+<p>Elasticsearch is great but it has a steep learning curve. There are a lot of new informations, some
+new concepts about indexing, analyzers, tokens, searching, etc. This series is just a small example
+what can be achieved and how you can integrate it with your Rails application. If you want to learn
+Elasticsearch I really advise you to spent some time on reading documentation and more blog posts.
+To use the full power of this search engine you need to fully understand how it works. Also
+you can check a working <a href="https://github.com/Ragnarson/elastic_search_demo">demo</a> with all of the code from my series about Elasticsearch.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

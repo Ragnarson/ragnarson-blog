@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Integrating Braintree payments with Rails - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2015/06/22/integrating-braintree-payments-with-rails.html" property="og:url" /><meta content="Integrating Braintree payments with Rails" property="og:title" /><meta content="I have recently changed payment service provider to Braintree on Shelly Cloud and would love to share the experience with you. This post will show a fast and easy way of adding credit card payments to a Rails application." property="og:description" /><meta content="Sebastian Wojtczak" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@s_wojtczak" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Sebastian Wojtczak","image":"https://www.gravatar.com/avatar/1bcc0f22f6de3bb0942c9a187e1d1ac1.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Integrating Braintree payments with Rails","url":"https://blog.ragnarson.com/2015/06/22/integrating-braintree-payments-with-rails.html","author":{"@type":"Person","name":"Sebastian Wojtczak","image":"https://www.gravatar.com/avatar/1bcc0f22f6de3bb0942c9a187e1d1ac1.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2015-06-22","dateModified":"2015-06-22"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/1bcc0f22f6de3bb0942c9a187e1d1ac1.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="1bcc0f22f6de3bb0942c9a187e1d1ac1" /><div class="article-meta">June 22, 2015 - <a href="/authors/sebastian-wojtczak.html">Sebastian Wojtczak</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2015/06/22/integrating-braintree-payments-with-rails.html">Integrating Braintree payments with Rails</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>I have recently changed payment service provider to Braintree on Shelly Cloud and would love to share the experience with you. This post will show a fast and easy way of adding credit card payments to a Rails application. </p>
+
+<p>READMORE</p>
+
+<h2>Getting Braintree account</h2>
+
+<p>I started off with <a href="https://www.braintreepayments.com/">Braintree</a> website and signing up. As a requirement I had to provide basic info about the company as well as IDs and residential utility bills for owners. I was surprised that Braintree did not require from us to send any documents such as a translated excerpt from National Court Register, bank statements or detailed business plan of the company. We had our production account at Braintree within a couple of days, our previous payments providers should learn from them. Adding PayPal integration with a couple of clicks was also straightforward.</p>
+
+<h2>Setting up Braintree</h2>
+
+<p>I have added <a href="https://github.com/braintree/braintree_ruby">braintree</a> gem to Gemfile followed by <code>bundle install</code>.</p>
+<pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'braintree'</span>
+</code></pre>
+
+<p>To create a payment form Braintree Client JS SDK has to be included. It&#39;s responsible for displaying Drop-in UI - pre-formatted payment form, and for processing user credit card without accessing our server and application, for PCI DSS compliance sake.</p>
+<pre class="highlight slim"><code><span class="p">-</span><span class="c1"># slim template</span>
+<span class="p">=</span> <span class="n">form_tag</span> <span class="n">organization_payment_path</span><span class="p">(</span><span class="n">organization</span><span class="p">)</span> <span class="k">do</span>
+
+  <span class="nf">#dropin</span>
+
+  <span class="p">=</span> <span class="n">submit_tag</span> <span class="s1">'Confirm'</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'btn push--ends'</span>
+
+<span class="p">-</span> <span class="n">content_for</span> <span class="ss">:javascript</span> <span class="k">do</span>
+  <span class="p">=</span> <span class="n">javascript_include_tag</span> <span class="s2">"https://js.braintreegateway.com/v2/braintree.js"</span>
+  <span class="nd">javascript:
+</span>    <span class="kd">var</span> <span class="nx">client_token</span> <span class="o">=</span> <span class="err">"</span><span class="si">#{</span><span class="vi">@organization</span><span class="p">.</span><span class="nf">payment</span><span class="p">[</span><span class="s1">'client_token'</span><span class="p">]</span><span class="si">}</span><span class="err">"</span><span class="p">;</span>
+    <span class="nx">braintree</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span>
+      <span class="nx">client_token</span><span class="p">,</span>
+      <span class="s1">'dropin'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">container</span><span class="p">:</span> <span class="s1">'dropin'</span>
+      <span class="p">});</span>
+</code></pre>
+
+<p>After adding those few lines of code I had a sleek payment form:</p>
+<figure>
+<p><img src="/2015/06/22/integrating-braintree-payments-with-rails/dropinui-c00d76282a.png" alt="Dropin UI" /></p>
+</figure>
+<p>Note that the <code>client_token</code> has to be supplied to <code>braintree.setup</code> method. It contains configuration and authorization info required by JS SDK. It&#39;s unique for every customer and shouldn&#39;t be reused. The token can be generated on the server side, with the <code>customer_id</code> if the customer was already saved in the Braintree Vault and you&#39;ve saved his ID.</p>
+<pre class="highlight ruby"><code><span class="n">client_token</span> <span class="o">=</span> <span class="no">Braintree</span><span class="o">::</span><span class="no">ClientToken</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="ss">customer_id: </span><span class="n">customer_id</span><span class="p">)</span>
+</code></pre>
+
+<p>When a customer submits a payment method, either a credit card or PayPal account, a <code>payment_method_nonce</code> is generated which is added in a hidden field to the form. The nonce has to be collected in a controller action corresponding to the form. It can be used to create a new transaction or to add a new payment method.</p>
+
+<h2>Our billing model</h2>
+
+<p>Shelly Cloud&#39;s billing model may be different then yours. We do not charge our users upfront, our billing cycle ends at the end of the month when we issue invoices and charge accordingly. Because of that we have to save every client payment method within Braintree Vault, so when the billing cycle ends we can charge customers. Every organization on Shelly has a corresponding Braintree Customer, which contains one or more payment methods.</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">ensure_client!</span>
+  <span class="k">if</span> <span class="n">payment_client_id</span><span class="p">.</span><span class="nf">blank?</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="no">Braintree</span><span class="o">::</span><span class="no">Customer</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+      <span class="ss">company: </span><span class="n">payer_name</span><span class="p">,</span>
+      <span class="ss">email: </span><span class="n">receive_invoices_email</span>
+    <span class="p">)</span>
+
+    <span class="nb">self</span><span class="p">.</span><span class="nf">payment_client_id</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="nf">customer</span><span class="p">.</span><span class="nf">id</span>
+    <span class="n">save!</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Braintree Customer ID is saved in our model so we can use it later on to create a <code>client_token</code> or to charge that customer. When customer exists it is time to create a payment method with <code>payment_method_nonce</code>.</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_from_organization_and_nonce!</span><span class="p">(</span><span class="n">organization</span><span class="p">,</span> <span class="n">nonce</span><span class="p">)</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="no">Braintree</span><span class="o">::</span><span class="no">PaymentMethod</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+    <span class="ss">customer_id: </span><span class="n">organization</span><span class="p">.</span><span class="nf">payment_client_id</span><span class="p">,</span>
+    <span class="ss">payment_method_nonce: </span><span class="n">nonce</span><span class="p">,</span>
+    <span class="ss">options: </span><span class="p">{</span><span class="ss">make_default: </span><span class="kp">true</span><span class="p">}</span>
+  <span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">result</span><span class="p">.</span><span class="nf">success?</span>
+    <span class="n">pm</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="nf">payment_method</span>
+    <span class="n">create!</span><span class="p">(</span>
+      <span class="ss">card_type:    </span><span class="n">pm</span><span class="p">.</span><span class="nf">try</span><span class="p">(</span><span class="ss">:card_type</span><span class="p">),</span>
+      <span class="ss">expire_month: </span><span class="n">pm</span><span class="p">.</span><span class="nf">try</span><span class="p">(</span><span class="ss">:expiration_month</span><span class="p">),</span>
+      <span class="ss">expire_year:  </span><span class="n">pm</span><span class="p">.</span><span class="nf">try</span><span class="p">(</span><span class="ss">:expiration_year</span><span class="p">),</span>
+      <span class="ss">last4:        </span><span class="n">pm</span><span class="p">.</span><span class="nf">try</span><span class="p">(</span><span class="ss">:last_4</span><span class="p">),</span>
+      <span class="ss">organization: </span><span class="n">organization</span><span class="p">,</span>
+      <span class="ss">provider_id:  </span><span class="n">pm</span><span class="p">.</span><span class="nf">token</span><span class="p">,</span>
+      <span class="ss">email:        </span><span class="n">pm</span><span class="p">.</span><span class="nf">try</span><span class="p">(</span><span class="ss">:email</span><span class="p">),</span>
+      <span class="ss">type:         </span><span class="n">pm</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/^.*::/</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+    <span class="p">)</span>
+  <span class="k">else</span>
+    <span class="k">raise</span> <span class="no">RuntimeError</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"Payment Method failed for </span><span class="si">#{</span><span class="n">organization</span><span class="p">.</span><span class="nf">id</span><span class="si">}</span><span class="s2">:</span><span class="si">#{</span><span class="n">organization</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We store some details about the payment method provided by user, it&#39;s credit card type, expiration year and month, last four digits and email in case of PayPal account. We expect that Braintree API works all the time, so in case of any failure a <code>RuntimeError</code> is raised. If you&#39;re familiar with Paymill payments provider you might have noticed that there is no preauthorization step, that is because Braintree as a part of AVS/CVV validation, creates $0 or $1 transactions which are automatically voided.</p>
+
+<p>Now with a customer and a payment method stored in Braintree Vault we can charge customers at the end of every billing cycle. In our case <code>Braintree::Transaction.sale</code> method takes <code>customer_id</code>.</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">charge_with_braintree</span><span class="p">(</span><span class="n">euro_value</span><span class="p">,</span> <span class="n">invoice_number</span><span class="p">)</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="no">Braintree</span><span class="o">::</span><span class="no">Transaction</span><span class="p">.</span><span class="nf">sale</span><span class="p">({</span>
+    <span class="ss">amount: </span><span class="n">euro_value</span><span class="p">,</span>
+    <span class="ss">customer_id: </span><span class="n">payment_client_id</span><span class="p">,</span>
+    <span class="ss">options: </span><span class="p">{</span>
+       <span class="ss">submit_for_settlement: </span><span class="kp">true</span>
+    <span class="p">},</span>
+    <span class="ss">order_id: </span><span class="s2">"Shelly Cloud </span><span class="si">#{</span><span class="n">invoice_number</span><span class="si">}</span><span class="s2">"</span>
+  <span class="p">})</span>
+
+  <span class="k">unless</span> <span class="n">result</span><span class="p">.</span><span class="nf">success?</span>
+    <span class="k">raise</span> <span class="no">RuntimeError</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'Transaction failed with status "%s"'</span> <span class="o">%</span> <span class="n">result</span><span class="p">.</span><span class="nf">transaction</span><span class="p">.</span><span class="nf">status</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Note that if you have a different payment flow, like one time payments, you would have to pass the <code>payment_method_nonce</code> as a parameter.</p>
+
+<h1>Is that all?</h1>
+
+<p>If you need to accept credit card or PayPal payments fast, without unnecessary paperwork, then it is all it takes. Braintree SDK is simple and intuitive, contains much more features than described above. Things I didn&#39;t mention are:</p>
+
+<ul>
+<li>custom payment forms with <a href="https://www.braintreepayments.com/features/hosted-fields">Hosted Fields</a></li>
+<li>recurring billing with plans and subscriptions</li>
+<li>additional payment types</li>
+</ul>
+
+<p>So when you start adding payments on your website be sure to check out their great <a href="https://developers.braintreepayments.com/javascript+ruby/guides/overview">docs</a>.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

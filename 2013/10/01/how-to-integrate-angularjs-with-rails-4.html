@@ -1,0 +1,385 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>How to integrate AngularJS with Rails 4 - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2013/10/01/how-to-integrate-angularjs-with-rails-4.html" property="og:url" /><meta content="How to integrate AngularJS with Rails 4" property="og:title" /><meta content="Building most single-page applications (SPAs for short) is a two-step process:
+first you create a JSON API in a backend technology of choice and then you use
+that API in the JavaScript application. Here we'll be using Ruby on
+Rails on the backend and
+AngularJS on the frontend." property="og:description" /><meta content="Michał Kwiatkowski" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@michalkw" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Michał Kwiatkowski","image":"https://www.gravatar.com/avatar/8361458e7cc9c0b897bfc2a70a15fde9.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"How to integrate AngularJS with Rails 4","url":"https://blog.ragnarson.com/2013/10/01/how-to-integrate-angularjs-with-rails-4.html","author":{"@type":"Person","name":"Michał Kwiatkowski","image":"https://www.gravatar.com/avatar/8361458e7cc9c0b897bfc2a70a15fde9.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2013-10-01","dateModified":"2013-10-01"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/8361458e7cc9c0b897bfc2a70a15fde9.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="8361458e7cc9c0b897bfc2a70a15fde9" /><div class="article-meta">October  1, 2013 - <a href="/authors/michal-kwiatkowski.html">Michał Kwiatkowski</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2013/10/01/how-to-integrate-angularjs-with-rails-4.html">How to integrate AngularJS with Rails 4</a></h1></header><div class="article-notice">This article was originally posted on the Shelly Cloud blog, our Ruby
+platform as a service that we have decided to shut down on October 2015.</div><p>Building most single-page applications (SPAs for short) is a two-step process:
+first you create a JSON API in a backend technology of choice and then you use
+that API in the JavaScript application. Here we&#39;ll be using <a href="http://rubyonrails.org/">Ruby on
+Rails</a> on the backend and
+<a href="http://angularjs.org/">AngularJS</a> on the frontend. </p>
+
+<p>The main pain point of any kind of integration is making sure that everything
+fits together well. This post will <em>not</em> take you through building the whole
+application. Instead, it will focus on making sure all the integration points
+are handled properly. I will also share with you some practical advice on the
+topic.</p>
+
+<p>Code examples used in this post come from a <a href="https://github.com/mkwiatkowski/todo-rails4-angularjs">Todo list management
+application</a>. This text
+summarizes all the lessons learned during writing of that app.</p>
+
+<h2>Building a JSON API in Rails</h2>
+
+<p>Building an API in Rails is easy, so we&#39;ll roll our own from scratch. Note that
+if you decide to use a specialized library like
+<a href="https://github.com/FineLinePrototyping/angularjs-rails-resource">angularjs-rails-resource</a>
+some details will differ, but the general idea will remain the same.</p>
+
+<h3>Routing</h3>
+
+<p>Let&#39;s start by defining routes for our API.</p>
+<pre class="highlight ruby"><code><span class="n">namespace</span> <span class="ss">:api</span><span class="p">,</span> <span class="ss">defaults: </span><span class="p">{</span><span class="ss">format: :json</span><span class="p">}</span> <span class="k">do</span>
+  <span class="n">resources</span> <span class="ss">:task_lists</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:index</span><span class="p">]</span> <span class="k">do</span>
+    <span class="n">resources</span> <span class="ss">:tasks</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This is all pretty standard. We can get all lists through the task_lists#index
+action, get a task listing for a specific list via tasks#index action and
+operate on specific tasks via create, update and destroy actions. Using <code>format:
+:json</code> is a handy default.</p>
+
+<p>If we run <code>rake routes</code> now, we will get an output similar to this:</p>
+<pre class="highlight plaintext"><code>GET    /api/task_lists/:task_list_id/tasks(.:format)     api/tasks#index {:format=&gt;:json}
+POST   /api/task_lists/:task_list_id/tasks(.:format)     api/tasks#create {:format=&gt;:json}
+PATCH  /api/task_lists/:task_list_id/tasks/:id(.:format) api/tasks#update {:format=&gt;:json}
+PUT    /api/task_lists/:task_list_id/tasks/:id(.:format) api/tasks#update {:format=&gt;:json}
+DELETE /api/task_lists/:task_list_id/tasks/:id(.:format) api/tasks#destroy {:format=&gt;:json}
+GET    /api/task_lists(.:format)                         api/task_lists#index {:format=&gt;:json}
+</code></pre>
+
+<p>There are two HTTP verbs corresponding to the update action: PATCH and
+PUT. Supporting PATCH is a new feature added in Rails 4.0. You can read more
+about it on <a href="http://weblog.rubyonrails.org/2012/2/25/edge-rails-patch-is-the-new-primary-http-method-for-updates/">the offical
+blog</a>.</p>
+
+<h3>Request parameters</h3>
+
+<p>Rails 4 also changed the way the mass-assignment protection is done. Instead of
+whitelisting/blacklisting parameters in the model, you now have to do it in the
+controller, using <code>require</code> and <code>permit</code> methods. I like to create a helper
+method than can be used both in create and update actions:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">safe_params</span>
+  <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:task</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:description</span><span class="p">,</span> <span class="ss">:priority</span><span class="p">,</span> <span class="ss">:completed</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>With this definition, action implementation looks as simple as this:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">create</span>
+  <span class="n">task</span> <span class="o">=</span> <span class="n">task_list</span><span class="p">.</span><span class="nf">tasks</span><span class="p">.</span><span class="nf">create!</span><span class="p">(</span><span class="n">safe_params</span><span class="p">)</span>
+  <span class="n">render</span> <span class="ss">json: </span><span class="n">task</span><span class="p">,</span> <span class="ss">status: </span><span class="mi">201</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">update</span>
+  <span class="n">task</span><span class="p">.</span><span class="nf">update_attributes</span><span class="p">(</span><span class="n">safe_params</span><span class="p">)</span>
+  <span class="n">render</span> <span class="ss">nothing: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">status: </span><span class="mi">204</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Generating JSON</h3>
+
+<p>The previous example already hinted at this: returning JSON output should be as
+simple as writing <code>render json: object</code>. I like to use
+<a href="https://github.com/rails-api/active_model_serializers/">active_model_serializers</a>
+gem which greatly simplifies the process. Whenever you render an object or a
+collection of objects to json, a proper serializer will be used. In case of our
+Todo list application, the following will render an array of tasks:</p>
+<pre class="highlight ruby"><code><span class="n">render</span> <span class="ss">json: </span><span class="no">TaskList</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">]).</span><span class="nf">tasks</span>
+</code></pre>
+
+<p>To get the exact format we want (that will be easy to consume by AngularJS),
+after installing the gem, we also need to configure it. Put the following into
+<code>config/initializers/active_model_serializers.rb</code>:</p>
+<pre class="highlight ruby"><code><span class="no">ActiveSupport</span><span class="p">.</span><span class="nf">on_load</span><span class="p">(</span><span class="ss">:active_model_serializers</span><span class="p">)</span> <span class="k">do</span>
+  <span class="c1"># Disable for all serializers (except ArraySerializer)</span>
+  <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Serializer</span><span class="p">.</span><span class="nf">root</span> <span class="o">=</span> <span class="kp">false</span>
+
+  <span class="c1"># Disable for ArraySerializer</span>
+  <span class="no">ActiveModel</span><span class="o">::</span><span class="no">ArraySerializer</span><span class="p">.</span><span class="nf">root</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>With this configuration in place and a serializer defined like that:</p>
+<pre class="highlight ruby"><code><span class="c1"># app/serializers/task_serializer.rb</span>
+<span class="k">class</span> <span class="nc">TaskSerializer</span> <span class="o">&lt;</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Serializer</span>
+  <span class="n">attributes</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:priority</span><span class="p">,</span> <span class="ss">:due_date</span><span class="p">,</span> <span class="ss">:completed</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>we&#39;ll get the following output:</p>
+<pre class="highlight ruby"><code><span class="p">[</span>
+ <span class="p">{</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">123</span><span class="p">,</span>
+  <span class="s1">'description'</span> <span class="o">=&gt;</span> <span class="s1">'Send newsletter'</span><span class="p">,</span>
+  <span class="s1">'priority'</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s1">'due_date'</span> <span class="o">=&gt;</span> <span class="s1">'2013-09-10'</span><span class="p">,</span>
+  <span class="s1">'completed'</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">},</span>
+ <span class="p">{</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">124</span><span class="p">,</span>
+  <span class="s1">'description'</span> <span class="o">=&gt;</span> <span class="s1">'Prepare presentation'</span><span class="p">,</span>
+  <span class="s1">'priority'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s1">'due_date'</span> <span class="o">=&gt;</span> <span class="s1">'2013-09-17'</span><span class="p">,</span>
+  <span class="s1">'completed'</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre>
+
+<h3>Testing</h3>
+
+<p>All respectable APIs have to be well tested. Fortunately, Rails makes writing
+automated tests really easy. In case of a JSON API, controller tests are the way
+to go. That&#39;s how a sample test may look like, using RSpec syntax:</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="no">Api</span><span class="o">::</span><span class="no">TasksController</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">"should be able to create a new record"</span> <span class="k">do</span>
+    <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">task_list_id: </span><span class="n">task_list</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span>
+      <span class="ss">task: </span><span class="p">{</span><span class="ss">description: </span><span class="s2">"New task"</span><span class="p">},</span> <span class="ss">format: :json</span>
+    <span class="n">response</span><span class="p">.</span><span class="nf">should</span> <span class="n">be_success</span>
+    <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">).</span><span class="nf">should</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">123</span><span class="p">,</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span><span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>An important detail to note here is the use of <code>format: :json</code>. This makes sure
+that the parameters are passed and interpreted as JSON.</p>
+
+<p>When writing more tests like this, you may find it useful to define a helper
+method for parsing the response. Put the following into your <code>spec_helper.rb</code>:</p>
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">JsonApiHelpers</span>
+  <span class="k">def</span> <span class="nf">json_response</span>
+    <span class="vi">@json_response</span> <span class="o">||=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">include</span> <span class="no">JsonApiHelpers</span><span class="p">,</span> <span class="ss">type: :controller</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>With this code in place, instead of:</p>
+<pre class="highlight ruby"><code><span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">).</span><span class="nf">should</span> <span class="o">==</span> <span class="p">{.</span><span class="nf">.</span><span class="o">.</span><span class="p">}</span>
+</code></pre>
+
+<p>you can now write:</p>
+<pre class="highlight ruby"><code><span class="n">json_response</span><span class="p">.</span><span class="nf">should</span> <span class="o">==</span> <span class="p">{.</span><span class="nf">.</span><span class="o">.</span><span class="p">}</span>
+</code></pre>
+
+<p>which is a little cleaner, you must admit. It also has an added bonus that the
+response will be only parsed once, even if you make multiple assertions on the
+output.</p>
+
+<h2>Building AngularJS application</h2>
+
+<p>Since the API is ready it&#39;s finally time to move on to building the AngularJS
+application. There is a breadth of tutorials to <a href="http://egghead.io/">watch</a> and
+<a href="http://docs.angularjs.org/tutorial">read</a>, so I&#39;m not going to repeat that
+here, instead focusing solely on the integration with Rails.</p>
+
+<h3>Including AngularJS files</h3>
+
+<p>The fastest way to get started is putting the JavaScript include tags for
+AngularJS directly into layout. At the time of writing this post, 1.0.8 is the
+latest stable version, so if you want to use that, put the following two lines
+into <code>app/views/layouts/application.html.slim</code>:</p>
+<pre class="highlight plaintext"><code>= javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"
+= javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-resource.min.js"
+</code></pre>
+
+<p>Of course you can also download the files and put them somewhere in
+<code>app/assets/javascripts/</code>. Unfortunately the asset pipeline may break some of
+your AngularJS code due to renaming. To prevent that, put the following line
+into your <code>config/environments/production.rb</code>:</p>
+<pre class="highlight ruby"><code><span class="n">config</span><span class="p">.</span><span class="nf">assets</span><span class="p">.</span><span class="nf">js_compressor</span> <span class="o">=</span> <span class="no">Uglifier</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">mangle: </span><span class="kp">false</span><span class="p">)</span>
+</code></pre>
+
+<p>This will disable name mangling during JavaScript minification. You can read
+more about this topic in <a href="http://docs.angularjs.org/tutorial/step_05">the official
+tutorial</a> (scroll down to &quot;A Note on
+Minification&quot;).</p>
+
+<h3>Structuring the AngularJS code</h3>
+
+<p>Each AngularJS application consists of the main application module and some
+controllers, directives and services. As long as you keep everything under
+<code>app/assets/javascripts/</code> the asset pipeline will put them all together without
+a problem. Ultimately it&#39;s up to you where to put each of them, but here&#39;s how
+I&#39;ve done it.</p>
+
+<p>First, my <code>application.js</code> lists all the external requirements (like jQuery or
+AngularJS itself), then the file containing the main application module,
+to finally use the <code>require_tree</code> directive:</p>
+<pre class="highlight plaintext"><code>//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require lib/angular.min
+//= require lib/angular-resource.min
+//= require todoApp
+//= require_tree .
+</code></pre>
+
+<p>With that in mind, the main application module is defined in <code>todoApp.js.coffee</code>
+and looks like this:</p>
+<pre class="highlight coffeescript"><code><span class="nx">todoApp</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="na">module</span><span class="p">(</span><span class="s">'todoApp'</span><span class="p">,</span> <span class="p">[</span><span class="s">'ngResource'</span><span class="p">])</span>
+</code></pre>
+
+<p>I keep the rest of the files in suitable subdirectories: <code>controllers</code>,
+<code>directives</code> and <code>services</code> for standard elements of an AngularJS app, and <code>lib</code>
+for any other dependencies.</p>
+
+<h3>Defining the service</h3>
+
+<p>The Rails API can be accessed from the AngularJS app through the
+<a href="http://docs.angularjs.org/api/ngResource">ngResource</a> module. Instead of using
+the resource directly in the controller, it&#39;s a good practice to define a
+service around it. This way you can abstract away some pesky details of
+accessing data, much like you would do with Rails models.</p>
+
+<p>Below is a basic service for accessing tasks, written in CoffeeScript.</p>
+<pre class="highlight coffeescript"><code><span class="nx">angular</span><span class="p">.</span><span class="na">module</span><span class="p">(</span><span class="s">'todoApp'</span><span class="p">).</span><span class="na">factory</span> <span class="s">'Task'</span><span class="p">,</span> <span class="p">(</span><span class="nx">$resource</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">class</span> <span class="nx">Task</span>
+    <span class="na">constructor</span><span class="o">:</span> <span class="p">(</span><span class="nx">taskListId</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="vi">@</span><span class="na">service</span> <span class="o">=</span> <span class="nx">$resource</span><span class="p">(</span><span class="s">'/api/task_lists/:task_list_id/tasks/:id'</span><span class="p">,</span>
+        <span class="p">{</span><span class="na">task_list_id</span><span class="o">:</span> <span class="nx">taskListId</span><span class="p">,</span> <span class="na">id</span><span class="o">:</span> <span class="s">'@id'</span><span class="p">})</span>
+
+    <span class="na">create</span><span class="o">:</span> <span class="p">(</span><span class="nx">attrs</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="k">new</span> <span class="vi">@</span><span class="na">service</span><span class="p">(</span><span class="na">task</span><span class="o">:</span> <span class="nx">attrs</span><span class="p">).</span><span class="na">$save</span> <span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="nx">attrs</span><span class="p">.</span><span class="na">id</span> <span class="o">=</span> <span class="nx">task</span><span class="p">.</span><span class="na">id</span>
+      <span class="nx">attrs</span>
+
+    <span class="na">all</span><span class="o">:</span> <span class="o">-&gt;</span>
+      <span class="vi">@</span><span class="na">service</span><span class="p">.</span><span class="na">query</span><span class="p">()</span>
+</code></pre>
+
+<p>For example, to get a list of all tasks from a given list, you&#39;d do the
+following:</p>
+<pre class="highlight coffeescript"><code><span class="nx">$scope</span><span class="p">.</span><span class="na">tasks</span> <span class="o">=</span> <span class="nx">Task</span><span class="p">(</span><span class="nx">taskListId</span><span class="p">).</span><span class="na">all</span><span class="p">()</span>
+</code></pre>
+
+<p>It cannot get any easier than this.</p>
+
+<h3>Making it work with CSRF protection</h3>
+
+<p>Rails come with cross-site request forgery protection in the form of a token
+embedded in the head section of each page. To make forms work in AngularJS you
+need to use that token in all API requests. Put the following three lines into
+the main application file (<code>todoApp.js.coffee</code> in our case):</p>
+<pre class="highlight coffeescript"><code><span class="nx">todoApp</span><span class="p">.</span><span class="na">config</span> <span class="p">(</span><span class="nx">$httpProvider</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nx">authToken</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s">"meta[name=</span><span class="se">\"</span><span class="s">csrf-token</span><span class="se">\"</span><span class="s">]"</span><span class="p">).</span><span class="na">attr</span><span class="p">(</span><span class="s">"content"</span><span class="p">)</span>
+  <span class="nx">$httpProvider</span><span class="p">.</span><span class="na">defaults</span><span class="p">.</span><span class="na">headers</span><span class="p">.</span><span class="na">common</span><span class="p">[</span><span class="s">"X-CSRF-TOKEN"</span><span class="p">]</span> <span class="o">=</span> <span class="nx">authToken</span>
+</code></pre>
+
+<h3>Making it work with turbolinks</h3>
+
+<p>Turbolinks which <a href="https://twitter.com/dhh/status/251024691337244672">became a default in Rails
+4</a> may cause some problems to
+AngularJS applications, especially if you need to support different SPAs on
+multiple pages. To overcome this problem, put the following into the main
+application file:</p>
+<pre class="highlight ruby"><code><span class="err">$</span><span class="p">(</span><span class="n">document</span><span class="p">).</span><span class="nf">on</span> <span class="s1">'page:load'</span><span class="p">,</span> <span class="o">-&gt;</span>
+  <span class="err">$</span><span class="p">(</span><span class="s1">'[ng-app]'</span><span class="p">).</span><span class="nf">each</span> <span class="o">-&gt;</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="err">$</span><span class="p">(</span><span class="n">this</span><span class="p">).</span><span class="nf">attr</span><span class="p">(</span><span class="s1">'ng-app'</span><span class="p">)</span>
+    <span class="n">angular</span><span class="p">.</span><span class="nf">bootstrap</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="p">[</span><span class="n">module</span><span class="p">])</span>
+</code></pre>
+
+<p>This will make sure the AngularJS application is properly initialized each time
+a turbolink does its fetch&amp;replace magic.</p>
+
+<h3>Making updates using the PATCH method</h3>
+
+<p>The new PATCH method mentioned in the beginning of this post is not supported by
+<code>ngResource</code> by default, but it&#39;s easy enough to make it work. First, put the
+following code into the main application file:</p>
+<pre class="highlight coffeescript"><code><span class="nx">defaults</span> <span class="o">=</span> <span class="nx">$http</span><span class="p">.</span><span class="na">defaults</span><span class="p">.</span><span class="na">headers</span>
+<span class="nx">defaults</span><span class="p">.</span><span class="na">patch</span> <span class="o">=</span> <span class="nx">defaults</span><span class="p">.</span><span class="na">patch</span> <span class="o">||</span> <span class="p">{}</span>
+<span class="nx">defaults</span><span class="p">.</span><span class="na">patch</span><span class="p">[</span><span class="s">'Content-Type'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'application/json'</span>
+</code></pre>
+
+<p>It will ensure any PATCH requests are made with <code>application/json</code> content type.</p>
+
+<p>After that, modify the resource definition from before, so that it specifies
+PATCH as a prefered verb for the update action.</p>
+<pre class="highlight coffeescript"><code><span class="nx">$resource</span><span class="p">(</span><span class="s">'/api/task_lists/:task_list_id/tasks/:id'</span><span class="p">,</span>
+  <span class="p">{</span><span class="na">task_list_id</span><span class="o">:</span> <span class="nx">taskListId</span><span class="p">,</span> <span class="na">id</span><span class="o">:</span> <span class="s">'@id'</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">update</span><span class="o">:</span> <span class="p">{</span><span class="na">method</span><span class="o">:</span> <span class="s">'PATCH'</span><span class="p">}})</span>
+</code></pre>
+
+<p>Now, whenever you issue an update on the resource, it will properly submit a
+PATCH request with JSON content.</p>
+
+<h3>Testing</h3>
+
+<p>Just as Rails, AngularJS has a great testing story. Thanks to its focus on
+Dependency Injection, unit testing components of an AngularJS application is a
+breeze.</p>
+
+<p><a href="http://docs.angularjs.org/tutorial/">The official tutorial</a> walks you through
+setting up testing infrastructure, using
+<a href="http://karma-runner.github.io/0.10/index.html">Karma</a>, so I&#39;m not going to
+repeat that here. I found it easy to use with
+<a href="http://pivotal.github.io/jasmine/">Jasmine</a> which I already knew and with
+<a href="http://code.angularjs.org/1.0.8/angular-mocks.js">angular-mocks</a> which helps
+with mocking some features of a web browser.</p>
+
+<h3>Debugging</h3>
+
+<p>When testing fails it&#39;s often useful to be able to boot up the browser and poke
+around manually. As I was learning AngularJS and figuring out integration
+problems, <a href="http://stackoverflow.com/questions/10490570/call-angular-js-from-legacy-code">Misko Hevery&#39;s answer on
+Stackoverflow</a>
+was a big help to me.</p>
+
+<p>Turns out, inspecting AngularJS app internals from the browser is not that
+complicated. All you need to do is to grab an element with jQuery. For example,
+that&#39;s how you can access scope in the context of the <code>taskDescription</code> element:</p>
+<pre class="highlight plaintext"><code>$("#taskDescription").scope()
+</code></pre>
+
+<p>From there you can traverse the complete state of your controller.</p>
+
+<p>Another tool that may come in handy is <a href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk">AngularJS
+Batarang</a>,
+a Chrome extension that allows you to inspect and profile your SPA&#39;s internals.</p>
+
+<h2>Now go and build!</h2>
+
+<p>That should get you through the initial steps of building your dream single-page
+application.</p>
+
+<p>Leave your thoughts in the comments and if you need a hosting for your Rails backend
+<a href="http://shellycloud.com/">you don&#39;t have to look far</a>. :)</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>

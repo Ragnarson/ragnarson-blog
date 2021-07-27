@@ -1,0 +1,481 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><title>Instant code updates for Cordova iOS apps - Ragnarson Blog</title><meta content="summary" name="twitter:card" /><meta content="@ragnarsoncom" name="twitter:site" /><meta content="Ragnarson Blog" property="og:site_name" /><meta content="article" property="og:type" /><meta content="https://blog.ragnarson.com/2016/02/23/cordova-instant-code-updates.html" property="og:url" /><meta content="Instant code updates for Cordova iOS apps" property="og:title" /><meta content="One of the many advantages of a hybrid approach to mobile apps development is instant code updates. In this article, I will guide you through setting up a basic updates mechanism from scratch. With little adjustment it will work for every Cordova (PhoneGap, Ionic) iOS project. You can follow the steps or download a complete github repo to tinker with it yourself. Some basic Objective-C knowledge will be necessary to follow the guide." property="og:description" /><meta content="Paweł Urbanek" name="author" /><meta content="https://blog.ragnarson.com/images/blog-embed-c040007b71.png" property="og:image" /><meta content="@_pawurb" name="twitter:creator" /><link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" /><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" /><script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","name":"Ragnarson Blog","url":"https://blog.ragnarson.com"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Paweł Urbanek","image":"https://www.gravatar.com/avatar/afd10449c8a73947a45c76c7ff5c2ba5.jpg?s=144&d=mm"}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","headline":"Instant code updates for Cordova iOS apps","url":"https://blog.ragnarson.com/2016/02/23/cordova-instant-code-updates.html","author":{"@type":"Person","name":"Paweł Urbanek","image":"https://www.gravatar.com/avatar/afd10449c8a73947a45c76c7ff5c2ba5.jpg?s=144&d=mm"},"publisher":{"@type":"Organization","name":"Ragnarson","url":"https://ragnarson.com","logo":"https://blog.ragnarson.com/images/brand-c0054f1cec.svg"},"datePublished":"2016-02-23","dateModified":"2016-02-23"}</script><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/application-c0f3339569.css" rel="stylesheet" /><link href="/favicon-152-c0fe5a334d.png" rel="apple-touch-icon-precomposed" /><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-11839548-2');
+ga('set', 'allowAdFeatures', false);
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+</head><body><div class="container nav-container"><nav class="navbar navbar-dark navbar-toggleable-md"><button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse" type="button"><i class="icon-menu"></i></button><a href="https://ragnarson.com" class="nav-brand navbar-logo"><img src="/images/brand-c0054f1cec.svg" title="Ragnarson Blog" width="220px" alt="Brand" /></a><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="nav navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Why us</a><div class="dropdown-menu"><a href="https://ragnarson.com/our-story/" class="dropdown-item">Our story</a><a href="https://ragnarson.com/core-values/" class="dropdown-item">Core Values</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Services</a><div class="dropdown-menu"><a href="https://ragnarson.com/services/web-app-development/" class="dropdown-item">Web app development</a><a href="https://ragnarson.com/services/infrastructure-and-devops/" class="dropdown-item">Infrastructure and DevOps</a></div></li><li class="nav-item"><a href="https://ragnarson.com/case-studies/" class="nav-link">Case studies</a></li><li class="nav-item"><a href="https://ragnarson.com/community/" class="nav-link">Community</a></li><li class="nav-item"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-header#contact" class="nav-link">Contact</a></li><li class="nav-item"><a href="/" class="active nav-link">Blog</a></li><li class="nav-item"><a href="http://jobs.ragnarson.com" class="nav-link">Jobs</a></li></ul></div></nav></div><div class="newsletter-show newsletter-container" id="js-box"><div class="newsletter-toggler"><i class="icon-chevron-right" id="js-arrow"></i></div><div class="newsletter-box"><div class="newsletter-popup"><div id="mc_embed_signup">
+  <form action="//ragnarson.us10.list-manage.com/subscribe/post?u=6a4a4d00f989604300f83d3de&amp;id=6adadf2f44" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL" class="newsletter-label">
+        Sign up for our newsletter and get notifications about new articles on your email
+      </label>
+
+      <div class="row">
+        <div class="three-thirds">
+          <input type="email" value="" name="EMAIL" class="newsletter-input" id="mce-EMAIL" placeholder="Your email address" required>
+
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div class="signup_hidden">
+            <input type="text" name="b_6a4a4d00f989604300f83d3de_6adadf2f44" tabindex="-1" value="" class="one-half">
+          </div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <input type="submit" value="Join our newsletter" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter-btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div></div></div><div id="main" role="main"><div class="article"><header><img src="https://www.gravatar.com/avatar/afd10449c8a73947a45c76c7ff5c2ba5.jpg?s=144&amp;d=mm" class="avatar" width="72px" size="72px" alt="Afd10449c8a73947a45c76c7ff5c2ba5" /><div class="article-meta">February 23, 2016 - <a href="/authors/pawel-urbanek.html">Paweł Urbanek</a>  in <a href="/categories/development.html">development</a></div><h1 class="article-title"><a href="/2016/02/23/cordova-instant-code-updates.html">Instant code updates for Cordova iOS apps</a></h1></header><p>One of the many advantages of a hybrid approach to mobile apps development is instant code updates. In this article, I will guide you through setting up a basic updates mechanism from scratch. With little adjustment it will work for every <a href="https://cordova.apache.org/">Cordova</a> (<a href="http://phonegap.com/">PhoneGap</a>, <a href="http://ionicframework.com">Ionic</a>) iOS project. You can follow the steps or download a <a href="https://github.com/pawurb/cordova-instant-updates">complete github repo</a> to tinker with it yourself. Some basic Objective-C knowledge will be necessary to follow the guide.</p>
+
+<p></p>
+
+<p>For backend development releasing a new version is often as easy as doing a git push. On the contrary, submitting a new version to the App Store, with all the iTunes Connect bureaucracy and review waiting time is sometimes difficult to cope with. On Android it takes a couple of hours for a new version to go live on production. iOS review time can take anything <a href="http://appreviewtimes.com/">from a couple of days to ~3 weeks</a>. In theory, you can request an expedited review, however, this is normally reserved for urgent bug fixes and cannot be overused.</p>
+
+<p>For iOS apps, all the compiled native code must not be changed after submitting the app to review. However <a href="https://developer.apple.com/programs/ios/information/iOS_Program_Information_4_3_15.pdf">point 3.3.2</a> of the iOS Developer Program Information explicitly states that <em>code downloaded and run by Apple&#39;s built-in WebKit framework or JavascriptCore</em> can be updated without all the 3-week-long review hassle.</p>
+
+<p>We&#39;ve been using this approach in the production of our app for almost a year now. Overall it works without problems, apart from a few minor caveats I will mention later.</p>
+
+<p>I will be using the newest Cordova by the time of writing (5.4.1). The steps should be identical for other versions.</p>
+
+<h3>Initial setup</h3>
+
+<p>Let&#39;s start with generating a new iOS Cordova project:</p>
+<pre class="highlight shell"><code>cordova create hot_updates
+<span class="nb">cd </span>hot_updates
+cordova platforms add ios
+<span class="nb">echo</span> <span class="s2">"&lt;html&gt;&lt;body&gt;&lt;h1&gt;I am version 1&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;"</span> &gt; www/index.html
+cordova build ios
+</code></pre>
+
+<p>Now open the xCode project from <code>platforms/ios</code> in the xCode and run it to make sure there are no errors and you can see the correct <code>index.html</code> rendered:</p>
+<figure>
+<p><img src="/2016/02/23/cordova-instant-code-updates/version-1-c0dc57e6db.png" alt="Lunch" /></p>
+</figure>
+<p>By default, Cordova keeps all the html assets in the application bundle. It is not writable and cannot be changed after submitting the app to review. To enable instant updates, you need to change the resource path for Cordova assets.</p>
+
+<p>Open the following file: <code>platforms/ios/CordovaLib/Classes/CDVCommandDelegateImpl.m</code></p>
+
+<p>and change</p>
+<pre class="highlight swift"><code><span class="o">-</span> <span class="p">(</span><span class="kt">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">pathForResource</span><span class="p">:(</span><span class="kt">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">resourcepath</span>
+</code></pre>
+
+<p>method to look like this <a href="http://stackoverflow.com/questions/12865316/phonegap-updating-javascript-and-css-without-submitting-the-app-to-appstore">(source)</a>:</p>
+<pre class="highlight swift"><code><span class="o">-</span> <span class="p">(</span><span class="kt">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">pathForResource</span><span class="p">:(</span><span class="kt">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">resourcepath</span>
+<span class="p">{</span>
+    <span class="kt">NSArray</span> <span class="o">*</span><span class="n">searchPaths</span> <span class="o">=</span> <span class="kt">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="kt">NSDocumentDirectory</span><span class="p">,</span> <span class="kt">NSUserDomainMask</span><span class="p">,</span> <span class="kt">YES</span><span class="p">);</span>
+    <span class="kt">NSString</span> <span class="o">*</span><span class="n">wwwFolderName</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSString</span> <span class="nv">stringWithFormat</span><span class="p">:</span><span class="s">@"%@/www"</span><span class="p">,</span> <span class="p">[</span><span class="n">searchPaths</span> <span class="n">firstObject</span><span class="p">]];</span>
+    <span class="kt">NSBundle</span><span class="o">*</span> <span class="n">mainBundle</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSBundle</span> <span class="n">mainBundle</span><span class="p">];</span>
+    <span class="kt">NSMutableArray</span><span class="o">*</span> <span class="n">directoryParts</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSMutableArray</span> <span class="nv">arrayWithArray</span><span class="p">:[</span><span class="n">resourcepath</span> <span class="nv">componentsSeparatedByString</span><span class="p">:</span><span class="s">@"/"</span><span class="p">]];</span>
+    <span class="kt">NSString</span><span class="o">*</span> <span class="n">filename</span> <span class="o">=</span> <span class="p">[</span><span class="n">directoryParts</span> <span class="n">lastObject</span><span class="p">];</span>
+
+    <span class="p">[</span><span class="n">directoryParts</span> <span class="n">removeLastObject</span><span class="p">];</span>
+
+    <span class="kt">NSString</span><span class="o">*</span> <span class="n">directoryPartsJoined</span> <span class="o">=</span> <span class="p">[</span><span class="n">directoryParts</span> <span class="nv">componentsJoinedByString</span><span class="p">:</span><span class="s">@"/"</span><span class="p">];</span>
+    <span class="kt">NSString</span><span class="o">*</span> <span class="n">directoryStr</span> <span class="o">=</span> <span class="n">wwwFolderName</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">([</span><span class="n">directoryPartsJoined</span> <span class="n">length</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">directoryStr</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSString</span> <span class="nv">stringWithFormat</span><span class="p">:</span><span class="s">@"%@/%@"</span><span class="p">,</span> <span class="n">wwwFolderName</span><span class="p">,</span> <span class="p">[</span><span class="n">directoryParts</span> <span class="nv">componentsJoinedByString</span><span class="p">:</span><span class="s">@"/"</span><span class="p">]];</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">wwwFolderName</span> <span class="nv">isEqualToString</span><span class="p">:</span><span class="s">@"www"</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span><span class="kt">NSString</span> <span class="nv">stringWithFormat</span><span class="p">:</span><span class="s">@"%@/%@"</span><span class="p">,</span><span class="n">wwwFolderName</span><span class="p">,</span><span class="s">@"index.html"</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">mainBundle</span> <span class="nv">pathForResource</span><span class="p">:</span><span class="n">filename</span> <span class="nv">ofType</span><span class="p">:</span><span class="s">@""</span> <span class="nv">inDirectory</span><span class="p">:</span><span class="n">directoryStr</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Save and run your project again. You should see a white screen. Now let&#39;s put some assets in the new path.</p>
+
+<p>To minimize Cordova code customization we will put all the remaining code for code updates in one class. First let&#39;s add a class responsible for this to the xCode project. Right click on <code>Classes</code> group and select <code>New file</code> of type <code>Cocoa Touch Class</code> call it <code>CodeUpdater</code> and make it a <code>NSObject</code> subclass.</p>
+
+<p>Now open <code>platforms/ios/HelloCordova/Classes/AppDelegate.m</code> and add the import statement to the beginning of the file.</p>
+<pre class="highlight swift"><code><span class="cp">#import "CodeUpdater.h"</span>
+</code></pre>
+
+<p>We want to check for the new updates every time the app is launched or woken up from background mode. Therefore, add the following line:</p>
+<pre class="highlight swift"><code><span class="p">[[[</span><span class="kt">CodeUpdater</span> <span class="n">alloc</span><span class="p">]</span> <span class="nv">initWithViewController</span><span class="p">:</span><span class="k">self</span><span class="o">.</span><span class="n">viewController</span><span class="p">]</span> <span class="n">call</span><span class="p">];</span>
+</code></pre>
+
+<p>to the end of:</p>
+<pre class="highlight swift"><code><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nv">application</span><span class="p">:(</span><span class="kt">UIApplication</span><span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="nv">didFinishLaunchingWithOptions</span><span class="p">:(</span><span class="kt">NSDictionary</span><span class="o">*</span><span class="p">)</span><span class="n">launchOptions</span>
+</code></pre>
+
+<p>AppDelegate method. Just before the <code>return YES;</code> statement.</p>
+
+<p>Also add the following method:</p>
+<pre class="highlight swift"><code><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="nv">applicationWillEnterForeground</span><span class="p">:(</span><span class="kt">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="p">{</span>
+    <span class="p">[[[</span><span class="kt">CodeUpdater</span> <span class="n">alloc</span><span class="p">]</span> <span class="nv">initWithViewController</span><span class="p">:</span><span class="k">self</span><span class="o">.</span><span class="n">viewController</span><span class="p">]</span> <span class="n">call</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Your code will now fail to compile because you did not add the correct initializer and public method to the <code>CodeUpdater</code> class yet. Change the <code>CodeUpdater.h</code> file to look like this:</p>
+<pre class="highlight objective_c"><code><span class="cp">#import &lt;Foundation/Foundation.h&gt;
+#import "MainViewController.h"
+</span>
+<span class="k">@interface</span> <span class="nc">CodeUpdater</span> <span class="p">:</span> <span class="nc">NSObject</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="nf">initWithViewController</span><span class="p">:(</span><span class="n">CDVViewController</span> <span class="o">*</span><span class="p">)</span><span class="nv">viewController</span><span class="p">;</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">call</span><span class="p">;</span>
+
+<span class="k">@end</span>
+</code></pre>
+
+<p>Also, let&#39;s add some placeholder intializer and call method to <code>CodeUpdater.m</code>:</p>
+<pre class="highlight objective_c"><code><span class="cp">#import "CodeUpdater.h"
+</span>
+<span class="k">@implementation</span> <span class="nc">CodeUpdater</span>
+    <span class="k">-</span> <span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="nf">initWithViewController</span><span class="p">:(</span><span class="n">CDVViewController</span> <span class="o">*</span><span class="p">)</span><span class="nv">viewController</span> <span class="p">{</span>
+      <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="nf">init</span><span class="p">];</span>
+      <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">call</span> <span class="p">{</span>
+    <span class="p">}</span>
+<span class="k">@end</span>
+</code></pre>
+
+<p>Now your project should compile again.</p>
+
+<p>To keep code examples simpler, we will skip semantic versioning here and just use plain integers to mark updates. If you want to do a proper semantic versioning, I recommend the following library: <a href="https://github.com/thisandagain/semver">semver</a>.</p>
+
+<p>Anyway, we will need to add a couple of libraries, both external and system, that hot updates depend on.</p>
+
+<p>Let&#39;s start by importing:</p>
+
+<ul>
+<li><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a></li>
+<li><a href="https://github.com/ZipArchive/ZipArchive">ZipArchive</a></li>
+</ul>
+
+<p>Unfortunately Cordova does not play well with Cocoapods. You&#39;ll have to follow the docs on how to import the libs manually, or just download the <a href="https://github.com/pawurb/cordova-instant-updates">sample repo</a> where the libs are already included.</p>
+
+<p>Now add the following system libraries in the xCode:</p>
+
+<ul>
+<li>libz.tdd</li>
+<li>SystemConfiguration.framework</li>
+<li>Security.framework</li>
+</ul>
+
+<p>Then add import statements to the <code>CodeUpdater.m</code> file:</p>
+<pre class="highlight swift"><code><span class="cp">#import "AFNetworking.h"</span>
+<span class="cp">#import "SSZipArchive.h"</span>
+</code></pre>
+
+<p>Try to compile again to make sure you imported everything correctly.</p>
+
+<h3>Development mode</h3>
+
+<p>We have to implement the two cases of updates flow. For development mode we will be copying assets from the application bundle. This is where the <code>cordova build ios</code> command copies them so we want to apply our changes after each build. For production we will fetch JSON api info about the newest available assets version and the download update if available.</p>
+
+<p>Let&#39;s start with the development mode. To distinguish between modes, we will simply add a static bool constant. In production you probably should move it to a configuration file but we will skip it here to keep the code simpler.</p>
+
+<p>Edit <code>CodeUpdater.m</code> file to look like this:</p>
+<pre class="highlight swift"><code><span class="cp">#import "CodeUpdater.h"</span>
+<span class="cp">#import "AFNetworking.h"</span>
+<span class="cp">#import "SSZipArchive.h"</span>
+
+<span class="kd">static</span> <span class="kt">BOOL</span> <span class="kt">DEV_MODE</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="kd">@implementation</span> <span class="kt">CodeUpdater</span> <span class="p">{</span>
+    <span class="kt">NSFileManager</span> <span class="o">*</span><span class="n">_fileManager</span><span class="p">;</span>
+    <span class="kt">CDVViewController</span> <span class="o">*</span><span class="n">_viewController</span><span class="p">;</span>
+<span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="nv">initWithViewController</span><span class="p">:(</span><span class="kt">CDVViewController</span> <span class="o">*</span><span class="p">)</span><span class="n">viewController</span> <span class="p">{</span>
+        <span class="n">_fileManager</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSFileManager</span> <span class="n">defaultManager</span><span class="p">];</span>
+        <span class="n">_viewController</span> <span class="o">=</span> <span class="n">viewController</span><span class="p">;</span>
+        <span class="k">self</span> <span class="o">=</span> <span class="p">[</span><span class="k">super</span> <span class="kd">init</span><span class="p">];</span>
+        <span class="k">return</span> <span class="k">self</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">call</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="kt">DEV_MODE</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 1</span>
+            <span class="p">[</span><span class="k">self</span> <span class="n">copyBundleAssets</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">copyBundleAssets</span> <span class="p">{</span> <span class="c1">// 2</span>
+        <span class="p">[</span><span class="n">_fileManager</span> <span class="nv">removeItemAtPath</span><span class="p">:[</span><span class="k">self</span> <span class="n">writableAssetsPath</span><span class="p">]</span> <span class="nv">error</span><span class="p">:</span><span class="kc">nil</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">_fileManager</span> <span class="nv">copyItemAtPath</span><span class="p">:[</span><span class="k">self</span> <span class="n">bundleAssetsPath</span><span class="p">]</span> <span class="nv">toPath</span><span class="p">:[</span><span class="k">self</span> <span class="n">writableAssetsPath</span><span class="p">]</span> <span class="nv">error</span><span class="p">:</span><span class="kc">nil</span><span class="p">];</span>
+    <span class="p">}</span>
+
+   <span class="o">-</span> <span class="p">(</span><span class="kt">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">writableAssetsPath</span> <span class="p">{</span> <span class="c1">// 3</span>
+        <span class="kt">NSArray</span> <span class="o">*</span><span class="n">paths</span> <span class="o">=</span> <span class="kt">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="kt">NSDocumentDirectory</span><span class="p">,</span> <span class="kt">NSUserDomainMask</span><span class="p">,</span> <span class="kt">YES</span><span class="p">);</span>
+        <span class="kt">NSString</span> <span class="o">*</span><span class="n">documentsDirectory</span> <span class="o">=</span> <span class="p">[</span><span class="n">paths</span> <span class="n">firstObject</span><span class="p">];</span>
+        <span class="p">[</span><span class="k">self</span> <span class="nv">addSkipBackupAttributeToItemAtURL</span><span class="p">:[</span><span class="kt">NSURL</span> <span class="nv">fileURLWithPath</span><span class="p">:</span><span class="n">documentsDirectory</span><span class="p">]];</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">documentsDirectory</span> <span class="nv">stringByAppendingPathComponent</span><span class="p">:</span><span class="s">@"/www"</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="kt">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">bundleAssetsPath</span> <span class="p">{</span> <span class="c1">// 4</span>
+        <span class="k">return</span> <span class="p">[[[</span><span class="kt">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="n">resourcePath</span><span class="p">]</span> <span class="nv">stringByAppendingPathComponent</span><span class="p">:</span><span class="s">@"www"</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="nv">addSkipBackupAttributeToItemAtURL</span><span class="p">:(</span><span class="kt">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="kt">URL</span> <span class="p">{</span> <span class="c1">// 5</span>
+        <span class="kt">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
+        <span class="p">[</span><span class="kt">URL</span> <span class="nv">setResourceValue</span><span class="p">:</span> <span class="p">[</span><span class="kt">NSNumber</span> <span class="nv">numberWithBool</span><span class="p">:</span> <span class="kt">YES</span><span class="p">]</span> <span class="nv">forKey</span><span class="p">:</span> <span class="kt">NSURLIsExcludedFromBackupKey</span> <span class="nv">error</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="kd">@end</span>
+
+</code></pre>
+
+<p>That&#39;s quite a lot of new code so let&#39;s explain:</p>
+
+<ol>
+<li>If your app is in development mode you have to copy assets from the application bundle to the new path we&#39;ve overwritten in <code>CDVCommandDelegateImpl.m</code> class.</li>
+<li>using the NSFileManager instance, we remove the old assets and copy the new ones from the bundle.</li>
+<li>this is the writable assets path location on the phone.</li>
+<li>this is the path of the default application bundle</li>
+<li>this method is needed to avoid problems with iCloud sync when your total assets size is more than 5MB.</li>
+</ol>
+
+<p>You can validate that applied changes are visible after building and running the xcode project:</p>
+<pre class="highlight shell"><code><span class="nb">echo</span> <span class="s2">"&lt;html&gt;&lt;body&gt;&lt;h1&gt;I am version 2&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;"</span> &gt; www/index.html
+cordova build ios
+</code></pre>
+<figure>
+<p><img src="/2016/02/23/cordova-instant-code-updates/version-2-c032a1cbd7.png" alt="Lunch" /></p>
+</figure>
+<h3>Production mode</h3>
+
+<p>First, we will bootstrap a simple Sinatra server that will provide us with the JSON api. Alternatively, you can use any backend technology you are familiar with.</p>
+
+<p>Create a <code>Gemfile</code> file in a separate <code>server</code> folder with the following contents:</p>
+<pre class="highlight ruby"><code><span class="n">source</span> <span class="s1">'https://rubygems.org'</span>
+<span class="n">gem</span> <span class="s1">'sinatra'</span>
+<span class="n">gem</span> <span class="s1">'json'</span>
+</code></pre>
+
+<p>then add a <code>server.rb</code></p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+  <span class="n">content_type</span> <span class="ss">:json</span>
+  <span class="p">{</span> <span class="ss">version: </span><span class="mi">2</span><span class="p">,</span> <span class="ss">url: </span><span class="s2">"http://localhost:8080/package.zip"</span> <span class="p">}.</span><span class="nf">to_json</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>and run it:</p>
+<pre class="highlight shell"><code>bundle install
+ruby server.rb
+</code></pre>
+
+<p>After going to <code>localhost:4567</code> in your browser you should see the correct JSON.</p>
+
+<p>Now let&#39;s generate a new assets version that will be downloaded and unzipped to our mobile app. In the <code>server</code> folder execute the following commands:</p>
+<pre class="highlight shell"><code>mkdir www
+<span class="nb">echo</span> <span class="s2">"&lt;html&gt;&lt;body&gt;&lt;h1&gt;I am updated version&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;"</span> &gt; www/index.html
+zip -r package.zip www
+</code></pre>
+
+<p>We will use python <code>SimpleHTTPServer</code> to serve asset files locally.  On MacOS it should be preinstalled. Run:</p>
+
+<p><code>python -m SimpleHTTPServer</code></p>
+<figure>
+<p><img src="/2016/02/23/cordova-instant-code-updates/python_server-c0a929db05.png" alt="Lunch" />
+<figcaption>
+Make sure it works on <code>localhost:8080</code> and all the files are served correctly.
+</figcaption></p>
+</figure>
+<p>On production, I recommend using <a href="https://aws.amazon.com/s3/">Amazon S3</a> with <a href="https://aws.amazon.com/cloudfront/">CloudFront</a>.</p>
+
+<p>iOS 9 introduced some http restrictions. If you want your app to communicate with endpoints not secured by SSL, you have to add the following code to <code>platforms/ios/HelloCordova/HelloCordova-Info.plist</code> file</p>
+<pre class="highlight xml"><code>  <span class="nt">&lt;key&gt;</span>NSAppTransportSecurity<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;dict&gt;</span>
+    <span class="nt">&lt;key&gt;</span>NSAllowsArbitraryLoads<span class="nt">&lt;/key&gt;</span>
+    <span class="nt">&lt;true/&gt;</span>
+  <span class="nt">&lt;/dict&gt;</span>
+</code></pre>
+
+<p>You can read up on what it&#39;s all about <a href="http://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/">here</a>.</p>
+
+<p>Now add the following code to <code>CodeUpdater.m</code>:</p>
+<pre class="highlight swift"><code><span class="cp">#import "CodeUpdater.h"</span>
+<span class="cp">#import "AFNetworking.h"</span>
+<span class="cp">#import "SSZipArchive.h"</span>
+
+<span class="kd">static</span> <span class="kt">BOOL</span> <span class="kt">DEV_MODE</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="kd">static</span> <span class="kt">NSString</span> <span class="o">*</span><span class="kt">API_URL</span> <span class="o">=</span> <span class="s">@"http://localhost:4567/"</span><span class="p">;</span>
+<span class="kd">static</span> <span class="kt">NSString</span> <span class="o">*</span><span class="kt">VERSION_KEY</span> <span class="o">=</span> <span class="s">@"currentVersion"</span><span class="p">;</span>
+
+<span class="kd">@implementation</span> <span class="kt">CodeUpdater</span> <span class="p">{</span>
+    <span class="kt">NSFileManager</span> <span class="o">*</span><span class="n">_fileManager</span><span class="p">;</span>
+    <span class="kt">AFHTTPRequestOperationManager</span> <span class="o">*</span><span class="n">_http</span><span class="p">;</span>
+    <span class="kt">NSString</span> <span class="o">*</span><span class="n">_download_url</span><span class="p">;</span>
+    <span class="kt">NSNumber</span> <span class="o">*</span><span class="n">_version</span><span class="p">;</span>
+    <span class="kt">CDVViewController</span> <span class="o">*</span><span class="n">_viewController</span><span class="p">;</span>
+<span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="nv">initWithViewController</span><span class="p">:(</span><span class="kt">CDVViewController</span> <span class="o">*</span><span class="p">)</span><span class="n">viewController</span> <span class="p">{</span>
+        <span class="n">_fileManager</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSFileManager</span> <span class="n">defaultManager</span><span class="p">];</span>
+        <span class="n">_http</span> <span class="o">=</span> <span class="p">[</span><span class="kt">AFHTTPRequestOperationManager</span> <span class="n">manager</span><span class="p">];</span>
+        <span class="n">_http</span><span class="o">.</span><span class="n">requestSerializer</span> <span class="o">=</span> <span class="p">[</span><span class="kt">AFJSONRequestSerializer</span> <span class="n">serializer</span><span class="p">];</span>
+        <span class="n">_http</span><span class="o">.</span><span class="n">requestSerializer</span><span class="o">.</span><span class="n">timeoutInterval</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+        <span class="n">_viewController</span> <span class="o">=</span> <span class="n">viewController</span><span class="p">;</span>
+        <span class="k">self</span> <span class="o">=</span> <span class="p">[</span><span class="k">super</span> <span class="kd">init</span><span class="p">];</span>
+        <span class="k">return</span> <span class="k">self</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">call</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="kt">DEV_MODE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">[</span><span class="k">self</span> <span class="n">copyBundleAssets</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="p">[</span><span class="k">self</span> <span class="n">copyAssetsIfMissing</span><span class="p">];</span>
+            <span class="p">[</span><span class="k">self</span> <span class="n">checkForUpdates</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">copyAssetsIfMissing</span> <span class="p">{</span> <span class="c1">// 1</span>
+        <span class="kt">BOOL</span> <span class="k">as</span><span class="n">setsExists</span> <span class="o">=</span> <span class="p">[</span><span class="n">_fileManager</span> <span class="nv">fileExistsAtPath</span><span class="p">:[</span><span class="k">self</span> <span class="n">writableAssetsPath</span><span class="p">]];</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">as</span><span class="n">setsExists</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">[</span><span class="k">self</span> <span class="n">copyBundleAssets</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">copyBundleAssets</span> <span class="p">{</span>
+      <span class="o">...</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="kt">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">writableAssetsPath</span> <span class="p">{</span>
+      <span class="o">...</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="kt">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">bundleAssetsPath</span> <span class="p">{</span>
+      <span class="o">...</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="nv">addSkipBackupAttributeToItemAtURL</span><span class="p">:(</span><span class="kt">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="kt">URL</span> <span class="p">{</span>
+      <span class="o">...</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">checkForUpdates</span> <span class="p">{</span> <span class="c1">// 2</span>
+        <span class="p">[</span><span class="n">_http</span> <span class="kt">GET</span><span class="p">:</span><span class="kt">API_URL</span> <span class="nv">parameters</span><span class="p">:</span> <span class="kc">nil</span> <span class="nv">success</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="kt">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="n">id</span> <span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">_version</span> <span class="o">=</span> <span class="p">((</span><span class="kt">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">response</span><span class="p">)[</span><span class="s">@"version"</span><span class="p">];</span>
+            <span class="n">_download_url</span> <span class="o">=</span> <span class="p">((</span><span class="kt">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">response</span><span class="p">)[</span><span class="s">@"url"</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">_version</span> <span class="o">!=</span> <span class="p">(</span><span class="n">id</span><span class="p">)[</span><span class="kt">NSNull</span> <span class="n">null</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">_download_url</span> <span class="o">!=</span> <span class="p">(</span><span class="n">id</span><span class="p">)[</span><span class="kt">NSNull</span> <span class="n">null</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">([</span><span class="n">_version</span> <span class="n">integerValue</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[[</span><span class="k">self</span> <span class="n">currentVersion</span><span class="p">]</span> <span class="n">integerValue</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="p">[</span><span class="k">self</span> <span class="n">fetchNewVersion</span><span class="p">];</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="kt">NSLog</span><span class="p">(</span><span class="s">@"Version %@ is up to date"</span><span class="p">,</span> <span class="p">[</span><span class="k">self</span> <span class="n">currentVersion</span><span class="p">]);</span>
+                <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="kt">NSLog</span><span class="p">(</span><span class="s">@"Missing version number info."</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="nv">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="kt">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="kt">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">NSLog</span><span class="p">(</span><span class="s">@"ERROR: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+        <span class="p">}];</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">fetchNewVersion</span> <span class="p">{</span> <span class="c1">// 3</span>
+        <span class="kt">UIAlertView</span> <span class="o">*</span><span class="n">popupDownloading</span> <span class="o">=</span> <span class="p">[[</span><span class="kt">UIAlertView</span> <span class="n">alloc</span><span class="p">]</span>
+                       <span class="nv">initWithTitle</span><span class="p">:</span><span class="s">@"Update"</span>
+                       <span class="nv">message</span><span class="p">:</span><span class="s">@"Your app is being updated."</span>
+                       <span class="nv">delegate</span><span class="p">:</span><span class="kc">nil</span>
+                       <span class="nv">cancelButtonTitle</span><span class="p">:</span><span class="kc">nil</span>
+                       <span class="nv">otherButtonTitles</span><span class="p">:</span><span class="kc">nil</span><span class="p">];</span>
+
+        <span class="kt">NSLog</span><span class="p">(</span><span class="s">@"Downloading version %@ started"</span><span class="p">,</span> <span class="n">_version</span><span class="p">);</span>
+        <span class="kt">NSURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSURLRequest</span> <span class="nv">requestWithURL</span><span class="p">:[</span><span class="kt">NSURL</span> <span class="kt">URLWithString</span><span class="p">:</span><span class="n">_download_url</span><span class="p">]];</span>
+        <span class="kt">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span> <span class="o">=</span> <span class="p">[[</span><span class="kt">AFHTTPRequestOperation</span> <span class="n">alloc</span><span class="p">]</span> <span class="nv">initWithRequest</span><span class="p">:</span><span class="n">request</span><span class="p">];</span>
+
+        <span class="kt">NSArray</span> <span class="o">*</span><span class="n">paths</span> <span class="o">=</span> <span class="kt">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="kt">NSDocumentDirectory</span><span class="p">,</span> <span class="kt">NSUserDomainMask</span><span class="p">,</span> <span class="kt">YES</span><span class="p">);</span>
+        <span class="kt">NSString</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">paths</span> <span class="nv">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span> <span class="nv">stringByAppendingPathComponent</span><span class="p">:</span><span class="s">@"package.zip"</span><span class="p">];</span>
+        <span class="n">operation</span><span class="o">.</span><span class="n">outputStream</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSOutputStream</span> <span class="nv">outputStreamToFileAtPath</span><span class="p">:</span><span class="n">path</span> <span class="nv">append</span><span class="p">:</span><span class="kt">NO</span><span class="p">];</span>
+
+        <span class="p">[</span><span class="n">operation</span> <span class="nv">setCompletionBlockWithSuccess</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="kt">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="n">id</span> <span class="n">responseObject</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">NSLog</span><span class="p">(</span><span class="s">@"Downloading version %@ to %@ completed"</span><span class="p">,</span> <span class="n">_version</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+            <span class="kt">NSString</span> <span class="o">*</span><span class="n">zipPath</span> <span class="o">=</span> <span class="n">path</span><span class="p">;</span>
+            <span class="kt">NSString</span> <span class="o">*</span><span class="n">destinationPath</span> <span class="o">=</span> <span class="p">[[</span><span class="n">paths</span> <span class="nv">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span> <span class="nv">stringByAppendingPathComponent</span><span class="p">:</span><span class="s">@""</span><span class="p">];</span>
+
+            <span class="p">[</span><span class="kt">SSZipArchive</span> <span class="nv">unzipFileAtPath</span><span class="p">:</span><span class="n">zipPath</span> <span class="nv">toDestination</span><span class="p">:</span><span class="n">destinationPath</span><span class="p">];</span>
+            <span class="p">[</span><span class="k">self</span> <span class="nv">setCurrentVersion</span><span class="p">:</span><span class="n">_version</span><span class="p">];</span>
+            <span class="p">[[</span><span class="kt">NSURLCache</span> <span class="n">sharedURLCache</span><span class="p">]</span> <span class="n">removeAllCachedResponses</span><span class="p">];</span>
+            <span class="p">[</span><span class="n">_viewController</span><span class="o">.</span><span class="n">webView</span> <span class="n">reload</span><span class="p">];</span>
+            <span class="p">[</span><span class="n">popupDownloading</span> <span class="nv">dismissWithClickedButtonIndex</span><span class="p">:</span><span class="mi">0</span> <span class="nv">animated</span><span class="p">:</span><span class="kt">YES</span><span class="p">];</span>
+            <span class="kt">UIAlertView</span> <span class="o">*</span><span class="n">popupCompleted</span> <span class="o">=</span> <span class="p">[[</span><span class="kt">UIAlertView</span> <span class="n">alloc</span><span class="p">]</span>
+                        <span class="nv">initWithTitle</span><span class="p">:</span><span class="s">@"Update"</span>
+                        <span class="nv">message</span><span class="p">:</span><span class="s">@"Your app has been updated."</span>
+                        <span class="nv">delegate</span><span class="p">:</span><span class="kc">nil</span>
+                        <span class="nv">cancelButtonTitle</span><span class="p">:</span><span class="s">@"OK"</span>
+                        <span class="nv">otherButtonTitles</span><span class="p">:</span><span class="kc">nil</span><span class="p">];</span>
+            <span class="p">[</span><span class="n">popupCompleted</span> <span class="n">show</span><span class="p">];</span>
+            <span class="kt">NSLog</span><span class="p">(</span><span class="s">@"WebView reloaded with a new version: %@"</span><span class="p">,</span> <span class="n">_version</span><span class="p">);</span>
+        <span class="p">}</span> <span class="nv">failure</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="kt">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="kt">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">NSLog</span><span class="p">(</span><span class="s">@"ERROR: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+            <span class="p">[</span><span class="n">popupDownloading</span> <span class="nv">dismissWithClickedButtonIndex</span><span class="p">:</span><span class="mi">0</span> <span class="nv">animated</span><span class="p">:</span><span class="kt">YES</span><span class="p">];</span>
+        <span class="p">}];</span>
+
+        <span class="p">[</span><span class="n">operation</span> <span class="n">start</span><span class="p">];</span>
+     <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="kt">NSNumber</span> <span class="o">*</span><span class="p">)</span><span class="n">currentVersion</span> <span class="p">{</span> <span class="c1">// 4</span>
+        <span class="kt">NSUserDefaults</span> <span class="o">*</span><span class="n">defaults</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">defaults</span> <span class="nv">integerForKey</span><span class="p">:</span><span class="kt">VERSION_KEY</span><span class="p">])</span> <span class="p">{</span>
+            <span class="p">[</span><span class="n">defaults</span> <span class="nv">setInteger</span><span class="p">:</span><span class="mi">1</span> <span class="nv">forKey</span><span class="p">:</span><span class="kt">VERSION_KEY</span><span class="p">];</span>
+            <span class="p">[</span><span class="n">defaults</span> <span class="n">synchronize</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="err">@</span><span class="p">([</span><span class="n">defaults</span> <span class="nv">integerForKey</span><span class="p">:</span><span class="kt">VERSION_KEY</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="nv">setCurrentVersion</span><span class="p">:(</span><span class="kt">NSNumber</span> <span class="o">*</span><span class="p">)</span> <span class="n">version</span> <span class="p">{</span> <span class="c1">// 5</span>
+        <span class="kt">NSUserDefaults</span> <span class="o">*</span><span class="n">defaults</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">defaults</span> <span class="nv">setInteger</span><span class="p">:[</span><span class="n">version</span> <span class="n">integerValue</span><span class="p">]</span> <span class="nv">forKey</span><span class="p">:</span><span class="kt">VERSION_KEY</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">defaults</span> <span class="n">synchronize</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="kd">@end</span>
+</code></pre>
+
+<p>So let&#39;s run through what is going on with this:</p>
+
+<ol>
+<li>If running the app for the first time in production mode our assets path will be empty. In case there is no newer version to download from the servers, it will remain empty and the app will be useless. To avoid this we check if bundle assets are already present in the Cordova assets path and, if not, then we copy them there.</li>
+<li>Using <code>AFNetworking</code> library, we hit our JSON api and check if a newer version than the one installed locally is available.</li>
+<li>If there is a new version available we download the zip package from the provided url. When download is initiated we display an informative popup. After the package is fully downloaded, we unzip it to the Cordova assets path, save the new version number to the <code>NSUserDefaults</code> and reload the <code>UIWebView</code> to apply changes.</li>
+<li>This method returns the current version number. If none is present, we set the current version to 1.</li>
+<li>This method lets us update the current version number.</li>
+</ol>
+
+<p>Make sure both sinatra and python servers are running and execute the app.</p>
+<figure>
+<p><img src="/2016/02/23/cordova-instant-code-updates/version-updated-c0e476a9cb.png" alt="Lunch" />
+<figcaption>
+You should see the popup and an assets version from the <code>package.zip</code> on the screen.
+</figcaption></p>
+</figure>
+<p>If you want to upload a new version just change the contents of the <code>package.zip</code> file and bump the version number in the sinatra server.</p>
+
+<h3>Caveats</h3>
+
+<p>As I mentioned earlier there are some things to watch out for when using this approach:</p>
+
+<ul>
+<li><p>You cannot hot update native plugins like the ones used by <a href="http://ngcordova.com/">ngCordova</a>. Therefore, you have to be careful not to ship a version depending upon plugins which are not bundled in the app. We solved this problem by using semantic versioning and bumping the major version only during App Store releases.</p></li>
+<li><p>When using this mechanism for Ionic framework based apps I noticed that sometimes the template files used in UI router do not update even though a new version was downloaded. Looks like they are cached somewhere and so far I have failed to resolve it (tips are welcome). This can lead to serious bugs when JavaScript and template codes are incompatible. A hacky fix is to rename the template each time a new version is released, like <code>index.html --&gt; index2.html</code>. Names can be reset when a new version is released through App Store.</p></li>
+</ul>
+
+<h3>Final remarks</h3>
+
+<p>This mechanism has given us a significant boost for releasing the new features on time and fixing production bugs without expedited reviews. If you develop an Ionic app you can also look into <a href="http://docs.ionic.io/docs/deploy-from-scratch">Ionic Deploy</a>, however, by the time of writing it is still in beta, not recommended for production and will eventually be a paid service. Our hot updates were ready and working fine before it was even announced and we did not feel a need to switch.</p>
+
+<p>With a bit more sophisticated backend side logic there is some cool stuff you can do with this mechanism:</p>
+
+<ul>
+<li>Incremental updates: The way this works, it that files in the Cordova assets path are overwritten by the new ones. In a package, you could only include things that changed and distribute updates of a couple of KB instead of MB.</li>
+<li>A/B testing: Publish a couple of versions and distribute them to clients randomly or in predefined proportions. Using in-app analytics with some version specific labelling can tell you which behaves the best.</li>
+</ul>
+
+<p>But that&#39;s a story for another (huge) blogpost. Thanks for making it to the end and let me know if you have any questions. You can download a complete repo with both the xCode project and server side code from <a href="https://github.com/ragnarson/cordova-instant-updates">here</a>.</p>
+<div class="work-with-us"><p>At Ragnarson we help companies deliver great products. We take care of development and deployment so that they can focus on growing the product and working with customers.</p><a class="btn" href="https://ragnarson.com/?utm_source=ragnarson&utm_medium=blog&utm_campaign=work-with-us#contact">Work with us</a></div><div class="article-comments"><div id="commento"></div>
+<script src="https://cdn.commento.io/js/commento.js"></script>
+</div></div><footer><div class="text--center"><a href="https://ragnarson.com/?utm_source=ragnarson&amp;utm_medium=blog&amp;utm_campaign=blog-footer"><img src="/images/ragnar-desk-c0d025368e.png" srcset="/images/ragnar-desk-c0d025368e.png 1x, /images/ragnar-desk-2x-c0332b062e.png 2x" alt="Ragnar desk" /></a></div></footer></div><script src="/javascripts/application-c0ec307bf9.js"></script></body></html>
