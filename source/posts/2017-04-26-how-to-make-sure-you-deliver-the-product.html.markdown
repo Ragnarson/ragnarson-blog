@@ -54,3 +54,7 @@ I like short and clean controllers. They are responsible for accepting a request
 # Summary
 
 We, developers usually like to take challenging tasks. We like thinking about what is the best pattern to use in given situation, just to use our brains as much as possible. And I’m totally for it because this is a fascinating thing in being a professional developer. Writing the code itself is just our tool to create what we thought about. But in the end, someone is paying us to help him achieve his goals. We need to remember that we are here to help people with the growth of their businesses, not just to satisfy ourselves with writing clean code.
+
+# Extra
+
+If you need help with digital product ideation or MVP planning have a look at our friends at [Markovate](https://www.markovate.com/services/product-development/).
