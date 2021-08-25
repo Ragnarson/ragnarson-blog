@@ -319,6 +319,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/2021/08/12/founding-impact-how-to-approach-family-office-investors.html</loc>
+    <lastmod>2021-08-25T19:11:17+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/2013/09/24/how-to-manage-front-end-packages-in-rails-with-bower.html</loc>
     <lastmod>2020-12-01T10:31:45+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -391,6 +397,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/2021/07/29/founding-impact-from-marketing-to-impact-investing.html</loc>
+    <lastmod>2021-08-25T19:11:17+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/2017/02/14/by-order-of-the-peaky-fuckin-blinders-how-to-do-dirty-work-and-dont-get-caught-episode-1.html</loc>
     <lastmod>2020-12-01T10:31:45+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -446,7 +458,7 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/2017/04/26/how-to-make-sure-you-deliver-the-product.html</loc>
-    <lastmod>2021-07-27T16:17:52+02:00</lastmod>
+    <lastmod>2021-08-25T19:11:17+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -655,7 +667,25 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/2021/08.html</loc>
+    <lastmod>2020-12-01T10:31:45+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/2021/08/12.html</loc>
+    <lastmod>2020-12-01T10:31:45+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/2021/07.html</loc>
+    <lastmod>2020-12-01T10:31:45+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/2021/07/29.html</loc>
     <lastmod>2020-12-01T10:31:45+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
