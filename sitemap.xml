@@ -259,6 +259,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://blog.ragnarson.com/2021/11/04/founding-impact-from-startup-to-impact-investing.html</loc>
+    <lastmod>2021-11-08T15:30:30+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://blog.ragnarson.com/2021/01/07/impact-investing-mistakes-to-avoid-in-your-pitch-deck.html</loc>
     <lastmod>2021-06-04T13:20:26+02:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -692,6 +698,18 @@
   </url>
   <url>
     <loc>https://blog.ragnarson.com/2021.html</loc>
+    <lastmod>2020-12-01T10:31:45+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/2021/11.html</loc>
+    <lastmod>2020-12-01T10:31:45+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://blog.ragnarson.com/2021/11/04.html</loc>
     <lastmod>2020-12-01T10:31:45+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
